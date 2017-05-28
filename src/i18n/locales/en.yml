@@ -1,0 +1,9 @@
+locale: English
+
+globals:
+  imsak: Fajr
+  gunes: Sunrise
+  ogle: Dhuhr
+  ikindi: Asr
+  aksam: Maghrib
+  yatsi: Isha
