@@ -1,5 +1,5 @@
 <template lang="pug">
-  #app
+  .App
     router-view
 </template>
 
@@ -10,10 +10,25 @@
 </script>
 
 <style lang="scss">
-  #app {
-    font-family: Helvetica, Arial, sans-serif;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
+  * {
+    margin: 0;
+    padding: 0;
+    border: 0;
+
+    &, &:before, &:after {
+      box-sizing: border-box;
+    }
+  }
+
+  body {
+    font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    font-weight: 200;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .App {
+    height: 100%;
   }
 </style>

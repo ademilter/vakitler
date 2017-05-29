@@ -1,4 +1,5 @@
 import axios from 'axios'
+import _ from 'lodash'
 
 export default {
   getTimes (context) {
@@ -6,7 +7,9 @@ export default {
       context.commit('setIl', res.data.namazvakitleri.il)
       context.commit('setIlce', res.data.namazvakitleri.ilce)
       context.commit('setZaman', res.data.namazvakitleri.zaman)
-      context.commit('setVakitler', res.data.namazvakitleri.zaman.vakitler)
+      const vakitler = _.omit(res.data.namazvakitleri.zaman.vakitler, ['kible'])
+      context.commit('setVakitler', vakitler)
+      context.commit('setVakit')
     })
   }
 }

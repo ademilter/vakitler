@@ -1,34 +1,49 @@
 <template lang="pug">
-  //h1 {{ $t('globals.msg') }}
-  div
-    h3 İl: {{ il }}
-    h3 İlçe: {{ ilce }}
-    h2 Tarih: {{ zaman.gun }}.{{ zaman.ay }}.{{ zaman.yil }}
-    div(v-for="(vakit, key) in vakitler")
-      b {{ $t('globals.' + key) }}:
-      span {{ vakit }}
+  .Times(:class="vakit")
+    Period(v-for="(Vakit, Key) in vakitler", :Key="Key", :Vakit="Vakit", :key="Key")
 </template>
 
 <script>
-  import { mapGetters, mapActions } from 'vuex'
+  import { mapGetters, mapActions, mapMutations } from 'vuex'
+  import Period from '@/components/Home-period.vue'
 
   export default {
     name: 'Home',
+    components: {
+      Period
+    },
     computed: {
       ...mapGetters([
         'il',
         'ilce',
         'zaman',
+        'vakit',
         'vakitler'
       ])
     },
     methods: {
       ...mapActions([
         'getTimes'
+      ]),
+      ...mapMutations([
+        'setVakit'
       ])
     },
     mounted () {
       this.getTimes()
+      setInterval(() => {
+        this.setVakit()
+      }, 60000)
     }
   }
 </script>
+
+<style lang="scss">
+
+  .Times {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+</style>
