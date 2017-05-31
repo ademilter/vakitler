@@ -7,15 +7,9 @@ sudo: false
 
 cache: yarn
 
-script:
-  - yarn run test
-
 before_deploy:
   - yarn run build
   - cp ./dist/index.html ./build/200.html
 
-deploy:
-  provider: surge
-  project: ./dist/
-  domain: namaz-vakti.surge.sh
-  skip_cleanup: true
+after_success:
+  - surge --project ./dist/ --domain namaz-vakti.surge.sh
