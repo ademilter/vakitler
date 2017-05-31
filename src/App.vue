@@ -22,6 +22,7 @@
 
   body {
     font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    line-height: 1;
     font-weight: 200;
     width: 100vw;
     height: 100vh;

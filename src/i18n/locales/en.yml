@@ -1,6 +1,6 @@
 locale: English
 
-globals:
+periods:
   imsak: Fajr
   gunes: Sunrise
   ogle: Dhuhr

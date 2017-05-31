@@ -9,27 +9,31 @@ export const store = new Vuex.Store({
   actions,
   mutations,
   state: {
-    il: '',
-    ilce: '',
-    zaman: {},
-    vakit: '',
-    vakitler: {}
+    Periods: {},
+    currentPeriod: '',
+    nextPeriod: '',
+    Counter: ''
   },
   getters: {
-    il (state) {
-      return state.il
+    Periods (state) {
+      return state.Periods
     },
-    ilce (state) {
-      return state.ilce
+    currentPeriod (state) {
+      return state.currentPeriod
     },
-    zaman (state) {
-      return state.zaman
+    nextPeriod (state) {
+      return state.nextPeriod
     },
-    vakit (state) {
-      return state.vakit
-    },
-    vakitler (state) {
-      return state.vakitler
+    Counter (state) {
+      // https://stackoverflow.com/questions/6312993/javascript-seconds-to-time-string-with-format-hhmmss?page=2&tab=votes#tab-top
+      let pad = (input) => {
+        return input < 10 ? '0' + input : input
+      }
+      return [
+        pad(Math.floor(state.Counter / 3600)),
+        pad(Math.floor(state.Counter % 3600 / 60)),
+        pad(Math.floor(state.Counter % 60))
+      ]
     }
   }
 })

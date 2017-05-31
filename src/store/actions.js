@@ -1,15 +1,17 @@
 import axios from 'axios'
-import _ from 'lodash'
 
 export default {
-  getTimes (context) {
-    axios.get('http://www.namazvaktim.net/xml/gunluk/istanbul/istanbul.json').then((res) => {
-      context.commit('setIl', res.data.namazvakitleri.il)
-      context.commit('setIlce', res.data.namazvakitleri.ilce)
-      context.commit('setZaman', res.data.namazvakitleri.zaman)
-      const vakitler = _.omit(res.data.namazvakitleri.zaman.vakitler, ['kible'])
-      context.commit('setVakitler', vakitler)
-      context.commit('setVakit')
+  getData (context) {
+    const countryId = 2
+    const eyaletId = 539
+    const townId = 9541
+    const URL = `http://diyanet-api.herokuapp.com/namaz_vakti/${countryId}/${eyaletId}/${townId}/Haftalik`
+    axios.get(URL).then((res) => {
+      if (res.status === 200) {
+        context.commit('SET_PERIODS', res.data[0])
+        context.commit('FIND_CURRENT_PERIOD')
+        context.commit('FIND_NEXT_PERIOD')
+      }
     })
   }
 }
