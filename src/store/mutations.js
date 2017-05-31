@@ -33,9 +33,11 @@ export default {
 
   COUNTER (state) {
     const NOW = new Date()
-    const HOURS_MINUTES = state.Periods[state.nextPeriod].split(':')
-    let NEXT_PERIOD = moment([NOW.getFullYear(), NOW.getMonth(), NOW.getDate(), HOURS_MINUTES[0], HOURS_MINUTES[1]])
-    if (state.currentPeriod === 'yatsi') NEXT_PERIOD.add(1, 'day')
+    const CURRENT_HOURS_MINUTES = state.Periods[state.currentPeriod].split(':')
+    const NEXT_HOURS_MINUTES = state.Periods[state.nextPeriod].split(':')
+    let NEXT_PERIOD = moment([NOW.getFullYear(), NOW.getMonth(), NOW.getDate(), NEXT_HOURS_MINUTES[0], NEXT_HOURS_MINUTES[1]])
+    console.log(NOW.getHours())
+    if (state.currentPeriod === 'yatsi' && NOW.getHours() >= CURRENT_HOURS_MINUTES[0]) NEXT_PERIOD.add(1, 'day')
     state.Counter = Math.abs(moment(NOW).diff(NEXT_PERIOD, 'second'))
   }
 
