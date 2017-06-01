@@ -73,30 +73,30 @@
       font-weight: 500;
     }
 
-    $font-family: (
+    $theme: (
       period: 'imsak',
       bg: #cbf0ff,
-      theme: #6fa4e0
+      color: #0a8c82
     ), (
       period: 'gunes',
       bg: #ffefba,
-      color: #6fa4e0
+      color: #af7400
     ), (
       period: 'ogle',
-      bg: #6fa4e0,
-      color: #6fa4e0
+      bg: #ffdc8a,
+      color: #7b660f
     ), (
       period: 'ikindi',
       bg: #fdc7b1,
-      color: #6fa4e0
+      color: #944000
     ), (
       period: 'aksam',
       bg: #6fa4e0,
-      color: #6fa4e0
+      color: #d9edff
     ), (
       period: 'yatsi',
       bg: #574e9e,
-      color: #6fa4e0
+      color: #c5d3ff
     );
 
     $order: (
@@ -122,23 +122,24 @@
     ), (
       name: 'fifth',
       grow: 6,
-      darken: 14,
+      darken: 16,
       fontSize: 1.05em
     ), (
       name: 'sixth',
       grow: 4,
-      darken: 16,
+      darken: 20,
       fontSize: 1em
     );
 
-    @for $i from 1 through length($font-family) {
-      $a: nth($font-family, $i);
+    @for $i from 1 through length($theme) {
+      $a: nth($theme, $i);
       @for $j from 1 through length($order) {
         $b: nth($order, $j);
         .Times.#{map-get($a, period)} & {
           &.#{map-get($b, name)} {
             flex-grow: map-get($b, grow);
-            background-color: darken(map-get($a, bg), map-get($b, darken));
+            color: map-get($a, color);
+            background-color: desaturate(darken(map-get($a, bg), map-get($b, darken)), map-get($b, darken));
             .content {
               font-size: map-get($b, fontSize);
             }
