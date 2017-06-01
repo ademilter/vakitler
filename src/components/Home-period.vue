@@ -4,7 +4,7 @@
       .title vaktin çıkmasına
       h3.count {{ showCounter }}
     .content
-      .name {{ $t('periods.' + Key) }}
+      .name {{ $t(Key.toLowerCase()) }}
       .time.bold {{ Time }}
 </template>
 
@@ -76,27 +76,27 @@
     }
 
     $theme: (
-      period: 'imsak',
+      period: 'Imsak',
       bg: #D2F2FF,
       color: #1585A7
     ), (
-      period: 'gunes',
+      period: 'Gunes',
       bg: #FFE1A1,
       color: #A6601E
     ), (
-      period: 'ogle',
+      period: 'Ogle',
       bg: #FFF09C,
       color: #806902
     ), (
-      period: 'ikindi',
+      period: 'Ikindi',
       bg: #FFC8B9,
       color: #904714
     ), (
-      period: 'aksam',
+      period: 'Aksam',
       bg: #88BCF7,
       color: #1A4F8A
     ), (
-      period: 'yatsi',
+      period: 'Yatsi',
       bg: #332F70,
       color: #BCD4E5
     );

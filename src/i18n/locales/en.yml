@@ -1,9 +1,11 @@
 locale: English
 
-periods:
-  imsak: Fajr
-  gunes: Sunrise
-  ogle: Dhuhr
-  ikindi: Asr
-  aksam: Maghrib
-  yatsi: Isha
+imsak: Fajr
+gunes: Sunrise
+ogle: Dhuhr
+ikindi: Asr
+aksam: Maghrib
+yatsi: Isha
+saat: h
+dakika: min
+saniye: sec

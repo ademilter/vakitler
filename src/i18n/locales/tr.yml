@@ -1,9 +1,11 @@
 locale: Türkçe
 
-periods:
-  imsak: İmsak
-  gunes: Güneş
-  ogle: Öğle
-  ikindi: İkindi
-  aksam: Akşam
-  yatsi: Yatsı
+imsak: İmsak
+gunes: Güneş
+ogle: Öğle
+ikindi: İkindi
+aksam: Akşam
+yatsi: Yatsı
+saat: s
+dakika: dk
+saniye: sn

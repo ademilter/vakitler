@@ -21,16 +21,16 @@
       ]),
       showCounter () {
         let times = parseInt(this.Counter[0]) === 0 ? _.drop(this.Counter) : this.Counter
-        times = parseInt(times[0]) === 0 ? _.drop(times) : times
-        // TODO: s, dk, sn gibi kelimeler dil dosyasına eklenecek (nasıl olur bilemedim)
-        if (times.length === 1) return `${parseInt(times[0])}sn`
-        else if (times.length === 2) return `${parseInt(times[0])}dk`
-        else if (times.length === 3) return `${parseInt(times[0])}s ${parseInt(times[1])}dk`
+        // times = parseInt(times[0]) === 0 ? _.drop(times) : times
+        let second = `${parseInt(_.last(times))}`
+        if (times.length === 3) return `${times[0]}:${times[1]}:${second}`
+        else if (times.length === 2) return `${times[0]}:${second}`
+        else if (times.length === 1) return second
       }
     },
     mounted () {
       this.$store.dispatch('getData').then(() => {
-        this._timer = setInterval(() => {
+        setInterval(() => {
           this.$store.commit('COUNTER')
           if (this.Counter === 0) {
             this.$store.commit('FIND_CURRENT_PERIOD')
