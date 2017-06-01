@@ -29,10 +29,11 @@
       }
     },
     mounted () {
-      this.$store.dispatch('getData')
-      this._timer = setInterval(() => {
-        this.$store.commit('COUNTER')
-      }, 1000)
+      this.$store.dispatch('getData').then(() => {
+        this._timer = setInterval(() => {
+          this.$store.commit('COUNTER')
+        }, 1000)
+      })
     }
   }
 </script>

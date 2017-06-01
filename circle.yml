@@ -8,6 +8,7 @@ database:
     - echo "Skipping DB."
 dependencies:
   post:
+    - npm rebuild node-sass
     - npm run build
 deployment:
   production:
