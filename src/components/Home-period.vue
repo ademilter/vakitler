@@ -1,11 +1,11 @@
 <template lang="pug">
   .Period(:class="[Key, Order]")
     .counter
-      div vaktin çıkmasına
-      h4 {{ showCounter }}
+      .title vaktin çıkmasına
+      h3.count {{ showCounter }}
     .content
       .name {{ $t('periods.' + Key) }}
-      .time {{ Time }}
+      .time.bold {{ Time }}
 </template>
 
 <script>
@@ -52,7 +52,10 @@
       top: 50%;
       transform: translateY(-50%);
 
-      h4 {
+      .title {
+
+      }
+      .count {
         margin-top: 5px;
       }
     }
@@ -70,50 +73,49 @@
 
     .time {
       margin-top: 5px;
-      font-weight: 500;
     }
 
     $theme: (
       period: 'imsak',
-      bg: #cbf0ff,
-      color: #0a8c82
+      bg: #D2F2FF,
+      color: #1585A7
     ), (
       period: 'gunes',
-      bg: #ffefba,
-      color: #af7400
+      bg: #FFE1A1,
+      color: #A6601E
     ), (
       period: 'ogle',
-      bg: #ffdc8a,
-      color: #7b660f
+      bg: #FFF09C,
+      color: #806902
     ), (
       period: 'ikindi',
-      bg: #fdc7b1,
-      color: #944000
+      bg: #FFC8B9,
+      color: #904714
     ), (
       period: 'aksam',
-      bg: #6fa4e0,
-      color: #d9edff
+      bg: #88BCF7,
+      color: #1A4F8A
     ), (
       period: 'yatsi',
-      bg: #574e9e,
-      color: #c5d3ff
+      bg: #332F70,
+      color: #BCD4E5
     );
 
     $order: (
       name: 'first',
       grow: 20,
       darken: 0,
-      fontSize: 2em
+      fontSize: 2.2em
     ), (
       name: 'second',
       grow: 12,
       darken: 4,
-      fontSize: 1.20em
+      fontSize: 1.3em
     ), (
       name: 'third',
       grow: 10,
       darken: 8,
-      fontSize: 1.15em
+      fontSize: 1.2em
     ), (
       name: 'fourth',
       grow: 8,
@@ -123,7 +125,7 @@
       name: 'fifth',
       grow: 6,
       darken: 16,
-      fontSize: 1.05em
+      fontSize: 1em
     ), (
       name: 'sixth',
       grow: 4,

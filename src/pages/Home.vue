@@ -23,9 +23,9 @@
         let times = parseInt(this.Counter[0]) === 0 ? _.drop(this.Counter) : this.Counter
         times = parseInt(times[0]) === 0 ? _.drop(times) : times
         // TODO: s, dk, sn gibi kelimeler dil dosyasına eklenecek (nasıl olur bilemedim)
-        if (times.length === 1) return `${parseInt(times[0])} sn`
-        else if (times.length === 2) return `${parseInt(times[0])} dk`
-        else if (times.length === 3) return `${parseInt(times[0])} s ${parseInt(times[1])} dk`
+        if (times.length === 1) return `${parseInt(times[0])}sn`
+        else if (times.length === 2) return `${parseInt(times[0])}dk`
+        else if (times.length === 3) return `${parseInt(times[0])}s ${parseInt(times[1])}dk`
       }
     },
     mounted () {
