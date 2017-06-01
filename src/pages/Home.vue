@@ -32,6 +32,10 @@
       this.$store.dispatch('getData').then(() => {
         this._timer = setInterval(() => {
           this.$store.commit('COUNTER')
+          if (this.Counter === 0) {
+            this.$store.commit('FIND_CURRENT_PERIOD')
+            this.$store.commit('FIND_NEXT_PERIOD')
+          }
         }, 1000)
       })
     }
