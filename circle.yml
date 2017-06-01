@@ -1,0 +1,16 @@
+machine:
+  timezone:
+    Europe/Istanbul
+  node:
+    version: 7.8.0
+database:
+  override:
+    - echo "Skipping DB."
+dependencies:
+  post:
+    - npm run build
+deployment:
+  production:
+    branch: master
+    commands:
+      - surge --project ./dist/ --domain namaz-vakti.surge.sh
