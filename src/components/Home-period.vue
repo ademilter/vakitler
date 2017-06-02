@@ -70,6 +70,7 @@
       right: 10px;
       transform: translateY(50%);
       width: 110px;
+      filter: drop-shadow(0 2px 5px rgba(black, .14));
 
       // aspect-ratio box
       &:before {
