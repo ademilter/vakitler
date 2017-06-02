@@ -3,7 +3,7 @@ import moment from 'moment'
 
 export default {
 
-  SET_PERIODS (state, data) {
+  SET_PERIODS (state, allPeriods) {
     const NOW = new Date()
     // 2 to 02
     let day = NOW.getDate().toString()
@@ -12,22 +12,20 @@ export default {
     let month = (NOW.getMonth() + 1).toString()
     month = _.size(month) === 1 ? `0${month}` : month
 
-    const DATA = _.find(data, ['MiladiTarihKisa', `${day}.${month}.${NOW.getFullYear()}`])
+    const DATA = _.find(allPeriods, ['MiladiTarihKisa', `${day}.${month}.${NOW.getFullYear()}`])
     state.Periods = _.pick(DATA, ['Imsak', 'Gunes', 'Ogle', 'Ikindi', 'Aksam', 'Yatsi'])
   },
 
   FIND_CURRENT_PERIOD (state) {
     let _periods = []
-
-    _.forEach(state.Periods, (time, period) => {
-      const HOURS_MINUTES = time.split(':')
+    _.forEach(state.Periods, (periodTime, periodName) => {
+      const HOURS_MINUTES = periodTime.split(':')
       const NOW = new Date()
       const PERIOD = moment([NOW.getFullYear(), NOW.getMonth(), NOW.getDate(), HOURS_MINUTES[0], HOURS_MINUTES[1]])
       if (moment(NOW).diff(PERIOD, 'seconds') > 0) {
-        _periods.push(period)
+        _periods.push(periodName)
       }
     })
-
     if (_periods.length > 0) {
       state.currentPeriod = _.last(_periods)
     } else {
@@ -49,7 +47,6 @@ export default {
     let NEXT_PERIOD = moment([NOW.getFullYear(), NOW.getMonth(), NOW.getDate(), NEXT_HOURS_MINUTES[0], NEXT_HOURS_MINUTES[1]])
     if (state.currentPeriod === 'Yatsi' && NOW.getHours() >= CURRENT_HOURS_MINUTES[0]) NEXT_PERIOD.add(1, 'day')
     state.secCounter = Math.abs(moment(NOW).diff(NEXT_PERIOD, 'second'))
-    state.Counter = Math.abs(moment(NOW).diff(NEXT_PERIOD, 'second'))
   },
 
   TOTAL_TIME (state) {
@@ -60,6 +57,17 @@ export default {
     let END_PERIOD = moment([NOW.getFullYear(), NOW.getMonth(), NOW.getDate(), NEXT_HOURS_MINUTES[0], NEXT_HOURS_MINUTES[1]])
     if (state.currentPeriod === 'Yatsi' && NOW.getHours() >= CURRENT_HOURS_MINUTES[0]) END_PERIOD.add(1, 'day')
     state.periodTotalTime = Math.abs(moment(START_PERIOD).diff(END_PERIOD, 'second'))
+  },
+
+  RAMAZAN_DA_MIYIZ (state, ramadanStatus) {
+    state.Ramadan.status = ramadanStatus
+  },
+
+  IFTARA_KALAN_SURE (state) {
+    const NOW = new Date()
+    const NEXT_HOURS_MINUTES = state.Periods['Aksam'].split(':')
+    let NEXT_PERIOD = moment([NOW.getFullYear(), NOW.getMonth(), NOW.getDate(), NEXT_HOURS_MINUTES[0], NEXT_HOURS_MINUTES[1]])
+    state.Ramadan.totalTime = Math.abs(moment(NOW).diff(NEXT_PERIOD, 'second'))
   }
 
 }

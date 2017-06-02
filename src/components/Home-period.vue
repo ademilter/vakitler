@@ -1,5 +1,5 @@
 <template lang="pug">
-  .Period(:class="[Key, Order]")
+  .Period(:class="[Name, Order]")
     transition(name='t-enterLeft')
       .counter(v-show="percentCounter", :style="{ bottom: percentCounter + '%' }")
         .count
@@ -11,7 +11,7 @@
           span.bold {{ Counter[2] }}
         img(src="../assets/counter-bg.svg")
     .content
-      .name {{ $t(Key.toLowerCase()) }}
+      .name {{ $t(Name.toLowerCase()) }}
       .time.bold {{ Time }}
     .bar
     //.bar(v-show="percentCounter", :style="{ height: 100 - percentCounter + '%' }")
@@ -23,18 +23,19 @@
 
   export default {
     name: 'Period',
-    props: ['Key', 'Time', 'showCounter', 'percentCounter'],
+    props: ['Name', 'Time'],
     computed: {
       ...mapGetters([
         'Periods',
         'currentPeriod',
-        'Counter'
+        'Counter',
+        'percentCounter'
       ]),
       Order () {
         const ORDER_CLASS = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth']
         const PERIODS = _.keys(this.Periods)
         const CURRENT_INDEX = _.indexOf(PERIODS, this.currentPeriod)
-        const THIS_INDEX = _.indexOf(PERIODS, this.Key)
+        const THIS_INDEX = _.indexOf(PERIODS, this.Name)
         return ORDER_CLASS[Math.abs(THIS_INDEX - CURRENT_INDEX)]
       }
     }
@@ -50,7 +51,6 @@
     flex-grow: 1;
     display: flex;
     align-items: center;
-    color: white;
     background-color: #eee;
     transition: .2s;
 
@@ -97,7 +97,7 @@
         span {
           &.dash {
             margin-right: 3px;
-            margin-top: -1px;
+            margin-top: -3px;
           }
         }
       }
@@ -185,13 +185,19 @@
 
     @for $i from 1 through length($theme) {
       $a: nth($theme, $i);
+
+      @at-root .Times.#{map-get($a, period)} {
+        color: map-get($a, color);
+      }
+
+      // theme & size
       @for $j from 1 through length($order) {
         $b: nth($order, $j);
+
         .Times.#{map-get($a, period)} & {
           &.#{map-get($b, name)} {
             z-index: length($order) - $j;
             flex-grow: map-get($b, grow);
-            color: map-get($a, color);
             background-color: desaturate(darken(map-get($a, bg), map-get($b, darken)), map-get($b, darken));
             .content {
               opacity: 1 - ($j - 1) / 10;
@@ -200,6 +206,17 @@
           }
         }
       }
+
+      // order
+      @for $k from 1 through length($theme) {
+        $c: nth($theme, $k);
+        .Times.#{map-get($a, period)} & {
+          &.#{map-get($c, period)} {
+            order: $k;
+          }
+        }
+      }
+
     }
 
   }
