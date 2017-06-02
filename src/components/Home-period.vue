@@ -2,12 +2,18 @@
   .Period(:class="[Key, Order]")
     transition(name='t-enterLeft')
       .counter(v-show="percentCounter", :style="{ bottom: percentCounter + '%' }")
-        .count.bold {{ showCounter }}
+        .count
+          span.dash –
+          span.bold {{ Counter[0] }}
+          span :
+          span.bold {{ Counter[1] }}
+          span :
+          span.bold {{ Counter[2] }}
         img(src="../assets/counter-bg.svg")
     .content
       .name {{ $t(Key.toLowerCase()) }}
       .time.bold {{ Time }}
-    .bar(v-show="percentCounter", :style="{ height: 100 - percentCounter + '%' }")
+    //.bar(v-show="percentCounter", :style="{ height: 100 - percentCounter + '%' }")
 </template>
 
 <script>
@@ -20,7 +26,8 @@
     computed: {
       ...mapGetters([
         'Periods',
-        'currentPeriod'
+        'currentPeriod',
+        'Counter'
       ]),
       Order () {
         const ORDER_CLASS = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth']
@@ -60,15 +67,15 @@
     .counter {
       display: none;
       position: absolute;
-      right: 15px;
+      right: 10px;
       transform: translateY(50%);
-      width: 100px;
+      width: 110px;
 
       // aspect-ratio box
       &:before {
         content: "";
         display: block;
-        padding-top: percentage(46/143); // svg h/w
+        padding-top: percentage(46/163); // svg h/w
       }
 
       .count {
@@ -76,8 +83,17 @@
         z-index: 1;
         position: absolute;
         left: 10px;
-        top: 54%;
+        top: 55%;
         transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+
+        span {
+          &.dash {
+            margin-right: 3px;
+            margin-top: -1px;
+          }
+        }
       }
 
       img {

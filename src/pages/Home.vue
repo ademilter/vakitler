@@ -6,7 +6,7 @@
 <script>
   import { mapGetters } from 'vuex'
   import Period from '@/components/Home-period.vue'
-  import _ from 'lodash'
+  // import _ from 'lodash'
 
   export default {
     name: 'Home',
@@ -22,6 +22,7 @@
         'periodTotalTime'
       ]),
       showCounter () {
+        /*
         let times = this.Counter
         times = parseInt(times[0]) === 0 ? _.drop(times) : times // clear h
         times = parseInt(times[0]) === 0 ? _.drop(times) : times // clear min
@@ -30,6 +31,7 @@
         if (times.length === 3) return times.join(':')
         else if (times.length === 2) return `${times[0]}:${second}`
         else if (times.length === 1) return second
+        */
       },
       percentCounter () {
         let counter = this.secCounter
