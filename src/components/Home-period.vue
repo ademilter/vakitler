@@ -1,11 +1,13 @@
 <template lang="pug">
   .Period(:class="[Key, Order]")
-    .counter
-      .title vaktin çıkmasına
-      h3.count {{ showCounter }}
+    transition(name='t-enterLeft')
+      .counter(v-show="percentCounter", :style="{ bottom: percentCounter + '%' }")
+        .count {{ showCounter }}
+        img(src="../assets/counter-bg.svg")
     .content
       .name {{ $t(Key.toLowerCase()) }}
       .time.bold {{ Time }}
+    .bar(v-show="percentCounter", :style="{ height: 100 - percentCounter + '%' }")
 </template>
 
 <script>
@@ -14,7 +16,7 @@
 
   export default {
     name: 'Period',
-    props: ['Key', 'Time', 'showCounter'],
+    props: ['Key', 'Time', 'showCounter', 'percentCounter'],
     computed: {
       ...mapGetters([
         'Periods',
@@ -44,23 +46,54 @@
     background-color: #eee;
     transition: .2s;
 
+    .bar {
+      display: none;
+      z-index: 2;
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 3px;
+      background-color: rgba(black, .2);
+      border-radius: 5px;
+    }
+
     .counter {
       display: none;
-      text-align: right;
       position: absolute;
-      right: 30px;
-      top: 50%;
-      transform: translateY(-50%);
+      right: 15px;
+      transform: translateY(50%);
+      width: 100px;
 
-      .title {
-
+      // aspect-ratio box
+      &:before {
+        content: "";
+        display: block;
+        padding-top: percentage(46/143); // svg h/w
       }
+
       .count {
-        margin-top: 5px;
+        font-size: 1.2em;
+        z-index: 1;
+        position: absolute;
+        left: 10px;
+        top: 52%;
+        transform: translateY(-50%);
       }
+
+      img {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+      }
+
     }
 
     &.first {
+      .bar {
+        display: block;
+      }
       .counter {
         display: block;
       }
@@ -139,6 +172,7 @@
         $b: nth($order, $j);
         .Times.#{map-get($a, period)} & {
           &.#{map-get($b, name)} {
+            z-index: length($order) - $j;
             flex-grow: map-get($b, grow);
             color: map-get($a, color);
             background-color: desaturate(darken(map-get($a, bg), map-get($b, darken)), map-get($b, darken));
@@ -150,6 +184,14 @@
       }
     }
 
+  }
+
+  .t-enterLeft-enter-active, .t-enterLeft-leave-active {
+    transition: .2s;
+  }
+
+  .t-enterLeft-enter, .t-enterLeft-leave-to {
+    opacity: 0;
   }
 
 </style>

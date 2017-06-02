@@ -21,19 +21,21 @@
   }
 
   body {
-    font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    font-family: 'Avenir Next Condensed', 'Roboto', Helvetica, Arial, sans-serif;
     line-height: 1;
-    font-weight: 200;
+    font-weight: 400;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
   }
 
   h1, h2, h3, h4, h5, h6, b, strong, .bold {
-    font-weight: 500;
+    font-weight: 600;
   }
 
   .App {
-    height: 100%;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
   }
 </style>

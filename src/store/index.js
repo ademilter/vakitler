@@ -12,7 +12,9 @@ export const store = new Vuex.Store({
     Periods: {},
     currentPeriod: '',
     nextPeriod: '',
-    Counter: ''
+    Counter: '',
+    secCounter: '',
+    periodTotalTime: ''
   },
   getters: {
     Periods (state) {
@@ -34,6 +36,12 @@ export const store = new Vuex.Store({
         pad(Math.floor(state.Counter % 3600 / 60)),
         pad(Math.floor(state.Counter % 60))
       ]
+    },
+    secCounter (state) {
+      return state.secCounter
+    },
+    periodTotalTime (state) {
+      return state.periodTotalTime
     }
   }
 })
