@@ -34,6 +34,9 @@
   }
 
   .App {
+    position: fixed;
+    left:0;
+    top:0;
     overflow: hidden;
     width: 100vw;
     height: 100vh;

@@ -2,7 +2,7 @@
   .Period(:class="[Key, Order]")
     transition(name='t-enterLeft')
       .counter(v-show="percentCounter", :style="{ bottom: percentCounter + '%' }")
-        .count {{ showCounter }}
+        .count.bold {{ showCounter }}
         img(src="../assets/counter-bg.svg")
     .content
       .name {{ $t(Key.toLowerCase()) }}
@@ -76,7 +76,7 @@
         z-index: 1;
         position: absolute;
         left: 10px;
-        top: 52%;
+        top: 54%;
         transform: translateY(-50%);
       }
 
