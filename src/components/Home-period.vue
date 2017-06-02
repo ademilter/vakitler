@@ -13,6 +13,7 @@
     .content
       .name {{ $t(Key.toLowerCase()) }}
       .time.bold {{ Time }}
+    .bar
     //.bar(v-show="percentCounter", :style="{ height: 100 - percentCounter + '%' }")
 </template>
 
@@ -59,9 +60,13 @@
       position: absolute;
       top: 0;
       right: 0;
-      width: 3px;
-      background-color: rgba(black, .2);
-      border-radius: 5px;
+      width: 4px;
+      height: 100%;
+      background-color: currentColor;
+    }
+
+    &.first .bar {
+      display: block;
     }
 
     .counter {
@@ -70,7 +75,7 @@
       right: 10px;
       transform: translateY(50%);
       width: 110px;
-      filter: drop-shadow(0 2px 5px rgba(black, .14));
+      //filter: drop-shadow(0 1px 3px rgba(black, .06));
 
       // aspect-ratio box
       &:before {
@@ -107,79 +112,74 @@
 
     }
 
-    &.first {
-      .bar {
-        display: block;
-      }
-      .counter {
-        display: block;
-      }
+    &.first .counter {
+      display: block;
     }
 
     .name {
-      opacity: .6;
-      font-size: .9em;
+      font-size: .8em;
     }
 
     .time {
-      margin-top: 5px;
+      margin-top: 4px;
+      font-size: 1.1em;
     }
 
     $theme: (
       period: 'Imsak',
       bg: #D2F2FF,
-      color: #1585A7
+      color: #1281A2
     ), (
       period: 'Gunes',
-      bg: #FFE1A1,
+      bg: #FFEBC1,
       color: #A6601E
     ), (
       period: 'Ogle',
-      bg: #FFF09C,
-      color: #806902
+      bg: #FFEDA3,
+      color: #804502
     ), (
       period: 'Ikindi',
-      bg: #FFC8B9,
-      color: #904714
+      bg: #FFD8BA,
+      color: #8F361A
     ), (
       period: 'Aksam',
-      bg: #88BCF7,
-      color: #1A4F8A
+      bg: #8BCCFD,
+      color: #073E6D
     ), (
       period: 'Yatsi',
-      bg: #332F70,
-      color: #BCD4E5
+      bg: #2E3B83,
+      color: #BAE6FF
     );
 
     $order: (
       name: 'first',
-      grow: 20,
+      grow: 50,
       darken: 0,
-      fontSize: 2.2em
+      fontSize: 2.3em
     ), (
       name: 'second',
-      grow: 12,
-      darken: 4,
-      fontSize: 1.3em
+      grow: 22,
+      darken: 5,
+      fontSize: 1.6em
     ), (
       name: 'third',
-      grow: 10,
-      darken: 8,
-      fontSize: 1.2em
+      grow: 18,
+      darken: 9,
+      fontSize: 1.4em
     ), (
       name: 'fourth',
-      grow: 8,
-      darken: 12,
-      fontSize: 1.1em
+      grow: 14,
+      darken: 13,
+      fontSize: 1.2em
     ), (
       name: 'fifth',
-      grow: 6,
+      grow: 10,
       darken: 16,
-      fontSize: 1em
+      fontSize: 1.1em
     ), (
       name: 'sixth',
-      grow: 4,
-      darken: 20,
+      grow: 6,
+      darken: 18,
       fontSize: 1em
     );
 
@@ -194,6 +194,7 @@
             color: map-get($a, color);
             background-color: desaturate(darken(map-get($a, bg), map-get($b, darken)), map-get($b, darken));
             .content {
+              opacity: 1 - ($j - 1) / 10;
               font-size: map-get($b, fontSize);
             }
           }
