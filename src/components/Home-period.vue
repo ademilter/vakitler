@@ -1,7 +1,7 @@
 <template lang="pug">
   .Period(:class="[Name, Order]")
     transition(name='t-enterLeft')
-      .counter(v-show="percentCounter", :style="{ bottom: percentCounter + '%' }")
+      .counter(v-if="Order === 'first'", v-show="percentCounter", :style="{ bottom:  newBottomValue + '%' }")
         .count
           span.dash –
           span.bold {{ Counter[0] }}
@@ -9,11 +9,12 @@
           span.bold {{ Counter[1] }}
           span :
           span.bold {{ Counter[2] }}
-        img(src="../assets/counter-bg.svg")
+        svg(:viewbox="svgViewbox")
+          polygon(fill="#fff", fill-rule="evenodd", :points="svgPoints")
     .content
       .name {{ $t(Name.toLowerCase()) }}
       .time.bold {{ Time }}
-    .bar
+    .bar(v-if="Order === 'first'")
     //.bar(v-show="percentCounter", :style="{ height: 100 - percentCounter + '%' }")
 </template>
 
@@ -24,11 +25,17 @@
   export default {
     name: 'Period',
     props: ['Name', 'Time'],
+    data () {
+      return {
+        kutuYuksekligi: 0
+      }
+    },
     computed: {
       ...mapGetters([
         'Periods',
         'currentPeriod',
         'Counter',
+        'secCounter',
         'percentCounter'
       ]),
       Order () {
@@ -37,7 +44,56 @@
         const CURRENT_INDEX = _.indexOf(PERIODS, this.currentPeriod)
         const THIS_INDEX = _.indexOf(PERIODS, this.Name)
         return ORDER_CLASS[Math.abs(THIS_INDEX - CURRENT_INDEX)]
+      },
+      svgW () {
+        return 110
+      },
+      svgH () {
+        return this.svgW * (46 / 164)
+      },
+      svgViewbox () {
+        return `0 0 ${this.svgW} ${this.svgH}`
+      },
+      svgPoints () {
+        return `0 0 ${this.svgW - (this.svgH / 2)} 0 ${this.svgW} ${this.arrowNewValue} ${this.svgW - (this.svgH / 2)} ${this.svgH} 0 ${this.svgH}`
+      },
+      maxBottomValue () {
+        let ok = this.svgH / 2
+        return ok / this.kutuYuksekligi * 100
+      },
+      whatLocation () {
+        let pc = this.percentCounter
+        let mv = this.maxBottomValue
+        if (pc > 100 - mv) {
+          return 'top'
+        } else if (pc < mv) {
+          return 'bottom'
+        } else {
+          return 'center'
+        }
+      },
+      newBottomValue () {
+        if (this.whatLocation === 'top') {
+          return (100 - this.maxBottomValue).toFixed(2)
+        } else if (this.whatLocation === 'bottom') {
+          return this.maxBottomValue.toFixed(2)
+        } else {
+          return this.percentCounter.toFixed(2)
+        }
+      },
+      arrowNewValue () {
+        const svgHalf = this.svgH / 2
+        if (this.whatLocation === 'top') {
+          return svgHalf / this.percentCounter
+        } else if (this.whatLocation === 'bottom') {
+          return svgHalf + svgHalf / this.percentCounter
+        } else {
+          return svgHalf
+        }
       }
+    },
+    mounted () {
+      this.kutuYuksekligi = document.querySelector('.first').offsetHeight || 0
     }
   }
 </script>
@@ -81,7 +137,7 @@
       &:before {
         content: "";
         display: block;
-        padding-top: percentage(46/163); // svg h/w
+        padding-top: percentage(46/164); // svg h/w
       }
 
       .count {
@@ -102,7 +158,7 @@
         }
       }
 
-      img {
+      svg {
         position: absolute;
         left: 0;
         top: 0;
@@ -128,27 +184,33 @@
     $theme: (
       period: 'Imsak',
       bg: #D2F2FF,
-      color: #1281A2
+      color: #1281A2,
+      dark: false
     ), (
       period: 'Gunes',
       bg: #FFEBC1,
-      color: #A6601E
+      color: #A6601E,
+      dark: false
     ), (
       period: 'Ogle',
       bg: #FFEDA3,
-      color: #804502
+      color: #804502,
+      dark: false
     ), (
       period: 'Ikindi',
       bg: #FFD8BA,
-      color: #8F361A
+      color: #8F361A,
+      dark: false
     ), (
       period: 'Aksam',
       bg: #8BCCFD,
-      color: #073E6D
+      color: #073E6D,
+      dark: false
     ), (
       period: 'Yatsi',
       bg: #2E3B83,
-      color: #BAE6FF
+      color: #BAE6FF,
+      dark: true
     );
 
     $order: (

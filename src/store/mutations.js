@@ -46,7 +46,17 @@ export default {
     const NEXT_HOURS_MINUTES = state.Periods[state.nextPeriod].split(':')
     let NEXT_PERIOD = moment([NOW.getFullYear(), NOW.getMonth(), NOW.getDate(), NEXT_HOURS_MINUTES[0], NEXT_HOURS_MINUTES[1]])
     if (state.currentPeriod === 'Yatsi' && NOW.getHours() >= CURRENT_HOURS_MINUTES[0]) NEXT_PERIOD.add(1, 'day')
-    state.secCounter = Math.abs(moment(NOW).diff(NEXT_PERIOD, 'second'))
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // DEBUG
+    const DEBUG = false
+    if (DEBUG) {
+      // let newDate = moment(NOW).add(161, 'm')
+      let newDate = moment(NOW).subtract(64, 'm')
+      state.secCounter = Math.abs(newDate.diff(NEXT_PERIOD, 'second'))
+      // !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    } else {
+      state.secCounter = Math.abs(moment(NOW).diff(NEXT_PERIOD, 'second'))
+    }
   },
 
   TOTAL_TIME (state) {
