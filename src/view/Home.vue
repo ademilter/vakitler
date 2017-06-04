@@ -49,7 +49,7 @@
     height: 100%;
   }
 
-  $Info-height: 23px;
+  $Info-height: 28px;
 
   .Info {
     position: absolute;
