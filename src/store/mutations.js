@@ -3,6 +3,22 @@ import moment from 'moment'
 
 export default {
 
+  SET_COUNTRY (state, countries) {
+    const TR = _.find(countries, ['UlkeAdi', 'TÜRKİYE'])
+    if (TR) countries.unshift(TR)
+    state.AllCountries = countries
+  },
+
+  SET_STATE (state, states) {
+    const IST = _.find(states, ['SehirAdi', 'İSTANBUL'])
+    if (IST) states.unshift(IST)
+    state.AllStates = states
+  },
+
+  SET_TOWN (state, towns) {
+    state.AllTowns = towns
+  },
+
   SET_PERIODS (state, allPeriods) {
     const NOW = new Date()
     // 2 to 02

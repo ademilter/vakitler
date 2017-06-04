@@ -35,6 +35,19 @@
     font-weight: 600;
   }
 
+  a {
+    text-decoration: none;
+  }
+
+  a, button {
+    color: inherit
+  }
+
+  button {
+    font-size: 1em;
+    background-color: transparent;
+  }
+
   .App {
     height: 100%;
   }

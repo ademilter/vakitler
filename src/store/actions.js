@@ -1,13 +1,37 @@
 import axios from 'axios'
 import moment from 'moment'
 import _ from 'lodash'
+const API_URL = 'https://ezanvakti.herokuapp.com/'
 
 export default {
 
-  getData ({ dispatch, commit, state }) {
-    const townId = 9541
-    const URL = `https://ezanvakti.herokuapp.com/vakitler?ilce=${townId}`
-    return axios.get(URL).then((res) => {
+  GET_COUNTRY ({ dispatch, commit, state }) {
+    axios.get(API_URL + 'ulkeler').then((res) => {
+      if (res.status === 200) {
+        commit('SET_COUNTRY', res.data)
+      }
+    })
+  },
+
+  GET_STATE ({ dispatch, commit, state }) {
+    axios.get(API_URL + 'sehirler?ulke=' + localStorage.getItem('countryId')).then((res) => {
+      if (res.status === 200) {
+        console.log(res.data)
+        commit('SET_STATE', res.data)
+      }
+    })
+  },
+
+  GET_TOWN ({ dispatch, commit, state }) {
+    axios.get(API_URL + 'ilceler?sehir=' + localStorage.getItem('stateId')).then((res) => {
+      if (res.status === 200) {
+        commit('SET_TOWN', res.data)
+      }
+    })
+  },
+
+  GET_PERIOD ({ dispatch, commit, state }) {
+    axios.get(API_URL + 'vakitler?ilce=' + localStorage.getItem('townId')).then((res) => {
       if (res.status === 200) {
         commit('SET_PERIODS', res.data)
         dispatch('findPeriod')
