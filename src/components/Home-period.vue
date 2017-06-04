@@ -86,14 +86,23 @@
         if (this.whatLocation === 'top') {
           return svgHalf / this.percentCounter
         } else if (this.whatLocation === 'bottom') {
-          return svgHalf + svgHalf / this.percentCounter
+          return svgHalf + (svgHalf / this.percentCounter)
         } else {
           return svgHalf
         }
       }
     },
+    methods: {
+      setKutuYuksekligi () {
+        const h = document.querySelector('.first').offsetHeight || 0
+        this.kutuYuksekligi = h
+      }
+    },
     mounted () {
-      this.kutuYuksekligi = document.querySelector('.first').offsetHeight || 0
+      this.setKutuYuksekligi()
+      window.onresize = (event) => {
+        this.setKutuYuksekligi()
+      }
     }
   }
 </script>

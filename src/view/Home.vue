@@ -26,7 +26,7 @@
         return this.ramadanStatus && !_.includes(['Ikindi', 'Aksam', 'Yatsi'], this.currentPeriod)
       }
     },
-    mounted () {
+    created () {
       this.$store.dispatch('getData')
     }
   }
