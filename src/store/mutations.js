@@ -60,18 +60,26 @@ export default {
     const NOW = new Date()
     const CURRENT_HOURS_MINUTES = state.Periods[state.currentPeriod].split(':')
     const NEXT_HOURS_MINUTES = state.Periods[state.nextPeriod].split(':')
-    let NEXT_PERIOD = moment([NOW.getFullYear(), NOW.getMonth(), NOW.getDate(), NEXT_HOURS_MINUTES[0], NEXT_HOURS_MINUTES[1]])
-    if (state.currentPeriod === 'Yatsi' && NOW.getHours() >= CURRENT_HOURS_MINUTES[0]) NEXT_PERIOD.add(1, 'day')
+
+    const CURRENT_PERIOD = moment(NOW)
+    const NEXT_PERIOD = moment([NOW.getFullYear(), NOW.getMonth(), NOW.getDate(), NEXT_HOURS_MINUTES[0], NEXT_HOURS_MINUTES[1]])
+
+    if (state.currentPeriod === 'Yatsi') {
+      if (NOW.getHours() >= parseInt(CURRENT_HOURS_MINUTES[0]) && NOW.getHours() <= 23) {
+        NEXT_PERIOD.add(1, 'day')
+      }
+    }
+
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!
     // DEBUG
     const DEBUG = false
     if (DEBUG) {
-      // let newDate = moment(NOW).add(161, 'm')
-      let newDate = moment(NOW).subtract(64, 'm')
+      // let newDate = CURRENT_PERIOD.add(161, 'm')
+      let newDate = CURRENT_PERIOD.subtract(120, 'm')
       state.secCounter = Math.abs(newDate.diff(NEXT_PERIOD, 'second'))
       // !!!!!!!!!!!!!!!!!!!!!!!!!!!!
     } else {
-      state.secCounter = Math.abs(moment(NOW).diff(NEXT_PERIOD, 'second'))
+      state.secCounter = Math.abs(CURRENT_PERIOD.diff(NEXT_PERIOD, 'second'))
     }
   },
 
@@ -79,10 +87,19 @@ export default {
     const NOW = new Date()
     const CURRENT_HOURS_MINUTES = state.Periods[state.currentPeriod].split(':')
     const NEXT_HOURS_MINUTES = state.Periods[state.nextPeriod].split(':')
-    let START_PERIOD = moment([NOW.getFullYear(), NOW.getMonth(), NOW.getDate(), CURRENT_HOURS_MINUTES[0], CURRENT_HOURS_MINUTES[1]])
-    let END_PERIOD = moment([NOW.getFullYear(), NOW.getMonth(), NOW.getDate(), NEXT_HOURS_MINUTES[0], NEXT_HOURS_MINUTES[1]])
-    if (state.currentPeriod === 'Yatsi' && NOW.getHours() >= CURRENT_HOURS_MINUTES[0]) END_PERIOD.add(1, 'day')
-    state.periodTotalTime = Math.abs(moment(START_PERIOD).diff(END_PERIOD, 'second'))
+
+    const CURRENT_PERIOD = moment([NOW.getFullYear(), NOW.getMonth(), NOW.getDate(), CURRENT_HOURS_MINUTES[0], CURRENT_HOURS_MINUTES[1]])
+    const NEXT_PERIOD = moment([NOW.getFullYear(), NOW.getMonth(), NOW.getDate(), NEXT_HOURS_MINUTES[0], NEXT_HOURS_MINUTES[1]])
+
+    if (state.currentPeriod === 'Yatsi') {
+      if (NOW.getHours() >= parseInt(CURRENT_HOURS_MINUTES[0]) && NOW.getHours() <= 23) {
+        NEXT_PERIOD.add(1, 'day')
+      } else {
+        CURRENT_PERIOD.subtract(1, 'day')
+      }
+    }
+
+    state.periodTotalTime = Math.abs(CURRENT_PERIOD.diff(NEXT_PERIOD, 'second'))
   },
 
   RAMAZAN_DA_MIYIZ (state, ramadanStatus) {
