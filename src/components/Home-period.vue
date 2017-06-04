@@ -274,6 +274,14 @@
               opacity: 1 - ($j - 1) / 10;
               font-size: map-get($b, fontSize);
             }
+            .counter {
+              @if (map-get($a, dark)) {
+                color: map-get($a, bg);
+              }
+              else {
+                color: map-get($a, color);
+              }
+            }
           }
         }
       }
