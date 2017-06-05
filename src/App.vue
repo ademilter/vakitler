@@ -21,7 +21,7 @@
   }
 
   body {
-    font-family: 'Avenir Next Condensed', 'Roboto', Helvetica, Arial, sans-serif;
+    font-family: 'Avenir Next Condensed', 'Roboto Condensed', 'Roboto', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     line-height: 1;

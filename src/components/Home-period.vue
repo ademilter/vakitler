@@ -1,21 +1,21 @@
 <template lang="pug">
-  .Period(:class="[Name, Order]")
-    transition(name='t-enterLeft')
-      .counter(v-if="Order === 'first'", v-show="percentCounter", :style="{ bottom:  newBottomValue + '%' }")
-        .count
-          span.dash –
-          span.bold {{ Counter[0] }}
-          span :
-          span.bold {{ Counter[1] }}
-          span :
-          span.bold {{ Counter[2] }}
-        svg(:viewbox="svgViewbox")
-          polygon(fill="#fff", fill-rule="evenodd", :points="svgPoints")
-    .content
-      .name {{ $t(Name.toLowerCase()) }}
-      .time.bold {{ Time }}
-    .bar(v-if="Order === 'first'")
-    //.bar(v-show="percentCounter", :style="{ height: 100 - percentCounter + '%' }")
+  transition(name='t-enterFade')
+    .Period(:class="[Name, Order]")
+      transition(name='t-enterFade')
+        .Period-counter(v-if="Order === 'first'", v-show="percentCounter", :style="{ bottom:  newBottomValue + '%' }")
+          .count
+            span.dash –
+            span.bold {{ Counter[0] }}
+            span :
+            span.bold {{ Counter[1] }}
+            span :
+            span.bold {{ Counter[2] }}
+          svg(:viewbox="svgViewbox")
+            polygon(fill="#fff", fill-rule="evenodd", :points="svgPoints")
+      .Period-content
+        .name {{ $t(Name.toLowerCase()) }}
+        .time.bold {{ Time }}
+      .Period-bar(v-if="Order === 'first'")
 </template>
 
 <script>
@@ -113,82 +113,10 @@
     position: relative;
     padding-left: 30px;
     padding-right: 30px;
-    flex-grow: 1;
     display: flex;
     align-items: center;
     background-color: #eee;
     transition: .2s;
-
-    .bar {
-      display: none;
-      z-index: 2;
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 4px;
-      height: 100%;
-      background-color: currentColor;
-    }
-
-    &.first .bar {
-      display: block;
-    }
-
-    .counter {
-      display: none;
-      position: absolute;
-      right: 10px;
-      transform: translateY(50%);
-      width: 110px;
-      //filter: drop-shadow(0 1px 3px rgba(black, .06));
-
-      // aspect-ratio box
-      &:before {
-        content: "";
-        display: block;
-        padding-top: percentage(46/164); // svg h/w
-      }
-
-      .count {
-        font-size: 1.2em;
-        z-index: 1;
-        position: absolute;
-        left: 10px;
-        top: 55%;
-        transform: translateY(-50%);
-        display: flex;
-        align-items: center;
-
-        span {
-          &.dash {
-            margin-right: 3px;
-            margin-top: -3px;
-          }
-        }
-      }
-
-      svg {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-      }
-
-    }
-
-    &.first .counter {
-      display: block;
-    }
-
-    .name {
-      font-size: .8em;
-    }
-
-    .time {
-      margin-top: 4px;
-      font-size: 1.1em;
-    }
 
     $theme: (
       period: 'Imsak',
@@ -267,14 +195,15 @@
 
         .Times.#{map-get($a, period)} & {
           &.#{map-get($b, name)} {
+            transition-delay: #{$j * 100}ms;
             z-index: length($order) - $j;
             flex-grow: map-get($b, grow);
             background-color: desaturate(darken(map-get($a, bg), map-get($b, darken)), map-get($b, darken));
-            .content {
+            .Period-content {
               opacity: 1 - ($j - 1) / 10;
               font-size: map-get($b, fontSize);
             }
-            .counter {
+            .Period-counter {
               @if (map-get($a, dark)) {
                 color: map-get($a, bg);
               }
@@ -298,13 +227,78 @@
 
     }
 
+    &-content {
+
+      .name {
+        font-size: .8em;
+      }
+
+      .time {
+        margin-top: 4px;
+        font-size: 1.1em;
+      }
+
+    }
+
+    &-counter {
+      position: absolute;
+      right: 10px;
+      transform: translateY(50%);
+      width: 110px;
+      filter: drop-shadow(0 1px 2px rgba(black, .06));
+
+      // aspect-ratio box
+      &:before {
+        content: "";
+        display: block;
+        padding-top: percentage(46/164); // svg h/w
+      }
+
+      .count {
+        font-size: 1.2em;
+        z-index: 1;
+        position: absolute;
+        left: 10px;
+        top: 55%;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+
+        span {
+          &.dash {
+            margin-right: 3px;
+            margin-top: -3px;
+          }
+        }
+      }
+
+      svg {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+    }
+
+    &-bar {
+      z-index: 2;
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 4px;
+      height: 100%;
+      background-color: currentColor;
+    }
+
   }
 
-  .t-enterLeft-enter-active, .t-enterLeft-leave-active {
-    transition: .2s;
+  .t-enterFade-enter-active, .t-enterFade-leave-active {
+    transition: .6s;
   }
 
-  .t-enterLeft-enter, .t-enterLeft-leave-to {
+  .t-enterFade-enter, .t-enterFade-leave-to {
     opacity: 0;
   }
 

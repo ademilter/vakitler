@@ -21,15 +21,14 @@ export const store = new Vuex.Store({
   actions,
   mutations,
   state: {
-    // CHOOSE
+    // Settings
     AllCountries: [],
     AllStates: [],
     AllTowns: [],
-    // HOME
+    // Home
     Periods: {},
     currentPeriod: '',
     nextPeriod: '',
-    Counter: '',
     secCounter: '',
     periodTotalTime: '',
     Ramadan: {
@@ -41,6 +40,7 @@ export const store = new Vuex.Store({
     }
   },
   getters: {
+    // Settings
     AllCountries (state) {
       return state.AllCountries
     },
@@ -50,6 +50,7 @@ export const store = new Vuex.Store({
     AllTowns (state) {
       return state.AllTowns
     },
+    // Home
     Periods (state) {
       return state.Periods
     },
