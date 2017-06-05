@@ -57,6 +57,16 @@
       svgPoints () {
         return `0 0 ${this.svgW - (this.svgH / 2)} 0 ${this.svgW} ${this.arrowNewValue} ${this.svgW - (this.svgH / 2)} ${this.svgH} 0 ${this.svgH}`
       },
+      arrowNewValue () {
+        const svgHalf = this.svgH / 2
+        if (this.whatLocation === 'top') {
+          return this.kutuYuksekligi * (100 - this.percentCounter) / 100
+        } else if (this.whatLocation === 'bottom') {
+          return svgHalf + (svgHalf / this.percentCounter)
+        } else {
+          return svgHalf
+        }
+      },
       maxBottomValue () {
         let ok = this.svgH / 2
         return ok / this.kutuYuksekligi * 100
@@ -74,21 +84,11 @@
       },
       newBottomValue () {
         if (this.whatLocation === 'top') {
-          return (100 - this.maxBottomValue).toFixed(2)
+          return 100 - this.maxBottomValue
         } else if (this.whatLocation === 'bottom') {
-          return this.maxBottomValue.toFixed(2)
+          return this.maxBottomValue
         } else {
-          return this.percentCounter.toFixed(2)
-        }
-      },
-      arrowNewValue () {
-        const svgHalf = this.svgH / 2
-        if (this.whatLocation === 'top') {
-          return svgHalf / this.percentCounter
-        } else if (this.whatLocation === 'bottom') {
-          return svgHalf + (svgHalf / this.percentCounter)
-        } else {
-          return svgHalf
+          return this.percentCounter
         }
       }
     },

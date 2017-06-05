@@ -74,9 +74,9 @@ export default {
     // DEBUG
     const DEBUG = false
     if (DEBUG) {
-      // let newDate = CURRENT_PERIOD.add(161, 'm')
-      let newDate = CURRENT_PERIOD.subtract(120, 'm')
-      state.secCounter = Math.abs(newDate.diff(NEXT_PERIOD, 'second'))
+      // CURRENT_PERIOD.add(122, 'm')
+      CURRENT_PERIOD.subtract(174, 'm')
+      state.secCounter = Math.abs(CURRENT_PERIOD.diff(NEXT_PERIOD, 'second'))
       // !!!!!!!!!!!!!!!!!!!!!!!!!!!!
     } else {
       state.secCounter = Math.abs(CURRENT_PERIOD.diff(NEXT_PERIOD, 'second'))
