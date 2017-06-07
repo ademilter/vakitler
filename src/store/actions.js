@@ -32,25 +32,47 @@ export default {
   GET_PERIOD ({ dispatch, commit, state }) {
     axios.get(API_URL + 'vakitler?ilce=' + localStorage.getItem('townId')).then((res) => {
       if (res.status === 200) {
-        commit('SET_PERIODS', res.data)
-        dispatch('FIND_PERIOD')
-        commit('TOTAL_TIME')
-        dispatch('CHECK_RAMADAN')
-
-        setInterval(() => {
-          commit('COUNTER')
-          let counter = _.map(state.Counter, _.unary(parseInt))
-          if (_.sum(counter) === 0) {
-            dispatch('FIND_PERIOD')
-          }
-        }, 1000)
+        commit('SET_ALL_PERIODS', res.data, false)
+        commit('SET_TODAY_PERIODS')
       }
     })
   },
 
-  FIND_PERIOD ({ commit }) {
-    commit('FIND_CURRENT_PERIOD')
-    commit('FIND_NEXT_PERIOD')
+  INIT_APP ({ dispatch, commit, state }) {
+    const PERIODS = JSON.parse(localStorage.getItem('allPeriods')) || []
+
+    if (PERIODS.length > 0) {
+      const NOW = new Date()
+
+      let day = NOW.getDate().toString()
+      day = _.size(day) === 1 ? `0${day}` : day
+      let month = (NOW.getMonth() + 1).toString()
+      month = _.size(month) === 1 ? `0${month}` : month
+
+      const TODAY = _.find(PERIODS, ['MiladiTarihKisa', `${day}.${month}.${NOW.getFullYear()}`])
+
+      if (TODAY) {
+        commit('SET_ALL_PERIODS', PERIODS, true)
+        commit('SET_TODAY_PERIODS')
+      } else {
+        dispatch('GET_PERIOD')
+      }
+    } else {
+      dispatch('GET_PERIOD')
+    }
+  },
+
+  START_COUNTER ({ dispatch, commit, state }) {
+    commit('FIND_ACTIVE_PERIOD')
+    commit('TOTAL_TIME')
+    dispatch('CHECK_RAMADAN')
+
+    setInterval(() => {
+      commit('COUNTER')
+      if (state.counter === 0) {
+        commit('FIND_ACTIVE_PERIOD')
+      }
+    }, 1000)
   },
 
   CHECK_RAMADAN ({ commit, state }) {

@@ -26,6 +26,7 @@ export const store = new Vuex.Store({
     allStates: [],
     allTowns: [],
     // Home
+    allPeriods: [],
     periods: {},
     currentPeriod: '',
     nextPeriod: '',
