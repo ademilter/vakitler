@@ -3,11 +3,11 @@
     .text {{ $t('iftar') }}
     .count
       span.dash –
-      span.bold {{ ramadanCounter[0] }}
+      span.bold {{ splitFatoorCounter[0] }}
       span :
-      span.bold {{ ramadanCounter[1] }}
+      span.bold {{ splitFatoorCounter[1] }}
       span :
-      span.bold {{ ramadanCounter[2] }}
+      span.bold {{ splitFatoorCounter[2] }}
 </template>
 
 <script>
@@ -17,7 +17,7 @@
     name: 'rowRamadan',
     computed: {
       ...mapGetters([
-        'ramadanCounter'
+        'splitFatoorCounter'
       ])
     }
   }

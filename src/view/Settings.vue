@@ -1,21 +1,20 @@
 <template lang="pug">
   .Settings
     .row
-      select(v-show="AllCountries.length", v-model="countryId")
+      select(:disabled="!allCountries.length", v-model="countryId")
         option(value="-1", selected) Ülke seçin
-        option(v-for="Country in AllCountries", :value="Country.UlkeID", :key="Country.UlkeID") {{ Country.UlkeAdi }}
+        option(v-for="country in allCountries", :value="country.UlkeID", :key="country.UlkeID") {{ country.UlkeAdi }}
     .row
-      select(:disabled="!AllStates.length", v-model="stateId")
+      select(:disabled="!allStates.length", v-model="stateId")
         option(value="-1", selected) Şehir seçin
-        option(v-for="State in AllStates", :value="State.SehirID", :key="State.SehirID") {{ State.SehirAdi }}
+        option(v-for="state in allStates", :value="state.SehirID", :key="state.SehirID") {{ state.SehirAdi }}
     .row
-      select(:disabled="!AllTowns.length", v-model="townId")
+      select(:disabled="!allTowns.length", v-model="townId")
         option(value="-1", selected) İlçe seçin
-        option(v-for="Town in AllTowns", :value="Town.IlceID", :key="Town.IlceID") {{ Town.IlceAdi }}
+        option(v-for="town in allTowns", :value="town.IlceID", :key="town.IlceID") {{ town.IlceAdi }}
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
   import _ from 'lodash'
   import Router from '@/router'
 
@@ -29,11 +28,15 @@
       }
     },
     computed: {
-      ...mapGetters([
-        'AllCountries',
-        'AllStates',
-        'AllTowns'
-      ])
+      allCountries () {
+        return this.$store.state.allCountries
+      },
+      allStates () {
+        return this.$store.state.allStates
+      },
+      allTowns () {
+        return this.$store.state.allTowns
+      }
     },
     watch: {
       countryId () {
@@ -60,7 +63,7 @@
       },
       changeTown () {
         localStorage.setItem('townId', this.townId)
-        let town = _.find(this.AllTowns, ['IlceID', this.townId])
+        let town = _.find(this.allTowns, ['IlceID', this.townId])
         localStorage.setItem('townName', town.IlceAdi)
         Router.push({ name: 'Home' })
       }

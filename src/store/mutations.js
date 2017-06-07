@@ -6,17 +6,17 @@ export default {
   SET_COUNTRY (state, countries) {
     const TR = _.find(countries, ['UlkeAdi', 'TÜRKİYE'])
     if (TR) countries.unshift(TR)
-    state.AllCountries = countries
+    state.allCountries = countries
   },
 
   SET_STATE (state, states) {
     const IST = _.find(states, ['SehirAdi', 'İSTANBUL'])
     if (IST) states.unshift(IST)
-    state.AllStates = states
+    state.allStates = states
   },
 
   SET_TOWN (state, towns) {
-    state.AllTowns = towns
+    state.allTowns = towns
   },
 
   SET_PERIODS (state, allPeriods) {
@@ -29,12 +29,12 @@ export default {
     month = _.size(month) === 1 ? `0${month}` : month
 
     const DATA = _.find(allPeriods, ['MiladiTarihKisa', `${day}.${month}.${NOW.getFullYear()}`])
-    state.Periods = _.pick(DATA, ['Imsak', 'Gunes', 'Ogle', 'Ikindi', 'Aksam', 'Yatsi'])
+    state.periods = _.pick(DATA, ['Imsak', 'Gunes', 'Ogle', 'Ikindi', 'Aksam', 'Yatsi'])
   },
 
   FIND_CURRENT_PERIOD (state) {
     let _periods = []
-    _.forEach(state.Periods, (periodTime, periodName) => {
+    _.forEach(state.periods, (periodTime, periodName) => {
       const HOURS_MINUTES = periodTime.split(':')
       const NOW = new Date()
       const PERIOD = moment([NOW.getFullYear(), NOW.getMonth(), NOW.getDate(), HOURS_MINUTES[0], HOURS_MINUTES[1]])
@@ -45,12 +45,12 @@ export default {
     if (_periods.length > 0) {
       state.currentPeriod = _.last(_periods)
     } else {
-      state.currentPeriod = _.last(_.keys(state.Periods))
+      state.currentPeriod = _.last(_.keys(state.periods))
     }
   },
 
   FIND_NEXT_PERIOD (state) {
-    const KEYS = _.keys(state.Periods)
+    const KEYS = _.keys(state.periods)
     const CURRENT_INDEX = _.indexOf(KEYS, state.currentPeriod)
     const NEXT_INDEX = CURRENT_INDEX === (KEYS.length - 1) ? 0 : CURRENT_INDEX + 1
     state.nextPeriod = KEYS[NEXT_INDEX]
@@ -58,8 +58,8 @@ export default {
 
   COUNTER (state) {
     const NOW = new Date()
-    const CURRENT_HOURS_MINUTES = state.Periods[state.currentPeriod].split(':')
-    const NEXT_HOURS_MINUTES = state.Periods[state.nextPeriod].split(':')
+    const CURRENT_HOURS_MINUTES = state.periods[state.currentPeriod].split(':')
+    const NEXT_HOURS_MINUTES = state.periods[state.nextPeriod].split(':')
 
     const CURRENT_PERIOD = moment(NOW)
     const NEXT_PERIOD = moment([NOW.getFullYear(), NOW.getMonth(), NOW.getDate(), NEXT_HOURS_MINUTES[0], NEXT_HOURS_MINUTES[1]])
@@ -76,17 +76,17 @@ export default {
     if (DEBUG) {
       // CURRENT_PERIOD.add(122, 'm')
       CURRENT_PERIOD.subtract(174, 'm')
-      state.secCounter = Math.abs(CURRENT_PERIOD.diff(NEXT_PERIOD, 'second'))
+      state.counter = Math.abs(CURRENT_PERIOD.diff(NEXT_PERIOD, 'second'))
       // !!!!!!!!!!!!!!!!!!!!!!!!!!!!
     } else {
-      state.secCounter = Math.abs(CURRENT_PERIOD.diff(NEXT_PERIOD, 'second'))
+      state.counter = Math.abs(CURRENT_PERIOD.diff(NEXT_PERIOD, 'second'))
     }
   },
 
   TOTAL_TIME (state) {
     const NOW = new Date()
-    const CURRENT_HOURS_MINUTES = state.Periods[state.currentPeriod].split(':')
-    const NEXT_HOURS_MINUTES = state.Periods[state.nextPeriod].split(':')
+    const CURRENT_HOURS_MINUTES = state.periods[state.currentPeriod].split(':')
+    const NEXT_HOURS_MINUTES = state.periods[state.nextPeriod].split(':')
 
     const CURRENT_PERIOD = moment([NOW.getFullYear(), NOW.getMonth(), NOW.getDate(), CURRENT_HOURS_MINUTES[0], CURRENT_HOURS_MINUTES[1]])
     const NEXT_PERIOD = moment([NOW.getFullYear(), NOW.getMonth(), NOW.getDate(), NEXT_HOURS_MINUTES[0], NEXT_HOURS_MINUTES[1]])
@@ -102,15 +102,15 @@ export default {
     state.periodTotalTime = Math.abs(CURRENT_PERIOD.diff(NEXT_PERIOD, 'second'))
   },
 
-  RAMAZAN_DA_MIYIZ (state, ramadanStatus) {
-    state.Ramadan.status = ramadanStatus
+  SET_IS_RAMADAN (state, ramadanStatus) {
+    state.ramadan.status = ramadanStatus
   },
 
-  IFTARA_KALAN_SURE (state) {
+  FATOOR_COUNTER (state) {
     const NOW = new Date()
-    const NEXT_HOURS_MINUTES = state.Periods['Aksam'].split(':')
+    const NEXT_HOURS_MINUTES = state.periods['Aksam'].split(':')
     let NEXT_PERIOD = moment([NOW.getFullYear(), NOW.getMonth(), NOW.getDate(), NEXT_HOURS_MINUTES[0], NEXT_HOURS_MINUTES[1]])
-    state.Ramadan.totalTime = Math.abs(moment(NOW).diff(NEXT_PERIOD, 'second'))
+    state.ramadan.totalTime = Math.abs(moment(NOW).diff(NEXT_PERIOD, 'second'))
   }
 
 }

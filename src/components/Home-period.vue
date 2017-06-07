@@ -1,21 +1,21 @@
 <template lang="pug">
   transition(name='t-enterFade')
-    .Period(:class="[Name, Order]")
+    .Period(:class="[name, order]")
       transition(name='t-enterFade')
-        .Period-counter(v-if="Order === 'first'", v-show="percentCounter", :style="{ bottom:  newBottomValue + '%' }")
+        .Period-counter(v-if="order === 'first'", v-show="percentCounter", :style="{ bottom:  newBottomValue + '%' }")
           .count
             span.dash –
-            span.bold {{ Counter[0] }}
+            span.bold {{ splitCounter[0] }}
             span :
-            span.bold {{ Counter[1] }}
+            span.bold {{ splitCounter[1] }}
             span :
-            span.bold {{ Counter[2] }}
+            span.bold {{ splitCounter[2] }}
           svg(:viewbox="svgViewbox")
             polygon(fill="#fff", fill-rule="evenodd", :points="svgPoints")
       .Period-content
-        .name {{ $t(Name.toLowerCase()) }}
-        .time.bold {{ Time }}
-      .Period-bar(v-if="Order === 'first'")
+        .name {{ $t(name.toLowerCase()) }}
+        .time.bold {{ time }}
+      .Period-bar(v-if="order === 'first'")
 </template>
 
 <script>
@@ -24,7 +24,7 @@
 
   export default {
     name: 'Period',
-    props: ['Name', 'Time'],
+    props: ['name', 'time'],
     data () {
       return {
         kutuYuksekligi: 0
@@ -32,17 +32,23 @@
     },
     computed: {
       ...mapGetters([
-        'Periods',
-        'currentPeriod',
-        'Counter',
-        'secCounter',
+        'splitCounter',
         'percentCounter'
       ]),
-      Order () {
+      periods () {
+        return this.$store.state.periods
+      },
+      currentPeriod () {
+        return this.$store.state.currentPeriod
+      },
+      counter () {
+        return this.$store.state.counter
+      },
+      order () {
         const ORDER_CLASS = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth']
-        const PERIODS = _.keys(this.Periods)
+        const PERIODS = _.keys(this.periods)
         const CURRENT_INDEX = _.indexOf(PERIODS, this.currentPeriod)
-        const THIS_INDEX = _.indexOf(PERIODS, this.Name)
+        const THIS_INDEX = _.indexOf(PERIODS, this.name)
         return ORDER_CLASS[Math.abs(THIS_INDEX - CURRENT_INDEX)]
       },
       svgW () {

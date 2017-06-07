@@ -22,64 +22,32 @@ export const store = new Vuex.Store({
   mutations,
   state: {
     // Settings
-    AllCountries: [],
-    AllStates: [],
-    AllTowns: [],
+    allCountries: [],
+    allStates: [],
+    allTowns: [],
     // Home
-    Periods: {},
+    periods: {},
     currentPeriod: '',
     nextPeriod: '',
-    secCounter: '',
+    counter: '',
     periodTotalTime: '',
-    Ramadan: {
-      counter: '',
-      status: '',
-      totalTime: '',
+    // Ramadan
+    ramadan: {
       start: moment('5-27-2017', 'MM-DD-YYYY'),
-      end: moment('6-24-2017', 'MM-DD-YYYY')
+      end: moment('6-24-2017', 'MM-DD-YYYY'),
+      status: '',
+      counter: ''
     }
   },
   getters: {
-    // Settings
-    AllCountries (state) {
-      return state.AllCountries
-    },
-    AllStates (state) {
-      return state.AllStates
-    },
-    AllTowns (state) {
-      return state.AllTowns
-    },
-    // Home
-    Periods (state) {
-      return state.Periods
-    },
-    currentPeriod (state) {
-      return state.currentPeriod
-    },
-    nextPeriod (state) {
-      return state.nextPeriod
-    },
-    Counter (state) {
-      return secondToArray(state.secCounter)
-    },
-    secCounter (state) {
-      return state.secCounter
-    },
-    periodTotalTime (state) {
-      return state.periodTotalTime
+    splitCounter (state) {
+      return secondToArray(state.counter)
     },
     percentCounter (state) {
-      return state.secCounter * 100 / state.periodTotalTime
+      return state.counter * 100 / state.periodTotalTime
     },
-    ramadanStatus (state) {
-      return state.Ramadan.status
-    },
-    ramadanTotalTime (state) {
-      return state.Ramadan.totalTime
-    },
-    ramadanCounter (state) {
-      return secondToArray(state.Ramadan.totalTime)
+    splitFatoorCounter (state) {
+      return secondToArray(state.ramadan.counter)
     }
   }
 })

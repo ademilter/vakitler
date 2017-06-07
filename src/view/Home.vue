@@ -4,11 +4,10 @@
       router-link.Info-link(:to="{ name: 'Settings' }") {{ townName }}
     .Times(:class="currentPeriod")
       rowRamadan(v-if="showRamadan")
-      Period(v-for="(Time, Name) in Periods", :Name="Name", :Time="Time", :key="Name")
+      Period(v-for="(time, name) in periods", :name="name", :time="time", :key="name")
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
   import Period from '@/components/Home-period.vue'
   import rowRamadan from '@/components/Home-row-ramadan.vue'
   import _ from 'lodash'
@@ -21,11 +20,15 @@
       rowRamadan
     },
     computed: {
-      ...mapGetters([
-        'Periods',
-        'currentPeriod',
-        'ramadanStatus'
-      ]),
+      periods () {
+        return this.$store.state.periods
+      },
+      currentPeriod () {
+        return this.$store.state.currentPeriod
+      },
+      ramadanStatus () {
+        return this.$store.state.ramadan.status
+      },
       showRamadan () {
         return this.ramadanStatus && !_.includes(['Ikindi', 'Aksam', 'Yatsi'], this.currentPeriod)
       },

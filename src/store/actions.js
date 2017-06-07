@@ -5,7 +5,7 @@ const API_URL = 'https://ezanvakti.herokuapp.com/'
 
 export default {
 
-  GET_COUNTRY ({ dispatch, commit, state }) {
+  GET_COUNTRY ({ commit }) {
     axios.get(API_URL + 'ulkeler').then((res) => {
       if (res.status === 200) {
         commit('SET_COUNTRY', res.data)
@@ -13,16 +13,15 @@ export default {
     })
   },
 
-  GET_STATE ({ dispatch, commit, state }) {
+  GET_STATE ({ commit }) {
     axios.get(API_URL + 'sehirler?ulke=' + localStorage.getItem('countryId')).then((res) => {
       if (res.status === 200) {
-        console.log(res.data)
         commit('SET_STATE', res.data)
       }
     })
   },
 
-  GET_TOWN ({ dispatch, commit, state }) {
+  GET_TOWN ({ commit }) {
     axios.get(API_URL + 'ilceler?sehir=' + localStorage.getItem('stateId')).then((res) => {
       if (res.status === 200) {
         commit('SET_TOWN', res.data)
@@ -34,33 +33,32 @@ export default {
     axios.get(API_URL + 'vakitler?ilce=' + localStorage.getItem('townId')).then((res) => {
       if (res.status === 200) {
         commit('SET_PERIODS', res.data)
-        dispatch('findPeriod')
+        dispatch('FIND_PERIOD')
         commit('TOTAL_TIME')
+        dispatch('CHECK_RAMADAN')
 
         setInterval(() => {
           commit('COUNTER')
           let counter = _.map(state.Counter, _.unary(parseInt))
           if (_.sum(counter) === 0) {
-            dispatch('findPeriod')
+            dispatch('FIND_PERIOD')
           }
         }, 1000)
-
-        dispatch('checkRamazan')
       }
     })
   },
 
-  findPeriod ({ commit, state }) {
+  FIND_PERIOD ({ commit }) {
     commit('FIND_CURRENT_PERIOD')
     commit('FIND_NEXT_PERIOD')
   },
 
-  checkRamazan ({ commit, state }) {
-    let status = moment(new Date()).isBetween(state.Ramadan.start, state.Ramadan.end, null, '[]')
-    commit('RAMAZAN_DA_MIYIZ', status)
-    if (status) {
+  CHECK_RAMADAN ({ commit, state }) {
+    let IS_RAMADAN = moment(new Date()).isBetween(state.ramadan.start, state.ramadan.end, null, '[]')
+    commit('SET_IS_RAMADAN', IS_RAMADAN)
+    if (IS_RAMADAN) {
       setInterval(() => {
-        commit('IFTARA_KALAN_SURE')
+        commit('FATOOR_COUNTER')
       }, 1000)
     }
   }
