@@ -29,14 +29,14 @@ export const store = new Vuex.Store({
     periods: {},
     currentPeriod: '',
     nextPeriod: '',
-    counter: '',
-    periodTotalTime: '',
+    counter: null,
+    periodTotalTime: null,
     // Ramadan
     ramadan: {
       start: moment('5-27-2017', 'MM-DD-YYYY'),
       end: moment('6-24-2017', 'MM-DD-YYYY'),
-      status: '',
-      counter: ''
+      status: false,
+      counter: 0
     }
   },
   getters: {

@@ -10,3 +10,7 @@ saat: h
 dakika: min
 saniye: sec
 iftar: Remaining time of the iftar
+sayac-bilgi: In time to finish
+ulke-sec: Select Country
+sehir-sec: Select State
+ilce-sec: Select Town
