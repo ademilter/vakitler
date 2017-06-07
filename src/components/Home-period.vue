@@ -100,7 +100,7 @@
       }
     },
     watch: {
-      percentCounter () {
+      counter () {
         this.setKutuYuksekligi()
       }
     },

@@ -19,7 +19,15 @@ export default {
     state.allTowns = towns
   },
 
-  SET_PERIODS (state, allPeriods) {
+  SET_ALL_PERIODS (state, allPeriods, isLocal) {
+    state.allPeriods = allPeriods
+    // SET LOCAL STORAGE
+    if (!isLocal) {
+      localStorage.setItem('allPeriods', JSON.stringify(allPeriods))
+    }
+  },
+
+  SET_TODAY_PERIODS (state) {
     const NOW = new Date()
     // 2 to 02
     let day = NOW.getDate().toString()
@@ -28,32 +36,33 @@ export default {
     let month = (NOW.getMonth() + 1).toString()
     month = _.size(month) === 1 ? `0${month}` : month
 
-    const DATA = _.find(allPeriods, ['MiladiTarihKisa', `${day}.${month}.${NOW.getFullYear()}`])
-    state.periods = _.pick(DATA, ['Imsak', 'Gunes', 'Ogle', 'Ikindi', 'Aksam', 'Yatsi'])
+    const TODAY = _.find(state.allPeriods, ['MiladiTarihKisa', `${day}.${month}.${NOW.getFullYear()}`])
+    state.periods = _.pick(TODAY, ['Imsak', 'Gunes', 'Ogle', 'Ikindi', 'Aksam', 'Yatsi'])
   },
 
-  FIND_CURRENT_PERIOD (state) {
+  FIND_ACTIVE_PERIOD (state) {
     let _periods = []
+    const NOW = new Date()
+
     _.forEach(state.periods, (periodTime, periodName) => {
       const HOURS_MINUTES = periodTime.split(':')
-      const NOW = new Date()
       const PERIOD = moment([NOW.getFullYear(), NOW.getMonth(), NOW.getDate(), HOURS_MINUTES[0], HOURS_MINUTES[1]])
       if (moment(NOW).diff(PERIOD, 'seconds') > 0) {
         _periods.push(periodName)
       }
     })
+
+    const PERIODS_KEYS = _.keys(state.periods)
+
     if (_periods.length > 0) {
       state.currentPeriod = _.last(_periods)
     } else {
-      state.currentPeriod = _.last(_.keys(state.periods))
+      state.currentPeriod = _.last(PERIODS_KEYS)
     }
-  },
 
-  FIND_NEXT_PERIOD (state) {
-    const KEYS = _.keys(state.periods)
-    const CURRENT_INDEX = _.indexOf(KEYS, state.currentPeriod)
-    const NEXT_INDEX = CURRENT_INDEX === (KEYS.length - 1) ? 0 : CURRENT_INDEX + 1
-    state.nextPeriod = KEYS[NEXT_INDEX]
+    const CURRENT_INDEX = _.indexOf(PERIODS_KEYS, state.currentPeriod)
+    const NEXT_INDEX = CURRENT_INDEX === (PERIODS_KEYS.length - 1) ? 0 : CURRENT_INDEX + 1
+    state.nextPeriod = PERIODS_KEYS[NEXT_INDEX]
   },
 
   COUNTER (state) {

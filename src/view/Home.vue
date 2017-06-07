@@ -36,12 +36,16 @@
         return localStorage.getItem('townName')
       }
     },
+    watch: {
+      periods () {
+        this.$store.dispatch('START_COUNTER')
+      }
+    },
     created () {
       if (!localStorage.getItem('townId')) {
         Router.push({ name: 'Settings' })
-      } else {
-        this.$store.dispatch('GET_PERIOD')
       }
+      this.$store.dispatch('INIT_APP')
     }
   }
 </script>
