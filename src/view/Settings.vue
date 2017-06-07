@@ -2,15 +2,15 @@
   .Settings
     .row
       select(:disabled="!allCountries.length", v-model="countryId")
-        option(value="-1", selected) Ülke seçin
+        option(value="-1", selected) {{ $t('ulke-sec') }}
         option(v-for="country in allCountries", :value="country.UlkeID", :key="country.UlkeID") {{ country.UlkeAdi }}
     .row
       select(:disabled="!allStates.length", v-model="stateId")
-        option(value="-1", selected) Şehir seçin
+        option(value="-1", selected) {{ $t('sehir-sec') }}
         option(v-for="state in allStates", :value="state.SehirID", :key="state.SehirID") {{ state.SehirAdi }}
     .row
       select(:disabled="!allTowns.length", v-model="townId")
-        option(value="-1", selected) İlçe seçin
+        option(value="-1", selected) {{ $t('ilce-sec') }}
         option(v-for="town in allTowns", :value="town.IlceID", :key="town.IlceID") {{ town.IlceAdi }}
 </template>
 
