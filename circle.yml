@@ -15,3 +15,7 @@ deployment:
     branch: master
     commands:
       - surge --project ./dist/ --domain namaz-vakti.surge.sh
+  staging:
+    branch: dev
+    commands:
+      - surge --project ./dist/ --domain dev-namaz-vakti.surge.sh
