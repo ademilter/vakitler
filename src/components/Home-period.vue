@@ -3,6 +3,7 @@
     .Period(:class="[name, order]")
       transition(name='t-enterFade')
         .Period-counter(v-if="order === 'first'", v-show="percentCounter", :style="{ bottom:  newBottomValue + '%' }")
+          .title {{ $t('sayac-bilgi') }}
           .count
             span.dash –
             span.bold {{ splitCounter[0] }}
@@ -264,6 +265,13 @@
         padding-top: percentage(46/164); // svg h/w
       }
 
+      .title {
+        position: absolute;
+        left: 0;
+        bottom: 115%;
+        animation: fadeOut 1s 3s both;
+      }
+
       .count {
         font-size: 1.2em;
         z-index: 1;
@@ -302,6 +310,12 @@
       background-color: currentColor;
     }
 
+  }
+
+  @keyframes fadeOut {
+    to {
+      opacity: 0;
+    }
   }
 
   .t-enterFade-enter-active, .t-enterFade-leave-active {
