@@ -14,4 +14,4 @@ deployment:
   production:
     branch: master
     commands:
-      - surge --project ./dist/ --domain dev.namaz-vakti.surge.sh
+      - surge --project ./dist/ --domain dev-namaz-vakti.surge.sh
