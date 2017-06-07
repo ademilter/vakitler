@@ -1,5 +1,5 @@
 <template lang="pug">
-  .rowRamadan
+  .rowRamadan(v-show="status")
     .text {{ $t('iftar') }}
     .count
       span.dash –
@@ -18,7 +18,10 @@
     computed: {
       ...mapGetters([
         'splitFatoorCounter'
-      ])
+      ]),
+      status () {
+        return this.$store.state.ramadan.status
+      }
     }
   }
 </script>
@@ -48,6 +51,15 @@
         }
       }
     }
+  }
 
+  .t-enterHeight-enter-active, .t-enterHeight-leave-active {
+    transition: .2s;
+    overflow: hidden;
+    transition-delay: 1s;
+  }
+
+  .t-enterHeight-enter, .t-enterHeight-leave-to {
+    height: 0;
   }
 </style>

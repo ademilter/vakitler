@@ -98,6 +98,11 @@
         }
       }
     },
+    watch: {
+      percentCounter () {
+        this.setKutuYuksekligi()
+      }
+    },
     methods: {
       setKutuYuksekligi () {
         const h = document.querySelector('.first').offsetHeight || 0
@@ -105,7 +110,6 @@
       }
     },
     mounted () {
-      this.setKutuYuksekligi()
       window.onresize = (event) => {
         this.setKutuYuksekligi()
       }
