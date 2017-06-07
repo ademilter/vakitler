@@ -17,6 +17,7 @@
         .name {{ $t(name.toLowerCase()) }}
         .time.bold {{ time }}
       .Period-bar(v-if="order === 'first'")
+        .loading(:style="{ height: 100 - percentCounter + '%' }")
 </template>
 
 <script>
@@ -217,6 +218,9 @@
             .Period-counter {
               @if (map-get($a, dark)) {
                 color: map-get($a, bg);
+                .title {
+                  color: map-get($a, color);
+                }
               }
               else {
                 color: map-get($a, color);
@@ -305,9 +309,25 @@
       position: absolute;
       top: 0;
       right: 0;
-      width: 4px;
+      width: 5px;
       height: 100%;
-      background-color: currentColor;
+
+      &:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background-color: currentColor;
+        opacity: .3;
+      }
+
+      .loading {
+        background-color: currentColor;
+        box-shadow: 0 0 4px rgba(white, .5);
+      }
+
     }
 
   }
