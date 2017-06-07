@@ -110,7 +110,7 @@ export default {
     const NOW = new Date()
     const NEXT_HOURS_MINUTES = state.periods['Aksam'].split(':')
     let NEXT_PERIOD = moment([NOW.getFullYear(), NOW.getMonth(), NOW.getDate(), NEXT_HOURS_MINUTES[0], NEXT_HOURS_MINUTES[1]])
-    state.ramadan.totalTime = Math.abs(moment(NOW).diff(NEXT_PERIOD, 'second'))
+    state.ramadan.counter = Math.abs(moment(NOW).diff(NEXT_PERIOD, 'second'))
   }
 
 }
