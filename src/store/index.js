@@ -34,8 +34,8 @@ export const store = new Vuex.Store({
     periodTotalTime: null,
     // Ramadan
     ramadan: {
-      start: moment('5-27-2017', 'MM-DD-YYYY'),
-      end: moment('6-24-2017', 'MM-DD-YYYY'),
+      start: moment('5-16-2018', 'MM-DD-YYYY'),
+      end: moment('6-14-2018', 'MM-DD-YYYY'),
       status: false,
       counter: 0
     }
