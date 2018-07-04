@@ -15,9 +15,10 @@
     "axios": "^0.16.1",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",
+    "o.disk": "^1.0.0",
     "vue": "^2.3.3",
-    "vue-router": "^2.3.1",
     "vue-i18n": "^6.1.3",
+    "vue-router": "^2.3.1",
     "vuex": "^2.3.1"
   },
   "devDependencies": {
@@ -80,5 +81,16 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ]
+  ],
+  "main": ".eslintrc.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ademilter/namaz-vakti.git"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ademilter/namaz-vakti/issues"
+  },
+  "homepage": "https://github.com/ademilter/namaz-vakti#readme"
 }

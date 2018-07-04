@@ -1,36 +1,54 @@
 import axios from 'axios'
 import moment from 'moment'
+import ODisk from 'o.disk'
 import _ from 'lodash'
 const API_URL = 'https://ezanvakti.herokuapp.com/'
 
 export default {
 
   GET_COUNTRY ({ commit }) {
+    let data = ODisk.ulkeler
+    if (data) {
+      return commit('SET_COUNTRY', data)
+    }
     axios.get(API_URL + 'ulkeler').then((res) => {
       if (res.status === 200) {
+        ODisk.ulkeler = res.data
         commit('SET_COUNTRY', res.data)
       }
     })
   },
 
   GET_STATE ({ commit }) {
-    axios.get(API_URL + 'sehirler?ulke=' + localStorage.getItem('countryId')).then((res) => {
+    let country = ODisk.countryId
+    let data = ODisk[country + '_sehirler']
+    if (data) {
+      return commit('SET_STATE', data)
+    }
+    axios.get(API_URL + 'sehirler?ulke=' + country).then((res) => {
       if (res.status === 200) {
+        ODisk[country + '_sehirler'] = res.data
         commit('SET_STATE', res.data)
       }
     })
   },
 
   GET_TOWN ({ commit }) {
-    axios.get(API_URL + 'ilceler?sehir=' + localStorage.getItem('stateId')).then((res) => {
+    let state = ODisk.stateId
+    let data = ODisk[state + '_ilceler']
+    if (data) {
+      return commit('SET_TOWN', data)
+    }
+    axios.get(API_URL + 'ilceler?sehir=' + state).then((res) => {
       if (res.status === 200) {
+        ODisk[state + '_ilceler'] = res.data
         commit('SET_TOWN', res.data)
       }
     })
   },
 
   GET_PERIOD ({ dispatch, commit, state }) {
-    axios.get(API_URL + 'vakitler?ilce=' + localStorage.getItem('townId')).then((res) => {
+    axios.get(API_URL + 'vakitler?ilce=' + ODisk.townId).then((res) => {
       if (res.status === 200) {
         commit('SET_ALL_PERIODS', res.data, false)
         commit('SET_TODAY_PERIODS')
@@ -39,7 +57,7 @@ export default {
   },
 
   INIT_APP ({ dispatch, commit, state }) {
-    const PERIODS = JSON.parse(localStorage.getItem('allPeriods')) || []
+    const PERIODS = ODisk.allPeriods || []
 
     if (PERIODS.length > 0) {
       const NOW = new Date()

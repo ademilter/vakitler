@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import moment from 'moment'
-
+import ODisk from 'o.disk'
 export default {
 
   SET_COUNTRY (state, countries) {
@@ -21,9 +21,9 @@ export default {
 
   SET_ALL_PERIODS (state, allPeriods, isLocal) {
     state.allPeriods = allPeriods
-    // SET LOCAL STORAGE
+    // SAVE TO DISK
     if (!isLocal) {
-      localStorage.setItem('allPeriods', JSON.stringify(allPeriods))
+      ODisk.allPeriods = allPeriods
     }
   },
 

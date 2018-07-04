@@ -17,6 +17,7 @@
 <script>
   import _ from 'lodash'
   import Router from '@/router'
+  import ODisk from 'o.disk'
 
   export default {
     name: 'Choose',
@@ -51,20 +52,29 @@
     },
     created () {
       this.$store.dispatch('GET_COUNTRY')
+      let props = ['countryId', 'stateId']
+      props.some(function (i) {
+        if (ODisk[i]) {
+          this[i] = ODisk[i]
+          this.$store.dispatch('GET_' + i.match(/(.+)Id/)[1].toUpperCase())
+          return false
+        }
+        return true
+      }, this)
     },
     methods: {
       changeCountry () {
-        localStorage.setItem('countryId', this.countryId)
+        ODisk.countryId = this.countryId
         this.$store.dispatch('GET_STATE')
       },
       changeState () {
-        localStorage.setItem('stateId', this.stateId)
+        ODisk.stateId = this.stateId
         this.$store.dispatch('GET_TOWN')
       },
       changeTown () {
-        localStorage.setItem('townId', this.townId)
+        ODisk.townId = this.townId
         let town = _.find(this.allTowns, ['IlceID', this.townId])
-        localStorage.setItem('townName', town.IlceAdi)
+        ODisk.townName = town.IlceAdi
         Router.push({ name: 'Home' })
       }
     }
