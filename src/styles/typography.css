@@ -1,0 +1,22 @@
+html {
+  font-family: var(--ff-text);
+  font-size: var(--fs-body);
+  line-height: var(--line-height);
+}
+
+/*input, textarea, select, button {
+  font-weight: var(--fw-normal);
+}*/
+
+small,
+.fs-small {
+  font-size: var(--fs-small);
+}
+
+.fw-normal {
+  font-weight: var(--fw-normal);
+}
+
+.fw-medium {
+  font-weight: var(--fw-bold);
+}
