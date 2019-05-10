@@ -114,6 +114,7 @@ export default {
     )
   },
   ramadanTimer: (state, getters) => {
+    if (['Aksam', 'Yatsi'].indexOf(getters.currentTime) > -1) return null
     const second = getters.today.Aksam.diff(state.now, 'second')
     return secondSplit(second).join(':')
   }

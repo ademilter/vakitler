@@ -1,5 +1,5 @@
 <template>
-  <div class="home" v-if="userTown">
+  <div class="page-home" v-if="userTown">
     <div class="settings-link">
       <router-link :to="{ name: 'Settings' }">
         {{ userCity.SehirAdiEn }} - {{ userTown.IlceAdiEn }}
@@ -11,54 +11,62 @@
         :datetime="today.Imsak"
         :currentTime="currentTime"
         :timer="periodTimer"
+        :isRamadan="ramadanTimer"
+        :ramadanTimer="ramadanTimer"
       />
       <Time
         time="Gunes"
         :datetime="today.Gunes"
         :currentTime="currentTime"
         :timer="periodTimer"
+        :isRamadan="ramadanTimer"
+        :ramadanTimer="ramadanTimer"
       />
       <Time
         time="Ogle"
         :datetime="today.Ogle"
         :currentTime="currentTime"
         :timer="periodTimer"
+        :isRamadan="ramadanTimer"
+        :ramadanTimer="ramadanTimer"
       />
       <Time
         time="Ikindi"
         :datetime="today.Ikindi"
         :currentTime="currentTime"
         :timer="periodTimer"
+        :isRamadan="ramadanTimer"
+        :ramadanTimer="ramadanTimer"
       />
-      <!--      <Ramadan v-if="isRamadan" :timer="ramadanTimer" />-->
       <Time
         time="Aksam"
         :datetime="today.Aksam"
         :currentTime="currentTime"
         :timer="periodTimer"
+        :isRamadan="ramadanTimer"
+        :ramadanTimer="ramadanTimer"
       />
       <Time
         time="Yatsi"
         :datetime="today.Yatsi"
         :currentTime="currentTime"
         :timer="periodTimer"
+        :isRamadan="ramadanTimer"
+        :ramadanTimer="ramadanTimer"
       />
     </div>
   </div>
 </template>
 
 <script>
-// import moment from 'moment/moment'
 import Time from '../components/Time'
-import Ramadan from '../components/Ramadan'
 import { mapGetters, mapState } from 'vuex'
 
 export default {
   name: 'home',
 
   components: {
-    Time,
-    Ramadan
+    Time
   },
 
   computed: {
@@ -80,3 +88,28 @@ export default {
   }
 }
 </script>
+
+<style>
+.settings-link {
+  height: 30px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-home {
+  padding-top: 30px;
+}
+
+.times {
+  height: calc(100vh - 30px);
+  background-color: #eee;
+  display: grid;
+}
+</style>

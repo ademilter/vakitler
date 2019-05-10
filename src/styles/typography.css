@@ -8,15 +8,6 @@ html {
   font-weight: var(--fw-normal);
 }*/
 
-small,
-.fs-small {
+small {
   font-size: var(--fs-small);
-}
-
-.fw-normal {
-  font-weight: var(--fw-normal);
-}
-
-.fw-medium {
-  font-weight: var(--fw-bold);
 }
