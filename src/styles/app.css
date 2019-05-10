@@ -1,9 +1,7 @@
-@import 'formalize.css';
 @import 'variables.css';
-@import 'typography.css';
-@import 'times.css';
+@import 'font-face.css';
 
-html {
-  overflow: hidden;
-  height: 100vh;
-}
+@import 'formalize.css';
+@import 'typography.css';
+
+@import 'times.css';

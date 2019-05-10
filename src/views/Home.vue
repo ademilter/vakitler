@@ -91,11 +91,12 @@ export default {
 
 <style>
 .settings-link {
-  height: 30px;
+  z-index: 2;
   position: fixed;
   left: 0;
   right: 0;
   top: 0;
+  height: 30px;
   background-color: #000;
   color: #fff;
   display: flex;
