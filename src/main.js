@@ -10,13 +10,20 @@ import App from './views/App.vue'
 
 import './styles/app.css'
 
-new Vue({
-  router,
-  store,
-  wait: wait.instance,
-  render: h => h(App)
-}).$mount('#app')
+const init = async () => {
+  // TODO: data yüklenmezse?
+  await store.dispatch('init')
 
-setInterval(() => {
-  store.commit('TIME_UPDATE')
-}, 1000)
+  setInterval(() => {
+    store.commit('TIME_UPDATE')
+  }, 1000)
+
+  new Vue({
+    router,
+    store,
+    wait: wait.instance,
+    render: h => h(App)
+  }).$mount('#app')
+}
+
+init()

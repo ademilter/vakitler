@@ -60,7 +60,7 @@
 
 <script>
 import Time from '../components/Time'
-import { mapGetters, mapState } from 'vuex'
+import { mapGetters, mapState, mapActions } from 'vuex'
 
 export default {
   name: 'home',
@@ -81,8 +81,12 @@ export default {
     ])
   },
 
+  methods: {
+    ...mapActions(['init'])
+  },
+
   created() {
-    if (!this.userTown) this.$router.push({ name: 'Settings' })
+    if (!this.userTown) this.init()
   }
 }
 </script>
