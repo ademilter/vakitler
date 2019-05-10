@@ -12,7 +12,9 @@ import './styles/app.css'
 
 const init = async () => {
   // TODO: data yüklenmezse?
-  await store.dispatch('init')
+  if (!store.state.countries.length) {
+    await store.dispatch('init')
+  }
 
   setInterval(() => {
     store.commit('TIME_UPDATE')

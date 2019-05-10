@@ -83,10 +83,6 @@ export default {
 
   methods: {
     ...mapActions(['init'])
-  },
-
-  created() {
-    if (!this.userTown) this.init()
   }
 }
 </script>
