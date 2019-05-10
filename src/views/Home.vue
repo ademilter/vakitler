@@ -1,66 +1,65 @@
 <template>
-  <div class="home">
+  <div class="home" v-if="userTown">
     <div class="settings-link">
       <router-link :to="{ name: 'Settings' }">
         {{ userCity.SehirAdiEn }} - {{ userTown.IlceAdiEn }}
       </router-link>
     </div>
-    <div class="times" :class="currentTime">
-      <template v-for="(time, key) in times">
-        <Time
-          v-if="key !== 'TomorrowImsak'"
-          :key="key"
-          :time="key"
-          :datetime="time"
-          :currentTime="currentTime"
-          :timer="timer"
-        />
-      </template>
+    <div class="times" :class="period.currentTime">
+      <Time
+        time="Imsak"
+        :datetime="today.Imsak"
+        :currentTime="period.currentTime"
+        :timer="period.counter"
+      />
+      <Time
+        time="Gunes"
+        :datetime="today.Gunes"
+        :currentTime="period.currentTime"
+        :timer="period.counter"
+      />
+      <Time
+        time="Ogle"
+        :datetime="today.Ogle"
+        :currentTime="period.currentTime"
+        :timer="period.counter"
+      />
+      <Time
+        time="Ikindi"
+        :datetime="today.Ikindi"
+        :currentTime="period.currentTime"
+        :timer="period.counter"
+      />
+      <Ramadan />
+      <Time
+        time="Yatsi"
+        :datetime="today.Yatsi"
+        :currentTime="period.currentTime"
+        :timer="period.counter"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import moment from 'moment'
 import Time from '../components/Time'
+import Ramadan from '../components/Ramadan'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'home',
 
-  data() {
-    return {
-      timer: null
-    }
-  },
-
   components: {
-    Time
+    Time,
+    Ramadan
   },
 
   computed: {
-    ...mapGetters(['userCity', 'userTown', 'times', 'currentTime', 'nextTime'])
-  },
-
-  methods: {
-    setTimer() {
-      const second = this.times[this.nextTime].diff(moment(), 'second')
-      let pad = x => {
-        return x < 10 ? '0' + x : x
-      }
-      this.timer = [
-        pad(Math.floor(second / 3600)),
-        pad(Math.floor((second % 3600) / 60)),
-        pad(Math.floor(second % 60))
-      ].join(':')
-    }
+    ...mapGetters(['userCity', 'userTown', 'today', 'period'])
   },
 
   created() {
-    this.setTimer()
-    setInterval(() => {
-      this.setTimer()
-    }, 1000)
+    if (!this.userTown) this.$router.push({ name: 'Settings' })
   }
 }
 </script>
