@@ -1,18 +1,29 @@
+import './core/plugins'
+import './core/prototype'
+
 import Vue from 'vue'
-import App from './App'
-import i18n from './i18n'
-import router from './router'
+import router from './core/router'
+import store from './store'
+import wait from './utils/wait'
 
-import { store } from './store'
+import App from './views/App.vue'
 
-Vue.config.productionTip = false
+import './styles/app.css'
 
-/* eslint-disable no-new */
-new Vue({
-  el: '#App',
-  router,
-  store,
-  i18n,
-  template: '<App/>',
-  components: { App }
-})
+const init = async () => {
+  // TODO: data yüklenmezse?
+  await store.dispatch('init')
+
+  setInterval(() => {
+    store.commit('TIME_UPDATE')
+  }, 1000)
+
+  new Vue({
+    router,
+    store,
+    wait: wait.instance,
+    render: h => h(App)
+  }).$mount('#app')
+}
+
+init()

@@ -1,0 +1,161 @@
+.times.Imsak {
+  grid-auto-rows: 7fr 5fr 4fr 3fr 2fr 1fr;
+  color: var(--color-imsak);
+  background-color: var(--color-imsak-bg);
+
+  .Gunes {
+    //opacity: 0.9;
+    background-color: #baeafd;
+  }
+  .Ogle {
+    opacity: 0.9;
+    background-color: #a8e3fb;
+  }
+  .Ikindi {
+    opacity: 0.8;
+    background-color: #97dcf8;
+  }
+  .Aksam {
+    opacity: 0.7;
+    background-color: #8bd6f5;
+  }
+  .Yatsi {
+    opacity: 0.6;
+    background-color: #83d2f3;
+  }
+}
+
+.times.Gunes {
+  grid-auto-rows: 5fr 7fr 5fr 4fr 3fr 2fr;
+  color: var(--color-gunes);
+  background-color: var(--color-gunes-bg);
+
+  .Imsak {
+    //opacity: 0.9;
+    background-color: #fde2aa;
+  }
+  .Ogle {
+    //opacity: 0.9;
+    background-color: #fde2aa;
+  }
+  .Ikindi {
+    opacity: 0.9;
+    background-color: #fada98;
+  }
+  .Aksam {
+    opacity: 0.8;
+    background-color: #f7d387;
+  }
+  .Yatsi {
+    opacity: 0.7;
+    background-color: #f4cd7b;
+  }
+}
+
+.times.Ogle {
+  grid-auto-rows: 4fr 5fr 7fr 5fr 4fr 3fr;
+  color: var(--color-ogle);
+  background-color: var(--color-ogle-bg);
+
+  .Imsak {
+    opacity: 0.9;
+    background-color: #f9e07b;
+  }
+  .Gunes {
+    //opacity: 0.9;
+    background-color: #fce68c;
+  }
+  .Ikindi {
+    //opacity: 0.9;
+    background-color: #fce68c;
+  }
+  .Aksam {
+    opacity: 0.9;
+    background-color: #f9e07b;
+  }
+  .Yatsi {
+    opacity: 0.8;
+    background-color: #f5da6b;
+  }
+}
+
+.times.Ikindi {
+  grid-auto-rows: 3fr 4fr 5fr 7fr 5fr 4fr;
+  color: var(--color-ikindi);
+  background-color: var(--color-ikindi-bg);
+
+  .Imsak {
+    opacity: 0.8;
+    background-color: #f6b480;
+  }
+  .Gunes {
+    opacity: 0.9;
+    background-color: #fabf91;
+  }
+  .Ogle {
+    //opacity: 0.9;
+    background-color: #fdcaa3;
+  }
+  .Aksam {
+    //opacity: 0.9;
+    background-color: #fdcaa3;
+  }
+  .Yatsi {
+    opacity: 0.9;
+    background-color: #fabf91;
+  }
+}
+
+.times.Aksam {
+  grid-auto-rows: 2fr 3fr 4fr 5fr 7fr 5fr;
+  color: var(--color-aksam);
+  background-color: var(--color-aksam-bg);
+
+  .Imsak {
+    opacity: 0.7;
+    background-color: #4ba6ec;
+  }
+  .Gunes {
+    opacity: 0.8;
+    background-color: #56aef0;
+  }
+  .Ogle {
+    opacity: 0.9;
+    background-color: #65b7f5;
+  }
+  .Ikindi {
+    //opacity: 0.9;
+    background-color: #76c0f9;
+  }
+  .Yatsi {
+    //opacity: 0.9;
+    background-color: #76c0f9;
+  }
+}
+
+.times.Yatsi {
+  grid-auto-rows: 1fr 2fr 3fr 4fr 5fr 7fr;
+  color: var(--color-yatsi);
+  background-color: var(--color-yatsi-bg);
+
+  .Imsak {
+    opacity: 0.6;
+    background-color: #1e2237;
+  }
+  .Gunes {
+    opacity: 0.7;
+    background-color: #20253f;
+  }
+  .Ogle {
+    opacity: 0.8;
+    background-color: #242a4b;
+  }
+  .Ikindi {
+    opacity: 0.9;
+    background-color: #28305b;
+  }
+  .Aksam {
+    //opacity: 0.9;
+    background-color: #2b356c;
+  }
+}

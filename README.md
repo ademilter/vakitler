@@ -1,21 +1,15 @@
-# namaz-vakti
+# Namaz Vakti PWA
 
-> A Vue.js project
+[![Netlify Status](https://api.netlify.com/api/v1/badges/6748c2b4-bcd0-480b-83c0-b2486aef0122/deploy-status)](https://app.netlify.com/sites/namaz-vakti/deploys)
 
-## Build Setup
 
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
 ```
+// Project setup
+yarn install
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+// Compiles and hot-reloads for development
+yarn run serve
+
+// Compiles and minifies for production
+yarn run build
+```
