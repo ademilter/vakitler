@@ -16,6 +16,7 @@ const init = async () => {
     await store.dispatch('init')
   }
 
+  store.commit('TIME_UPDATE')
   setInterval(() => {
     store.commit('TIME_UPDATE')
   }, 1000)

@@ -3,7 +3,7 @@ import moment from 'moment'
 export default {
   TIME_UPDATE(state) {
     state.now = moment()
-    // state.now.add(-7, 'hours')
+    // state.now.add(5, 'hours')
   },
   SAVE_COUNTRIES(state, data) {
     state.countries = data

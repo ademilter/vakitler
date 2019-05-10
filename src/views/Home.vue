@@ -7,52 +7,12 @@
     </div>
     <div class="times" :class="currentTime">
       <Time
-        time="Imsak"
-        :datetime="today.Imsak"
+        v-for="time in ['Imsak', 'Gunes', 'Ogle', 'Ikindi', 'Aksam', 'Yatsi']"
+        :key="time"
+        :time="time"
+        :datetime="today[time]"
         :currentTime="currentTime"
         :timer="periodTimer"
-        :isRamadan="ramadanTimer"
-        :ramadanTimer="ramadanTimer"
-      />
-      <Time
-        time="Gunes"
-        :datetime="today.Gunes"
-        :currentTime="currentTime"
-        :timer="periodTimer"
-        :isRamadan="ramadanTimer"
-        :ramadanTimer="ramadanTimer"
-      />
-      <Time
-        time="Ogle"
-        :datetime="today.Ogle"
-        :currentTime="currentTime"
-        :timer="periodTimer"
-        :isRamadan="ramadanTimer"
-        :ramadanTimer="ramadanTimer"
-      />
-      <Time
-        time="Ikindi"
-        :datetime="today.Ikindi"
-        :currentTime="currentTime"
-        :timer="periodTimer"
-        :isRamadan="ramadanTimer"
-        :ramadanTimer="ramadanTimer"
-      />
-      <Time
-        time="Aksam"
-        :datetime="today.Aksam"
-        :currentTime="currentTime"
-        :timer="periodTimer"
-        :isRamadan="ramadanTimer"
-        :ramadanTimer="ramadanTimer"
-      />
-      <Time
-        time="Yatsi"
-        :datetime="today.Yatsi"
-        :currentTime="currentTime"
-        :timer="periodTimer"
-        :isRamadan="ramadanTimer"
-        :ramadanTimer="ramadanTimer"
       />
     </div>
   </div>
@@ -60,7 +20,7 @@
 
 <script>
 import Time from '../components/Time'
-import { mapGetters, mapState, mapActions } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 
 export default {
   name: 'home',
@@ -71,18 +31,7 @@ export default {
 
   computed: {
     ...mapState(['now']),
-    ...mapGetters([
-      'userTown',
-      'today',
-      'currentTime',
-      'periodTimer',
-      'isRamadan',
-      'ramadanTimer'
-    ])
-  },
-
-  methods: {
-    ...mapActions(['init'])
+    ...mapGetters(['userTown', 'today', 'currentTime', 'periodTimer'])
   }
 }
 </script>

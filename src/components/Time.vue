@@ -1,7 +1,6 @@
 <template>
   <div class="time" :class="[time, { active: isActiveTime }]">
     <div>
-      <!-- body -->
       <div class="time-body">
         <h4 class="time-body-title">
           {{ time }}
@@ -11,14 +10,6 @@
         </h3>
       </div>
 
-      <!-- ramadan timer -->
-      <Timer
-        class="ramadan"
-        v-if="isRamadan && isAksam && isBeforeIkindi"
-        :time="ramadanTimer"
-      />
-
-      <!-- default timer -->
       <Timer v-if="isActiveTime" :time="timer" />
     </div>
   </div>
@@ -36,19 +27,11 @@ export default {
     time: String,
     datetime: Object,
     currentTime: String,
-    timer: String,
-    isRamadan: String,
-    ramadanTimer: String
+    timer: String
   },
   computed: {
     isActiveTime() {
       return this.time === this.currentTime
-    },
-    isAksam() {
-      return this.time === 'Aksam'
-    },
-    isBeforeIkindi() {
-      return ['Imsak', 'Gunes', 'Ogle'].indexOf(this.currentTime) > -1
     }
   }
 }
