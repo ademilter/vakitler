@@ -1,4 +1,10 @@
+import moment from 'moment'
+
 export default {
+  TIME_UPDATE(state) {
+    state.now = moment()
+    // state.now.add(6.44, 'hours')
+  },
   SAVE_COUNTRIES(state, data) {
     state.countries = data
   },

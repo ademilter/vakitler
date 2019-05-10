@@ -5,46 +5,53 @@
         {{ userCity.SehirAdiEn }} - {{ userTown.IlceAdiEn }}
       </router-link>
     </div>
-    <div class="times" :class="period.currentTime">
+    <div class="times" :class="currentTime">
       <Time
         time="Imsak"
         :datetime="today.Imsak"
-        :currentTime="period.currentTime"
-        :timer="period.counter"
+        :currentTime="currentTime"
+        :timer="periodTimer"
       />
       <Time
         time="Gunes"
         :datetime="today.Gunes"
-        :currentTime="period.currentTime"
-        :timer="period.counter"
+        :currentTime="currentTime"
+        :timer="periodTimer"
       />
       <Time
         time="Ogle"
         :datetime="today.Ogle"
-        :currentTime="period.currentTime"
-        :timer="period.counter"
+        :currentTime="currentTime"
+        :timer="periodTimer"
       />
       <Time
         time="Ikindi"
         :datetime="today.Ikindi"
-        :currentTime="period.currentTime"
-        :timer="period.counter"
+        :currentTime="currentTime"
+        :timer="periodTimer"
       />
-      <Ramadan />
+      <!--      <Ramadan v-if="isRamadan" :timer="ramadanTimer" />-->
+      <Time
+        time="Aksam"
+        :datetime="today.Aksam"
+        :currentTime="currentTime"
+        :timer="periodTimer"
+      />
       <Time
         time="Yatsi"
         :datetime="today.Yatsi"
-        :currentTime="period.currentTime"
-        :timer="period.counter"
+        :currentTime="currentTime"
+        :timer="periodTimer"
       />
     </div>
   </div>
 </template>
 
 <script>
+// import moment from 'moment/moment'
 import Time from '../components/Time'
 import Ramadan from '../components/Ramadan'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 
 export default {
   name: 'home',
@@ -55,7 +62,17 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['userCity', 'userTown', 'today', 'period'])
+    ...mapState(['now']),
+    ...mapGetters([
+      'userCity',
+      'userTown',
+      'today',
+      'currentTime',
+      'nextTime',
+      'periodTimer',
+      'isRamadan',
+      'ramadanTimer'
+    ])
   },
 
   created() {

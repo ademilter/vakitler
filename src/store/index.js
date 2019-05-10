@@ -16,6 +16,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   plugins: [vuexLocal.plugin],
   state: {
+    now: moment(),
     // global store
     countries: [],
     cities: [],

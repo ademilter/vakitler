@@ -16,3 +16,7 @@ new Vue({
   wait: wait.instance,
   render: h => h(App)
 }).$mount('#app')
+
+setInterval(() => {
+  store.commit('TIME_UPDATE')
+}, 1000)
