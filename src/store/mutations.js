@@ -19,9 +19,12 @@ export default {
   },
   SAVE_COUNTRY_ID(state, id) {
     state.countryId = id
+    state.cityId = -1
+    state.townId = -1
   },
   SAVE_CITY_ID(state, id) {
     state.cityId = id
+    state.townId = -1
   },
   SAVE_TOWN_ID(state, id) {
     state.townId = id

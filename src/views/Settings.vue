@@ -1,26 +1,60 @@
 <template>
   <div class="page-settings">
-    <select :disabled="!countries.length" v-model="userCountry">
-      <option value="-1">Select</option>
-      <option
-        v-for="country in countries"
-        :key="country.UlkeID"
-        :value="country.UlkeID"
-        >{{ country.UlkeAdiEn }}
-      </option>
-    </select>
-    <select :disabled="!cities.length" v-model="userCity">
-      <option value="-1">Select</option>
-      <option v-for="city in cities" :key="city.SehirID" :value="city.SehirID">
-        {{ city.SehirAdiEn }}
-      </option>
-    </select>
-    <select :disabled="!towns.length" v-model="userTown">
-      <option value="-1">Select</option>
-      <option v-for="town in towns" :key="town.IlceID" :value="town.IlceID">
-        {{ town.IlceAdiEn }}
-      </option>
-    </select>
+    <ul>
+      <li>
+        <select
+          :disabled="!countries.length"
+          :class="{ disabled: !countries.length }"
+          v-model="userCountry"
+        >
+          <option value="-1">Select</option>
+          <option
+            v-for="country in countries"
+            :key="country.UlkeID"
+            :value="country.UlkeID"
+          >
+            {{ country.UlkeAdiEn }}
+          </option>
+        </select>
+      </li>
+      <li>
+        <select
+          :disabled="!cities.length"
+          :class="{ disabled: !cities.length }"
+          v-model="userCity"
+        >
+          <option value="-1">Select</option>
+          <option
+            v-for="city in cities"
+            :key="city.SehirID"
+            :value="city.SehirID"
+          >
+            {{ city.SehirAdiEn }}
+          </option>
+        </select>
+      </li>
+      <li>
+        <select
+          :disabled="!towns.length"
+          :class="{ disabled: !towns.length }"
+          v-model="userTown"
+        >
+          <option value="-1">Select</option>
+          <option v-for="town in towns" :key="town.IlceID" :value="town.IlceID">
+            {{ town.IlceAdiEn }}
+          </option>
+        </select>
+      </li>
+      <li>
+        <router-link
+          class="button"
+          :class="{ disabled: townId === -1 }"
+          :to="{ name: 'Home' }"
+        >
+          Kaydet ve Geri Dön
+        </router-link>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -85,3 +119,13 @@ export default {
   }
 }
 </script>
+
+<style>
+.page-settings {
+  padding: 30px;
+
+  li {
+    margin-bottom: 10px;
+  }
+}
+</style>

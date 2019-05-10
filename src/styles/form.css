@@ -1,0 +1,21 @@
+select {
+  display: flex;
+  width: 100%;
+  height: var(--finger);
+  border: 1px solid #aaa;
+  border-radius: var(--radius);
+}
+
+.button {
+  height: var(--finger);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #aaa;
+  border-radius: var(--radius);
+  background-color: #eececa;
+}
+
+.disabled {
+  opacity: 0.3;
+}

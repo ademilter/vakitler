@@ -2,7 +2,7 @@
   <div class="page-home" v-if="userTown">
     <div class="settings-link">
       <router-link :to="{ name: 'Settings' }">
-        {{ userCity.SehirAdiEn }} - {{ userTown.IlceAdiEn }}
+        {{ userTown.IlceAdiEn }}
       </router-link>
     </div>
     <div class="times" :class="currentTime">
@@ -72,11 +72,9 @@ export default {
   computed: {
     ...mapState(['now']),
     ...mapGetters([
-      'userCity',
       'userTown',
       'today',
       'currentTime',
-      'nextTime',
       'periodTimer',
       'isRamadan',
       'ramadanTimer'
