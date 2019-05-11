@@ -11,19 +11,22 @@ export default {
   },
   today: state => {
     const day = state.times.find(o =>
-      moment(o.MiladiTarihUzunIso8601).isSame(moment(), 'day')
+      moment(o.MiladiTarihUzunIso8601).isSame(moment(state.now), 'day')
     )
     return day ? new Day(day) : null
   },
   tomorrow: state => {
     const day = state.times.find(o =>
-      moment(o.MiladiTarihUzunIso8601).isSame(moment().add(1, 'days'), 'day')
+      moment(o.MiladiTarihUzunIso8601).isSame(
+        moment(state.now).add(1, 'days'),
+        'day'
+      )
     )
     return day ? new Day(day) : null
   },
   isBeforeImsak: (state, getters) => {
     return moment(state.now).isBetween(
-      moment().startOf('date'),
+      moment(state.now).startOf('date'),
       getters.today.Imsak,
       null,
       '[)'
