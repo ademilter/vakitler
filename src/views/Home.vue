@@ -12,7 +12,8 @@
         :time="time"
         :datetime="today[time]"
         :currentTime="currentTime"
-        :timer="periodTimer"
+        :timer="timer"
+        :isKerahat="isKerahat"
       />
     </div>
   </div>
@@ -31,7 +32,7 @@ export default {
 
   computed: {
     ...mapState(['now']),
-    ...mapGetters(['userTown', 'today', 'currentTime', 'periodTimer'])
+    ...mapGetters(['userTown', 'today', 'currentTime', 'timer', 'isKerahat'])
   }
 }
 </script>

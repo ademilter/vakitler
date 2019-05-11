@@ -21,15 +21,6 @@ export default {
     )
     return day ? new Day(day) : null
   },
-  yesterday: state => {
-    const day = state.times.find(o =>
-      moment(o.MiladiTarihUzunIso8601).isSame(
-        moment().subtract(1, 'days'),
-        'day'
-      )
-    )
-    return day ? new Day(day) : null
-  },
   isBeforeImsak: (state, getters) => {
     return moment(state.now).isBetween(
       moment().startOf('date'),
@@ -112,7 +103,7 @@ export default {
         return 'Imsak'
     }
   },
-  periodTimer: (state, getters) => {
+  timer: (state, getters) => {
     let second
     if (getters.nextTime === 'Imsak') {
       second = getters.isBeforeImsak
@@ -122,5 +113,13 @@ export default {
       second = getters.today[getters.nextTime].diff(state.now, 'second')
     }
     return secondSplit(second).join(':')
+  },
+  isKerahat: (state, getters) => {
+    return moment(state.now).isBetween(
+      moment(getters.today[getters.nextTime]).subtract(30, 'minutes'),
+      getters.today[getters.nextTime],
+      null,
+      '[]'
+    )
   }
 }

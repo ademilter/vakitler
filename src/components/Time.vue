@@ -10,7 +10,7 @@
         </h3>
       </div>
 
-      <Timer v-if="isActiveTime" :time="timer" />
+      <Timer v-if="isActiveTime" :timer="timer" :isKerahat="isKerahat" />
     </div>
   </div>
 </template>
@@ -27,7 +27,8 @@ export default {
     time: String,
     datetime: Object,
     currentTime: String,
-    timer: String
+    timer: String,
+    isKerahat: Boolean
   },
   computed: {
     isActiveTime() {
@@ -47,7 +48,7 @@ export default {
   transition-delay: 0.1s;
 
   &.active &-body {
-    font-size: 1.3em;
+    font-size: 1.4em;
   }
 
   &-body {
