@@ -53,6 +53,7 @@ export default {
   padding: 10px 30px;
   transition-delay: 0.1s;
 
+  &.active &-body,
   &.next &-body {
     font-size: 1.3em;
   }
@@ -62,7 +63,7 @@ export default {
       font-weight: normal;
     }
     &-value {
-      margin-top: 5px;
+      margin-top: 6px;
       font-size: 1.3em;
     }
   }
