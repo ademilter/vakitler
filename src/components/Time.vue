@@ -1,5 +1,8 @@
 <template>
-  <div class="time" :class="[time, { active: isActiveTime }]">
+  <div
+    class="time"
+    :class="[time, { active: isActiveTime }, { next: isNextTime }]"
+  >
     <div>
       <div class="time-body">
         <h4 class="time-body-title">
@@ -10,7 +13,7 @@
         </h3>
       </div>
 
-      <Timer v-if="isActiveTime" :timer="timer" :isKerahat="isKerahat" />
+      <Timer v-if="isActiveTime" :timer="timer" />
     </div>
   </div>
 </template>
@@ -28,11 +31,14 @@ export default {
     datetime: Object,
     currentTime: String,
     timer: String,
-    isKerahat: Boolean
+    nextTime: String
   },
   computed: {
     isActiveTime() {
       return this.time === this.currentTime
+    },
+    isNextTime() {
+      return this.time === this.nextTime
     }
   }
 }
@@ -47,8 +53,8 @@ export default {
   padding: 10px 30px;
   transition-delay: 0.1s;
 
-  &.active &-body {
-    font-size: 1.4em;
+  &.next &-body {
+    font-size: 1.3em;
   }
 
   &-body {

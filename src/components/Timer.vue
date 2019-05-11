@@ -1,13 +1,12 @@
 <template>
-  <div class="timer" :class="{ kerahat: isKerahat }">– {{ timer }}</div>
+  <div class="timer">{{ timer }}</div>
 </template>
 
 <script>
 export default {
   name: 'Timer',
   props: {
-    timer: String,
-    isKerahat: Boolean
+    timer: String
   }
 }
 </script>
@@ -16,8 +15,8 @@ export default {
 .timer {
   position: absolute;
   right: 30px;
-  top: 50%;
-  font-size: 1.2em;
+  top: 100%;
+  font-size: 1.1em;
   transform: translateY(-50%);
   display: flex;
   align-items: center;
@@ -29,9 +28,5 @@ export default {
   color: #000;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
   font-feature-settings: 'tnum' 1, 'case' 1;
-
-  &.kerahat {
-    border: 2px solid #ff1b3d;
-  }
 }
 </style>

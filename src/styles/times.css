@@ -80,7 +80,7 @@
 }
 
 .times.Ikindi {
-  grid-auto-rows: 3fr 4fr 5fr 7fr 5fr 4fr;
+  grid-auto-rows: 1fr 2fr 2fr 3fr 3fr 2fr;
   color: var(--color-ikindi);
   background-color: var(--color-ikindi-bg);
 
@@ -96,10 +96,10 @@
     //opacity: 0.9;
     background-color: #fdcaa3;
   }
-  .Aksam {
-    //opacity: 0.9;
-    background-color: #fdcaa3;
-  }
+  //.Aksam {
+  //  //opacity: 0.9;
+  //  background-color: #fdcaa3;
+  //}
   .Yatsi {
     opacity: 0.9;
     background-color: #fabf91;

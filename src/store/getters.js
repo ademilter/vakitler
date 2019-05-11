@@ -113,13 +113,5 @@ export default {
       second = getters.today[getters.nextTime].diff(state.now, 'second')
     }
     return secondSplit(second).join(':')
-  },
-  isKerahat: (state, getters) => {
-    return moment(state.now).isBetween(
-      moment(getters.today[getters.nextTime]).subtract(30, 'minutes'),
-      getters.today[getters.nextTime],
-      null,
-      '[]'
-    )
   }
 }
