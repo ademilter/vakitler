@@ -16,7 +16,7 @@ export default {
   position: absolute;
   right: 30px;
   top: 100%;
-  font-size: 1.2em;
+  font-size: 1.5em;
   transform: translateY(-50%);
   display: flex;
   align-items: center;
