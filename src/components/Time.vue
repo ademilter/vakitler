@@ -55,7 +55,7 @@ export default {
 
   &.active &-body,
   &.next &-body {
-    font-size: 1.1em;
+    font-size: 1.2em;
   }
 
   &-body {

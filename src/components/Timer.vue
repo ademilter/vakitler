@@ -16,14 +16,14 @@ export default {
   position: absolute;
   right: 30px;
   top: 100%;
-  font-size: 1.5em;
+  font-size: 2em;
   transform: translateY(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 10px 14px;
   background-color: white;
-  font-weight: bold;
+  /*font-weight: bold;*/
   border-radius: var(--radius);
   color: #000;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
