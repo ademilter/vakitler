@@ -11,10 +11,15 @@ import App from './views/App.vue'
 import './styles/app.css'
 
 const init = async () => {
-  // TODO: data yüklenmezse?
   if (!store.state.countries.length) {
     await store.dispatch('init')
   }
+
+  if (!store.getters.tomorrow) {
+    await store.dispatch('getTimes')
+  }
+
+  // TODO: yarınki data yoksa ve offline ise hata ekranını göster
 
   store.commit('TIME_UPDATE')
   setInterval(() => {
