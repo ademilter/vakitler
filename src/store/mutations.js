@@ -28,5 +28,8 @@ export default {
   },
   SAVE_TOWN_ID(state, id) {
     state.townId = id
+  },
+  CHANGE_LANG(state, locale) {
+    state.lang = locale
   }
 }

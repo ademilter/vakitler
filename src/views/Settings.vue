@@ -2,6 +2,10 @@
   <div class="page-settings">
     <ul>
       <li>
+        <h2>{{ $t(`settings.data`) }}</h2>
+      </li>
+      <li>
+        <label>{{ $t(`settings.country`) }}</label>
         <select
           :disabled="!countries.length"
           :class="{ disabled: !countries.length }"
@@ -18,6 +22,7 @@
         </select>
       </li>
       <li>
+        <label>{{ $t(`settings.city`) }}</label>
         <select
           :disabled="!cities.length"
           :class="{ disabled: !cities.length }"
@@ -34,6 +39,7 @@
         </select>
       </li>
       <li>
+        <label>{{ $t(`settings.town`) }}</label>
         <select
           :disabled="!towns.length"
           :class="{ disabled: !towns.length }"
@@ -45,13 +51,32 @@
           </option>
         </select>
       </li>
+    </ul>
+    <ul>
       <li>
+        <h2>{{ $t(`settings.settings`) }}</h2>
+      </li>
+      <li>
+        <label>{{ $t(`settings.language`) }}</label>
+        <select v-model="changeLang">
+          <option
+            v-for="locale in $i18n.availableLocales"
+            :key="locale"
+            :value="locale"
+          >
+            {{ $t(`locales.${locale}`) }}
+          </option>
+        </select>
+      </li>
+    </ul>
+    <ul class="bottom">
+      <li class="save">
         <router-link
           class="button"
           :class="{ disabled: townId === -1 }"
           :to="{ name: 'Home' }"
         >
-          Kaydet ve Geri Dön
+          {{ $t(`settings.saveAndBack`) }}
         </router-link>
       </li>
     </ul>
@@ -68,17 +93,6 @@ export default {
       this.fetchCountries()
     }
   },
-  watch: {
-    countryId() {
-      this.fetchCities()
-    },
-    cityId() {
-      this.fetchTowns()
-    },
-    townId() {
-      this.getTimes()
-    }
-  },
   computed: {
     ...mapState([
       'countries',
@@ -86,7 +100,8 @@ export default {
       'towns',
       'countryId',
       'cityId',
-      'townId'
+      'townId',
+      'lang'
     ]),
     userCountry: {
       get() {
@@ -94,6 +109,7 @@ export default {
       },
       set(id) {
         this.SAVE_COUNTRY_ID(id)
+        this.fetchCities()
       }
     },
     userCity: {
@@ -102,6 +118,7 @@ export default {
       },
       set(id) {
         this.SAVE_CITY_ID(id)
+        this.fetchTowns()
       }
     },
     userTown: {
@@ -110,12 +127,27 @@ export default {
       },
       set(id) {
         this.SAVE_TOWN_ID(id)
+        this.getTimes()
+      }
+    },
+    changeLang: {
+      get() {
+        return this.lang
+      },
+      set(locale) {
+        this.$i18n.locale = locale
+        this.CHANGE_LANG(locale)
       }
     }
   },
   methods: {
     ...mapActions(['fetchCountries', 'fetchCities', 'fetchTowns', 'getTimes']),
-    ...mapMutations(['SAVE_COUNTRY_ID', 'SAVE_CITY_ID', 'SAVE_TOWN_ID'])
+    ...mapMutations([
+      'SAVE_COUNTRY_ID',
+      'SAVE_CITY_ID',
+      'SAVE_TOWN_ID',
+      'CHANGE_LANG'
+    ])
   }
 }
 </script>
@@ -123,9 +155,34 @@ export default {
 <style>
 .page-settings {
   padding: 30px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #ddd;
+
+  ul {
+    margin-bottom: 30px;
+  }
+
+  .bottom {
+    margin-top: auto;
+    margin-bottom: 0;
+  }
+
+  h2 {
+    margin-bottom: 20px;
+  }
 
   li {
-    margin-bottom: 10px;
+    margin-bottom: 14px;
+
+    label {
+      display: flex;
+      margin-bottom: 7px;
+    }
+  }
+  .save {
+    margin-top: 20px;
   }
 }
 </style>

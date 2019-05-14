@@ -4,6 +4,7 @@ import './core/prototype'
 import Vue from 'vue'
 import router from './core/router'
 import store from './store'
+import i18n from './core/i18n'
 import wait from './utils/wait'
 import './core/registerServiceWorker'
 
@@ -29,6 +30,7 @@ const init = async () => {
   new Vue({
     router,
     store,
+    i18n,
     wait: wait.instance,
     render: h => h(App)
   }).$mount('#app')

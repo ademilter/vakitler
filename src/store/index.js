@@ -26,11 +26,7 @@ export default new Vuex.Store({
     countryId: -1,
     cityId: -1,
     townId: -1,
-    // ramadan
-    ramadan: {
-      start: moment('5-6-2019', 'M-D-YYYY'),
-      end: moment('6-3-2019', 'M-D-YYYY')
-    }
+    lang: 'tr'
   },
   getters,
   actions,

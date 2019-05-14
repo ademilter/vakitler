@@ -45,8 +45,7 @@ export default {
   right: 0;
   top: 0;
   height: 30px;
-  background-color: #000;
-  color: #fff;
+  background-color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;

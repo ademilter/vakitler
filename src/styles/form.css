@@ -4,6 +4,7 @@ select {
   height: var(--finger);
   border: 1px solid #aaa;
   border-radius: var(--radius);
+  background-color: white;
 }
 
 .button {
@@ -11,9 +12,10 @@ select {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #aaa;
+  border: 0;
   border-radius: var(--radius);
-  background-color: #eececa;
+  color: white;
+  background-color: #538eee;
 }
 
 .disabled {

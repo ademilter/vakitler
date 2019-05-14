@@ -6,7 +6,7 @@
     <div>
       <div class="time-body">
         <h4 class="time-body-title">
-          {{ time }}
+          {{ $t(`times.${time}`) }}
         </h4>
         <h3 class="time-body-value">
           {{ datetime.format('HH:mm') }}
