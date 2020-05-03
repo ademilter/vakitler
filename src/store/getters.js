@@ -1,23 +1,26 @@
-import moment from 'moment'
+import moment from 'moment/moment'
 import Day from '../model/day'
 import { secondSplit } from '../utils/secondSplit'
 
 export default {
-  userTown: state => {
-    return state.towns.find(o => o.IlceID === state.townId)
+  userTown: (state) => {
+    return state.towns.find((time) => time.IlceID === state.townId)
   },
-  userCity: state => {
-    return state.cities.find(o => o.SehirID === state.cityId)
+  userCity: (state) => {
+    return state.cities.find((time) => time.SehirID === state.cityId)
   },
-  today: state => {
-    const day = state.times.find(o =>
-      moment(o.MiladiTarihKisa, 'DD.MM.YYYY').isSame(moment(state.now), 'day')
+  today: (state) => {
+    const day = state.times.find((time) =>
+      moment(time.MiladiTarihKisa, 'DD.MM.YYYY').isSame(
+        moment(state.now),
+        'day'
+      )
     )
     return day ? new Day(day) : null
   },
-  tomorrow: state => {
-    const day = state.times.find(o =>
-      moment(o.MiladiTarihKisa, 'DD.MM.YYYY').isSame(
+  tomorrow: (state) => {
+    const day = state.times.find((time) =>
+      moment(time.MiladiTarihKisa, 'DD.MM.YYYY').isSame(
         moment(state.now).add(1, 'days'),
         'day'
       )

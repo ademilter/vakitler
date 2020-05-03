@@ -1,4 +1,4 @@
-import moment from 'moment'
+import moment from 'moment/moment'
 
 export default {
   TIME_UPDATE(state) {

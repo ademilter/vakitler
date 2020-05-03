@@ -32,7 +32,7 @@ const init = async () => {
     store,
     i18n,
     wait: wait.instance,
-    render: h => h(App)
+    render: (h) => h(App)
   }).$mount('#app')
 }
 

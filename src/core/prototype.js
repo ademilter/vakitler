@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-import moment from 'moment'
+import moment from 'moment/moment'
 
 import wait from '../utils/wait'
 import http from '../utils/http'

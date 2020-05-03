@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import VuexPersistence from 'vuex-persist'
-import moment from 'moment'
+import moment from 'moment/moment'
 
 import getters from './getters'
 import actions from './actions'
