@@ -2,7 +2,7 @@ import moment from 'moment/moment'
 
 export default class Day {
   constructor(data) {
-    this.MiladiTarihUzunIso8601 = data.MiladiTarihUzunIso8601
+    this.MiladiTarihKisa = data.MiladiTarihKisa
     //
     this.Imsak = this.convertToDate(data.Imsak)
     this.Gunes = this.convertToDate(data.Gunes)
@@ -14,7 +14,7 @@ export default class Day {
 
   convertToDate(hours) {
     const [hour, minutes] = hours.split(':')
-    return moment(this.MiladiTarihUzunIso8601)
+    return moment(this.MiladiTarihKisa, 'DD.MM.YYYY')
       .hour(hour)
       .minutes(minutes)
       .seconds(0)

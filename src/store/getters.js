@@ -11,13 +11,13 @@ export default {
   },
   today: state => {
     const day = state.times.find(o =>
-      moment(o.MiladiTarihUzunIso8601).isSame(moment(state.now), 'day')
+      moment(o.MiladiTarihKisa, 'DD.MM.YYYY').isSame(moment(state.now), 'day')
     )
     return day ? new Day(day) : null
   },
   tomorrow: state => {
     const day = state.times.find(o =>
-      moment(o.MiladiTarihUzunIso8601).isSame(
+      moment(o.MiladiTarihKisa, 'DD.MM.YYYY').isSame(
         moment(state.now).add(1, 'days'),
         'day'
       )
