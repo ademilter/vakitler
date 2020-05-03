@@ -1,5 +1,5 @@
-export const secondSplit = second => {
-  let pad = x => {
+export const secondSplit = (second) => {
+  let pad = (x) => {
     return x < 10 ? '0' + x : x
   }
   return [
