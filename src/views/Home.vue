@@ -45,10 +45,11 @@ export default {
   right: 0;
   top: 0;
   height: 30px;
-  background-color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: white;
+  background-color: black;
 }
 
 .page-home {

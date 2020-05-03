@@ -157,11 +157,14 @@ export default {
   padding: 30px;
   height: 100vh;
   display: flex;
+  max-width: 600px;
+  margin: 0 auto;
   flex-direction: column;
-  background-color: #ddd;
+  color: white;
+  background-color: #000;
 
   ul {
-    margin-bottom: 30px;
+    margin-bottom: 50px;
   }
 
   .bottom {
@@ -174,15 +177,22 @@ export default {
   }
 
   li {
-    margin-bottom: 14px;
+    & + li {
+      margin-top: 30px;
+    }
 
     label {
+      opacity: 0.9;
       display: flex;
-      margin-bottom: 7px;
+      margin-bottom: 10px;
     }
-  }
-  .save {
-    margin-top: 20px;
+
+    select {
+      appearance: none;
+      padding-left: 15px;
+      padding-right: 40px;
+      background: white url('/img/chevron-down.svg') no-repeat right 20px center;
+    }
   }
 }
 </style>
