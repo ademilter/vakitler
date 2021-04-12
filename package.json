@@ -7,31 +7,31 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
-    "axios": "^0.19.2",
-    "core-js": "^3.6.5",
-    "moment": "^2.25.1",
-    "register-service-worker": "^1.7.1",
-    "vue": "^2.6.11",
-    "vue-i18n": "^8.17.4",
-    "vue-router": "^3.1.6",
+    "axios": "^0.21.1",
+    "core-js": "^3.10.1",
+    "moment": "^2.29.1",
+    "register-service-worker": "^1.7.2",
+    "vue": "^2.6.12",
+    "vue-i18n": "^8.24.3",
+    "vue-router": "^3.5.1",
     "vue-wait": "^1.4.8",
-    "vuex": "^3.3.0",
-    "vuex-persist": "^2.2.0"
+    "vuex": "^3.6.2",
+    "vuex-persist": "^2.3.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.3.0",
-    "@vue/cli-plugin-pwa": "~4.3.0",
-    "@vue/cli-plugin-router": "~4.3.0",
-    "@vue/cli-plugin-vuex": "~4.3.0",
-    "@vue/cli-service": "~4.3.0",
+    "@vue/cli-plugin-babel": "~4.5.12",
+    "@vue/cli-plugin-pwa": "~4.5.12",
+    "@vue/cli-plugin-router": "~4.5.12",
+    "@vue/cli-plugin-vuex": "~4.5.12",
+    "@vue/cli-service": "~4.5.12",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.8.0",
     "eslint-plugin-vue": "^6.2.2",
-    "lodash-es": "^4.17.15",
+    "lodash-es": "^4.17.21",
     "postcss-comment": "^2.0.0",
     "postcss-import": "^12.0.1",
-    "postcss-nested": "^4.2.1",
-    "prettier": "^2.0.5",
-    "vue-template-compiler": "^2.6.11"
+    "postcss-nested": "^4.2.3",
+    "prettier": "^2.2.1",
+    "vue-template-compiler": "^2.6.12"
   }
 }
