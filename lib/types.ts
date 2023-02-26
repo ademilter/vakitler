@@ -1,3 +1,8 @@
+export enum ViewNames {
+  Timer = "timer",
+  Times = "times",
+}
+
 export enum TimeNames {
   Fajr = "fajr",
   Sunrise = "sunrise",

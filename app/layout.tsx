@@ -2,7 +2,6 @@ import "@/styles/globals.css";
 
 import type { Metadata } from "next";
 import { Inter } from "@next/font/google";
-import { cx } from "@/lib/utils";
 import AnalyticsWrapper from "../components/analytics";
 
 const inter = Inter({
@@ -18,11 +17,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="tr"
-      className={cx("overflow-y-scroll scroll-smooth", inter.variable)}
-    >
-      <body className="bg-white leading-normal text-zinc-600 antialiased dark:bg-zinc-900 dark:text-zinc-400">
+    <html lang="tr" className={inter.variable}>
+      <body className="scroll-smooth bg-white text-zinc-900 antialiased">
         <main>{children}</main>
         <AnalyticsWrapper />
       </body>
@@ -30,9 +26,9 @@ export default function RootLayout({
   );
 }
 
-const siteName = "Namaz Vakti";
+const siteName = "Namaz Vakitleri";
 const title = `${siteName}`;
-const description = "";
+const description = "-";
 const url = "https://vakitler.vercel.app";
 const locale = "tr-TR";
 

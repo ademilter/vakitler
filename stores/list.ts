@@ -1,8 +1,10 @@
 import { create } from "zustand";
-import { Data } from "@/lib/types";
+import { Data, ViewNames } from "@/lib/types";
 import { Times } from "@/lib/model";
 
 interface State {
+  view: ViewNames;
+  setView: (view: ViewNames) => void;
   loading: boolean;
   setLoading: (state: boolean) => void;
   data: Data;
@@ -12,6 +14,8 @@ interface State {
 }
 
 const store = create<State>((set, get) => ({
+  view: ViewNames.Timer,
+  setView: (view) => set(() => ({ view })),
   loading: true,
   setLoading: (state) => set(() => ({ loading: state })),
   data: null,
