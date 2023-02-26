@@ -3,35 +3,34 @@
   "version": "0.1.4",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "axios": "^0.21.1",
-    "core-js": "^3.10.1",
-    "moment": "^2.29.1",
-    "register-service-worker": "^1.7.2",
-    "vue": "^2.6.12",
-    "vue-i18n": "^8.24.3",
-    "vue-router": "^3.5.1",
-    "vue-wait": "^1.4.8",
-    "vuex": "^3.6.2",
-    "vuex-persist": "^2.3.0"
+    "@next/font": "^13.2.1",
+    "@vercel/analytics": "^0.1.10",
+    "clsx": "^1.2.1",
+    "luxon": "^3.2.1",
+    "next": "^13.2.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "zustand": "^4.3.3"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.12",
-    "@vue/cli-plugin-pwa": "~4.5.12",
-    "@vue/cli-plugin-router": "~4.5.12",
-    "@vue/cli-plugin-vuex": "~4.5.12",
-    "@vue/cli-service": "~4.5.12",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.8.0",
-    "eslint-plugin-vue": "^6.2.2",
-    "lodash-es": "^4.17.21",
-    "postcss-comment": "^2.0.0",
-    "postcss-import": "^12.0.1",
-    "postcss-nested": "^4.2.3",
-    "prettier": "^2.2.1",
-    "vue-template-compiler": "^2.6.12"
+    "@types/luxon": "^3.2.0",
+    "@types/node": "18.13.0",
+    "@types/react": "18.0.27",
+    "@types/react-dom": "18.0.10",
+    "autoprefixer": "^10.4.13",
+    "eslint": "8.33.0",
+    "eslint-config-next": "^13.2.1",
+    "postcss": "^8.4.21",
+    "prettier": "^2.8.4",
+    "prettier-plugin-tailwindcss": "^0.2.2",
+    "tailwind-merge": "^1.10.0",
+    "tailwindcss": "^3.2.6",
+    "typescript": "^4.9.5"
   }
 }
