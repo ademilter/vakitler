@@ -10,6 +10,8 @@ export default function Container({
   className?: string;
 }) {
   return (
-    <div className={cx("mx-auto max-w-screen-sm", className)}>{children}</div>
+    <div className={cx("mx-auto max-w-screen-sm px-8", className)}>
+      {children}
+    </div>
   );
 }

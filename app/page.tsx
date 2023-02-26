@@ -1,5 +1,5 @@
-import Views from "@/components/views";
+import Times from "@/components/times";
 
 export default function Index() {
-  return <Views />;
+  return <Times />;
 }
