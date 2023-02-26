@@ -27,17 +27,18 @@ export class Times {
 
   constructor(times: AllTimes) {
     this.times = {};
+
     Object.keys(times).map((day) => {
       this.add(day, times[day]);
     });
   }
 
-  public add(date: string, times: DayTimes) {
+  public add(date: string, times: DayTimes): void {
     const time = new Time(times);
     this.times[date] = time;
   }
 
-  get today() {
+  get today(): Time {
     const date = DateTime.local().toISODate();
     return this.times[date];
   }

@@ -1,9 +1,9 @@
-import List from "@/components/list";
+import Views from "@/components/views";
 
 export default function Index() {
   return (
     <>
-      <List />
+      <Views />
     </>
   );
 }

@@ -33,7 +33,7 @@ export default function RootLayout({
 const siteName = "Namaz Vakti";
 const title = `${siteName}`;
 const description = "";
-const url = "https://ademilter.vercel.app";
+const url = "https://vakitler.vercel.app";
 const locale = "tr-TR";
 
 export const metadata: Metadata = {
