@@ -17,6 +17,8 @@ export function secondSplit(second: number): [string, string, string] {
   ];
 }
 
+export const hourFormat = "HH:mm";
+
 export const themeTimes = {
   [TimeNames.Fajr]: "text-sky-900 grid-rows-[2fr,_1fr,_1fr,_1fr,_1fr,_1fr]",
   [TimeNames.Sunrise]:

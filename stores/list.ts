@@ -11,6 +11,8 @@ interface State {
   setData: (data: Data) => void;
   times: Times | undefined;
   fetchData: () => Promise<void>;
+  timer: undefined | [string, string, string];
+  updateTimer: () => void;
 }
 
 const store = create<State>((set, get) => ({
@@ -38,6 +40,13 @@ const store = create<State>((set, get) => ({
     } finally {
       setLoading(false);
     }
+  },
+  timer: undefined,
+  updateTimer: () => {
+    const { times } = get();
+    if (!times) return;
+    const timer = times.timer;
+    set(() => ({ timer }));
   },
 }));
 

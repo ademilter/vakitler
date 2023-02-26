@@ -1,6 +1,6 @@
 import { DateTime, Interval } from "luxon";
 import { AllTimes, DayTimes, TimeNames } from "@/lib/types";
-import { secondSplit } from "@/lib/utils";
+import { hourFormat, secondSplit } from "@/lib/utils";
 
 export class Time {
   public [TimeNames.Fajr]: string;
@@ -43,15 +43,12 @@ export class Times {
     return this.times[date];
   }
 
-  // get tomorrow() {
-  //   const date = DateTime.local().plus({ days: 1 }).toISODate();
-  //   return this.times[date];
-  // }
+  get tomorrow() {
+    const date = DateTime.local().plus({ days: 1 }).toISODate();
+    return this.times[date];
+  }
 
   get time(): { now: TimeNames; next: TimeNames } {
-    const datetime = DateTime.local();
-    const hourFormat = "HH:mm";
-
     const fajr = DateTime.fromFormat(this.today[TimeNames.Fajr], hourFormat);
     const sun = DateTime.fromFormat(this.today[TimeNames.Sunrise], hourFormat);
     const dhuhr = DateTime.fromFormat(this.today[TimeNames.Dhuhr], hourFormat);
@@ -61,16 +58,14 @@ export class Times {
       hourFormat
     );
     const isha = DateTime.fromFormat(this.today[TimeNames.Isha], hourFormat);
-    // const tomorrowFajr = DateTime.fromFormat(
-    //   this.tomorrow[TimeNames.Fajr],
-    //   hourFormat
-    // );
 
     // default values = Isha
     const obj: { now: TimeNames; next: TimeNames } = {
       now: TimeNames.Isha,
       next: TimeNames.Fajr,
     };
+
+    const datetime = DateTime.local();
 
     if (Interval.fromDateTimes(fajr, sun).contains(datetime)) {
       obj.now = TimeNames.Fajr;
@@ -97,10 +92,17 @@ export class Times {
   }
 
   get timer(): [string, string, string] {
-    const milisecond = DateTime.fromFormat(this.today[this.time.next], "HH:mm")
-      .diff(DateTime.now())
-      .toMillis();
+    let dateTime = DateTime.fromFormat(this.today[this.time.now], "HH:mm");
 
-    return secondSplit(milisecond / 1000);
+    if (this.time.next === TimeNames.Fajr) {
+      dateTime = DateTime.fromFormat(
+        this.tomorrow[TimeNames.Fajr],
+        "HH:mm"
+      ).plus({ days: 1 });
+    }
+
+    const ms = dateTime.diff(DateTime.now()).toMillis();
+
+    return secondSplit(ms / 1000);
   }
 }
