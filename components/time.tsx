@@ -27,7 +27,7 @@ export default function Time({
           opacity: 1,
         },
         closed: {
-          y: 10,
+          y: 30,
           opacity: 0,
         },
       }}
@@ -50,10 +50,8 @@ export default function Time({
             isTimeActive && "border-2 border-white/80"
           )}
         >
-          <h5 className={clsx("font-normal capitalize leading-none")}>
-            {time}
-          </h5>
-          <h4 className={clsx("leading-none")}>{value}</h4>
+          <h5 className="font-normal capitalize leading-none">{time}</h5>
+          <h4 className="tabular-nums leading-none">{value}</h4>
         </div>
       </Container>
     </motion.div>

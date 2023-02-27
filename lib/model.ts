@@ -91,7 +91,7 @@ export class Times {
     return obj;
   }
 
-  get timer(): [string, string, string] {
+  get timer(): [number, number, number] {
     let dateTime = DateTime.fromFormat(this.today[this.time.next], "HH:mm");
 
     if (this.time.next === TimeNames.Fajr) {

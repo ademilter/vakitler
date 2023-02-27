@@ -33,7 +33,7 @@ export default function Times() {
       ) : (
         <div
           className={clsx(
-            "grid h-screen grid-rows-[minmax(auto,_1fr)_minmax(auto,_500px)]",
+            "grid h-screen grid-rows-[minmax(auto,_1fr)_minmax(auto,_540px)]",
             now === TimeNames.Fajr && "text-sky-900",
             now === TimeNames.Sunrise && "text-orange-900",
             now === TimeNames.Dhuhr && "text-yellow-900",
@@ -48,7 +48,10 @@ export default function Times() {
           <motion.div
             variants={{
               open: {
-                transition: { staggerChildren: 0.05, delayChildren: 0.05 },
+                transition: {
+                  staggerChildren: 0.1,
+                  delayChildren: 0.05,
+                },
               },
             }}
             className="grid grow"

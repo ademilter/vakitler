@@ -1,7 +1,4 @@
-export enum ViewNames {
-  Timer = "timer",
-  Times = "times",
-}
+export type Timer = [number, number, number];
 
 export enum TimeNames {
   Fajr = "fajr",
