@@ -1,5 +1,4 @@
-import store from "@/stores/list";
-import { cx } from "@/lib/utils";
+import { clsx } from "clsx";
 import { ReactNode } from "react";
 
 export default function Container({
@@ -10,8 +9,6 @@ export default function Container({
   className?: string;
 }) {
   return (
-    <div className={cx("mx-auto max-w-screen-sm px-8", className)}>
-      {children}
-    </div>
+    <div className={clsx("mx-auto max-w-md px-8", className)}>{children}</div>
   );
 }

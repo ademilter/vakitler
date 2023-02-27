@@ -6,4 +6,9 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
+  safelist: [
+    {
+      pattern: /bg-opacity-(10|20|30|40|50|60)/,
+    },
+  ],
 };
