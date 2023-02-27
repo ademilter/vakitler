@@ -1,18 +1,20 @@
 import store from "@/stores/list";
 
-export default function Timer({ show = false }: { show: boolean }) {
-  const { timer } = store();
+export default function Timer() {
+  const { timer, times } = store();
 
-  if (!show) return null;
   if (!timer) return null;
 
   return (
-    <div className="absolute inset-y-0 right-8 flex items-center">
-      <div className="flex rounded-full bg-white px-5 py-3 shadow">
-        <span className="text-3xl tabular-nums leading-none">
-          {timer.join(":")}
+    <span className="flex flex-col items-center">
+      <h2 className="text-3xl capitalize">{times?.time.now}</h2>
+
+      <div className="relative mt-4 px-4 py-2 text-xl tabular-nums">
+        <span className="absolute inset-0 rounded-xl bg-current opacity-10" />
+        <span className="relative z-10">
+          <b>{timer[0]}</b> saat <b>{timer[1]}</b> dakika
         </span>
       </div>
-    </div>
+    </span>
   );
 }

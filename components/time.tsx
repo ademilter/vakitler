@@ -2,6 +2,7 @@ import store from "@/stores/list";
 import { TimeNames } from "@/lib/types";
 import Container from "@/components/container";
 import { clsx } from "clsx";
+import { motion } from "framer-motion";
 
 export default function Time({
   time,
@@ -18,10 +19,18 @@ export default function Time({
 
   if (!times) return null;
 
-  console.log(`bg-sky-200/${(index + 1) * 10}`);
-
   return (
-    <div
+    <motion.div
+      variants={{
+        open: {
+          y: 0,
+          opacity: 1,
+        },
+        closed: {
+          y: 10,
+          opacity: 0,
+        },
+      }}
       className={clsx(
         now === TimeNames.Fajr && "bg-sky-400",
         now === TimeNames.Sunrise && "bg-orange-300",
@@ -29,20 +38,24 @@ export default function Time({
         now === TimeNames.Asr && "bg-amber-300",
         now === TimeNames.Maghrib && "bg-blue-400",
         now === TimeNames.Isha && "bg-indigo-400",
-        `bg-opacity-${(index + 1) * 10}`
+        `bg-opacity-${(index + 1) * 10}`,
+        // iphone bottom handle
+        time === TimeNames.Isha && "pb-6"
       )}
     >
-      <Container className={clsx("h-full px-4")}>
+      <Container className={clsx("flex h-full items-center px-3 py-2")}>
         <div
           className={clsx(
-            "flex h-full items-center justify-between rounded-xl px-4 py-4 text-lg md:px-6 md:text-2xl",
-            isTimeActive && "border-2 border-white"
+            "flex w-full items-center justify-between rounded-xl px-4 py-4 text-lg md:text-xl",
+            isTimeActive && "border-2 border-white/80"
           )}
         >
-          <h5 className={clsx("capitalize leading-none")}>{time}</h5>
-          <h4 className={clsx("font-semibold leading-none")}>{value}</h4>
+          <h5 className={clsx("font-normal capitalize leading-none")}>
+            {time}
+          </h5>
+          <h4 className={clsx("leading-none")}>{value}</h4>
         </div>
       </Container>
-    </div>
+    </motion.div>
   );
 }

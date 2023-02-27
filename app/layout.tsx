@@ -15,7 +15,7 @@ const inter = Inter({
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="tr" className={inter.variable}>
-      <body className="scroll-smooth bg-white text-zinc-900 antialiased">
+      <body className="overflow-hidden scroll-smooth bg-white text-zinc-900 antialiased">
         <main>{children}</main>
         <AnalyticsWrapper />
       </body>
