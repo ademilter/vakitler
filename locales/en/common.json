@@ -1,0 +1,17 @@
+{
+  "times": {
+    "fajr": "en-fajr",
+    "sunrise": "en-sunrise",
+    "dhuhr": "en-dhuhr",
+    "asr": "en-asr",
+    "maghrib": "en-maghrib",
+    "isha": "en-isha"
+  },
+  "create": "{{key}} başarıyla oluşturuldu",
+  "helpUrgency": {
+    "critical": "Kritik",
+    "moderate": "Orta",
+    "normal": "Normal"
+  },
+  "lookAtTheRecordsPage": "<0>Mevcut Kayıtlar</0> sayfasına göz atın."
+}

@@ -92,16 +92,24 @@ export class Times {
   }
 
   get timer(): [string, string, string] {
-    let dateTime = DateTime.fromFormat(this.today[this.time.now], "HH:mm");
+    let dateTime = DateTime.fromFormat(this.today[this.time.next], "HH:mm");
 
     if (this.time.next === TimeNames.Fajr) {
-      dateTime = DateTime.fromFormat(
-        this.tomorrow[TimeNames.Fajr],
-        "HH:mm"
-      ).plus({ days: 1 });
+      dateTime = DateTime.fromFormat(this.today[TimeNames.Fajr], "HH:mm");
+
+      const isBeforeMidnight =
+        DateTime.now() >
+        DateTime.fromFormat(this.today[TimeNames.Fajr], "HH:mm");
+
+      if (isBeforeMidnight) {
+        dateTime = DateTime.fromFormat(
+          this.tomorrow[TimeNames.Fajr],
+          "HH:mm"
+        ).plus({ days: 1 });
+      }
     }
 
-    const ms = dateTime.diff(DateTime.now()).toMillis();
+    const ms = dateTime.diffNow().toMillis();
 
     return secondSplit(ms / 1000);
   }

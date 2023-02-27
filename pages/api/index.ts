@@ -10,8 +10,8 @@ export default async function handler(req: NextRequest) {
   const country = params.get("country") ?? "Turkey";
   const region = params.get("region") ?? "İstanbul";
   const city = params.get("city") ?? "İstanbul";
-  const date = DateTime.now().toFormat("yyyy-MM-dd"); // yyyy-MM-dd
-  const days = "7"; // kaç günlük
+  const date = DateTime.now().minus({ days: 1 }).toFormat("yyyy-MM-dd"); // yyyy-MM-dd
+  const days = "3"; // kaç günlük
   const timezoneOffset = params.get("timezoneOffset") ?? "180"; // dakika cinsinden, örn: 180
 
   try {

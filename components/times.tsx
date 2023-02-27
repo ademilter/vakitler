@@ -11,16 +11,16 @@ export default function Times() {
   const { fetchData, loading, times, updateTimer } = store();
 
   const themeTimes = {
-    [TimeNames.Fajr]: "text-sky-900 grid-rows-[2fr,_1fr,_1fr,_1fr,_1fr,_1fr]",
+    [TimeNames.Fajr]: "text-sky-900 grid-rows-[1fr,_1fr,_1fr,_1fr,_1fr,_1fr]",
     [TimeNames.Sunrise]:
-      "text-orange-900 grid-rows-[1fr,_2fr,_1fr,_1fr,_1fr,_1fr]",
+      "text-orange-900 grid-rows-[1fr,_1fr,_1fr,_1fr,_1fr,_1fr]",
     [TimeNames.Dhuhr]:
-      "text-yellow-900 grid-rows-[1fr,_1fr,_2fr,_1fr,_1fr,_1fr]",
-    [TimeNames.Asr]: "text-amber-900 grid-rows-[1fr,_1fr,_1fr,_2fr,_1fr,_1fr]",
+      "text-yellow-900 grid-rows-[1fr,_1fr,_1fr,_1fr,_1fr,_1fr]",
+    [TimeNames.Asr]: "text-amber-900 grid-rows-[1fr,_1fr,_1fr,_1fr,_1fr,_1fr]",
     [TimeNames.Maghrib]:
-      "text-blue-900 grid-rows-[1fr,_1fr,_1fr,_1fr,_2fr,_1fr]",
+      "text-blue-900 grid-rows-[1fr,_1fr,_1fr,_1fr,_1fr,_1fr]",
     [TimeNames.Isha]:
-      "text-indigo-900 grid-rows-[1fr,_1fr,_1fr,_1fr,_1fr,_2fr]",
+      "text-indigo-900 grid-rows-[1fr,_1fr,_1fr,_1fr,_1fr,_1fr]",
   };
 
   const styleCnt = themeTimes[times?.time.now ?? TimeNames.Fajr];
@@ -38,10 +38,13 @@ export default function Times() {
       {loading ? (
         <div>Loading...</div>
       ) : (
-        <div className={cx("grid h-screen", styleCnt)}>
-          {Object.keys(times.today).map((key) => {
-            return <Time key={key} time={key as TimeNames} />;
-          })}
+        <div className="flex h-screen flex-col">
+          <div className="h-80">deneme</div>
+          <div className={cx("grid grow", styleCnt)}>
+            {Object.keys(times.today).map((key) => {
+              return <Time key={key} time={key as TimeNames} />;
+            })}
+          </div>
         </div>
       )}
     </div>

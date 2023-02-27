@@ -2,7 +2,8 @@ import "@/styles/globals.css";
 
 import type { Metadata } from "next";
 import { Inter } from "@next/font/google";
-import AnalyticsWrapper from "../components/analytics";
+import AnalyticsWrapper from "@/components/analytics";
+import { ReactNode } from "react";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -11,11 +12,7 @@ const inter = Inter({
   subsets: ["latin-ext"],
 });
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="tr" className={inter.variable}>
       <body className="scroll-smooth bg-white text-zinc-900 antialiased">
