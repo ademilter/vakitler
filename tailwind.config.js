@@ -8,7 +8,7 @@ module.exports = {
   ],
   safelist: [
     {
-      pattern: /bg-opacity-(10|20|30|40|50|60)/,
+      pattern: /bg-opacity-(10|20|30|40|50|60|70|80|90|100)/,
     },
   ],
 };

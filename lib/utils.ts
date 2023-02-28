@@ -1,4 +1,5 @@
 import { Timer } from "@/lib/types";
+import { DateTime, Settings } from "luxon";
 
 export function secondSplit(second: number): Timer {
   let pad = (x: number): string => {
@@ -11,5 +12,3 @@ export function secondSplit(second: number): Timer {
     Math.floor(second % 60),
   ];
 }
-
-export const hourFormat = "HH:mm";

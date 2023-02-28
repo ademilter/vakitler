@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@next/font": "^13.2.1",
     "@vercel/analytics": "^0.1.10",
     "clsx": "^1.2.1",
     "framer-motion": "^10.0.1",

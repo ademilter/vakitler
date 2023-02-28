@@ -1,19 +1,23 @@
 "use client";
 
 import { useEffect } from "react";
-import store from "@/stores/list";
+import store from "@/stores/times";
 import useInterval from "@/lib/use-interval";
 import { clsx } from "clsx";
 import Time from "@/components/time";
 import { TimeNames } from "@/lib/types";
 import Timer from "@/components/timer";
 import { motion } from "framer-motion";
+import InfoBar from "@/components/info-bar";
+import { useSearchParams } from "next/navigation";
 
 export default function Times() {
+  const searchParams = useSearchParams();
   const { fetchData, loading, times, updateTimer, timer } = store();
   const now = times?.time.now;
 
   useEffect(() => {
+    console.log(searchParams?.get("lang"));
     fetchData();
   }, []);
 
@@ -42,9 +46,14 @@ export default function Times() {
             now === TimeNames.Isha && "text-indigo-900"
           )}
         >
+          <InfoBar />
+
+          {/* TIMER */}
           <div className="flex items-center justify-center py-12">
             <Timer />
           </div>
+
+          {/* TIMES */}
           <motion.div
             variants={{
               open: {

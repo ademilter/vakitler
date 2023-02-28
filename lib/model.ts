@@ -1,6 +1,7 @@
-import { DateTime, Interval } from "luxon";
+import {DateTime, Interval, Settings} from "luxon";
 import { AllTimes, DayTimes, TimeNames } from "@/lib/types";
-import { hourFormat, secondSplit } from "@/lib/utils";
+import { secondSplit } from "@/lib/utils";
+import { hourFormat } from "@/lib/const";
 
 export class Time {
   public [TimeNames.Fajr]: string;
