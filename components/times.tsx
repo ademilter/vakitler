@@ -3,14 +3,14 @@
 import { useEffect } from "react";
 import store from "@/stores/times";
 import useInterval from "@/lib/use-interval";
-import { clsx } from "clsx";
 import Time from "@/components/time";
 import { TimeNames } from "@/lib/types";
 import Timer from "@/components/timer";
 import { motion } from "framer-motion";
 import InfoBar from "@/components/info-bar";
-import { useRouter, useSearchParams } from "next/navigation";
-import {DateTime} from "luxon";
+import { useSearchParams } from "next/navigation";
+import { DateTime } from "luxon";
+import { cx } from "@/lib/utils";
 
 export default function Times() {
   const searchParams = useSearchParams();
@@ -26,7 +26,7 @@ export default function Times() {
     });
   }, []);
 
-  useInterval(updateTimer, times?.time ? 60000 : null);
+  useInterval(updateTimer, times?.time ? 1000 : null);
 
   useEffect(() => {
     if (!times) return;
@@ -41,8 +41,8 @@ export default function Times() {
         <div>Loading...</div>
       ) : (
         <div
-          className={clsx(
-            "grid h-screen grid-rows-[minmax(auto,_1fr)_minmax(auto,_540px)]",
+          className={cx(
+            "grid h-screen grid-rows-[minmax(auto,_1fr)_minmax(auto,_520px)]",
             now === TimeNames.Fajr && "text-sky-900",
             now === TimeNames.Sunrise && "text-orange-900",
             now === TimeNames.Dhuhr && "text-yellow-900",
@@ -54,7 +54,7 @@ export default function Times() {
           <InfoBar />
 
           {/* TIMER */}
-          <div className="flex items-center justify-center py-12">
+          <div className="flex items-center justify-center pb-12 pt-16">
             <Timer />
           </div>
 

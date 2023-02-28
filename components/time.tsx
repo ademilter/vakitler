@@ -1,9 +1,9 @@
 import store from "@/stores/times";
 import { TimeNames } from "@/lib/types";
 import Container from "@/components/container";
-import { clsx } from "clsx";
 import { motion } from "framer-motion";
 import { Vakitler } from "@/lib/const";
+import { cx } from "@/lib/utils";
 
 export default function Time({
   time,
@@ -32,30 +32,25 @@ export default function Time({
           opacity: 0,
         },
       }}
-      className={clsx(
-        now === TimeNames.Fajr && "bg-sky-400",
+      className={cx(
+        now === TimeNames.Fajr && "bg-sky-300",
         now === TimeNames.Sunrise && "bg-orange-300",
         now === TimeNames.Dhuhr && "bg-yellow-300",
         now === TimeNames.Asr && "bg-amber-300",
-        now === TimeNames.Maghrib && "bg-blue-400",
-        now === TimeNames.Isha && "bg-indigo-400",
+        now === TimeNames.Maghrib && "bg-blue-300",
+        now === TimeNames.Isha && "bg-indigo-300",
         `bg-opacity-${(index + 1) * 10}`,
         // iphone bottom handle
-        time === TimeNames.Isha && "pb-10"
+        time === TimeNames.Isha && "pb-8"
       )}
     >
-      <Container className={clsx("flex h-full items-center px-3 py-2")}>
-        <div className="relative flex w-full items-center justify-between px-4 py-4 text-lg md:text-xl">
+      <Container className={"flex h-full items-center px-5 py-1"}>
+        <div className="relative flex w-full items-center justify-between px-5 py-5 text-lg md:text-xl">
           {isTimeActive && (
             <span
-              className={clsx(
-                "absolute inset-0 rounded-2xl border-2 border-white",
-                index === 0 && "opacity-100",
-                index === 1 && "opacity-100",
-                index === 2 && "opacity-90",
-                index === 3 && "opacity-80",
-                index === 4 && "opacity-70",
-                index === 5 && "opacity-60",
+              className={cx(
+                "absolute inset-0 rounded-2xl border-2 border-current",
+                `opacity-${(index + 1) * 10}`
               )}
             />
           )}

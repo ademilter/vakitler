@@ -1,5 +1,10 @@
 import { Timer } from "@/lib/types";
-import { DateTime, Settings } from "luxon";
+import { ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cx(...inputs: ClassValue[]): string {
+  return twMerge(clsx(inputs));
+}
 
 export function secondSplit(second: number): Timer {
   let pad = (x: number): string => {
