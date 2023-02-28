@@ -13,7 +13,7 @@ export default async function handler(req: NextRequest) {
   const city = params.get("city");
   const timezoneOffset = params.get("timezoneOffset");
   // default
-  const date = DateTime.now().toFormat("yyyy-MM-dd");
+  const date = DateTime.local().toFormat("yyyy-MM-dd");
   const days = "2";
 
   try {

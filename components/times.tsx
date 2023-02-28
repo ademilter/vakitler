@@ -9,7 +9,8 @@ import { TimeNames } from "@/lib/types";
 import Timer from "@/components/timer";
 import { motion } from "framer-motion";
 import InfoBar from "@/components/info-bar";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import {DateTime} from "luxon";
 
 export default function Times() {
   const searchParams = useSearchParams();
@@ -17,8 +18,12 @@ export default function Times() {
   const now = times?.time.now;
 
   useEffect(() => {
-    console.log(searchParams?.get("lang"));
-    fetchData();
+    fetchData({
+      country: searchParams?.get("country") as string,
+      region: searchParams?.get("region") as string,
+      city: searchParams?.get("city") as string,
+      timezoneOffset: DateTime.local().offset,
+    });
   }, []);
 
   useInterval(updateTimer, times?.time ? 60000 : null);

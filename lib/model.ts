@@ -99,7 +99,7 @@ export class Times {
       dateTime = DateTime.fromFormat(this.today[TimeNames.Fajr], "HH:mm");
 
       const isBeforeMidnight =
-        DateTime.now() >
+        DateTime.local() >
         DateTime.fromFormat(this.today[TimeNames.Fajr], "HH:mm");
 
       if (isBeforeMidnight) {
