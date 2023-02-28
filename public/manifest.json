@@ -1,7 +1,7 @@
 {
-  "short_name": "Zelzele",
-  "name": "Zelzele",
-  "description": "Türkiye sınırları içinde olan son 100 deprem bilgisini gösterir.",
+  "short_name": "Vakitler",
+  "name": "Namaz Vakitleri",
+  "description": "Namaz vakitlerini basit bir şekilde öğrenin.",
   "theme_color": "#ffffff",
   "background_color": "#ffffff",
   "display": "standalone",

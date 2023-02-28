@@ -1,12 +1,10 @@
-import { Metadata } from "next";
-
 const siteName = "Namaz Vakitleri";
 const title = `${siteName}`;
-const description = "-";
+const description = "Namaz vakitlerini basit bir şekilde öğrenin.";
 const url = "https://vakitler.vercel.app";
 const locale = "tr-TR";
 
-export const metadata: Metadata = {
+export const metadata = {
   title,
   description,
   openGraph: {
