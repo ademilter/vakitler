@@ -10,12 +10,14 @@
   },
   "dependencies": {
     "@vercel/analytics": "^0.1.10",
+    "@vercel/edge-config": "^0.1.1",
     "clsx": "^1.2.1",
     "framer-motion": "^10.0.1",
     "luxon": "^3.2.1",
     "next": "^13.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.43.2",
     "swr": "^2.0.4",
     "zustand": "^4.3.3"
   },

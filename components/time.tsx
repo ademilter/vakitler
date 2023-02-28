@@ -1,9 +1,10 @@
-import store from "@/stores/times";
 import { TimeNames } from "@/lib/types";
 import Container from "@/components/container";
 import { motion } from "framer-motion";
 import { Vakitler } from "@/lib/const";
 import { cx } from "@/lib/utils";
+import { useContext } from "react";
+import { CommonStoreContext } from "@/stores/common";
 
 export default function Time({
   time,
@@ -12,10 +13,10 @@ export default function Time({
   time: TimeNames;
   index: number;
 }) {
-  const { times } = store();
+  const { times } = useContext(CommonStoreContext);
   const value = times?.today[time];
 
-  const now = times?.time.now;
+  const now = times?.time?.now;
   const isTimeActive = now === time;
 
   if (!times) return null;
@@ -33,15 +34,15 @@ export default function Time({
         },
       }}
       className={cx(
-        now === TimeNames.Fajr && "bg-sky-300",
-        now === TimeNames.Sunrise && "bg-orange-300",
-        now === TimeNames.Dhuhr && "bg-yellow-300",
-        now === TimeNames.Asr && "bg-amber-300",
-        now === TimeNames.Maghrib && "bg-blue-300",
-        now === TimeNames.Isha && "bg-indigo-300",
+        now === TimeNames.Imsak && "bg-sky-300",
+        now === TimeNames.Gunes && "bg-orange-300",
+        now === TimeNames.Ogle && "bg-yellow-300",
+        now === TimeNames.Ikindi && "bg-amber-300",
+        now === TimeNames.Aksam && "bg-blue-300",
+        now === TimeNames.Yatsi && "bg-indigo-300",
         `bg-opacity-${(index + 1) * 10}`,
         // iphone bottom handle
-        time === TimeNames.Isha && "pb-8"
+        time === TimeNames.Yatsi && "pb-8"
       )}
     >
       <Container className={"flex h-full items-center px-5 py-1"}>
@@ -50,13 +51,12 @@ export default function Time({
             <motion.span
               layoutId="border"
               className={cx(
-                "absolute inset-0 rounded-2xl border-2 border-current",
-                `opacity-${(index + 1) * 10}`
+                "absolute inset-0 rounded-2xl border-2 border-current"
               )}
               variants={{
                 open: {
                   scale: 1,
-                  opacity: 1,
+                  opacity: 0.4,
                   transition: {
                     duration: 0.3,
                     delay: 1,

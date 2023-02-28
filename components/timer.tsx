@@ -1,9 +1,10 @@
-import store from "@/stores/times";
 import { Vakitler } from "@/lib/const";
 import { TimeNames } from "@/lib/types";
+import { useContext } from "react";
+import { CommonStoreContext } from "@/stores/common";
 
 export default function Timer() {
-  const { timer, times } = store();
+  const { timer, times } = useContext(CommonStoreContext);
 
   if (!timer) return null;
 
@@ -22,7 +23,9 @@ export default function Timer() {
             </>
           ) : (
             <>
-              <b>{timer[0]}</b> saat <b>{timer[1]}</b> dk
+              <b className="tabular-nums">{timer[0]}</b> saat{" "}
+              <b className="tabular-nums">{timer[1]}</b> dk{" "}
+              <b className="tabular-nums">{timer[2]}</b> sn
             </>
           )}
         </span>
