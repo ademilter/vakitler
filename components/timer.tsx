@@ -16,7 +16,7 @@ export default function Timer() {
       <div className="relative mt-4 px-4 py-2 text-xl">
         <span className="absolute inset-0 rounded-2xl bg-current opacity-10" />
         <span className="relative z-10">
-          {timer[0] === 1 && timer[1] === 0 ? (
+          {timer[0] === 0 && timer[1] === 0 ? (
             <>
               Vakit çıkmak üzere: <b>{timer[2]}</b>
             </>
