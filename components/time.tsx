@@ -47,11 +47,26 @@ export default function Time({
       <Container className={"flex h-full items-center px-5 py-1"}>
         <div className="relative flex w-full items-center justify-between px-5 py-5 text-lg md:text-xl">
           {isTimeActive && (
-            <span
+            <motion.span
+              layoutId="border"
               className={cx(
                 "absolute inset-0 rounded-2xl border-2 border-current",
                 `opacity-${(index + 1) * 10}`
               )}
+              variants={{
+                open: {
+                  scale: 1,
+                  opacity: 1,
+                  transition: {
+                    duration: 0.3,
+                    delay: 1,
+                  },
+                },
+                closed: {
+                  scale: 0.9,
+                  opacity: 0,
+                },
+              }}
             />
           )}
           <h5 className="font-normal capitalize leading-none">
