@@ -24,8 +24,7 @@ export default function Timer() {
           ) : (
             <>
               <b className="tabular-nums">{timer[0]}</b> saat{" "}
-              <b className="tabular-nums">{timer[1]}</b> dk{" "}
-              <b className="tabular-nums">{timer[2]}</b> sn
+              <b className="tabular-nums">{timer[1]}</b> dk
             </>
           )}
         </span>
