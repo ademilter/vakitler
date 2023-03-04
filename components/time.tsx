@@ -45,8 +45,8 @@ export default function Time({
         time === TimeNames.Yatsi && "pb-8"
       )}
     >
-      <Container className={"flex h-full items-center px-5 py-1"}>
-        <div className="relative flex w-full items-center justify-between px-5 py-5 text-lg md:text-xl">
+      <Container className={"flex h-full items-center px-2 py-2"}>
+        <div className="relative flex h-full w-full items-center justify-between px-6 text-lg md:text-xl">
           {isTimeActive && (
             <motion.span
               layoutId="border"
@@ -56,7 +56,7 @@ export default function Time({
               variants={{
                 open: {
                   scale: 1,
-                  opacity: 0.4,
+                  opacity: 0.5,
                   transition: {
                     duration: 0.3,
                     delay: 1,
@@ -69,9 +69,7 @@ export default function Time({
               }}
             />
           )}
-          <h5 className="font-normal capitalize leading-none">
-            {Vakitler[time]}
-          </h5>
+          <h5 className="capitalize leading-none">{Vakitler[time]}</h5>
           <h4 className="tabular-nums leading-none">{value}</h4>
         </div>
       </Container>

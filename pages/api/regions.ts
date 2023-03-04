@@ -1,14 +1,10 @@
 import { NextRequest } from "next/server";
-import { get } from "@vercel/edge-config";
 
 export const config = {
   runtime: "edge",
 };
 
 export default async function handler(req: NextRequest) {
-  const API_URL = await get("API_URL");
-  const API_PASS = await get("API_PASS");
-
   const params = req.nextUrl.searchParams;
   const countryID = params.get("countryID");
 
@@ -17,10 +13,10 @@ export default async function handler(req: NextRequest) {
       return new Response("Missing parameters", { status: 400 });
     }
 
-    const url = new URL(`/sehirler/${countryID}`, API_URL);
+    const url = new URL(`/sehirler/${countryID}`, process.env.API_URL);
 
     const response = await fetch(url, {
-      headers: { "x-parola": API_PASS },
+      headers: { "x-parola": process.env.API_PASS! },
     });
     const data = await response.json();
 

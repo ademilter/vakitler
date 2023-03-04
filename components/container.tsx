@@ -9,6 +9,6 @@ export default function Container({
   className?: string;
 }) {
   return (
-    <div className={cx("mx-auto max-w-md px-10", className)}>{children}</div>
+    <div className={cx("mx-auto max-w-md px-8", className)}>{children}</div>
   );
 }

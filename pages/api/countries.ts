@@ -1,19 +1,15 @@
 import { NextRequest } from "next/server";
-import { get } from "@vercel/edge-config";
 
 export const config = {
   runtime: "edge",
 };
 
 export default async function handler(req: NextRequest) {
-  const API_URL = await get("API_URL");
-  const API_PASS = await get("API_PASS");
-
   try {
-    const url = new URL("/ulkeler", API_URL);
+    const url = new URL("/ulkeler", process.env.API_URL);
 
     const response = await fetch(url, {
-      headers: { "x-parola": API_PASS },
+      headers: { "x-parola": process.env.API_PASS! },
     });
     const data = await response.json();
 

@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@vercel/analytics": "^0.1.10",
-    "@vercel/edge-config": "^0.1.1",
     "clsx": "^1.2.1",
     "framer-motion": "^10.0.1",
     "luxon": "^3.2.1",

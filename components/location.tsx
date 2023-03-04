@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useContext } from "react";
 import { CommonStoreContext } from "@/stores/common";
 
-export default function Location({}: {}) {
+export default function Location() {
   const { settings } = useContext(CommonStoreContext);
 
   const country = "country";
@@ -10,7 +10,7 @@ export default function Location({}: {}) {
   const city = "city";
 
   return (
-    <div className="fixed inset-x-0 top-0 grid place-items-center pt-2">
+    <div className="fixed inset-x-0 top-0 z-20 grid place-items-center p-2">
       <Link
         href={{
           pathname: "/settings",
@@ -20,20 +20,21 @@ export default function Location({}: {}) {
             city: city,
           },
         }}
-        className="flex items-center gap-1 px-4 py-2 text-sm opacity-80"
+        className="rounded-full bg-white"
       >
-        <span className="capitalize">
-          {/* TODO: locale */}
-          {settings.city?.IlceAdi.toLocaleLowerCase("tr").slice(0, 6)}.
-        </span>
-        <span>/</span>
-        <span className="capitalize">
-          {settings.region?.SehirAdi.toLocaleLowerCase("tr").slice(0, 6)}.
-        </span>
-        <span>/</span>
-        <span className="capitalize">
-          {settings.country?.UlkeAdi.toLocaleLowerCase("tr")}
-        </span>
+        <div className="flex items-center gap-1 px-3 py-1 text-sm opacity-80">
+          <span className="capitalize">
+            {settings.city?.IlceAdi.toLocaleLowerCase().slice(0, 8)}
+          </span>
+          <span>/</span>
+          <span className="capitalize">
+            {settings.region?.SehirAdi.toLocaleLowerCase().slice(0, 8)}
+          </span>
+          <span>/</span>
+          <span className="capitalize">
+            {settings.country?.UlkeAdi.toLocaleLowerCase().slice(0, 8)}
+          </span>
+        </div>
       </Link>
     </div>
   );
