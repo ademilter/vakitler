@@ -7,12 +7,11 @@ import { CommonStoreContext } from "@/stores/common";
 
 function Page() {
   const { t, lang } = useTranslation("common");
-  const { handleSubmit, control, formState } = useFormContext();
+  const { handleSubmit, control, formState, setValue } = useFormContext();
 
   const { countryKey, regionKey, cityKey } = useContext(CommonStoreContext);
 
   const {
-    defaultOptions,
     loadingCountries,
     countries,
     loadingRegions,
@@ -32,14 +31,20 @@ function Page() {
           rules={{
             required: "This is required",
           }}
-          render={({ field }) => (
+          render={({ field: { onChange, ...props } }) => (
             <select
-              className="w-64 rounded-md border border-gray-300 p-2"
+              className="h-12 w-full rounded-md border border-gray-300 px-4"
               disabled={loadingCountries}
-              {...field}
+              defaultValue="-1"
+              onChange={(e) => {
+                setValue("regionID", "-1", { shouldValidate: true });
+                setValue("cityID", "-1", { shouldValidate: true });
+                onChange(e);
+              }}
+              {...props}
             >
-              <option value={defaultOptions.value}>
-                {defaultOptions.name}
+              <option disabled value="-1">
+                {t("settings.selectCountry", {}, { returnObjects: true })}
               </option>
               {countries.map((c) => (
                 <option key={c.UlkeID} value={c.UlkeID}>
@@ -56,14 +61,19 @@ function Page() {
           rules={{
             required: "This is required",
           }}
-          render={({ field }) => (
+          render={({ field: { onChange, ...props } }) => (
             <select
-              className="w-64 rounded-md border border-gray-300 p-2"
+              className="h-12 w-full rounded-md border border-gray-300 px-4"
               disabled={loadingRegions}
-              {...field}
+              defaultValue="-1"
+              onChange={(e) => {
+                setValue("cityID", "-1", { shouldValidate: true });
+                onChange(e);
+              }}
+              {...props}
             >
-              <option value={defaultOptions.value}>
-                {defaultOptions.name}
+              <option disabled value="-1">
+                {t("settings.selectRegion", {}, { returnObjects: true })}
               </option>
               {regions.map((r) => (
                 <option key={r.SehirID} value={r.SehirID}>
@@ -80,14 +90,18 @@ function Page() {
           rules={{
             required: "This is required",
           }}
-          render={({ field }) => (
+          render={({ field: { onChange, ...props } }) => (
             <select
-              className="w-64 rounded-md border border-gray-300 p-2"
+              className="h-12 w-full rounded-md border border-gray-300 px-4"
               disabled={loadingCities}
-              {...field}
+              defaultValue="-1"
+              onChange={(e) => {
+                onChange(e);
+              }}
+              {...props}
             >
-              <option value={defaultOptions.value}>
-                {defaultOptions.name}
+              <option disabled value="-1">
+                {t("settings.selectCity", {}, { returnObjects: true })}
               </option>
               {cities.map((o) => (
                 <option key={o.IlceID} value={o.IlceID}>
@@ -98,29 +112,31 @@ function Page() {
           )}
         />
 
-        <label>
-          <input
-            type="radio"
-            name="lang"
-            value="tr"
-            checked={lang === "tr"}
-            onChange={onChangeLang}
-          />
-          {t("settings.tr", {}, { returnObjects: true })}
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="lang"
-            value="en"
-            checked={lang === "en"}
-            onChange={onChangeLang}
-          />
-          {t("settings.en", {}, { returnObjects: true })}
-        </label>
+        <div className="grid h-12 grid-cols-2 rounded-md border border-gray-300">
+          <label className="flex items-center gap-2 px-4">
+            <input
+              type="radio"
+              name="lang"
+              value="tr"
+              checked={lang === "tr"}
+              onChange={onChangeLang}
+            />
+            {t("settings.tr", {}, { returnObjects: true })}
+          </label>
+          <label className="flex items-center gap-2 border-l px-4">
+            <input
+              type="radio"
+              name="lang"
+              value="en"
+              checked={lang === "en"}
+              onChange={onChangeLang}
+            />
+            {t("settings.en", {}, { returnObjects: true })}
+          </label>
+        </div>
 
         <button
-          className="w-64 rounded-md border border-gray-300 p-2 disabled:opacity-50"
+          className="h-12 w-full rounded-md bg-blue-500 px-4 text-center text-white disabled:opacity-50"
           disabled={!formState.isValid}
         >
           {t("settings.save", {}, { returnObjects: true })}

@@ -18,10 +18,6 @@ export type SettingsForm = {
 };
 
 interface ISettingsStore {
-  defaultOptions: {
-    value: string;
-    name: string;
-  };
   loadingCountries: boolean;
   countries: ICountry[];
   loadingRegions: boolean;
@@ -33,10 +29,6 @@ interface ISettingsStore {
 }
 
 export const SettingsStoreContext = createContext<ISettingsStore>({
-  defaultOptions: {
-    value: "0",
-    name: "",
-  },
   loadingCountries: false,
   countries: [],
   loadingRegions: false,
@@ -57,11 +49,6 @@ export function SettingsStoreProvider({ children }: { children: ReactNode }) {
   const [loadingRegions, setLoadingRegions] = useState(false);
   const [loadingCities, setLoadingCities] = useState(false);
 
-  const defaultOptions = {
-    value: "0",
-    name: "",
-  };
-
   const defaultValues: SettingsForm = {
     countryID: undefined,
     regionID: undefined,
@@ -70,10 +57,10 @@ export function SettingsStoreProvider({ children }: { children: ReactNode }) {
 
   const methods = useForm<SettingsForm>({
     defaultValues,
-    mode: "onChange",
+    mode: "all",
   });
 
-  const { watch, setValue, trigger } = methods;
+  const { watch, setValue, trigger, formState } = methods;
 
   const countryID = watch("countryID");
   const regionID = watch("regionID");
@@ -183,19 +170,18 @@ export function SettingsStoreProvider({ children }: { children: ReactNode }) {
   }, [appReady]);
 
   useEffect(() => {
-    if (!countryID || countryID === defaultOptions.value) return;
+    if (!countryID || countryID === "-1") return;
     fetchRegions();
   }, [countryID]);
 
   useEffect(() => {
-    if (!regionID || regionID === defaultOptions.value) return;
+    if (!regionID || regionID === "-1") return;
     fetchCities();
   }, [regionID]);
 
   return (
     <SettingsStoreContext.Provider
       value={{
-        defaultOptions,
         loadingCountries,
         countries,
         loadingRegions,
