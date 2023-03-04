@@ -1,4 +1,4 @@
-import { Timer } from "@/lib/types";
+import { TypeTimer } from "@/lib/types";
 import { ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -6,7 +6,7 @@ export function cx(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs));
 }
 
-export function secondSplit(second: number): Timer {
+export function secondSplit(second: number): TypeTimer {
   let pad = (x: number): string => {
     return x < 10 ? `0${x}` : `${x}`;
   };
