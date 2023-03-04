@@ -1,125 +1,28 @@
-import { useContext, useEffect, useState } from "react";
-import { ICity, ICountry, IRegion } from "@/lib/types";
-import { CommonStoreContext } from "@/stores/common";
-import { Controller, useForm } from "react-hook-form";
+import React, { useContext } from "react";
+import { SettingsStoreContext, SettingsStoreProvider } from "@/stores/settings";
+import { Controller, useFormContext } from "react-hook-form";
 import Container from "@/components/container";
-import { useRouter } from "next/router";
+import useTranslation from "next-translate/useTranslation";
 
-type IForm = {
-  countryID: undefined | string;
-  regionID: undefined | string;
-  cityID: undefined | string;
-};
+function Page() {
+  const { t, lang } = useTranslation("common");
+  const { handleSubmit, control, formState } = useFormContext();
 
-export default function Index() {
-  const router = useRouter();
-
-  const { settings, setSettings, fetchData } = useContext(CommonStoreContext);
-  const [loadingCountries, setLoadingCountries] = useState(false);
-  const [loadingRegions, setLoadingRegions] = useState(false);
-  const [loadingCities, setLoadingCities] = useState(false);
-
-  const defaultOptions = {
-    value: "0",
-    name: "",
-  };
-
-  const defaultValues: IForm = {
-    countryID: settings.country?.UlkeID,
-    regionID: settings.region?.SehirID,
-    cityID: settings.city?.IlceID,
-  };
-
-  const { handleSubmit, control, watch, setValue, formState } = useForm<IForm>({
-    defaultValues,
-  });
-
-  const countryID = watch("countryID");
-  const regionID = watch("regionID");
-  const cityID = watch("cityID");
-
-  const [countries, setCountries] = useState<ICountry[]>([]);
-  const [regions, setRegions] = useState<IRegion[]>([]);
-  const [cities, setCities] = useState<ICity[]>([]);
-
-  const fetchCountries = async () => {
-    try {
-      setLoadingCountries(true);
-      const res = await fetch("/api/countries");
-      const data = await res.json();
-      setCountries(data);
-
-      if (countryID) setValue("countryID", countryID);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoadingCountries(false);
-    }
-  };
-
-  const fetchRegions = async () => {
-    try {
-      setLoadingRegions(true);
-      const res = await fetch(`api/regions?countryID=${countryID}`);
-      const data = await res.json();
-      setRegions(data);
-
-      if (regionID) setValue("regionID", regionID);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoadingRegions(false);
-    }
-  };
-
-  const fetchCities = async () => {
-    try {
-      setLoadingCities(true);
-      const res = await fetch(`api/cities?regionID=${regionID}`);
-      const data = await res.json();
-      setCities(data);
-
-      if (cityID) setValue("cityID", cityID);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoadingCities(false);
-    }
-  };
-
-  const onSubmit = async (values: IForm) => {
-    const country = countries.find((c) => c.UlkeID === values.countryID);
-    const region = regions.find((r) => r.SehirID === values.regionID);
-    const city = cities.find((c) => c.IlceID === values.cityID);
-
-    setSettings({ country, region, city });
-
-    localStorage.setItem(
-      "VAKITLER_SETTINGS",
-      JSON.stringify({ country, region, city })
-    );
-
-    await fetchData(cityID as string);
-    return router.push(`/`);
-  };
-
-  useEffect(() => {
-    fetchCountries();
-  }, []);
-
-  useEffect(() => {
-    if (!countryID || countryID === defaultOptions.value) return;
-    fetchRegions();
-  }, [countryID]);
-
-  useEffect(() => {
-    if (!regionID || regionID === defaultOptions.value) return;
-    fetchCities();
-  }, [regionID]);
+  const {
+    defaultOptions,
+    loadingCountries,
+    countries,
+    loadingRegions,
+    regions,
+    loadingCities,
+    cities,
+    onSubmit,
+    onChangeLang,
+  } = useContext(SettingsStoreContext);
 
   return (
     <Container className="py-10">
-      <form className="grid gap-4" onSubmit={handleSubmit(onSubmit)}>
+      <form className="grid gap-4" onSubmit={handleSubmit(onSubmit as any)}>
         <Controller
           name="countryID"
           control={control}
@@ -192,13 +95,42 @@ export default function Index() {
           )}
         />
 
+        <label>
+          <input
+            type="radio"
+            name="lang"
+            value="tr"
+            checked={lang === "tr"}
+            onChange={onChangeLang}
+          />
+          {t("settings.tr", {}, { returnObjects: true })}
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="lang"
+            value="en"
+            checked={lang === "en"}
+            onChange={onChangeLang}
+          />
+          {t("settings.en", {}, { returnObjects: true })}
+        </label>
+
         <button
           className="w-64 rounded-md border border-gray-300 p-2 disabled:opacity-50"
           disabled={!formState.isValid}
         >
-          Kaydet
+          {t("settings.save", {}, { returnObjects: true })}
         </button>
       </form>
     </Container>
+  );
+}
+
+export default function Settings() {
+  return (
+    <SettingsStoreProvider>
+      <Page />
+    </SettingsStoreProvider>
   );
 }

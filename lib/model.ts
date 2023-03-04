@@ -1,5 +1,5 @@
 import { DateTime, Interval } from "luxon";
-import { ITime, TimeNames } from "@/lib/types";
+import { ITime, TimeNames, TypeTimer } from "@/lib/types";
 import { secondSplit } from "@/lib/utils";
 import { hourFormat } from "@/lib/const";
 
@@ -97,7 +97,7 @@ export class Times {
     return obj;
   }
 
-  get timer(): [number, number, number] {
+  get timer(): TypeTimer {
     let dateTime = DateTime.fromFormat(this.today[this.time.next], "HH:mm");
 
     if (this.time.next === TimeNames.Imsak) {

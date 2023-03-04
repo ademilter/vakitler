@@ -1,8 +1,8 @@
-import { Html, Head, Main, NextScript } from "next/document";
+import { Head, Html, Main, NextScript } from "next/document";
 
-export default function Document() {
+export default function Document({ locale }: { locale: string }) {
   return (
-    <Html lang="tr">
+    <Html lang={locale}>
       <Head />
       <body className="scroll-smooth bg-white text-zinc-900 antialiased">
         <Main />

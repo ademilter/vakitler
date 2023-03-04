@@ -1,10 +1,10 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { Times } from "@/lib/model";
-import { ICity, ICountry, IRegion, Timer } from "@/lib/types";
-import useInterval from "@/lib/use-interval";
+import { ICity, ICountry, IRegion } from "@/lib/types";
 import { useRouter } from "next/router";
 
 interface ICommonStore {
+  appReady: boolean;
   appLoading: boolean;
   setAppLoading: (state: boolean) => void;
   settings: {
@@ -15,10 +15,10 @@ interface ICommonStore {
   setSettings: (settings: ICommonStore["settings"]) => void;
   times: undefined | Times;
   fetchData: (cityID: string) => Promise<void>;
-  timer: undefined | Timer;
 }
 
 export const CommonStoreContext = createContext<ICommonStore>({
+  appReady: false,
   appLoading: false,
   setAppLoading: () => {},
   settings: {
@@ -29,16 +29,15 @@ export const CommonStoreContext = createContext<ICommonStore>({
   setSettings: () => {},
   times: undefined,
   fetchData: () => Promise.resolve(),
-  timer: undefined,
 });
 
 export function CommonStoreProvider({ children }: { children: ReactNode }) {
   const router = useRouter();
 
+  const [appReady, setAppReady] = useState<ICommonStore["appReady"]>(false);
   const [appLoading, setAppLoading] =
     useState<ICommonStore["appLoading"]>(false);
   const [times, setTimes] = useState<ICommonStore["times"]>();
-  const [timer, setTimer] = useState<ICommonStore["timer"]>();
   const [settings, setSettings] = useState<ICommonStore["settings"]>({
     country: undefined,
     region: undefined,
@@ -74,14 +73,9 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
     } else {
       router.push("/settings");
     }
-  };
 
-  useInterval(
-    () => {
-      setTimer(times?.timer);
-    },
-    times ? 1000 : null
-  );
+    setAppReady(true);
+  };
 
   useEffect(() => {
     initApp();
@@ -93,11 +87,11 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
   return (
     <CommonStoreContext.Provider
       value={{
+        appReady,
         appLoading,
         setAppLoading,
         times,
         fetchData,
-        timer,
         settings,
         setSettings,
       }}

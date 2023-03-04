@@ -1,10 +1,25 @@
 {
   "times": {
-    "fajr": "en-fajr",
-    "sunrise": "en-sunrise",
-    "dhuhr": "en-dhuhr",
-    "asr": "en-asr",
-    "maghrib": "en-maghrib",
-    "isha": "en-isha"
+    "Imsak": "Fajr",
+    "Gunes": "Sunrise",
+    "Ogle": "Dhuhr",
+    "Ikindi": "Asr",
+    "Aksam": "Maghrib",
+    "Yatsi": "Isha"
+  },
+  "timer": {
+    "second": "<0>{{second}}</0>",
+    "minute": "<0>{{minute}}</0> min",
+    "hour": "<0>{{hour}}</0> hours <0>{{minute}}</0> min",
+    "hour_two": "<0>{{hour}}</0> hour <0>{{minute}}</0> min"
+  },
+  "settings": {
+    "countryKey": "UlkeAdiEn",
+    "regionKey": "SehirAdiEn",
+    "cityKey": "IlceAdiEn",
+    "tr": "Türkçe",
+    "en": "English",
+    "save": "Save",
+    "cancel": "Cancel"
   }
 }

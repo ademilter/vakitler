@@ -1,10 +1,24 @@
 {
   "times": {
-    "fajr": "tr-fajr",
-    "sunrise": "tr-sunrise",
-    "dhuhr": "tr-dhuhr",
-    "asr": "tr-asr",
-    "maghrib": "tr-maghrib",
-    "isha": "tr-isha"
+    "Imsak": "İmsak",
+    "Gunes": "Güneş",
+    "Ogle": "Öğle",
+    "Ikindi": "İkindi",
+    "Aksam": "Akşam",
+    "Yatsi": "Yatsı"
+  },
+  "timer": {
+    "second": "Vakit çıkmak üzere <0>{{second}}</0>",
+    "minute": "<0>{{minute}}</0> dak",
+    "hour": "<0>{{hour}}</0> saat <0>{{minute}}</0> dak"
+  },
+  "settings": {
+    "countryKey": "UlkeAdi",
+    "regionKey": "SehirAdi",
+    "cityKey": "IlceAdi",
+    "tr": "Türkçe",
+    "en": "English",
+    "save": "Kaydet",
+    "cancel": "İptal"
   }
 }

@@ -1,4 +1,4 @@
-export type Timer = [number, number, number];
+export type TypeTimer = [number, number, number];
 
 export interface ICountry {
   UlkeAdi: string; // "ABD",

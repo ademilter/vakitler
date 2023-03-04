@@ -1,10 +1,10 @@
 import { TimeNames } from "@/lib/types";
 import Container from "@/components/container";
 import { motion } from "framer-motion";
-import { Vakitler } from "@/lib/const";
 import { cx } from "@/lib/utils";
 import { useContext } from "react";
 import { CommonStoreContext } from "@/stores/common";
+import useTranslation from "next-translate/useTranslation";
 
 export default function Time({
   time,
@@ -13,6 +13,8 @@ export default function Time({
   time: TimeNames;
   index: number;
 }) {
+  const { t } = useTranslation("common");
+
   const { times } = useContext(CommonStoreContext);
   const value = times?.today[time];
 
@@ -69,7 +71,15 @@ export default function Time({
               }}
             />
           )}
-          <h5 className="capitalize leading-none">{Vakitler[time]}</h5>
+          <h5 className="capitalize leading-none">
+            {t(
+              `times.${time}`,
+              {},
+              {
+                returnObjects: true,
+              }
+            )}
+          </h5>
           <h4 className="tabular-nums leading-none">{value}</h4>
         </div>
       </Container>
