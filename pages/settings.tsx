@@ -3,10 +3,13 @@ import { SettingsStoreContext, SettingsStoreProvider } from "@/stores/settings";
 import { Controller, useFormContext } from "react-hook-form";
 import Container from "@/components/container";
 import useTranslation from "next-translate/useTranslation";
+import { CommonStoreContext } from "@/stores/common";
 
 function Page() {
   const { t, lang } = useTranslation("common");
   const { handleSubmit, control, formState } = useFormContext();
+
+  const { countryKey, regionKey, cityKey } = useContext(CommonStoreContext);
 
   const {
     defaultOptions,
@@ -40,7 +43,7 @@ function Page() {
               </option>
               {countries.map((c) => (
                 <option key={c.UlkeID} value={c.UlkeID}>
-                  {c.UlkeAdi}
+                  {c[countryKey]}
                 </option>
               ))}
             </select>
@@ -64,7 +67,7 @@ function Page() {
               </option>
               {regions.map((r) => (
                 <option key={r.SehirID} value={r.SehirID}>
-                  {r.SehirAdi}
+                  {r[regionKey]}
                 </option>
               ))}
             </select>
@@ -88,7 +91,7 @@ function Page() {
               </option>
               {cities.map((o) => (
                 <option key={o.IlceID} value={o.IlceID}>
-                  {o.IlceAdi}
+                  {o[cityKey]}
                 </option>
               ))}
             </select>

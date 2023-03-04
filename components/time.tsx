@@ -44,7 +44,7 @@ export default function Time({
         now === TimeNames.Yatsi && "bg-indigo-300",
         `bg-opacity-${(index + 1) * 10}`,
         // iphone bottom handle
-        time === TimeNames.Yatsi && "pb-8"
+        time === TimeNames.Yatsi && "pb-10"
       )}
     >
       <Container className={"flex h-full items-center px-2 py-2"}>

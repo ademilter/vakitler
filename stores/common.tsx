@@ -2,6 +2,7 @@ import { createContext, ReactNode, useEffect, useState } from "react";
 import { Times } from "@/lib/model";
 import { ICity, ICountry, IRegion } from "@/lib/types";
 import { useRouter } from "next/router";
+import useTranslation from "next-translate/useTranslation";
 
 interface ICommonStore {
   appReady: boolean;
@@ -15,6 +16,9 @@ interface ICommonStore {
   setSettings: (settings: ICommonStore["settings"]) => void;
   times: undefined | Times;
   fetchData: (cityID: string) => Promise<void>;
+  countryKey: keyof ICountry;
+  regionKey: keyof IRegion;
+  cityKey: keyof ICity;
 }
 
 export const CommonStoreContext = createContext<ICommonStore>({
@@ -29,9 +33,13 @@ export const CommonStoreContext = createContext<ICommonStore>({
   setSettings: () => {},
   times: undefined,
   fetchData: () => Promise.resolve(),
+  countryKey: "UlkeAdi",
+  regionKey: "SehirAdi",
+  cityKey: "IlceAdi",
 });
 
 export function CommonStoreProvider({ children }: { children: ReactNode }) {
+  const { t } = useTranslation("common");
   const router = useRouter();
 
   const [appReady, setAppReady] = useState<ICommonStore["appReady"]>(false);
@@ -43,6 +51,30 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
     region: undefined,
     city: undefined,
   });
+
+  const countryKey = t(
+    "settings.countryKey",
+    {},
+    {
+      returnObjects: true,
+    }
+  ) as keyof ICountry;
+
+  const regionKey = t(
+    "settings.regionKey",
+    {},
+    {
+      returnObjects: true,
+    }
+  ) as keyof IRegion;
+
+  const cityKey = t(
+    "settings.cityKey",
+    {},
+    {
+      returnObjects: true,
+    }
+  ) as keyof ICity;
 
   const fetchData = async (cityID: string) => {
     try {
@@ -94,6 +126,9 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
         fetchData,
         settings,
         setSettings,
+        countryKey,
+        regionKey,
+        cityKey,
       }}
     >
       {children}
