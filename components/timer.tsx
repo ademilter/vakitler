@@ -4,12 +4,13 @@ import { CommonStoreContext } from "@/stores/common";
 import Trans from "next-translate/Trans";
 import useTranslation from "next-translate/useTranslation";
 import useInterval from "@/lib/use-interval";
+import { motion } from "framer-motion";
 
 export default function Timer() {
   const { t } = useTranslation("common");
 
   const { times } = useContext(CommonStoreContext);
-  const [timer, setTimer] = useState<TypeTimer>();
+  const [timer, setTimer] = useState<TypeTimer>([0, 0, 0]);
 
   useInterval(
     () => {
@@ -23,10 +24,25 @@ export default function Timer() {
     setTimer(times?.timer as TypeTimer);
   }, [times]);
 
-  if (!timer) return null;
-
   return (
-    <span className="flex flex-col items-center">
+    <motion.div
+      variants={{
+        open: {
+          y: 0,
+          scale: 1,
+          opacity: 1,
+        },
+        closed: {
+          y: 30,
+          scale: 0.9,
+          opacity: 0,
+        },
+      }}
+      transition={{
+        delay: 0.3,
+      }}
+      className="flex flex-col items-center"
+    >
       <h2 className="text-4xl capitalize">
         {t(
           `times.${times?.time.now as TimeNames}`,
@@ -64,6 +80,6 @@ export default function Timer() {
           )}
         </span>
       </div>
-    </span>
+    </motion.div>
   );
 }

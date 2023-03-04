@@ -48,6 +48,7 @@ export default function Index() {
               transition: {
                 staggerChildren: 0.05,
                 delayChildren: 0.05,
+                staggerDirection: -1,
               },
             },
           }}
