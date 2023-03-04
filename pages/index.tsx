@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CommonStoreContext } from "@/stores/common";
 import { cx } from "@/lib/utils";
 import { motion } from "framer-motion";
@@ -8,13 +8,20 @@ import Timer from "@/components/timer";
 import Time from "@/components/time";
 
 export default function Index() {
-  const { appReady, times } = useContext(CommonStoreContext);
+  const { times } = useContext(CommonStoreContext);
   const now = times?.time?.now;
 
-  if (!times?.hasData) return null;
+  const [start, setStart] = useState(false);
+
+  useEffect(() => {
+    if (!times) return;
+    setStart(true);
+  }, [times]);
+
+  if (!times) return null;
 
   return (
-    <motion.div initial={false} animate={appReady ? "open" : "closed"}>
+    <motion.div initial={false} animate={start ? "open" : "closed"}>
       <div
         className={cx(
           "grid h-screen grid-rows-[minmax(auto,_1fr)_minmax(auto,_520px)]",
@@ -39,7 +46,7 @@ export default function Index() {
           variants={{
             open: {
               transition: {
-                staggerChildren: 0.1,
+                staggerChildren: 0.05,
                 delayChildren: 0.05,
               },
             },

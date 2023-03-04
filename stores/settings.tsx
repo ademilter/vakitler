@@ -90,9 +90,12 @@ export function SettingsStoreProvider({ children }: { children: ReactNode }) {
   const fetchCountries = async () => {
     try {
       setLoadingCountries(true);
+
       const url = new URL("/api/countries", window.location.origin);
+
       const res = await fetch(url.toString());
       const data = await res.json();
+
       setCountries(data);
 
       if (countryID) setValue("countryID", countryID);
@@ -106,10 +109,13 @@ export function SettingsStoreProvider({ children }: { children: ReactNode }) {
   const fetchRegions = async () => {
     try {
       setLoadingRegions(true);
+
       const url = new URL("/api/regions", window.location.origin);
       url.searchParams.set("countryID", countryID as string);
+
       const res = await fetch(url.toString());
       const data = await res.json();
+
       setRegions(data);
 
       if (regionID) setValue("regionID", regionID);
@@ -123,10 +129,13 @@ export function SettingsStoreProvider({ children }: { children: ReactNode }) {
   const fetchCities = async () => {
     try {
       setLoadingCities(true);
+
       const url = new URL("/api/cities", window.location.origin);
       url.searchParams.set("regionID", regionID as string);
+
       const res = await fetch(url.toString());
       const data = await res.json();
+
       setCities(data);
 
       if (cityID) setValue("cityID", cityID);

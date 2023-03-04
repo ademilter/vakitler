@@ -8,19 +8,20 @@ import useInterval from "@/lib/use-interval";
 export default function Timer() {
   const { t } = useTranslation("common");
 
-  const { appReady, times } = useContext(CommonStoreContext);
+  const { times } = useContext(CommonStoreContext);
   const [timer, setTimer] = useState<TypeTimer>();
 
   useInterval(
     () => {
       setTimer(times?.timer as TypeTimer);
     },
-    appReady ? 1000 : null
+    times ? 1000 : null
   );
+
   useEffect(() => {
-    if (!appReady) return;
+    if (!times) return;
     setTimer(times?.timer as TypeTimer);
-  }, [appReady]);
+  }, [times]);
 
   if (!timer) return null;
 
