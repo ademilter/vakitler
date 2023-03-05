@@ -17,9 +17,7 @@
     "next-translate": "^2.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.43.2",
-    "swr": "^2.0.4",
-    "zustand": "^4.3.3"
+    "react-hook-form": "^7.43.2"
   },
   "devDependencies": {
     "@types/luxon": "^3.2.0",

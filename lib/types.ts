@@ -29,6 +29,7 @@ export interface ITime {
   HicriTarihUzun: string; // "8 Şaban 1444";
   MiladiTarihKisa: string; // "28.02.2023";
   MiladiTarihUzunIso8601: string; // "2023-02-28T00:00:00.0000000+03:00";
+  AyinSekliURL: string; // ""http://namazvakti.diyanet.gov.tr/images/i7.gif"";
 }
 
 export enum TimeNames {

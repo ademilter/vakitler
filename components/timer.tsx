@@ -5,6 +5,7 @@ import Trans from "next-translate/Trans";
 import useTranslation from "next-translate/useTranslation";
 import useInterval from "@/lib/use-interval";
 import { motion } from "framer-motion";
+import Icon, { ICON_NAMES } from "@/components/icon";
 
 export default function Timer() {
   const { t } = useTranslation("common");
@@ -43,6 +44,8 @@ export default function Timer() {
       }}
       className="flex flex-col items-center"
     >
+      <Icon icon={times?.iconName as keyof typeof ICON_NAMES} size={32} />
+
       <h2 className="text-4xl capitalize">
         {t(
           `times.${times?.time.now as TimeNames}`,

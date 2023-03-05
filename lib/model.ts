@@ -14,6 +14,7 @@ export class Time {
   public MiladiTarihKisa: string;
   public HicriTarihUzun: string;
   public KibleSaati: string;
+  public AyinSekliURL: string;
 
   constructor(props: ITime) {
     this[TimeNames.Imsak] = props[TimeNames.Imsak];
@@ -26,6 +27,14 @@ export class Time {
     this.MiladiTarihKisa = props.MiladiTarihKisa;
     this.HicriTarihUzun = props.HicriTarihUzun;
     this.KibleSaati = props.KibleSaati;
+    this.AyinSekliURL = props.AyinSekliURL;
+  }
+
+  get moonKey(): string {
+    const [_, name] = this.AyinSekliURL.split(
+      "http://namazvakti.diyanet.gov.tr/images/"
+    );
+    return name.split(".")[0];
   }
 }
 
@@ -33,7 +42,7 @@ export class Times {
   public times: Time[];
 
   constructor(data: ITime[] = []) {
-    this.times = data.map((day) => new Time(day));
+    this.times = data.map(day => new Time(day));
   }
 
   get hasData(): boolean {
@@ -41,16 +50,23 @@ export class Times {
   }
 
   get today(): Time {
-    return this.times.find((day) => {
-      const today = DateTime.local().toFormat("dd.MM.yyyy");
-      return day.MiladiTarihKisa === today;
+    return this.times.find(day => {
+      const d = DateTime.local().toFormat("dd.MM.yyyy");
+      return day.MiladiTarihKisa === d;
     }) as Time;
   }
 
   get tomorrow(): Time {
-    return this.times.find((day) => {
-      const today = DateTime.local().plus({ days: 1 }).toFormat("dd.MM.yyyy");
-      return day.MiladiTarihKisa === today;
+    return this.times.find(day => {
+      const d = DateTime.local().plus({ days: 1 }).toFormat("dd.MM.yyyy");
+      return day.MiladiTarihKisa === d;
+    }) as Time;
+  }
+
+  get yesterday(): Time {
+    return this.times.find(day => {
+      const d = DateTime.local().minus({ days: 1 }).toFormat("dd.MM.yyyy");
+      return day.MiladiTarihKisa === d;
     }) as Time;
   }
 
@@ -97,17 +113,20 @@ export class Times {
     return obj;
   }
 
+  isBeforeMidnight(): boolean {
+    return (
+      DateTime.local() >
+      DateTime.fromFormat(this.today[TimeNames.Imsak], "HH:mm")
+    );
+  }
+
   get timer(): TypeTimer {
     let dateTime = DateTime.fromFormat(this.today[this.time.next], "HH:mm");
 
-    if (this.time.next === TimeNames.Imsak) {
+    if (this.time.now === TimeNames.Yatsi) {
       dateTime = DateTime.fromFormat(this.today[TimeNames.Imsak], "HH:mm");
 
-      const isBeforeMidnight =
-        DateTime.local() >
-        DateTime.fromFormat(this.today[TimeNames.Imsak], "HH:mm");
-
-      if (isBeforeMidnight) {
+      if (this.isBeforeMidnight()) {
         dateTime = DateTime.fromFormat(
           this.tomorrow[TimeNames.Imsak],
           "HH:mm"
@@ -118,5 +137,19 @@ export class Times {
     const ms = dateTime.diffNow().toMillis();
 
     return secondSplit(ms / 1000);
+  }
+
+  get iconName(): string {
+    let key = this.time.now as string;
+
+    if (this.time.now === TimeNames.Yatsi) {
+      key = this.today.moonKey;
+
+      if (!this.isBeforeMidnight()) {
+        key = this.yesterday.moonKey;
+      }
+    }
+
+    return key;
   }
 }
