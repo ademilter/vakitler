@@ -62,21 +62,24 @@ export default function Timer() {
           {timer[0] === 0 && timer[1] === 0 ? (
             <Trans
               i18nKey={`timer.second`}
-              components={[<b key="timer" />]}
+              components={[<b key="timer" className="tabular-nums" />]}
               values={{ second: timer[2] }}
               ns={"common"}
             />
           ) : timer[0] === 0 ? (
             <Trans
               i18nKey={`timer.minute`}
-              components={[<b key="minute" />]}
+              components={[<b key="minute" className="tabular-nums" />]}
               values={{ minute: timer[1] }}
               ns={"common"}
             />
           ) : (
             <Trans
               i18nKey={`timer.hour`}
-              components={[<b key="hour" />, <b key="minute" />]}
+              components={[
+                <b key="hour" className="tabular-nums" />,
+                <b key="minute" className="tabular-nums" />,
+              ]}
               values={{ hour: timer[0], minute: timer[1] }}
               ns={"common"}
             />

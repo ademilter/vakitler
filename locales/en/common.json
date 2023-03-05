@@ -8,7 +8,7 @@
     "Yatsi": "Isha"
   },
   "timer": {
-    "second": "<0>{{second}}</0>",
+    "second": "<0>{{second}}</0> sec",
     "minute": "<0>{{minute}}</0> min",
     "hour": "<0>{{hour}}</0> hours <0>{{minute}}</0> min",
     "hour_two": "<0>{{hour}}</0> hour <0>{{minute}}</0> min"

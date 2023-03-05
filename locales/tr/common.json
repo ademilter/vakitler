@@ -8,9 +8,9 @@
     "Yatsi": "Yatsı"
   },
   "timer": {
-    "second": "Vakit çıkmak üzere <0>{{second}}</0>",
-    "minute": "<0>{{minute}}</0> dak",
-    "hour": "<0>{{hour}}</0> saat <0>{{minute}}</0> dak"
+    "second": "<0>{{second}}</0> saniye",
+    "minute": "<0>{{minute}}</0> dakika",
+    "hour": "<0>{{hour}}</0> saat <0>{{minute}}</0> dakika"
   },
   "settings": {
     "countryKey": "UlkeAdi",
