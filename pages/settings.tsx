@@ -33,7 +33,7 @@ function Page() {
           }}
           render={({ field: { onChange, ...props } }) => (
             <select
-              className="h-12 w-full rounded-md border border-gray-300 px-4"
+              className="h-12 w-full rounded-md border border-gray-300 bg-white px-4"
               disabled={loadingCountries}
               defaultValue="-1"
               onChange={(e) => {
@@ -63,7 +63,7 @@ function Page() {
           }}
           render={({ field: { onChange, ...props } }) => (
             <select
-              className="h-12 w-full rounded-md border border-gray-300 px-4"
+              className="h-12 w-full rounded-md border border-gray-300 bg-white px-4"
               disabled={loadingRegions}
               defaultValue="-1"
               onChange={(e) => {
@@ -92,7 +92,7 @@ function Page() {
           }}
           render={({ field: { onChange, ...props } }) => (
             <select
-              className="h-12 w-full rounded-md border border-gray-300 px-4"
+              className="h-12 w-full rounded-md border border-gray-300 bg-white px-4"
               disabled={loadingCities}
               defaultValue="-1"
               onChange={(e) => {
