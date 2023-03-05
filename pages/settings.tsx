@@ -36,7 +36,7 @@ function Page() {
               className="h-12 w-full rounded-md border border-gray-300 bg-white px-4"
               disabled={loadingCountries}
               defaultValue="-1"
-              onChange={(e) => {
+              onChange={e => {
                 setValue("regionID", "-1", { shouldValidate: true });
                 setValue("cityID", "-1", { shouldValidate: true });
                 onChange(e);
@@ -46,7 +46,7 @@ function Page() {
               <option disabled value="-1">
                 {t("settings.selectCountry", {}, { returnObjects: true })}
               </option>
-              {countries.map((c) => (
+              {countries.map(c => (
                 <option key={c.UlkeID} value={c.UlkeID}>
                   {c[countryKey]}
                 </option>
@@ -66,7 +66,7 @@ function Page() {
               className="h-12 w-full rounded-md border border-gray-300 bg-white px-4"
               disabled={loadingRegions}
               defaultValue="-1"
-              onChange={(e) => {
+              onChange={e => {
                 setValue("cityID", "-1", { shouldValidate: true });
                 onChange(e);
               }}
@@ -75,7 +75,7 @@ function Page() {
               <option disabled value="-1">
                 {t("settings.selectRegion", {}, { returnObjects: true })}
               </option>
-              {regions.map((r) => (
+              {regions.map(r => (
                 <option key={r.SehirID} value={r.SehirID}>
                   {r[regionKey]}
                 </option>
@@ -95,7 +95,7 @@ function Page() {
               className="h-12 w-full rounded-md border border-gray-300 bg-white px-4"
               disabled={loadingCities}
               defaultValue="-1"
-              onChange={(e) => {
+              onChange={e => {
                 onChange(e);
               }}
               {...props}
@@ -103,7 +103,7 @@ function Page() {
               <option disabled value="-1">
                 {t("settings.selectCity", {}, { returnObjects: true })}
               </option>
-              {cities.map((o) => (
+              {cities.map(o => (
                 <option key={o.IlceID} value={o.IlceID}>
                   {o[cityKey]}
                 </option>

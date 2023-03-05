@@ -134,9 +134,9 @@ export function SettingsStoreProvider({ children }: { children: ReactNode }) {
   };
 
   const onSubmit = async (values: SettingsForm) => {
-    const country = countries.find((c) => c.UlkeID === values.countryID);
-    const region = regions.find((r) => r.SehirID === values.regionID);
-    const city = cities.find((c) => c.IlceID === values.cityID);
+    const country = countries.find(c => c.UlkeID === values.countryID);
+    const region = regions.find(r => r.SehirID === values.regionID);
+    const city = cities.find(c => c.IlceID === values.cityID);
 
     setSettings({ country, region, city });
 

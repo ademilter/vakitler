@@ -1,6 +1,6 @@
 const siteName = "Namaz Vakitleri";
 const title = `${siteName}`;
-const description = "Namaz vakitlerini basit bir şekilde öğrenin.";
+const description = "Namaz vakitlerini kolay şekilde öğrenin.";
 const url = "https://vakitler.vercel.app";
 const locale = "tr-TR";
 
