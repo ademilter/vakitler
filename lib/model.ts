@@ -139,17 +139,17 @@ export class Times {
     return secondSplit(ms / 1000);
   }
 
-  get iconName(): string {
-    let key = this.time.now as string;
-
-    if (this.time.now === TimeNames.Yatsi) {
-      key = this.today.moonKey;
-
-      if (!this.isBeforeMidnight()) {
-        key = this.yesterday.moonKey;
-      }
-    }
-
-    return key;
-  }
+  // get iconName(): string {
+  //   let key = this.time.now as string;
+  //
+  //   if (this.time.now === TimeNames.Yatsi) {
+  //     key = this.today.moonKey;
+  //
+  //     if (!this.isBeforeMidnight()) {
+  //       key = this.yesterday.moonKey;
+  //     }
+  //   }
+  //
+  //   return key;
+  // }
 }

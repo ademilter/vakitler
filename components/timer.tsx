@@ -44,7 +44,7 @@ export default function Timer() {
       }}
       className="flex flex-col items-center"
     >
-      <Icon icon={times?.iconName as keyof typeof ICON_NAMES} size={32} />
+      {/*<Icon icon={times?.iconName as keyof typeof ICON_NAMES} size={32} />*/}
 
       <h2 className="text-4xl capitalize">
         {t(
