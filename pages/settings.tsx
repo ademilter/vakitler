@@ -7,7 +7,8 @@ import { CommonStoreContext } from "@/stores/common";
 
 function Page() {
   const { t, lang } = useTranslation("common");
-  const { handleSubmit, control, formState, setValue } = useFormContext();
+  const { handleSubmit, control, formState, setValue, register } =
+    useFormContext();
 
   const { countryKey, regionKey, cityKey } = useContext(CommonStoreContext);
 
@@ -36,6 +37,12 @@ function Page() {
               className="h-12 w-full rounded-md border border-gray-300 bg-white px-4"
               disabled={loadingCountries}
               defaultValue="-1"
+              {...register("countryID", {
+                required: true,
+                validate: {
+                  test: value => value !== "-1",
+                },
+              })}
               onChange={e => {
                 setValue("regionID", "-1", { shouldValidate: true });
                 setValue("cityID", "-1", { shouldValidate: true });
@@ -66,6 +73,12 @@ function Page() {
               className="h-12 w-full rounded-md border border-gray-300 bg-white px-4"
               disabled={loadingRegions}
               defaultValue="-1"
+              {...register("regionID", {
+                required: true,
+                validate: {
+                  test: value => value !== "-1",
+                },
+              })}
               onChange={e => {
                 setValue("cityID", "-1", { shouldValidate: true });
                 onChange(e);
@@ -95,6 +108,12 @@ function Page() {
               className="h-12 w-full rounded-md border border-gray-300 bg-white px-4"
               disabled={loadingCities}
               defaultValue="-1"
+              {...register("cityID", {
+                required: true,
+                validate: {
+                  test: value => value !== "-1",
+                },
+              })}
               onChange={e => {
                 onChange(e);
               }}
