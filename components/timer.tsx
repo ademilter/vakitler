@@ -10,20 +10,7 @@ import Icon, { ICON_NAMES } from "@/components/icon";
 export default function Timer() {
   const { t } = useTranslation("common");
 
-  const { times } = useContext(CommonStoreContext);
-  const [timer, setTimer] = useState<TypeTimer>([0, 0, 0]);
-
-  useInterval(
-    () => {
-      setTimer(times?.timer as TypeTimer);
-    },
-    times ? 1000 : null
-  );
-
-  useEffect(() => {
-    if (!times) return;
-    setTimer(times?.timer as TypeTimer);
-  }, [times]);
+  const { timer, times } = useContext(CommonStoreContext);
 
   return (
     <motion.div

@@ -1,38 +1,50 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
-import { DateTime } from "luxon";
+import React, { useCallback, useContext } from "react";
 import { CommonStoreContext } from "@/stores/common";
 
 export default function TimePicker() {
-  const { localTime, setLocalTime, fetchData } = useContext(CommonStoreContext);
-
-  const [time, setTime] = useState<string>(localTime.toFormat("HH:mm"));
-
-  useEffect(() => {
-    const rawSettings = localStorage.getItem("VAKITLER_SETTINGS");
-    const settings = JSON.parse(rawSettings ?? "{}");
-    if (settings.city.IlceID) fetchData(settings.city.IlceID);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [localTime]);
-
-  const onSetTime = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const value = event.target.value;
-      setTime(value);
-      const time = DateTime.fromFormat(value, "HH:mm");
-      setLocalTime(time);
-    },
-    [localTime, setLocalTime]
-  );
+  const { localTime, devLocalTime, setDevLocalTime, fetchData } =
+    useContext(CommonStoreContext);
 
   const onNowClick = useCallback(() => {
-    setTime(DateTime.local().toFormat("HH:mm"));
-    setLocalTime(DateTime.local());
-  }, [setLocalTime]);
+    setDevLocalTime([0, 0, 0]);
+  }, [setDevLocalTime]);
 
   return (
     <div className="fixed top-0 right-0 z-30 rounded p-4 shadow-lg">
       <div className="flex items-center gap-2">
-        <input type="time" value={time} onChange={onSetTime} />
+        <input
+          type="number"
+          className="w-10"
+          value={devLocalTime[0]}
+          onChange={e => {
+            const value = parseInt(e.target.value);
+            if (!isNaN(value)) {
+              setDevLocalTime([value, devLocalTime[1], devLocalTime[2]]);
+            }
+          }}
+        />
+        <input
+          type="number"
+          className="w-10"
+          value={devLocalTime[1]}
+          onChange={e => {
+            const value = parseInt(e.target.value);
+            if (!isNaN(value)) {
+              setDevLocalTime([devLocalTime[0], value, devLocalTime[2]]);
+            }
+          }}
+        />
+        <input
+          type="number"
+          className="w-10"
+          value={devLocalTime[2]}
+          onChange={e => {
+            const value = parseInt(e.target.value);
+            if (!isNaN(value)) {
+              setDevLocalTime([devLocalTime[0], devLocalTime[1], value]);
+            }
+          }}
+        />
         <button onClick={onNowClick}>Clear</button>
       </div>
     </div>

@@ -1,9 +1,10 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { Times } from "@/lib/model";
-import { ICity, ICountry, IRegion } from "@/lib/types";
+import { ICity, ICountry, IRegion, TypeTimer } from "@/lib/types";
 import { useRouter } from "next/router";
 import useTranslation from "next-translate/useTranslation";
 import { DateTime } from "luxon";
+import useInterval from "@/lib/use-interval";
 
 interface ICommonStore {
   appReady: boolean;
@@ -22,6 +23,9 @@ interface ICommonStore {
   cityKey: keyof ICity;
   localTime: DateTime;
   setLocalTime: (time: DateTime) => void;
+  devLocalTime: [number, number, number];
+  setDevLocalTime: (value: [number, number, number]) => void;
+  timer: TypeTimer;
 }
 
 export const CommonStoreContext = createContext<ICommonStore>({
@@ -37,18 +41,26 @@ export const CommonStoreContext = createContext<ICommonStore>({
   times: undefined,
   localTime: DateTime.local(),
   setLocalTime: () => {},
+  devLocalTime: [0, 0, 0],
+  setDevLocalTime: () => {},
   fetchData: () => Promise.resolve(),
   countryKey: "UlkeAdi",
   regionKey: "SehirAdi",
   cityKey: "IlceAdi",
+  timer: [0, 0, 0],
 });
 
 export function CommonStoreProvider({ children }: { children: ReactNode }) {
   const { t } = useTranslation("common");
   const router = useRouter();
+
   const [localTime, setLocalTime] = useState<ICommonStore["localTime"]>(
     DateTime.local()
   );
+  const [devLocalTime, setDevLocalTime] = useState<
+    ICommonStore["devLocalTime"]
+  >([0, 0, 0]);
+
   const [appReady, setAppReady] = useState<ICommonStore["appReady"]>(false);
   const [appLoading, setAppLoading] =
     useState<ICommonStore["appLoading"]>(false);
@@ -58,6 +70,8 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
     region: undefined,
     city: undefined,
   });
+
+  const [timer, setTimer] = useState<TypeTimer>([0, 0, 0]);
 
   const countryKey = t(
     "settings.countryKey",
@@ -120,8 +134,31 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
     initApp();
   }, []);
 
+  useInterval(
+    () => {
+      let localTime = DateTime.local();
+      const hasChange = devLocalTime.some(value => value !== 0);
+
+      if (hasChange) {
+        localTime = localTime.set({
+          hour: localTime.hour + devLocalTime[0],
+          minute: localTime.minute + devLocalTime[1],
+          second: localTime.second + devLocalTime[2],
+        });
+      }
+
+      setLocalTime(localTime);
+      times?.updateDateTime(localTime);
+    },
+    times ? 1000 : null
+  );
+
+  useEffect(() => {
+    if (!times) return;
+    setTimer(times?.timer() as TypeTimer);
+  }, [localTime, times]);
+
   // TODO: uygulama çalıştıktan sonra datanın ne kadar eski olduğuna bakıp güncellenmesini sağla
-  // bir defa istak atıp saklıyorum. 30 günlük veri geliyor
 
   return (
     <CommonStoreContext.Provider
@@ -132,12 +169,15 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
         times,
         localTime,
         setLocalTime,
+        devLocalTime,
+        setDevLocalTime,
         fetchData,
         settings,
         setSettings,
         countryKey,
         regionKey,
         cityKey,
+        timer,
       }}
     >
       {children}

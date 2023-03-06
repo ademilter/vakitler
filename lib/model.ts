@@ -46,6 +46,10 @@ export class Times {
     this.localTime = localTime;
   }
 
+  updateDateTime(datetime: DateTime): void {
+    this.localTime = datetime;
+  }
+
   get hasData(): boolean {
     return this.times.length > 0;
   }
@@ -120,7 +124,7 @@ export class Times {
     );
   }
 
-  get timer(): TypeTimer {
+  timer(): TypeTimer {
     let dateTime = DateTime.fromFormat(this.today[this.time.next], "HH:mm");
 
     if (this.time.now === TimeNames.Yatsi) {
