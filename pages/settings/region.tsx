@@ -42,7 +42,10 @@ export default function Country() {
     <Container className="py-10">
       {data.length > 0 && (
         <SettingsList
-          searchPlaceholder={t("settings.searchRegion")}
+          inputProps={{
+            placeholder: t("settings.searchRegion"),
+            name: "region",
+          }}
           onChange={id => {
             const region = data.find(o => o.SehirID === id);
             _setSettings({ ..._settings, region });

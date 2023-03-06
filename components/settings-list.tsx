@@ -4,7 +4,7 @@ import Fuse from "fuse.js";
 interface ISelect {
   onChange?: (value: string) => void;
   data?: { value: string; label: string }[];
-  searchPlaceholder?: string;
+  inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
 }
 
 const options = {
@@ -15,7 +15,7 @@ const options = {
 const SettingsList = ({
   onChange = () => {},
   data = [],
-  searchPlaceholder,
+  inputProps = {},
 }: ISelect) => {
   const [q, setQ] = useState<string>("");
 
@@ -30,8 +30,9 @@ const SettingsList = ({
       <div className="sticky top-0 -mx-4 bg-white p-4">
         <input
           type="text"
+          autoFocus
           className="h-10 w-full rounded-lg border px-2"
-          placeholder={searchPlaceholder}
+          {...inputProps}
           value={q}
           onChange={e => setQ(e.target.value)}
         />

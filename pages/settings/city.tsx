@@ -42,7 +42,10 @@ export default function Country() {
     <Container className="py-10">
       {data.length > 0 && (
         <SettingsList
-          searchPlaceholder={t("settings.searchCity")}
+          inputProps={{
+            placeholder: t("settings.searchCity"),
+            name: "city",
+          }}
           onChange={async id => {
             const city = data.find(o => o.IlceID === id) as ICity;
 
