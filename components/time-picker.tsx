@@ -2,7 +2,7 @@ import React, { useCallback, useContext } from "react";
 import { CommonStoreContext } from "@/stores/common";
 
 export default function TimePicker() {
-  const { localTime, devLocalTime, setDevLocalTime, fetchData } =
+  const { devLocalTime, setDevLocalTime, fetchData } =
     useContext(CommonStoreContext);
 
   const onNowClick = useCallback(() => {
@@ -10,11 +10,11 @@ export default function TimePicker() {
   }, [setDevLocalTime]);
 
   return (
-    <div className="fixed top-0 right-0 z-30 rounded p-4 shadow-lg">
-      <div className="flex items-center gap-2">
+    <div className="fixed bottom-0 z-30 grid w-full place-items-center rounded shadow-lg">
+      <div className="flex items-center gap-2 rounded-xl bg-white px-3 py-2">
         <input
           type="number"
-          className="w-10"
+          className="h-6 w-12 rounded bg-zinc-100 pl-2"
           value={devLocalTime[0]}
           onChange={e => {
             const value = parseInt(e.target.value);
@@ -25,7 +25,7 @@ export default function TimePicker() {
         />
         <input
           type="number"
-          className="w-10"
+          className="h-6 w-12 rounded bg-zinc-100 pl-2"
           value={devLocalTime[1]}
           onChange={e => {
             const value = parseInt(e.target.value);
@@ -36,7 +36,7 @@ export default function TimePicker() {
         />
         <input
           type="number"
-          className="w-10"
+          className="h-6 w-12 rounded bg-zinc-100 pl-2"
           value={devLocalTime[2]}
           onChange={e => {
             const value = parseInt(e.target.value);
