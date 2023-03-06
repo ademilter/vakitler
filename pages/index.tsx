@@ -6,6 +6,18 @@ import { TimeNames } from "@/lib/types";
 import Location from "@/components/location";
 import Timer from "@/components/timer";
 import Time from "@/components/time";
+import TimePicker from "@/components/time-picker";
+
+const colors = {
+  [TimeNames.Imsak]: "text-sky-900",
+  [TimeNames.Gunes]: "text-orange-900",
+  [TimeNames.Ogle]: "text-yellow-900",
+  [TimeNames.Ikindi]: "text-amber-900",
+  [TimeNames.Aksam]: "text-blue-900",
+  [TimeNames.Yatsi]: "text-indigo-900",
+};
+
+const shouldShowTimePicker = process.env.NODE_ENV !== "production";
 
 export default function Index() {
   const { times } = useContext(CommonStoreContext);
@@ -19,18 +31,15 @@ export default function Index() {
   }, [times]);
 
   if (!times) return null;
+  const selectedColor = now ? colors[now] : "";
 
   return (
     <motion.div initial={false} animate={start ? "open" : "closed"}>
+      {shouldShowTimePicker && <TimePicker />}
       <div
         className={cx(
           "grid h-screen grid-rows-[minmax(auto,_1fr)_minmax(auto,_520px)]",
-          now === TimeNames.Imsak && "text-sky-900",
-          now === TimeNames.Gunes && "text-orange-900",
-          now === TimeNames.Ogle && "text-yellow-900",
-          now === TimeNames.Ikindi && "text-amber-900",
-          now === TimeNames.Aksam && "text-blue-900",
-          now === TimeNames.Yatsi && "text-indigo-900"
+          selectedColor
         )}
       >
         <Location />

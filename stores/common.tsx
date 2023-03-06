@@ -3,6 +3,7 @@ import { Times } from "@/lib/model";
 import { ICity, ICountry, IRegion } from "@/lib/types";
 import { useRouter } from "next/router";
 import useTranslation from "next-translate/useTranslation";
+import { DateTime } from "luxon";
 
 interface ICommonStore {
   appReady: boolean;
@@ -19,6 +20,8 @@ interface ICommonStore {
   countryKey: keyof ICountry;
   regionKey: keyof IRegion;
   cityKey: keyof ICity;
+  localTime: DateTime;
+  setLocalTime: (time: DateTime) => void;
 }
 
 export const CommonStoreContext = createContext<ICommonStore>({
@@ -32,6 +35,8 @@ export const CommonStoreContext = createContext<ICommonStore>({
   },
   setSettings: () => {},
   times: undefined,
+  localTime: DateTime.local(),
+  setLocalTime: () => {},
   fetchData: () => Promise.resolve(),
   countryKey: "UlkeAdi",
   regionKey: "SehirAdi",
@@ -41,7 +46,9 @@ export const CommonStoreContext = createContext<ICommonStore>({
 export function CommonStoreProvider({ children }: { children: ReactNode }) {
   const { t } = useTranslation("common");
   const router = useRouter();
-
+  const [localTime, setLocalTime] = useState<ICommonStore["localTime"]>(
+    DateTime.local()
+  );
   const [appReady, setAppReady] = useState<ICommonStore["appReady"]>(false);
   const [appLoading, setAppLoading] =
     useState<ICommonStore["appLoading"]>(false);
@@ -85,7 +92,7 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
 
       localStorage.setItem("VAKITLER_DATA", JSON.stringify(data));
 
-      const times = new Times(data);
+      const times = new Times(data, localTime);
       setTimes(times);
     } catch (e) {
       // TODO: global bir error mesaj göster
@@ -101,7 +108,7 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
 
     if (settings && data) {
       setSettings(JSON.parse(settings));
-      setTimes(new Times(JSON.parse(data)));
+      setTimes(new Times(JSON.parse(data), localTime));
     } else {
       router.push("/settings");
     }
@@ -123,6 +130,8 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
         appLoading,
         setAppLoading,
         times,
+        localTime,
+        setLocalTime,
         fetchData,
         settings,
         setSettings,

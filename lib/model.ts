@@ -40,9 +40,14 @@ export class Time {
 
 export class Times {
   public times: Time[];
+  public localTime: DateTime;
 
-  constructor(data: ITime[] = []) {
+  constructor(
+    data: ITime[] = [],
+    localTime: DateTime | undefined = DateTime.local()
+  ) {
     this.times = data.map(day => new Time(day));
+    this.localTime = localTime;
   }
 
   get hasData(): boolean {
@@ -51,21 +56,21 @@ export class Times {
 
   get today(): Time {
     return this.times.find(day => {
-      const d = DateTime.local().toFormat("dd.MM.yyyy");
+      const d = this.localTime.toFormat("dd.MM.yyyy");
       return day.MiladiTarihKisa === d;
     }) as Time;
   }
 
   get tomorrow(): Time {
     return this.times.find(day => {
-      const d = DateTime.local().plus({ days: 1 }).toFormat("dd.MM.yyyy");
+      const d = this.localTime.plus({ days: 1 }).toFormat("dd.MM.yyyy");
       return day.MiladiTarihKisa === d;
     }) as Time;
   }
 
   get yesterday(): Time {
     return this.times.find(day => {
-      const d = DateTime.local().minus({ days: 1 }).toFormat("dd.MM.yyyy");
+      const d = this.localTime.minus({ days: 1 }).toFormat("dd.MM.yyyy");
       return day.MiladiTarihKisa === d;
     }) as Time;
   }
@@ -87,7 +92,7 @@ export class Times {
       next: TimeNames.Imsak,
     };
 
-    const datetime = DateTime.local();
+    const datetime = this.localTime;
 
     if (Interval.fromDateTimes(Imsak, Gunes).contains(datetime)) {
       obj.now = TimeNames.Imsak;
@@ -115,8 +120,7 @@ export class Times {
 
   isBeforeMidnight(): boolean {
     return (
-      DateTime.local() >
-      DateTime.fromFormat(this.today[TimeNames.Imsak], "HH:mm")
+      this.localTime > DateTime.fromFormat(this.today[TimeNames.Imsak], "HH:mm")
     );
   }
 
@@ -134,7 +138,7 @@ export class Times {
       }
     }
 
-    const ms = dateTime.diffNow().toMillis();
+    const ms = dateTime.diff(this.localTime).toMillis();
 
     return secondSplit(ms / 1000);
   }
