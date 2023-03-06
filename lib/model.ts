@@ -10,10 +10,8 @@ export class Time {
   public [TimeNames.Ikindi]: string;
   public [TimeNames.Aksam]: string;
   public [TimeNames.Yatsi]: string;
-  public MiladiTarihUzunIso8601: string;
   public MiladiTarihKisa: string;
   public HicriTarihUzun: string;
-  public KibleSaati: string;
   public AyinSekliURL: string;
 
   constructor(props: ITime) {
@@ -23,10 +21,8 @@ export class Time {
     this[TimeNames.Ikindi] = props[TimeNames.Ikindi];
     this[TimeNames.Aksam] = props[TimeNames.Aksam];
     this[TimeNames.Yatsi] = props[TimeNames.Yatsi];
-    this.MiladiTarihUzunIso8601 = props.MiladiTarihUzunIso8601;
     this.MiladiTarihKisa = props.MiladiTarihKisa;
     this.HicriTarihUzun = props.HicriTarihUzun;
-    this.KibleSaati = props.KibleSaati;
     this.AyinSekliURL = props.AyinSekliURL;
   }
 
