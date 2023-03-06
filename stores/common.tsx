@@ -7,47 +7,53 @@ import { DateTime } from "luxon";
 import useInterval from "@/lib/use-interval";
 
 interface ICommonStore {
-  appReady: boolean;
   appLoading: boolean;
-  setAppLoading: (state: boolean) => void;
+  _settings: {
+    country: undefined | ICountry;
+    region: undefined | IRegion;
+    city: undefined | ICity;
+  };
+  _setSettings: (value: ICommonStore["_settings"]) => void;
   settings: {
     country: undefined | ICountry;
     region: undefined | IRegion;
     city: undefined | ICity;
   };
-  setSettings: (settings: ICommonStore["settings"]) => void;
+  changeSettings: (value: ICommonStore["_settings"]) => Promise<void>;
   times: undefined | Times;
-  fetchData: (cityID: string) => Promise<void>;
-  countryKey: keyof ICountry;
-  regionKey: keyof IRegion;
-  cityKey: keyof ICity;
   localTime: DateTime;
-  setLocalTime: (time: DateTime) => void;
   devLocalTime: [number, number, number];
   setDevLocalTime: (value: [number, number, number]) => void;
   timer: TypeTimer;
+  fetchData: (cityId: string) => Promise<void>;
+  countryKey: keyof ICountry;
+  regionKey: keyof IRegion;
+  cityKey: keyof ICity;
 }
 
 export const CommonStoreContext = createContext<ICommonStore>({
-  appReady: false,
   appLoading: false,
-  setAppLoading: () => {},
+  _settings: {
+    country: undefined,
+    region: undefined,
+    city: undefined,
+  },
+  _setSettings: () => {},
   settings: {
     country: undefined,
     region: undefined,
     city: undefined,
   },
-  setSettings: () => {},
+  changeSettings: () => Promise.resolve(),
   times: undefined,
   localTime: DateTime.local(),
-  setLocalTime: () => {},
   devLocalTime: [0, 0, 0],
   setDevLocalTime: () => {},
+  timer: [0, 0, 0],
   fetchData: () => Promise.resolve(),
   countryKey: "UlkeAdi",
   regionKey: "SehirAdi",
   cityKey: "IlceAdi",
-  timer: [0, 0, 0],
 });
 
 export function CommonStoreProvider({ children }: { children: ReactNode }) {
@@ -61,11 +67,15 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
     ICommonStore["devLocalTime"]
   >([0, 0, 0]);
 
-  const [appReady, setAppReady] = useState<ICommonStore["appReady"]>(false);
   const [appLoading, setAppLoading] =
     useState<ICommonStore["appLoading"]>(false);
   const [times, setTimes] = useState<ICommonStore["times"]>();
   const [settings, setSettings] = useState<ICommonStore["settings"]>({
+    country: undefined,
+    region: undefined,
+    city: undefined,
+  });
+  const [_settings, _setSettings] = useState<ICommonStore["settings"]>({
     country: undefined,
     region: undefined,
     city: undefined,
@@ -97,6 +107,12 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
     }
   ) as keyof ICity;
 
+  const changeSettings = async (settings: ICommonStore["_settings"]) => {
+    setSettings(settings);
+    localStorage.setItem("VAKITLER_SETTINGS", JSON.stringify(settings));
+    await fetchData(settings.city?.IlceID as string);
+  };
+
   const fetchData = async (cityID: string) => {
     try {
       setAppLoading(true);
@@ -124,10 +140,8 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
       setSettings(JSON.parse(settings));
       setTimes(new Times(JSON.parse(data), localTime));
     } else {
-      router.push("/settings");
+      router.push("/settings/country");
     }
-
-    setAppReady(true);
   };
 
   useEffect(() => {
@@ -163,21 +177,20 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
   return (
     <CommonStoreContext.Provider
       value={{
-        appReady,
         appLoading,
-        setAppLoading,
         times,
         localTime,
-        setLocalTime,
         devLocalTime,
         setDevLocalTime,
-        fetchData,
         settings,
-        setSettings,
+        changeSettings,
+        _settings,
+        _setSettings,
+        timer,
+        fetchData,
         countryKey,
         regionKey,
         cityKey,
-        timer,
       }}
     >
       {children}

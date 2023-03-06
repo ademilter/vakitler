@@ -13,6 +13,10 @@
     "hour": "<0>{{hour}}</0> saat <0>{{minute}}</0> dakika"
   },
   "settings": {
+    "currentLocation": "Mevcut konum",
+    "searchCountry": "Ülke ara",
+    "searchRegion": "Şehir ara",
+    "searchCity": "İlçe ara",
     "countryKey": "UlkeAdi",
     "regionKey": "SehirAdi",
     "cityKey": "IlceAdi",

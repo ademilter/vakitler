@@ -146,7 +146,10 @@ export class Times {
   get iconName(): string {
     let key = this.time.now as string;
 
-    if (this.time.now === TimeNames.Yatsi) {
+    if (this.time.now === TimeNames.Aksam) {
+      key = this.today.moonKey;
+    } //
+    else if (this.time.now === TimeNames.Yatsi) {
       key = this.today.moonKey;
 
       if (!this.isBeforeMidnight()) {
