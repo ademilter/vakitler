@@ -30,6 +30,9 @@ function Page() {
           control={control}
           rules={{
             required: "This is required",
+            validate: {
+              test: value => value !== "-1",
+            },
           }}
           render={({ field: { onChange, ...props } }) => (
             <select
@@ -60,6 +63,9 @@ function Page() {
           control={control}
           rules={{
             required: "This is required",
+            validate: {
+              test: value => value !== "-1",
+            },
           }}
           render={({ field: { onChange, ...props } }) => (
             <select
@@ -89,6 +95,9 @@ function Page() {
           control={control}
           rules={{
             required: "This is required",
+            validate: {
+              test: value => value !== "-1",
+            },
           }}
           render={({ field: { onChange, ...props } }) => (
             <select
