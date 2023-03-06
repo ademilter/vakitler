@@ -4,6 +4,7 @@ import useTranslation from "next-translate/useTranslation";
 import { CommonStoreContext } from "@/stores/common";
 import Link from "next/link";
 import setLanguage from "next-translate/setLanguage";
+import { clsx } from "clsx";
 
 export default function Settings() {
   const { t, lang } = useTranslation("common");
@@ -55,8 +56,13 @@ export default function Settings() {
         </svg>
       </Link>
 
-      <div className="grid h-12 grid-cols-2 rounded-lg border border-gray-300">
-        <label className="flex cursor-pointer items-center gap-2 px-4">
+      <div className="grid h-12 grid-cols-2 rounded-lg border border-gray-300 bg-zinc-100">
+        <label
+          className={clsx(
+            "flex cursor-pointer items-center gap-2 rounded-l-lg px-4",
+            lang === "tr" && "bg-white"
+          )}
+        >
           <input
             type="radio"
             name="lang"
@@ -66,7 +72,12 @@ export default function Settings() {
           />
           {t("settings.tr", {}, { returnObjects: true })}
         </label>
-        <label className="flex cursor-pointer items-center gap-2 border-l px-4">
+        <label
+          className={clsx(
+            "flex cursor-pointer items-center gap-2 rounded-r-lg border-l px-4",
+            lang === "en" && "bg-white"
+          )}
+        >
           <input
             type="radio"
             name="lang"
