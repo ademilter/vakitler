@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import useTranslation from "next-translate/useTranslation";
 import { DateTime } from "luxon";
 import useInterval from "@/lib/use-interval";
+import { LOCAL_KEYS } from "@/lib/const";
 
 interface ICommonStore {
   appLoading: boolean;
@@ -109,7 +110,7 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
 
   const changeSettings = async (settings: ICommonStore["_settings"]) => {
     setSettings(settings);
-    localStorage.setItem("VAKITLER_SETTINGS", JSON.stringify(settings));
+    localStorage.setItem(LOCAL_KEYS.Settings, JSON.stringify(settings));
     await fetchData(settings.city?.IlceID as string);
   };
 
@@ -120,7 +121,7 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
       const res = await fetch(url);
       const data = await res.json();
 
-      localStorage.setItem("VAKITLER_DATA", JSON.stringify(data));
+      localStorage.setItem(LOCAL_KEYS.Data, JSON.stringify(data));
 
       const times = new Times(data, localTime);
       setTimes(times);
@@ -133,8 +134,8 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
   };
 
   const initApp = () => {
-    const settings = localStorage.getItem("VAKITLER_SETTINGS");
-    const data = localStorage.getItem("VAKITLER_DATA");
+    const settings = localStorage.getItem(LOCAL_KEYS.Settings);
+    const data = localStorage.getItem(LOCAL_KEYS.Data);
 
     if (settings && data) {
       setSettings(JSON.parse(settings));
