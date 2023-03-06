@@ -1,9 +1,8 @@
-import { TimeNames, TypeTimer } from "@/lib/types";
+import { TimeNames } from "@/lib/types";
 import { useContext, useEffect, useState } from "react";
 import { CommonStoreContext } from "@/stores/common";
 import Trans from "next-translate/Trans";
 import useTranslation from "next-translate/useTranslation";
-import useInterval from "@/lib/use-interval";
 import { motion } from "framer-motion";
 import Icon, { ICON_NAMES } from "@/components/icon";
 
@@ -11,6 +10,16 @@ export default function Timer() {
   const { t } = useTranslation("common");
 
   const { timer, times } = useContext(CommonStoreContext);
+
+  const [showDesc, setShowDesc] = useState(true);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setShowDesc(false);
+    }, 5000);
+
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <motion.div
@@ -43,9 +52,25 @@ export default function Timer() {
         )}
       </h2>
 
-      <div className="relative z-10 mt-3 px-4 py-2 text-xl">
+      <div className="relative z-10 mt-3 px-4 py-2 text-center text-xl">
         <span className="absolute inset-0 rounded-2xl bg-current opacity-10" />
-        <span className="relative z-10">
+
+        <motion.span
+          animate={showDesc ? "show" : "hide"}
+          className="flex text-sm opacity-80"
+          variants={{
+            show: { height: "auto" },
+            hide: { height: 0, fontSize: 0 },
+          }}
+        >
+          <Trans
+            i18nKey={`timer.reminder`}
+            values={{ time: times?.time.next as TimeNames }}
+            ns={"common"}
+          />
+        </motion.span>
+
+        <div className="relative z-10">
           {timer[0] === 0 && timer[1] === 0 ? (
             <Trans
               i18nKey={`timer.second`}
@@ -71,7 +96,7 @@ export default function Timer() {
               ns={"common"}
             />
           )}
-        </span>
+        </div>
       </div>
     </motion.div>
   );
