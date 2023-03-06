@@ -23,7 +23,7 @@ export default async function handler(req: NextRequest) {
     return new Response(JSON.stringify(data), {
       status: 200,
       headers: {
-        "Cache-Control": "s-maxage=604800", // 7 day (86400 * 7)
+        "Cache-Control": "s-maxage=172800", // 2 days
       },
     });
   } catch (error) {
