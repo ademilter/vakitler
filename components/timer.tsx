@@ -31,7 +31,7 @@ export default function Timer() {
       }}
       className="flex flex-col items-center"
     >
-      {/*<Icon icon={times?.iconName as keyof typeof ICON_NAMES} size={32} />*/}
+      <Icon icon={times?.iconName as keyof typeof ICON_NAMES} size={32} />
 
       <h2 className="text-4xl capitalize">
         {t(
@@ -43,7 +43,7 @@ export default function Timer() {
         )}
       </h2>
 
-      <div className="relative z-10 mt-4 px-4 py-2 text-xl">
+      <div className="relative z-10 mt-3 px-4 py-2 text-xl">
         <span className="absolute inset-0 rounded-2xl bg-current opacity-10" />
         <span className="relative z-10">
           {timer[0] === 0 && timer[1] === 0 ? (
