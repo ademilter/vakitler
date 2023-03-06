@@ -33,7 +33,7 @@ export default function Timer() {
     >
       <Icon icon={times?.iconName as keyof typeof ICON_NAMES} size={32} />
 
-      <h2 className="text-4xl capitalize">
+      <h2 className="mt-2 text-4xl capitalize">
         {t(
           `times.${times?.time.now as TimeNames}`,
           {},
