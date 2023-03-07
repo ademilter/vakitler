@@ -21,7 +21,7 @@ export default function TimeSummaryTimer() {
         <Trans
           i18nKey="timerReminder"
           values={{
-            time: t(`times${times?.time.now as TimeNames}`),
+            time: t(`times${times?.time.next as TimeNames}`),
           }}
           ns={"common"}
         />
