@@ -52,7 +52,7 @@ export default function Timer() {
 
       <h2 className="mt-2 text-4xl capitalize">{nowName}</h2>
 
-      <div className="relative z-10 mt-3 px-4 py-2 text-center text-xl">
+      <div className="relative z-10 mt-3 flex flex-col items-center px-4 py-2 text-xl">
         <span className="absolute inset-0 rounded-2xl bg-current opacity-10" />
 
         <motion.span

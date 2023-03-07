@@ -44,11 +44,14 @@ export default function Time({
         now === TimeNames.Yatsi && "bg-indigo-300",
         `bg-opacity-${(index + 1) * 10}`,
         // iphone bottom handle
-        time === TimeNames.Yatsi && "pb-10"
+        time === TimeNames.Yatsi && "pb-8 md:pb-14"
       )}
     >
       <Container className={"flex h-full items-center px-2 py-2"}>
-        <div className="relative flex h-full w-full items-center justify-between px-6 py-3 text-lg md:text-xl">
+        <div
+          className="relative flex h-full w-full items-center justify-between
+        px-6 py-3 text-lg md:text-xl"
+        >
           {isTimeActive && (
             <motion.span
               layoutId="border"
