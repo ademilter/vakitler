@@ -17,6 +17,7 @@
     "next": "^13.2.1",
     "next-translate": "^2.0.2",
     "react": "^18.2.0",
+    "react-div-100vh": "^0.7.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.2"
   },

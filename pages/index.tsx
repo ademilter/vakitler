@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import Div100vh from "react-div-100vh";
 import { CommonStoreContext } from "@/stores/common";
 import { cx } from "@/lib/utils";
 import { motion } from "framer-motion";
@@ -36,22 +37,32 @@ export default function Index() {
   return (
     <motion.div initial={false} animate={start ? "open" : "closed"}>
       {shouldShowTimePicker && <TimePicker />}
-      <div
+
+      <Div100vh
         className={cx(
-          "grid h-screen grid-rows-[minmax(auto,_1fr)_minmax(auto,_520px)]",
+          "grid h-full grid-rows-[minmax(auto,_1fr)_minmax(auto,_520px)]",
           selectedColor
         )}
       >
+        <style jsx global>
+          {`
+            html,
+            body {
+              overflow: hidden;
+            }
+          `}
+        </style>
+
         <Location />
 
         {/* TIMER */}
-        <div className="flex items-center justify-center pb-12 pt-16">
+        <div className="flex items-center justify-center pb-12 pt-14">
           <Timer />
         </div>
 
         {/* TIMES */}
         <motion.div
-          className="grid grow"
+          className="grid h-full"
           variants={{
             open: {
               transition: {
@@ -66,7 +77,7 @@ export default function Index() {
             return <Time key={key} index={index} time={key as TimeNames} />;
           })}
         </motion.div>
-      </div>
+      </Div100vh>
     </motion.div>
   );
 }
