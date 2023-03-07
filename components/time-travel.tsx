@@ -1,12 +1,16 @@
 import React, { useCallback, useContext } from "react";
 import { CommonStoreContext } from "@/stores/common";
 
+const shouldShowTimePicker = process.env.NODE_ENV !== "production";
+
 export default function TimeTravel() {
   const { devLocalTime, setDevLocalTime } = useContext(CommonStoreContext);
 
   const onNowClick = useCallback(() => {
     setDevLocalTime([0, 0, 0]);
   }, [setDevLocalTime]);
+
+  if (!shouldShowTimePicker) return null;
 
   return (
     <div className="fixed bottom-0 right-0 z-30">

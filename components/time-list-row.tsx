@@ -39,7 +39,7 @@ export default function TimeListRow({
         now === TimeNames.Imsak && "bg-sky-300",
         now === TimeNames.Gunes && "bg-orange-300",
         now === TimeNames.Ogle && "bg-yellow-300",
-        now === TimeNames.Ikindi && "bg-amber-300",
+        now === TimeNames.Ikindi && "bg-rose-300",
         now === TimeNames.Aksam && "bg-blue-300",
         now === TimeNames.Yatsi && "bg-indigo-300",
         `bg-opacity-${(index + 1) * 10}`,

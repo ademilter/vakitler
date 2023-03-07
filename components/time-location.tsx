@@ -13,8 +13,8 @@ export default function TimeLocation() {
   const country = settings.country && settings.country[countryKey];
 
   return (
-    <div className="fixed inset-x-0 top-0 z-20 grid place-items-center p-2">
-      <Link href="/settings" className="rounded-full bg-white">
+    <div className="absolute inset-x-0 top-0 z-20 grid place-items-center">
+      <Link href="/settings">
         <div className="flex items-center gap-1 px-3 py-1 text-sm opacity-80">
           <span className="capitalize">
             {city?.toLocaleLowerCase(lang).slice(0, 12)}

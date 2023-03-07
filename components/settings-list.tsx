@@ -23,7 +23,9 @@ const SettingsList = ({
 }: ISelect) => {
   const [q, setQ] = useState<string>("");
 
-  const fuse = new Fuse(data, options);
+  const fuse = useMemo(() => {
+    return new Fuse(data, options);
+  }, [data]);
 
   const pushFirstData = useMemo(() => {
     return pushFirst
@@ -33,7 +35,7 @@ const SettingsList = ({
 
   const results = useMemo(() => {
     return q ? fuse.search(q).map(o => o.item) : [...pushFirstData, ...data];
-  }, [q, data, pushFirstData]);
+  }, [fuse, q, data, pushFirstData]);
 
   return (
     <div className="">

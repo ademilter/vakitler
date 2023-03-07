@@ -14,7 +14,7 @@ export default function TimeSummaryTimer() {
   );
 
   return (
-    <div className="relative z-10 flex flex-col items-center px-5 py-2 text-xl">
+    <div className="relative z-10 flex flex-col items-center px-6 py-2 text-xl">
       <span className="absolute inset-0 rounded-2xl bg-current opacity-10" />
 
       <span className="flex text-sm opacity-80">
