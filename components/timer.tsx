@@ -13,6 +13,14 @@ export default function Timer() {
 
   const [showDesc, setShowDesc] = useState(true);
 
+  const nowName = t(
+    `times.${times?.time.now as TimeNames}`,
+    {},
+    {
+      returnObjects: true,
+    }
+  );
+
   useEffect(() => {
     const timeout = setTimeout(() => {
       setShowDesc(false);
@@ -42,15 +50,7 @@ export default function Timer() {
     >
       <Icon icon={times?.iconName as keyof typeof ICON_NAMES} size={32} />
 
-      <h2 className="mt-2 text-4xl capitalize">
-        {t(
-          `times.${times?.time.now as TimeNames}`,
-          {},
-          {
-            returnObjects: true,
-          }
-        )}
-      </h2>
+      <h2 className="mt-2 text-4xl capitalize">{nowName}</h2>
 
       <div className="relative z-10 mt-3 px-4 py-2 text-center text-xl">
         <span className="absolute inset-0 rounded-2xl bg-current opacity-10" />
@@ -65,7 +65,9 @@ export default function Timer() {
         >
           <Trans
             i18nKey={`timer.reminder`}
-            values={{ time: times?.time.next as TimeNames }}
+            values={{
+              time: nowName,
+            }}
             ns={"common"}
           />
         </motion.span>
