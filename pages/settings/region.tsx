@@ -46,6 +46,7 @@ export default function Country() {
             placeholder: t("settings.searchRegion"),
             name: "region",
           }}
+          pushFirst={["539", "506"]}
           onChange={id => {
             const region = data.find(o => o.SehirID === id);
             _setSettings({ ..._settings, region });
