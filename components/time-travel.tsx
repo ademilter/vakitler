@@ -1,9 +1,8 @@
 import React, { useCallback, useContext } from "react";
 import { CommonStoreContext } from "@/stores/common";
 
-export default function TimePicker() {
-  const { devLocalTime, setDevLocalTime, fetchData } =
-    useContext(CommonStoreContext);
+export default function TimeTravel() {
+  const { devLocalTime, setDevLocalTime } = useContext(CommonStoreContext);
 
   const onNowClick = useCallback(() => {
     setDevLocalTime([0, 0, 0]);

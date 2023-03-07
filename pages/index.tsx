@@ -4,10 +4,10 @@ import { CommonStoreContext } from "@/stores/common";
 import { cx } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { TimeNames } from "@/lib/types";
-import Location from "@/components/location";
-import Timer from "@/components/timer";
-import Time from "@/components/time";
-import TimePicker from "@/components/time-picker";
+import TimeLocation from "@/components/time-location";
+import TimeSummary from "@/components/time-summary";
+import TimeList from "@/components/time-list";
+import TimeTravel from "@/components/time-travel";
 
 const colors = {
   [TimeNames.Imsak]: "text-sky-900",
@@ -36,48 +36,28 @@ export default function Index() {
 
   return (
     <motion.div initial={false} animate={start ? "open" : "closed"}>
-      {shouldShowTimePicker && <TimePicker />}
+      <style jsx global>
+        {`
+          html,
+          body {
+            overflow: hidden;
+          }
+        `}
+      </style>
 
       <Div100vh
         className={cx(
-          "grid h-full grid-rows-[minmax(auto,_1fr)_minmax(auto,_520px)]",
+          "h-full select-none",
+          "grid grid-rows-[minmax(auto,_1fr)_minmax(auto,_520px)]",
           selectedColor
         )}
       >
-        <style jsx global>
-          {`
-            html,
-            body {
-              overflow: hidden;
-            }
-          `}
-        </style>
-
-        <Location />
-
-        {/* TIMER */}
-        <div className="flex items-center justify-center pb-12 pt-14">
-          <Timer />
-        </div>
-
-        {/* TIMES */}
-        <motion.div
-          className="grid h-full"
-          variants={{
-            open: {
-              transition: {
-                staggerChildren: 0.05,
-                delayChildren: 0.05,
-                staggerDirection: -1,
-              },
-            },
-          }}
-        >
-          {Object.keys(TimeNames).map((key, index) => {
-            return <Time key={key} index={index} time={key as TimeNames} />;
-          })}
-        </motion.div>
+        <TimeLocation />
+        <TimeSummary />
+        <TimeList />
       </Div100vh>
+
+      {shouldShowTimePicker && <TimeTravel />}
     </motion.div>
   );
 }

@@ -43,7 +43,7 @@ export default function Country() {
       {data.length > 0 && (
         <SettingsList
           inputProps={{
-            placeholder: t("settings.searchCity"),
+            placeholder: t("settingsSearchCity"),
             name: "city",
           }}
           onChange={async id => {

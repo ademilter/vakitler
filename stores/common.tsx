@@ -85,7 +85,7 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
   const [timer, setTimer] = useState<TypeTimer>([0, 0, 0]);
 
   const countryKey = t(
-    "settings.countryKey",
+    "settingsCountryKey",
     {},
     {
       returnObjects: true,
@@ -93,7 +93,7 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
   ) as keyof ICountry;
 
   const regionKey = t(
-    "settings.regionKey",
+    "settingsRegionKey",
     {},
     {
       returnObjects: true,
@@ -101,7 +101,7 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
   ) as keyof IRegion;
 
   const cityKey = t(
-    "settings.cityKey",
+    "settingsCityKey",
     {},
     {
       returnObjects: true,

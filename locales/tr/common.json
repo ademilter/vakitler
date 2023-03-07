@@ -1,32 +1,26 @@
 {
-  "times": {
-    "Imsak": "İmsak",
-    "Gunes": "Güneş",
-    "Ogle": "Öğle",
-    "Ikindi": "İkindi",
-    "Aksam": "Akşam",
-    "Yatsi": "Yatsı"
-  },
-  "timer": {
-    "reminder": "{{time}} vaktine kalan süre",
-    "second": "<0>{{second}}</0> saniye",
-    "minute": "<0>{{minute}}</0> dakika",
-    "hour": "<0>{{hour}}</0> saat <0>{{minute}}</0> dakika"
-  },
-  "settings": {
-    "currentLocation": "Mevcut konum",
-    "searchCountry": "Ülke ara",
-    "searchRegion": "Şehir ara",
-    "searchCity": "İlçe ara",
-    "countryKey": "UlkeAdi",
-    "regionKey": "SehirAdi",
-    "cityKey": "IlceAdi",
-    "selectCountry": "Bir ülke seçin",
-    "selectRegion": "Bir şehir seçin",
-    "selectCity": "Bir ilçe seçin",
-    "tr": "Türkçe",
-    "en": "English",
-    "save": "Kaydet",
-    "cancel": "İptal"
-  }
+  "timesImsak": "İmsak",
+  "timesGunes": "Güneş",
+  "timesOgle": "Öğle",
+  "timesIkindi": "İkindi",
+  "timesAksam": "Akşam",
+  "timesYatsi": "Yatsı",
+  "timerReminder": "{{time}} vaktine kalan",
+  "timerSecond": "<0>{{second}}</0> saniye",
+  "timerMinute": "<0>{{minute}}</0> dakika",
+  "timerHour": "<0>{{hour}}</0> saat <0>{{minute}}</0> dakika",
+  "settingsCurrentLocation": "Mevcut konum",
+  "settingsSearchCountry": "Ülke ara",
+  "settingsSearchRegion": "Şehir ara",
+  "settingsSearchCity": "İlçe ara",
+  "settingsCountryKey": "UlkeAdi",
+  "settingsRegionKey": "SehirAdi",
+  "settingsCityKey": "IlceAdi",
+  "settingsSelectCountry": "Bir ülke seçin",
+  "settingsSelectRegion": "Bir şehir seçin",
+  "settingsSelectCity": "Bir ilçe seçin",
+  "settingsTr": "Türkçe",
+  "settingsEn": "English",
+  "settingsSave": "Kaydet",
+  "settingsCancel": "İptal"
 }

@@ -25,13 +25,6 @@ export default function Country() {
       const res = await fetch(url.toString());
       const data = await res.json();
 
-      // const turkey = data.find((c: ICountry) => c.UlkeID === "2");
-      // const azerbaycan = data.find((c: ICountry) => c.UlkeID === "5");
-      // const germany = data.find((c: ICountry) => c.UlkeID === "13");
-      // const netherlands = data.find((c: ICountry) => c.UlkeID === "4");
-      // const england = data.find((c: ICountry) => c.UlkeID === "15");
-      // const france = data.find((c: ICountry) => c.UlkeID === "21");
-
       setData(data);
     } catch (error) {
       console.log(error);
@@ -48,7 +41,7 @@ export default function Country() {
     <Container className="py-10">
       <SettingsList
         inputProps={{
-          placeholder: t("settings.searchCountry"),
+          placeholder: t("settingsSearchCountry"),
           name: "country",
         }}
         pushFirst={["2", "5", "13", "4", "15", "21"]}

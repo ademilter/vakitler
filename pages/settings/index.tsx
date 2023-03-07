@@ -28,7 +28,7 @@ export default function Settings() {
       >
         <div className="grow">
           <h5 className="text-sm font-normal opacity-60">
-            {t("settings.currentLocation", {}, { returnObjects: true })}
+            {t("settingsCurrentLocation")}
           </h5>
           <div className="flex items-center gap-1 font-medium">
             <span>{city}</span>
@@ -70,7 +70,7 @@ export default function Settings() {
             checked={lang === "tr"}
             onChange={onChangeLang}
           />
-          {t("settings.tr", {}, { returnObjects: true })}
+          {t("settingsTr")}
         </label>
         <label
           className={clsx(
@@ -85,7 +85,7 @@ export default function Settings() {
             checked={lang === "en"}
             onChange={onChangeLang}
           />
-          {t("settings.en", {}, { returnObjects: true })}
+          {t("settingsEn")}
         </label>
       </div>
 
@@ -93,7 +93,7 @@ export default function Settings() {
         href="/"
         className="flex h-12 w-full items-center justify-center rounded-lg bg-blue-500 px-4 text-white"
       >
-        {t("settings.save", {}, { returnObjects: true })}
+        {t("settingsSave")}
       </Link>
     </Container>
   );

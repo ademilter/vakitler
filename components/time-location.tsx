@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { CommonStoreContext } from "@/stores/common";
 import useTranslation from "next-translate/useTranslation";
 
-export default function Location() {
+export default function TimeLocation() {
   const { lang } = useTranslation("common");
   const { settings, countryKey, regionKey, cityKey } =
     useContext(CommonStoreContext);

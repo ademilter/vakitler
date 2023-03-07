@@ -1,33 +1,27 @@
 {
-  "times": {
-    "Imsak": "Fajr",
-    "Gunes": "Sunrise",
-    "Ogle": "Dhuhr",
-    "Ikindi": "Asr",
-    "Aksam": "Maghrib",
-    "Yatsi": "Isha"
-  },
-  "timer": {
-    "reminder": "Time to {{time}} time",
-    "second": "<0>{{second}}</0> sec",
-    "minute": "<0>{{minute}}</0> min",
-    "hour": "<0>{{hour}}</0> hours <0>{{minute}}</0> min",
-    "hour_two": "<0>{{hour}}</0> hour <0>{{minute}}</0> min"
-  },
-  "settings": {
-    "currentLocation": "Current Location",
-    "searchCountry": "Country search",
-    "searchRegion": "Region search",
-    "searchCity": "City search",
-    "countryKey": "UlkeAdiEn",
-    "regionKey": "SehirAdiEn",
-    "cityKey": "IlceAdiEn",
-    "selectCountry": "Select a Country",
-    "selectRegion": "Select a Region",
-    "selectCity": "Select a City",
-    "tr": "Türkçe",
-    "en": "English",
-    "save": "Save",
-    "cancel": "Cancel"
-  }
+  "timesImsak": "Fajr",
+  "timesGunes": "Sunrise",
+  "timesOgle": "Dhuhr",
+  "timesIkindi": "Asr",
+  "timesAksam": "Maghrib",
+  "timesYatsi": "Isha",
+  "timerReminder": "Time to {{time}}",
+  "timerSecond": "<0>{{second}}</0> sec",
+  "timerMinute": "<0>{{minute}}</0> min",
+  "timerHour": "<0>{{hour}}</0> hours <0>{{minute}}</0> min",
+  "timerHour_two": "<0>{{hour}}</0> hour <0>{{minute}}</0> min",
+  "settingsCurrentLocation": "Current Location",
+  "settingsSearchCountry": "Country search",
+  "settingsSearchRegion": "Region search",
+  "settingsSearchCity": "City search",
+  "settingsCountryKey": "UlkeAdiEn",
+  "settingsRegionKey": "SehirAdiEn",
+  "settingsCityKey": "IlceAdiEn",
+  "settingsSelectCountry": "Select a Country",
+  "settingsSelectRegion": "Select a Region",
+  "settingsSelectCity": "Select a City",
+  "settingsTr": "Türkçe",
+  "settingsEn": "English",
+  "settingsSave": "Save",
+  "settingsCancel": "Cancel"
 }

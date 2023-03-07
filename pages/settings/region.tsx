@@ -43,7 +43,7 @@ export default function Country() {
       {data.length > 0 && (
         <SettingsList
           inputProps={{
-            placeholder: t("settings.searchRegion"),
+            placeholder: t("settingsSearchRegion"),
             name: "region",
           }}
           pushFirst={["539", "506"]}
