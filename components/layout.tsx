@@ -7,12 +7,12 @@ import colors from "tailwindcss/colors";
 import Div100vh from "react-div-100vh";
 
 const theme = {
-  [TimeNames.Imsak]: "text-sky-900 bg-sky-50 bg-opacity-50",
-  [TimeNames.Gunes]: "text-orange-900 bg-orange-50 bg-opacity-50",
-  [TimeNames.Ogle]: "text-yellow-900 bg-yellow-50 bg-opacity-50",
-  [TimeNames.Ikindi]: "text-rose-900 bg-rose-50 bg-opacity-50",
-  [TimeNames.Aksam]: "text-blue-900 bg-blue-50 bg-opacity-50",
-  [TimeNames.Yatsi]: "text-indigo-900 bg-indigo-50 bg-opacity-50",
+  [TimeNames.Imsak]: "text-sky-900",
+  [TimeNames.Gunes]: "text-orange-900",
+  [TimeNames.Ogle]: "text-yellow-900",
+  [TimeNames.Ikindi]: "text-rose-900",
+  [TimeNames.Aksam]: "text-blue-900",
+  [TimeNames.Yatsi]: "text-indigo-900",
 };
 const color = {
   [TimeNames.Imsak]: colors.sky["50"],
