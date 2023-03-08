@@ -2,7 +2,6 @@ import { ReactNode, useContext } from "react";
 import { cx } from "@/lib/utils";
 import { TimeNames } from "@/lib/types";
 import { CommonStoreContext } from "@/stores/common";
-import Head from "next/head";
 import colors from "tailwindcss/colors";
 import Div100vh from "react-div-100vh";
 
@@ -29,13 +28,13 @@ export default function Layout({ children }: { children: ReactNode }) {
   const now = times?.time?.now;
 
   const themeStyle = now ? theme[now] : "";
-  const themeColor = now ? color[now] : "";
+  // const themeColor = now ? color[now] : "";
 
   return (
     <>
-      <Head>
+      {/*<Head>
         {themeColor && <meta name="theme-color" content={themeColor} />}
-      </Head>
+      </Head>*/}
 
       <style jsx global>
         {`
