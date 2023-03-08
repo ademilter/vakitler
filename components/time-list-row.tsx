@@ -56,12 +56,12 @@ export default function TimeListRow({
             <motion.span
               layoutId="border"
               className={cx(
-                "absolute inset-0 rounded-2xl border-2 border-current"
+                "absolute inset-0 rounded-2xl border border-current"
               )}
               variants={{
                 open: {
                   scale: 1,
-                  opacity: 0.5,
+                  opacity: 0.6,
                   transition: {
                     duration: 0.3,
                     delay: 1,

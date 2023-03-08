@@ -25,7 +25,7 @@ export default function TimeSummaryIcon() {
   return (
     <motion.button
       type="button"
-      className="flex items-center justify-center"
+      className="flex w-full items-center justify-center"
       onClick={() => setShowHijriCalendar(!showHijriCalendar)}
       animate={showHijriCalendar ? "open" : "closed"}
     >

@@ -5,7 +5,7 @@
   "timesIkindi": "İkindi",
   "timesAksam": "Akşam",
   "timesYatsi": "Yatsı",
-  "timerReminder": "{{time}} vaktine kalan",
+  "timerReminder": "{{time}} vaktine",
   "timerSecond": "<0>{{second}}</0> saniye",
   "timerMinute": "<0>{{minute}}</0> dakika",
   "timerHour": "<0>{{hour}}</0> saat <0>{{minute}}</0> dakika",

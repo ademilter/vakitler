@@ -27,7 +27,8 @@ export default function Index() {
         animate={start ? "open" : "closed"}
         className={cx(
           "h-full select-none",
-          "grid grid-rows-[minmax(auto,_1fr)_minmax(auto,_520px)]"
+          "grid grid-rows-[minmax(auto,_1fr)_minmax(auto,_480px)]",
+          "md:grid-rows-[minmax(auto,_1fr)_minmax(auto,_520px)]"
         )}
       >
         <TimeLocation />

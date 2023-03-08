@@ -17,7 +17,7 @@ export default function TimeLocation() {
       href="/settings"
       className="absolute inset-x-0 top-0 z-20 grid place-items-center"
     >
-      <div className="flex items-center gap-1 px-3 py-1 text-sm opacity-60">
+      <div className="flex items-center gap-1 px-3 py-2 text-sm opacity-60 md:py-4">
         <span className="capitalize">
           {city?.toLocaleLowerCase(lang).slice(0, 12)}
         </span>
