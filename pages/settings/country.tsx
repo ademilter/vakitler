@@ -44,7 +44,7 @@ export default function Country() {
           placeholder: t("settingsSearchCountry"),
           name: "country",
         }}
-        pushFirst={["2", "5", "13", "4", "15", "21"]}
+        pushFirst={["2", "13", "4", "35", "15", "21"]}
         onChange={id => {
           const country = data.find(c => c.UlkeID === id);
           _setSettings({ ..._settings, country });

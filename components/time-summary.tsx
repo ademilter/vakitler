@@ -3,10 +3,10 @@ import { useContext } from "react";
 import { CommonStoreContext } from "@/stores/common";
 import useTranslation from "next-translate/useTranslation";
 import { motion } from "framer-motion";
-import Icon, { ICON_NAMES } from "@/components/icon";
 import TimeSummaryTimer from "@/components/time-summary-timer";
+import TimeSummaryIcon from "@/components/time-summary-icon";
 
-export default function Timer() {
+export default function TimeSummary() {
   const { t } = useTranslation("common");
 
   const { times } = useContext(CommonStoreContext);
@@ -32,7 +32,7 @@ export default function Timer() {
   return (
     <div className="flex items-center justify-center pb-12 pt-14">
       <motion.div {...containerAnim} className="flex flex-col items-center">
-        <Icon icon={times?.iconName as keyof typeof ICON_NAMES} size={32} />
+        <TimeSummaryIcon />
 
         <h2 className="mt-2 text-4xl capitalize">
           {t(`times${times?.time.now as TimeNames}`)}
