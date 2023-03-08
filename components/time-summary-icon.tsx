@@ -4,6 +4,8 @@ import useTranslation from "next-translate/useTranslation";
 import Icon, { ICON_NAMES } from "@/components/icon";
 import { motion } from "framer-motion";
 import { DateTime } from "luxon";
+import { TimeNames } from "@/lib/types";
+import { hourFormat } from "@/lib/const";
 
 export default function TimeSummaryIcon() {
   const { lang } = useTranslation("common");
@@ -40,9 +42,16 @@ export default function TimeSummaryIcon() {
           },
         }}
       >
-        {localTime
-          .reconfigure({ outputCalendar: "islamic" })
-          .toLocaleString(DateTime.DATE_FULL, { locale: lang })}
+        {/* hicri takvimde akşam ezanı ile tarih bir sonraki güne geçer */}
+        {localTime >=
+        DateTime.fromFormat(times?.today[TimeNames.Aksam]!, hourFormat)
+          ? localTime
+              .plus({ days: 1 })
+              .reconfigure({ outputCalendar: "islamic" })
+              .toLocaleString(DateTime.DATE_FULL, { locale: lang })
+          : localTime
+              .reconfigure({ outputCalendar: "islamic" })
+              .toLocaleString(DateTime.DATE_FULL, { locale: lang })}
       </motion.span>
 
       <motion.span
