@@ -6,7 +6,6 @@ import { Analytics } from "@vercel/analytics/react";
 import { CommonStoreProvider } from "@/stores/common";
 import Head from "next/head";
 import { metadata } from "@/lib/meta";
-import Layout from "@/components/layout";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -46,10 +45,10 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           content={metadata.twitter.description}
         />
       </Head>
-      <Layout className={inter.variable}>
+      <div className={inter.variable}>
         <Component {...pageProps} />
         <Analytics />
-      </Layout>
+      </div>
     </CommonStoreProvider>
   );
 }

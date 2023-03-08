@@ -6,9 +6,13 @@ import useTranslation from "next-translate/useTranslation";
 import { DateTime } from "luxon";
 import useInterval from "@/lib/use-interval";
 import { LOCAL_KEYS } from "@/lib/const";
+// import colors from "tailwindcss/colors";
+// import { DefaultColors } from "tailwindcss/types/generated/colors";
 
 interface ICommonStore {
   appLoading: boolean;
+  showSettings: boolean;
+  setShowSettings: (value: boolean) => void;
   _settings: {
     country: undefined | ICountry;
     region: undefined | IRegion;
@@ -34,6 +38,8 @@ interface ICommonStore {
 
 export const CommonStoreContext = createContext<ICommonStore>({
   appLoading: false,
+  showSettings: false,
+  setShowSettings: () => {},
   _settings: {
     country: undefined,
     region: undefined,
@@ -61,6 +67,11 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
   const { t } = useTranslation("common");
   const router = useRouter();
 
+  const [appLoading, setAppLoading] =
+    useState<ICommonStore["appLoading"]>(false);
+  const [showSettings, setShowSettings] =
+    useState<ICommonStore["showSettings"]>(false);
+
   const [localTime, setLocalTime] = useState<ICommonStore["localTime"]>(
     DateTime.local()
   );
@@ -68,9 +79,6 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
     ICommonStore["devLocalTime"]
   >([0, 0, 0]);
 
-  const [appLoading, setAppLoading] =
-    useState<ICommonStore["appLoading"]>(false);
-  const [times, setTimes] = useState<ICommonStore["times"]>();
   const [settings, setSettings] = useState<ICommonStore["settings"]>({
     country: undefined,
     region: undefined,
@@ -81,6 +89,8 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
     region: undefined,
     city: undefined,
   });
+
+  const [times, setTimes] = useState<ICommonStore["times"]>();
 
   const [timer, setTimer] = useState<TypeTimer>([0, 0, 0]);
 
@@ -179,6 +189,8 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
     <CommonStoreContext.Provider
       value={{
         appLoading,
+        showSettings,
+        setShowSettings,
         times,
         localTime,
         devLocalTime,
