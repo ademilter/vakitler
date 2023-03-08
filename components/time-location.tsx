@@ -1,6 +1,7 @@
 import Link from "next/link";
 import useTranslation from "next-translate/useTranslation";
 import useLocations from "@/hooks/use-locations";
+import { askNotificationPermission } from "@/lib/utils";
 
 export default function TimeLocation() {
   const { lang } = useTranslation("common");
@@ -13,6 +14,13 @@ export default function TimeLocation() {
           <span className="capitalize">{city?.toLocaleLowerCase(lang)}</span>
         </div>
       </Link>
+
+      <button
+        className="absolute right-0 top-0 rounded-bl-sm p-1 pb-2 pl-2 hover:bg-black hover:bg-opacity-10"
+        onClick={() => askNotificationPermission()}
+      >
+        test
+      </button>
     </div>
   );
 }
