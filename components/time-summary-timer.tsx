@@ -29,6 +29,7 @@ export default function TimeSummaryTimer() {
 
       <div className="relative z-10">
         {timer[0] === 0 && timer[1] === 0 ? (
+          // 0 hour 0 minute 30 second
           <Trans
             i18nKey="timerSecond"
             components={[<ValueComp key="timer" />]}
@@ -36,19 +37,37 @@ export default function TimeSummaryTimer() {
             ns="common"
           />
         ) : timer[0] === 0 ? (
+          // 0 hour 30 minute
           <Trans
             i18nKey="timerMinute"
             components={[<ValueComp key="minute" />]}
             values={{ minute: timer[1] }}
             ns="common"
           />
-        ) : (
+        ) : timer[1] === 0 ? (
+          // 2 hour 0 minute
           <Trans
             i18nKey="timerHour"
-            components={[<ValueComp key="hour" />, <ValueComp key="minute" />]}
-            values={{ hour: timer[0], minute: timer[1] }}
+            components={[<ValueComp key="hour" />]}
+            values={{ hour: timer[0] }}
             ns="common"
           />
+        ) : (
+          // 2 hour 30 minute
+          <>
+            <Trans
+              i18nKey="timerHour"
+              components={[<ValueComp key="hour" />]}
+              values={{ hour: timer[0] }}
+              ns="common"
+            />{" "}
+            <Trans
+              i18nKey="timerMinute"
+              components={[<ValueComp key="minute" />]}
+              values={{ minute: timer[1] }}
+              ns="common"
+            />
+          </>
         )}
       </div>
     </div>

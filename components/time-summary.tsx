@@ -19,8 +19,8 @@ export default function TimeSummary() {
         opacity: 1,
       },
       closed: {
-        y: 30,
-        scale: 0.9,
+        y: 60,
+        scale: 0.8,
         opacity: 0,
       },
     },

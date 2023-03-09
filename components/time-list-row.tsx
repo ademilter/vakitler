@@ -28,10 +28,12 @@ export default function TimeListRow({
       variants={{
         open: {
           y: 0,
+          scale: 1,
           opacity: 1,
         },
         closed: {
           y: 30,
+          scale: 0.8,
           opacity: 0,
         },
       }}
@@ -64,7 +66,7 @@ export default function TimeListRow({
                   opacity: 0.6,
                   transition: {
                     duration: 0.3,
-                    delay: 1,
+                    delay: 0.6,
                   },
                 },
                 closed: {
