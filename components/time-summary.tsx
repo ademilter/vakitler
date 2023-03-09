@@ -30,18 +30,19 @@ export default function TimeSummary() {
   };
 
   return (
-    <div className="flex items-center justify-center pb-12 pt-14">
-      <motion.div {...containerAnim} className="flex flex-col items-center">
-        <TimeSummaryIcon />
+    <motion.div
+      {...containerAnim}
+      className="flex w-full flex-col items-center justify-center pb-12 pt-14"
+    >
+      <TimeSummaryIcon />
 
-        <h2 className="mt-2 text-4xl capitalize md:mt-4 md:text-5xl">
-          {t(`times${times?.time.now as TimeNames}`)}
-        </h2>
+      <h2 className="mt-2 text-4xl capitalize md:mt-4 md:text-5xl">
+        {t(`times${times?.time.now as TimeNames}`)}
+      </h2>
 
-        <div className="mt-5 md:mt-6">
-          <TimeSummaryTimer />
-        </div>
-      </motion.div>
-    </div>
+      <div className="mt-5 md:mt-6">
+        <TimeSummaryTimer />
+      </div>
+    </motion.div>
   );
 }
