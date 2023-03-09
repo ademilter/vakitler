@@ -1,22 +1,22 @@
 import "@/styles/globals.css";
 
 import type { AppProps } from "next/app";
-import { Inter } from "next/font/google";
+// import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { CommonStoreProvider } from "@/stores/common";
 import Head from "next/head";
 import { metadata } from "@/lib/meta";
 
-const inter = Inter({
-  variable: "--font-inter",
-  display: "swap",
-  style: "normal",
-  subsets: ["latin-ext"],
-});
+// const inter = Inter({
+//   variable: "--font-inter",
+//   display: "swap",
+//   style: "normal",
+//   subsets: ["latin-ext"],
+// });
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <CommonStoreProvider>
+    <>
       <Head>
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
@@ -48,10 +48,10 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           content={metadata.twitter.description}
         />
       </Head>
-      <div className={inter.variable}>
+      <CommonStoreProvider>
         <Component {...pageProps} />
-        <Analytics />
-      </div>
-    </CommonStoreProvider>
+      </CommonStoreProvider>
+      <Analytics />
+    </>
   );
 }

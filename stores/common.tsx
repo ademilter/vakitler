@@ -6,6 +6,8 @@ import useTranslation from "next-translate/useTranslation";
 import { DateTime } from "luxon";
 import useInterval from "@/lib/use-interval";
 import { LOCAL_KEYS } from "@/lib/const";
+import setLanguage from "next-translate/setLanguage";
+import i18n from "@/i18n.json";
 // import colors from "tailwindcss/colors";
 // import { DefaultColors } from "tailwindcss/types/generated/colors";
 
@@ -184,6 +186,11 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
   }, [localTime, times]);
 
   // TODO: uygulama çalıştıktan sonra datanın ne kadar eski olduğuna bakıp güncellenmesini sağla
+
+  useEffect(() => {
+    const local = localStorage.getItem(LOCAL_KEYS.Lang) || i18n.defaultLocale;
+    setLanguage(local);
+  }, []);
 
   return (
     <CommonStoreContext.Provider

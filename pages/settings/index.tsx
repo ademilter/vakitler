@@ -5,6 +5,7 @@ import { CommonStoreContext } from "@/stores/common";
 import Link from "next/link";
 import setLanguage from "next-translate/setLanguage";
 import { clsx } from "clsx";
+import { LOCAL_KEYS } from "@/lib/const";
 
 export default function Settings() {
   const { t, lang } = useTranslation("common");
@@ -18,6 +19,7 @@ export default function Settings() {
 
   const onChangeLang = async (e: React.ChangeEvent<HTMLInputElement>) => {
     await setLanguage(e.target.value);
+    localStorage.setItem(LOCAL_KEYS.Lang, e.target.value);
   };
 
   return (
