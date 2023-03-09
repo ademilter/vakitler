@@ -1,7 +1,7 @@
 import { ReactNode, SVGProps } from "react";
 
 export type IconProps = SVGProps<SVGSVGElement> & {
-  size?: number;
+  size?: number | string;
   icon: keyof typeof ICON_NAMES;
 };
 

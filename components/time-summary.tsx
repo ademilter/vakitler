@@ -34,11 +34,11 @@ export default function TimeSummary() {
       <motion.div {...containerAnim} className="flex flex-col items-center">
         <TimeSummaryIcon />
 
-        <h2 className="mt-2 text-4xl capitalize">
+        <h2 className="mt-2 text-4xl capitalize md:mt-4 md:text-5xl">
           {t(`times${times?.time.now as TimeNames}`)}
         </h2>
 
-        <div className="mt-4">
+        <div className="mt-5 md:mt-6">
           <TimeSummaryTimer />
         </div>
       </motion.div>
