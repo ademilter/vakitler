@@ -6,7 +6,6 @@ import TimeLocation from "@/components/time-location";
 import TimeSummary from "@/components/time-summary";
 import TimeList from "@/components/time-list";
 import TimeTravel from "@/components/time-travel";
-import Layout from "@/components/layout";
 
 export default function Index() {
   const { times } = useContext(CommonStoreContext);
@@ -21,21 +20,19 @@ export default function Index() {
   if (!times) return null;
 
   return (
-    <Layout>
-      <motion.div
-        initial={false}
-        animate={start ? "open" : "closed"}
-        className={cx(
-          "h-full select-none",
-          "grid grid-rows-[minmax(auto,_1fr)_minmax(auto,_480px)]",
-          "md:grid-rows-[minmax(auto,_1fr)_minmax(auto,_600px)]"
-        )}
-      >
-        <TimeLocation />
-        <TimeSummary />
-        <TimeList />
-      </motion.div>
+    <motion.div
+      initial={false}
+      animate={start ? "open" : "closed"}
+      className={cx(
+        "h-full select-none",
+        "grid grid-rows-[minmax(auto,_1fr)_minmax(auto,_480px)]",
+        "md:grid-rows-[minmax(auto,_1fr)_minmax(auto,_600px)]"
+      )}
+    >
+      <TimeLocation />
+      <TimeSummary />
+      <TimeList />
       <TimeTravel />
-    </Layout>
+    </motion.div>
   );
 }

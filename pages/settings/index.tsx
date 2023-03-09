@@ -23,14 +23,14 @@ export default function Settings() {
   };
 
   return (
-    <Container className="flex min-h-screen flex-col gap-6 py-10">
+    <Container className="flex h-full flex-col gap-6 py-10">
       <div className="grid gap-6 text-sm">
         <Link
           href="/settings/country"
-          className="flex rounded-lg border border-gray-300 p-4 hover:bg-blue-50"
+          className="flex rounded-lg border border-gray-200 p-4 hover:bg-blue-50"
         >
           <div className="grow">
-            <h5 className="font-normal">{t("settingsCurrentLocation")}</h5>
+            <h5 className="">{t("settingsCurrentLocation")}</h5>
             <div className="flex items-center gap-1">
               <span>{city}</span>
               <span className="opacity-30">/</span>
@@ -58,7 +58,7 @@ export default function Settings() {
           </span>
         </Link>
 
-        <div className="flex items-center gap-px rounded-lg border border-gray-300 bg-gray-200 bg-zinc-100">
+        <div className="flex items-center gap-px rounded-lg border border-gray-200 bg-gray-200 bg-zinc-200">
           <SettingsLangItem
             isSelected={lang === "tr"}
             name="lang"
@@ -79,14 +79,14 @@ export default function Settings() {
           </SettingsLangItem>
         </div>
 
-        <div className="space-y-px rounded-lg border border-gray-300 bg-zinc-200">
+        <div className="space-y-px rounded-lg border border-gray-200 bg-zinc-200">
           <a
             href="https://github.com/ademilter/vakitler"
             target="_blank"
             className="flex items-center rounded-t-lg bg-white p-4 hover:bg-blue-50"
           >
             <div className="grow">
-              <h5 className="font-normal">{t("settingsOpenSource")}</h5>
+              <h5 className="">{t("settingsOpenSource")}</h5>
               <p className="underline">github.com/ademilter/vakitler</p>
             </div>
 
@@ -111,7 +111,7 @@ export default function Settings() {
             className="flex items-center rounded-b-lg bg-white p-4 hover:bg-blue-50"
           >
             <div className="grow">
-              <h5 className="font-normal">{t("settingsSourceCode")}</h5>
+              <h5 className="">{t("settingsSourceCode")}</h5>
               <p className="underline">buymeacoffee.com/ademilter</p>
             </div>
 
@@ -186,9 +186,9 @@ export default function Settings() {
 
       <Link
         href="/"
-        className="mt-auto flex h-12 w-full items-center justify-center rounded-lg bg-blue-500 px-4 text-white"
+        className="mt-auto flex h-12 w-full items-center justify-center rounded-lg bg-current px-4"
       >
-        {t("settingsSave")}
+        <span className="text-white">{t("settingsSave")}</span>
       </Link>
     </Container>
   );

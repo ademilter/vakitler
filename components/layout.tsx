@@ -13,6 +13,7 @@ const theme = {
   [TimeNames.Aksam]: "text-blue-900",
   [TimeNames.Yatsi]: "text-indigo-900",
 };
+
 const color = {
   [TimeNames.Imsak]: colors.sky["50"],
   [TimeNames.Gunes]: colors.orange["50"],
@@ -23,32 +24,10 @@ const color = {
 };
 
 export default function Layout({ children }: { children: ReactNode }) {
-  const { showSettings, times } = useContext(CommonStoreContext);
+  const { times } = useContext(CommonStoreContext);
 
   const now = times?.time?.now;
-
   const themeStyle = now ? theme[now] : "";
-  // const themeColor = now ? color[now] : "";
 
-  return (
-    <>
-      {/*<Head>
-        {themeColor && <meta name="theme-color" content={themeColor} />}
-      </Head>*/}
-
-      <style jsx global>
-        {`
-          html,
-          body {
-            overflow: hidden;
-          }
-        `}
-      </style>
-
-      <Div100vh className={cx(themeStyle, "relative")}>
-        <div className={cx("h-full")}>{children}</div>
-        {/*<Settings />*/}
-      </Div100vh>
-    </>
-  );
+  return <Div100vh className={cx(themeStyle, "relative")}>{children}</Div100vh>;
 }

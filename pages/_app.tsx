@@ -6,6 +6,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { CommonStoreProvider } from "@/stores/common";
 import Head from "next/head";
 import { metadata } from "@/lib/meta";
+import Layout from "@/components/layout";
 
 // const inter = Inter({
 //   variable: "--font-inter",
@@ -49,7 +50,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         />
       </Head>
       <CommonStoreProvider>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </CommonStoreProvider>
       <Analytics />
     </>
