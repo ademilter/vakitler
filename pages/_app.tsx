@@ -20,7 +20,10 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="viewport"
+          content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
+        />
 
         <link rel="manifest" href={metadata.manifest} />
         <meta name="theme-color" content={metadata.themeColor} />
