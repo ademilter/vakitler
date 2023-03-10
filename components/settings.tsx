@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import useTranslation from "next-translate/useTranslation";
 import setLanguage from "next-translate/setLanguage";
 import Link from "next/link";
-import SettingsLangItem from "@/components/settings-lang-item";
+import SettingsLangItem from "@/components/settings-item";
 import { cx } from "@/lib/utils";
 
 export default function Settings() {
