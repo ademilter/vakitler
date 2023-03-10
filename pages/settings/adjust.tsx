@@ -3,7 +3,7 @@ import Container from "@/components/container";
 import useTranslation from "next-translate/useTranslation";
 import { CommonStoreContext } from "@/stores/common";
 import { TimeNames } from "@/lib/types";
-import { adjustedTime } from "@/lib/utils";
+import { adjustedTime, cx } from "@/lib/utils";
 import Link from "next/link";
 
 const timeKeys = Object.values(TimeNames);
@@ -27,10 +27,14 @@ export default function Adjust() {
   };
 
   const Times = Array.from(Array(6).keys()).map(i => {
+    const isActive = adjustments[i] !== 0;
     return (
       <div
         key={`time${i}`}
-        className="flex items-center border-b px-4 py-3 last:border-0"
+        className={cx(
+          "flex items-center border-b bg-zinc-50 px-4 py-3 last:border-0",
+          isActive && "bg-white"
+        )}
       >
         <span className="grid grow">
           <b>{t(`times${timeKeys[i]}`)}</b>
@@ -39,10 +43,16 @@ export default function Adjust() {
           </span>
         </span>
 
-        <span className="flex items-center gap-4">
-          <button type="button" onClick={() => onChangeAdjustment(0, i)}>
-            {adjustments[i]}
-          </button>
+        <span className="flex items-center gap-1">
+          {isActive && (
+            <button
+              type="button"
+              className="flex h-8 w-8 items-center justify-center"
+              onClick={() => onChangeAdjustment(0, i)}
+            >
+              {adjustments[i]}
+            </button>
+          )}
 
           <span className="flex items-center rounded border border-zinc-200 bg-white">
             <button

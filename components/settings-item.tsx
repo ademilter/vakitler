@@ -1,5 +1,5 @@
 import React from "react";
-import { clsx } from "clsx";
+import { cx } from "@/lib/utils";
 
 export default function SettingsItem({
   children,
@@ -11,7 +11,7 @@ export default function SettingsItem({
 }) {
   return (
     <label
-      className={clsx(
+      className={cx(
         "flex h-12 grow cursor-pointer items-center gap-2 px-4",
         "bg-white first:rounded-l-lg last:rounded-r-lg",
         isSelected && "bg-blue-50",
