@@ -24,5 +24,7 @@
   "settingsOpenSource": "This project is free and open source",
   "settingsSourceCode": "Thanks for your support",
   "settingsSave": "Save",
-  "settingsCancel": "Cancel"
+  "settingsCancel": "Cancel",
+  "settingsTimeFormat12": "12-hour format",
+  "settingsTimeFormat24": "24-hour format"
 }

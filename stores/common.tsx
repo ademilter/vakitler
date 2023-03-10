@@ -19,12 +19,14 @@ interface ICommonStore {
     country: undefined | ICountry;
     region: undefined | IRegion;
     city: undefined | ICity;
+    timeFormat: "12" | "24";
   };
   _setSettings: (value: ICommonStore["_settings"]) => void;
   settings: {
     country: undefined | ICountry;
     region: undefined | IRegion;
     city: undefined | ICity;
+    timeFormat: "12" | "24";
   };
   changeSettings: (value: ICommonStore["_settings"]) => Promise<void>;
   times: undefined | Times;
@@ -46,12 +48,14 @@ export const CommonStoreContext = createContext<ICommonStore>({
     country: undefined,
     region: undefined,
     city: undefined,
+    timeFormat: "24",
   },
   _setSettings: () => {},
   settings: {
     country: undefined,
     region: undefined,
     city: undefined,
+    timeFormat: "24",
   },
   changeSettings: () => Promise.resolve(),
   times: undefined,
@@ -85,11 +89,13 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
     country: undefined,
     region: undefined,
     city: undefined,
+    timeFormat: "24",
   });
   const [_settings, _setSettings] = useState<ICommonStore["settings"]>({
     country: undefined,
     region: undefined,
     city: undefined,
+    timeFormat: "24",
   });
 
   const [times, setTimes] = useState<ICommonStore["times"]>();

@@ -5,21 +5,30 @@ import { CommonStoreContext } from "@/stores/common";
 import Link from "next/link";
 import setLanguage from "next-translate/setLanguage";
 import { LOCAL_KEYS } from "@/lib/const";
-import SettingsLangItem from "@/components/settings-lang-item";
+import SettingsItem from "@/components/settings-item";
 
 export default function Settings() {
   const { t, lang } = useTranslation("common");
 
-  const { settings, countryKey, regionKey, cityKey } =
+  const { settings, countryKey, regionKey, cityKey, changeSettings } =
     useContext(CommonStoreContext);
 
   const city = settings.city && settings.city[cityKey];
   const region = settings.region && settings.region[regionKey];
   const country = settings.country && settings.country[countryKey];
+  const timeFormat = settings.timeFormat;
 
   const onChangeLang = async (e: React.ChangeEvent<HTMLInputElement>) => {
     await setLanguage(e.target.value);
     localStorage.setItem(LOCAL_KEYS.Lang, e.target.value);
+  };
+
+  const onChangeTimeFormat = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    await changeSettings({
+      ...settings,
+      timeFormat: e.target.value as typeof settings.timeFormat
+    });
+    localStorage.setItem(LOCAL_KEYS.TimeFormat, e.target.value);
   };
 
   return (
@@ -59,7 +68,7 @@ export default function Settings() {
         </Link>
 
         <div className="flex items-center gap-px rounded-lg border border-gray-200 bg-gray-200 bg-zinc-200">
-          <SettingsLangItem
+          <SettingsItem
             isSelected={lang === "tr"}
             name="lang"
             value="tr"
@@ -67,8 +76,8 @@ export default function Settings() {
             onChange={onChangeLang}
           >
             {t("settingsTr")}
-          </SettingsLangItem>
-          <SettingsLangItem
+          </SettingsItem>
+          <SettingsItem
             isSelected={lang === "en"}
             name="lang"
             value="en"
@@ -76,7 +85,28 @@ export default function Settings() {
             onChange={onChangeLang}
           >
             {t("settingsEn")}
-          </SettingsLangItem>
+          </SettingsItem>
+        </div>
+
+        <div className="flex items-center gap-px rounded-lg border border-gray-200 bg-gray-200 bg-zinc-200">
+          <SettingsItem
+            isSelected={timeFormat === "12"}
+            name="timeFormat"
+            value="12"
+            checked={timeFormat === "12"}
+            onChange={onChangeTimeFormat}
+          >
+            {t("settingsTimeFormat12")}
+          </SettingsItem>
+          <SettingsItem
+            isSelected={timeFormat === "24"}
+            name="timeFormat"
+            value="24"
+            checked={timeFormat === "24"}
+            onChange={onChangeTimeFormat}
+          >
+            {t("settingsTimeFormat24")}
+          </SettingsItem>
         </div>
 
         <div className="space-y-px rounded-lg border border-gray-200 bg-zinc-200">

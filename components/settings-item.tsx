@@ -1,7 +1,7 @@
 import React from "react";
 import { clsx } from "clsx";
 
-export default function SettingsLangItem({
+export default function SettingsItem({
   children,
   isSelected = false,
   ...props
