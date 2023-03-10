@@ -10,7 +10,7 @@ export default function Country() {
   const { t } = useTranslation("common");
   const { push } = useRouter();
 
-  const { regionKey, _settings, _setSettings } = useContext(CommonStoreContext);
+  const { _settings, _setSettings } = useContext(CommonStoreContext);
 
   const [data, setData] = useState<IRegion[]>([]);
   const [loading, setLoading] = useState(false);
@@ -54,7 +54,7 @@ export default function Country() {
           }}
           data={data.map(c => ({
             value: c.SehirID,
-            label: c[regionKey],
+            label: c[t("settingsRegionKey") as keyof IRegion],
           }))}
         />
       )}

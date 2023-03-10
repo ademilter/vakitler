@@ -25,6 +25,10 @@
   "settingsSourceCode": "Desteğiniz için teşekkür ederim",
   "settingsSave": "Kaydet",
   "settingsCancel": "İptal",
+  "settingsBack": "Ayarlara Dön",
   "settingsTimeFormat12": "12 saat biçimi",
-  "settingsTimeFormat24": "24 saat biçimi"
+  "settingsTimeFormat24": "24 saat biçimi",
+  "settingsCustomAdjustments": "Dakika Ayarı",
+  "settingsCustomAdjustmentsDetails": "Kişisel tercihleriniz ya da yerel farklılıklar için namaz saatlerine ince ayar yapın.",
+  "settingsNoAdjustments": "Ayar Yok"
 }

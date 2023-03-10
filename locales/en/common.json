@@ -25,6 +25,10 @@
   "settingsSourceCode": "Thanks for your support",
   "settingsSave": "Save",
   "settingsCancel": "Cancel",
+  "settingsBack": "Back to Settings",
   "settingsTimeFormat12": "12-hour format",
-  "settingsTimeFormat24": "24-hour format"
+  "settingsTimeFormat24": "24-hour format",
+  "settingsCustomAdjustments": "Custom Adjustments",
+  "settingsCustomAdjustmentsDetails": "Make fine adjustments to prayer times for your personal preferences or local differences.",
+  "settingsNoAdjustments": "No adjustments"
 }

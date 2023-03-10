@@ -10,7 +10,9 @@ import { hourFormat } from "@/lib/const";
 export default function TimeSummaryIcon() {
   const { lang } = useTranslation("common");
 
-  const { times, localTime } = useContext(CommonStoreContext);
+  const { times } = useContext(CommonStoreContext);
+  const localTime = times?.localTime || DateTime.local();
+
   const [showHijriCalendar, setShowHijriCalendar] = useState(true);
 
   useEffect(() => {
@@ -21,6 +23,8 @@ export default function TimeSummaryIcon() {
       clearTimeout(timer);
     };
   }, []);
+
+  if (!times?.today) return null;
 
   return (
     <motion.button
@@ -44,7 +48,7 @@ export default function TimeSummaryIcon() {
       >
         {/* hicri takvimde akşam ezanı ile tarih bir sonraki güne geçer */}
         {localTime >=
-        DateTime.fromFormat(times?.today[TimeNames.Aksam]!, hourFormat)
+        DateTime.fromFormat(times?.today[TimeNames.Aksam], hourFormat)
           ? localTime
               .plus({ days: 1 })
               .reconfigure({ outputCalendar: "islamic" })
