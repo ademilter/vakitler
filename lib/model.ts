@@ -3,15 +3,32 @@ import { ITime, TimeNames, TypeTimer } from "@/lib/types";
 import { secondSplit } from "@/lib/utils";
 import { hourFormat } from "@/lib/const";
 
+const timeNames = Object.values(TimeNames);
+
 export class Times {
   public times: Time[];
   public localTime: DateTime;
   public timeTravel: [number, number, number];
+  public adjustments: number[];
 
-  constructor(data: ITime[] = []) {
+  constructor(data: ITime[] = [], adjustments: number[] = timeNames.map(() => 0)) {
+    this.adjustments = adjustments;
     this.times = data.map(day => new Time(day));
     this.localTime = DateTime.local();
     this.timeTravel = [0, 0, 0];
+    if (adjustments.some(a => a !== 0)) {
+      this.adjustTimes(adjustments);
+    }
+  }
+
+  adjustTimes(adjustments: number[]) {
+    this.times.forEach((day, index) => {
+      timeNames.forEach((time, i) => {
+        const timeValue = DateTime.fromFormat(day[time], hourFormat);
+        const newTime = timeValue.plus({ minutes: adjustments[i] });
+        day[time] = newTime.toFormat(hourFormat);
+      });
+    });
   }
 
   updateTimeTravel(value: [number, number, number]): void {
