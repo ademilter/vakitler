@@ -26,7 +26,7 @@ export default function Settings() {
   const onChangeTimeFormat = async (e: React.ChangeEvent<HTMLInputElement>) => {
     await changeSettings({
       ...settings,
-      timeFormat: e.target.value as typeof settings.timeFormat,
+      timeFormat: e.target.value as typeof settings.timeFormat
     });
     localStorage.setItem(LOCAL_KEYS.TimeFormat, e.target.value);
   };

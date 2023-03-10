@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import useTranslation from "next-translate/useTranslation";
 import setLanguage from "next-translate/setLanguage";
 import Link from "next/link";
-import SettingsLangItem from "@/components/settings-item";
+import SettingsItem from "@/components/settings-item";
 import { cx } from "@/lib/utils";
 
 export default function Settings() {
@@ -84,7 +84,7 @@ export default function Settings() {
         </Link>
 
         <div className="grid h-12 grid-cols-2 rounded-lg border border-gray-300 bg-zinc-100">
-          <SettingsLangItem
+          <SettingsItem
             isSelected={lang === "tr"}
             name="lang"
             value="tr"
@@ -92,8 +92,8 @@ export default function Settings() {
             onChange={onChangeLang}
           >
             {t("settingsTr")}
-          </SettingsLangItem>
-          <SettingsLangItem
+          </SettingsItem>
+          <SettingsItem
             isSelected={lang === "en"}
             name="lang"
             value="en"
@@ -101,7 +101,7 @@ export default function Settings() {
             onChange={onChangeLang}
           >
             {t("settingsEn")}
-          </SettingsLangItem>
+          </SettingsItem>
         </div>
 
         <header className="flex justify-end">
