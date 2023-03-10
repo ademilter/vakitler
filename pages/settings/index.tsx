@@ -44,7 +44,7 @@ export default function Settings() {
       <div className="grid gap-6">
         <Link
           href="/settings/country"
-          className="flex rounded-lg border border-gray-200 p-4 hover:bg-blue-50"
+          className="flex rounded-lg border border-zinc-200 p-4 hover:bg-blue-50"
         >
           <div className="grow">
             <h5 className="">{t("settingsCurrentLocation")}</h5>
@@ -75,7 +75,7 @@ export default function Settings() {
           </span>
         </Link>
 
-        <div className="flex items-center gap-px rounded-lg border border-gray-200 bg-gray-200 bg-zinc-200">
+        <div className="flex items-center gap-px rounded-lg border border-zinc-200 bg-zinc-200 bg-zinc-200">
           <SettingsItem
             isSelected={lang === "tr"}
             name="lang"
@@ -96,7 +96,7 @@ export default function Settings() {
           </SettingsItem>
         </div>
 
-        <div className="flex items-center gap-px rounded-lg border border-gray-200 bg-gray-200 bg-zinc-200">
+        <div className="flex items-center gap-px rounded-lg border border-zinc-200 bg-zinc-200 bg-zinc-200">
           <SettingsItem
             isSelected={timeFormat === TimeFormat.Twelve}
             name="timeFormat"
@@ -119,15 +119,15 @@ export default function Settings() {
 
         <Link
           href="/settings/adjust"
-          className="flex items-center gap-px rounded-lg border border-gray-200 bg-gray-200 bg-zinc-200"
+          className="flex items-center gap-px rounded-lg border border-zinc-200 bg-zinc-200 bg-zinc-200"
         >
-          <label className="flex h-10 grow cursor-pointer items-center gap-2 rounded-lg bg-white px-4 hover:bg-blue-50">
+          <label className="flex h-12 grow cursor-pointer items-center gap-2 rounded-lg bg-white px-4 hover:bg-blue-50">
             <span className="grow">{t("settingsCustomAdjustments")}</span>
             <span className="">{adjustmentsAsText()}</span>
           </label>
         </Link>
 
-        <div className="space-y-px rounded-lg border border-gray-200 bg-zinc-200">
+        <div className="space-y-px rounded-lg border border-zinc-200 bg-zinc-200">
           <a
             href="https://github.com/ademilter/vakitler"
             target="_blank"
@@ -135,7 +135,9 @@ export default function Settings() {
           >
             <div className="grow">
               <p className="">{t("settingsOpenSource")}</p>
-              <p className="underline">github.com/ademilter/vakitler</p>
+              <p className="underline decoration-zinc-300">
+                github.com/ademilter/vakitler
+              </p>
             </div>
 
             <span className="flex h-full w-10 shrink-0 items-center justify-center opacity-80">
@@ -160,7 +162,9 @@ export default function Settings() {
           >
             <div className="grow">
               <p className="">{t("settingsSourceCode")}</p>
-              <p className="underline">buymeacoffee.com/ademilter</p>
+              <p className="underline decoration-zinc-300">
+                buymeacoffee.com/ademilter
+              </p>
             </div>
 
             <span className="flex h-full w-10 shrink-0 items-center justify-center opacity-80">

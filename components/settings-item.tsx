@@ -12,7 +12,7 @@ export default function SettingsItem({
   return (
     <label
       className={clsx(
-        "flex h-10 grow cursor-pointer items-center gap-2 px-4",
+        "flex h-12 grow cursor-pointer items-center gap-2 px-4",
         "bg-white first:rounded-l-lg last:rounded-r-lg",
         isSelected && "bg-blue-50",
         "hover:bg-blue-50"

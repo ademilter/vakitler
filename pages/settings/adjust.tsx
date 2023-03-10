@@ -18,14 +18,8 @@ export default function Adjust() {
   const timeFormat = settings.timeFormat;
   const adjustments = settings.adjustments || [0, 0, 0, 0, 0, 0];
 
-  const onChangeAdjustment = async (
-    e: React.ChangeEvent<HTMLInputElement>,
-    timeIndex: number
-  ) => {
-    if (timeIndex < 0 || timeIndex > 5) return;
-
-    const value = e.target.value;
-    adjustments[timeIndex] = parseInt(value);
+  const onChangeAdjustment = async (value: number, timeIndex: number) => {
+    adjustments[timeIndex] = value;
     setSettings({
       ...settings,
       adjustments,
@@ -36,34 +30,69 @@ export default function Adjust() {
     return (
       <div
         key={`time${i}`}
-        className="flex items-center gap-px rounded-lg border border-gray-200 bg-gray-200 bg-zinc-200"
+        className="flex items-center border-b px-4 py-3 last:border-0"
       >
-        <label className="flex h-10 grow cursor-pointer items-center gap-2 bg-white px-4 first:rounded-l-lg last:rounded-r-lg">
-          <span className="flex-1">
-            {t(`times${timeKeys[i]}`)} —{" "}
+        <span className="grid grow">
+          <b>{t(`times${timeKeys[i]}`)}</b>
+          <span>
             {adjustedTime(today?.[timeKeys[i]], adjustments[i], timeFormat)}
           </span>
-          <span className="text-xs">
-            <input
-              className="appearance-none text-center outline-none"
-              type="number"
-              max={60}
-              min={-60}
-              value={adjustments[i]}
-              onChange={e => onChangeAdjustment(e, i)}
-            />
+        </span>
+
+        <span className="flex items-center gap-4">
+          <button type="button" onClick={() => onChangeAdjustment(0, i)}>
+            {adjustments[i]}
+          </button>
+
+          <span className="flex items-center rounded border border-zinc-200 bg-white">
+            <button
+              className="flex h-8 w-8 items-center justify-center"
+              type="button"
+              onClick={() => onChangeAdjustment(adjustments[i] - 1, i)}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+            </button>
+            <button
+              className="flex h-8 w-8 items-center justify-center border-l border-l-zinc-200"
+              type="button"
+              onClick={() => onChangeAdjustment(adjustments[i] + 1, i)}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+            </button>
           </span>
-        </label>
+        </span>
       </div>
     );
   });
 
   return (
     <Container className="flex h-full flex-col gap-6 py-10">
-      <div className="grid gap-6 text-sm">
-        <div>{t("settingsCustomAdjustmentsDetails")}</div>
-        {Times}
-      </div>
+      <p>{t("settingsCustomAdjustmentsDetails")}</p>
+
+      <div className="grid rounded-lg border border-zinc-200">{Times}</div>
 
       <Link
         href="/settings"
