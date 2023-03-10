@@ -3,16 +3,9 @@ import Container from "@/components/container";
 import { motion } from "framer-motion";
 import { cx } from "@/lib/utils";
 import { useContext } from "react";
-import { DateTime } from "luxon";
 import { CommonStoreContext } from "@/stores/common";
 import useTranslation from "next-translate/useTranslation";
-
-function formatTime(time: string = "00:00", format: "12" | "24") {
-  if (format === "12") {
-    return DateTime.fromFormat(time, "HH:mm").toFormat("hh:mm a").toLowerCase();
-  }
-  return time;
-}
+import { adjustedTime } from "@/lib/utils";
 
 export default function TimeListRow({
   time,
@@ -23,8 +16,11 @@ export default function TimeListRow({
 }) {
   const { t } = useTranslation("common");
 
-  const { times, settings: { timeFormat } } = useContext(CommonStoreContext);
+  const { times, settings: { timeFormat, adjustments } } = useContext(CommonStoreContext);
+  const adjustment = adjustments[index];
   const value = times?.today[time];
+
+  const adjustedValue = adjustedTime(value, adjustment, timeFormat);
 
   const now = times?.time?.now;
   const isTimeActive = now === time;
@@ -85,7 +81,7 @@ export default function TimeListRow({
             />
           )}
           <h5 className="capitalize leading-none">{t(`times${time}`)}</h5>
-          <h4 className="tabular-nums leading-none">{formatTime(value, timeFormat)}</h4>
+          <h4 className="tabular-nums leading-none">{adjustedValue}</h4>
         </div>
       </Container>
     </motion.div>

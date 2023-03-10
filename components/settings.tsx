@@ -104,6 +104,27 @@ export default function Settings() {
           </SettingsItem>
         </div>
 
+        <div className="grid h-12 grid-cols-2 rounded-lg border border-gray-300 bg-zinc-100">
+          <SettingsItem
+            isSelected={lang === "tr"}
+            name="lang"
+            value="tr"
+            checked={lang === "tr"}
+            onChange={onChangeLang}
+          >
+            {t("settingsTr")}
+          </SettingsItem>
+          <SettingsItem
+            isSelected={lang === "en"}
+            name="lang"
+            value="en"
+            checked={lang === "en"}
+            onChange={onChangeLang}
+          >
+            {t("settingsEn")}
+          </SettingsItem>
+        </div>
+
         <header className="flex justify-end">
           <button
             type="button"

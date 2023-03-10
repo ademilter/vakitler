@@ -17,6 +17,17 @@ export default function Settings() {
   const region = settings.region && settings.region[regionKey];
   const country = settings.country && settings.country[countryKey];
   const timeFormat = settings.timeFormat;
+  const adjustments = (settings.adjustments || []).map((a) => {
+    if (a <= 0) return a;
+    if (a > 0) return `+${a}`;
+  });
+
+  const adjustmentsAsText = () => {
+    if (adjustments.length === 0 || adjustments.every(a => a === 0)) {
+      return t("settingsNoAdjustments");
+    }
+    return adjustments.join(", ");
+  }
 
   const onChangeLang = async (e: React.ChangeEvent<HTMLInputElement>) => {
     await setLanguage(e.target.value);
@@ -28,7 +39,6 @@ export default function Settings() {
       ...settings,
       timeFormat: e.target.value as typeof settings.timeFormat
     });
-    localStorage.setItem(LOCAL_KEYS.TimeFormat, e.target.value);
   };
 
   return (
@@ -108,6 +118,13 @@ export default function Settings() {
             {t("settingsTimeFormat24")}
           </SettingsItem>
         </div>
+
+        <Link href="/settings/adjust" className="flex items-center gap-px rounded-lg border border-gray-200 bg-gray-200 bg-zinc-200">
+          <label className="flex h-10 grow cursor-pointer items-center gap-2 px-4 bg-white first:rounded-l-lg last:rounded-r-lg hover:bg-blue-50">
+            <span className="flex-1">{t("settingsCustomAdjustments")}</span>
+            <span className="text-xs">{adjustmentsAsText()}</span>
+          </label>
+        </Link>
 
         <div className="space-y-px rounded-lg border border-gray-200 bg-zinc-200">
           <a

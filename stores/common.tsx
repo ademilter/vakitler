@@ -20,6 +20,7 @@ interface ICommonStore {
     region: undefined | IRegion;
     city: undefined | ICity;
     timeFormat: "12" | "24";
+    adjustments: number[];
   };
   _setSettings: (value: ICommonStore["_settings"]) => void;
   settings: {
@@ -27,7 +28,9 @@ interface ICommonStore {
     region: undefined | IRegion;
     city: undefined | ICity;
     timeFormat: "12" | "24";
+    adjustments: number[];
   };
+  saveSettings: (value: ICommonStore["_settings"]) => void;
   changeSettings: (value: ICommonStore["_settings"]) => Promise<void>;
   times: undefined | Times;
   localTime: DateTime;
@@ -49,6 +52,7 @@ export const CommonStoreContext = createContext<ICommonStore>({
     region: undefined,
     city: undefined,
     timeFormat: "24",
+    adjustments: [0, 0, 0, 0, 0, 0],
   },
   _setSettings: () => {},
   settings: {
@@ -56,7 +60,9 @@ export const CommonStoreContext = createContext<ICommonStore>({
     region: undefined,
     city: undefined,
     timeFormat: "24",
+    adjustments: [0, 0, 0, 0, 0, 0],
   },
+  saveSettings: () => {},
   changeSettings: () => Promise.resolve(),
   times: undefined,
   localTime: DateTime.local(),
@@ -90,12 +96,14 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
     region: undefined,
     city: undefined,
     timeFormat: "24",
+    adjustments: [0, 0, 0, 0, 0, 0],
   });
   const [_settings, _setSettings] = useState<ICommonStore["settings"]>({
     country: undefined,
     region: undefined,
     city: undefined,
     timeFormat: "24",
+    adjustments: [0, 0, 0, 0, 0, 0],
   });
 
   const [times, setTimes] = useState<ICommonStore["times"]>();
@@ -126,9 +134,13 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
     }
   ) as keyof ICity;
 
-  const changeSettings = async (settings: ICommonStore["_settings"]) => {
+  const saveSettings = (settings: ICommonStore["_settings"]) => {
     setSettings(settings);
     localStorage.setItem(LOCAL_KEYS.Settings, JSON.stringify(settings));
+  }
+
+  const changeSettings = async (settings: ICommonStore["_settings"]) => {
+    saveSettings(settings);
     await fetchData(settings.city?.IlceID as string);
   };
 
@@ -209,6 +221,7 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
         devLocalTime,
         setDevLocalTime,
         settings,
+        saveSettings,
         changeSettings,
         _settings,
         _setSettings,
