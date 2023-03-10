@@ -24,5 +24,7 @@
   "settingsOpenSource": "Bu proje ücretsiz ve açık kaynaklıdır",
   "settingsSourceCode": "Desteğiniz için teşekkür ederim",
   "settingsSave": "Kaydet",
-  "settingsCancel": "İptal"
+  "settingsCancel": "İptal",
+  "settingsTimeFormat12": "12 saat biçimi",
+  "settingsTimeFormat24": "24 saat biçimi"
 }
