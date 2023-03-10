@@ -1,5 +1,10 @@
 export type TypeTimer = [number, number, number];
 
+export enum TimeFormat {
+  Twelve = "12",
+  TwentyFour = "24",
+}
+
 export interface ICountry {
   UlkeAdi: string; // "ABD",
   UlkeAdiEn: string; // "USA",

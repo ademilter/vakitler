@@ -10,7 +10,8 @@ export default function Country() {
   const { t } = useTranslation("common");
   const { push } = useRouter();
 
-  const { cityKey, changeSettings, _settings } = useContext(CommonStoreContext);
+  const { _settings, fetchData, setSettings, settings } =
+    useContext(CommonStoreContext);
 
   const [data, setData] = useState<ICity[]>([]);
   const [loading, setLoading] = useState(false);
@@ -49,16 +50,20 @@ export default function Country() {
           onChange={async id => {
             const city = data.find(o => o.IlceID === id) as ICity;
 
-            await changeSettings({
-              ..._settings,
+            setSettings({
+              ...settings,
+              country: _settings.country,
+              region: _settings.region,
               city,
             });
+
+            await fetchData(city.IlceID);
 
             await push(`/`);
           }}
           data={data.map(c => ({
             value: c.IlceID,
-            label: c[cityKey],
+            label: c[t("settingsCityKey") as keyof ICity],
           }))}
         />
       )}

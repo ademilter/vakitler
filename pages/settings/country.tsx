@@ -10,8 +10,7 @@ export default function Country() {
   const { t } = useTranslation("common");
   const { push } = useRouter();
 
-  const { countryKey, _settings, _setSettings } =
-    useContext(CommonStoreContext);
+  const { _settings, _setSettings } = useContext(CommonStoreContext);
 
   const [data, setData] = useState<ICountry[]>([]);
   const [loading, setLoading] = useState(false);
@@ -52,7 +51,7 @@ export default function Country() {
         }}
         data={data.map(c => ({
           value: c.UlkeID,
-          label: c[countryKey],
+          label: c[t("settingsCountryKey") as keyof ICountry],
         }))}
       />
     </Container>

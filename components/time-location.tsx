@@ -1,16 +1,11 @@
 import Link from "next/link";
-import { useContext } from "react";
-import { CommonStoreContext } from "@/stores/common";
 import useTranslation from "next-translate/useTranslation";
+import useLocations from "@/hooks/use-locations";
 
 export default function TimeLocation() {
   const { lang } = useTranslation("common");
-  const { settings, countryKey, regionKey, cityKey } =
-    useContext(CommonStoreContext);
 
-  const city = settings.city && settings.city[cityKey];
-  const region = settings.region && settings.region[regionKey];
-  const country = settings.country && settings.country[countryKey];
+  const { city, country, region } = useLocations();
 
   return (
     <Link

@@ -16,9 +16,13 @@ export default function TimeListRow({
 }) {
   const { t } = useTranslation("common");
 
-  const { times, settings: { timeFormat, adjustments } } = useContext(CommonStoreContext);
-  const adjustment = adjustments[index];
-  const value = times?.today[time];
+  const {
+    times,
+    settings: { timeFormat, adjustments },
+  } = useContext(CommonStoreContext);
+
+  const adjustment = adjustments && adjustments[index];
+  const value = times?.today && times?.today?.[time];
 
   const adjustedValue = adjustedTime(value, adjustment, timeFormat);
 

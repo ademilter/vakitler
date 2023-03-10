@@ -5,14 +5,16 @@ import { cx } from "@/lib/utils";
 const shouldShowTimePicker = process.env.NODE_ENV !== "production";
 
 export default function TimeTravel() {
-  const { devLocalTime, setDevLocalTime } = useContext(CommonStoreContext);
+  const { times } = useContext(CommonStoreContext);
+  const timeTravel = times?.timeTravel || [0, 0, 0];
 
   const [show, setShow] = useState(false);
 
   const onNowClick = useCallback(() => {
-    setDevLocalTime([0, 0, 0]);
-  }, [setDevLocalTime]);
+    times?.updateTimeTravel([0, 0, 0]);
+  }, [times]);
 
+  if (!times) return null;
   if (!shouldShowTimePicker) return null;
 
   return (
@@ -35,33 +37,33 @@ export default function TimeTravel() {
         <input
           type="number"
           className="h-8 w-12 rounded-lg bg-zinc-100 pl-2"
-          value={devLocalTime[0]}
+          defaultValue={timeTravel[0]}
           onChange={e => {
             const value = parseInt(e.target.value);
             if (!isNaN(value)) {
-              setDevLocalTime([value, devLocalTime[1], devLocalTime[2]]);
+              times.updateTimeTravel([value, timeTravel[1], timeTravel[2]]);
             }
           }}
         />
         <input
           type="number"
           className="h-8 w-12 rounded-lg bg-zinc-100 pl-2"
-          value={devLocalTime[1]}
+          defaultValue={timeTravel[1]}
           onChange={e => {
             const value = parseInt(e.target.value);
             if (!isNaN(value)) {
-              setDevLocalTime([devLocalTime[0], value, devLocalTime[2]]);
+              times.updateTimeTravel([timeTravel[0], value, timeTravel[2]]);
             }
           }}
         />
         <input
           type="number"
           className="h-8 w-12 rounded-lg bg-zinc-100 pl-2"
-          value={devLocalTime[2]}
+          defaultValue={timeTravel[2]}
           onChange={e => {
             const value = parseInt(e.target.value);
             if (!isNaN(value)) {
-              setDevLocalTime([devLocalTime[0], devLocalTime[1], value]);
+              times.updateTimeTravel([timeTravel[0], timeTravel[1], value]);
             }
           }}
         />

@@ -19,8 +19,14 @@ export function secondSplit(second: number): TypeTimer {
   ];
 }
 
-export function adjustedTime(baseTime: string = "00:00", adjustment: number, timeFormat: "12" | "24") {
+export function adjustedTime(
+  baseTime: string = "00:00",
+  adjustment: number = 0,
+  timeFormat: "12" | "24"
+) {
   const time = DateTime.fromFormat(baseTime, "HH:mm");
   const newTime = time.plus({ minutes: adjustment });
-  return newTime.toFormat(timeFormat === "12" ? "hh:mm a" : "HH:mm").toLowerCase();
+  return newTime
+    .toFormat(timeFormat === "12" ? "hh:mm a" : "HH:mm")
+    .toLowerCase();
 }
