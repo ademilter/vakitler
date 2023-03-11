@@ -45,7 +45,13 @@ const SettingsList = ({
   }, [data, pushFirst]);
 
   const results = useMemo(() => {
-    return q ? fuse.search(q).map(o => o.item) : [...pushFirstData, ...data];
+    const removeFirstDataFromData = data.filter(
+      d => !pushFirstData.find(p => p.value === d.value)
+    );
+
+    return q
+      ? fuse.search(q).map(o => o.item)
+      : [...pushFirstData, ...removeFirstDataFromData];
   }, [fuse, q, data, pushFirstData]);
 
   return (
