@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import Container from "@/components/container";
 import useTranslation from "next-translate/useTranslation";
 import SettingsList from "@/components/settings-list";
-import { ICity, IRegion } from "@/lib/types";
+import { ICity } from "@/lib/types";
 import { useRouter } from "next/router";
 import { CommonStoreContext } from "@/stores/common";
 
@@ -14,9 +14,9 @@ export default function Country() {
     useContext(CommonStoreContext);
 
   const [data, setData] = useState<ICity[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [_, setLoading] = useState(false);
 
-  const fetchData1 = async () => {
+  const fetchCityData = useCallback(async () => {
     try {
       setLoading(true);
 
@@ -32,12 +32,12 @@ export default function Country() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [_settings.region?.SehirID]);
 
   useEffect(() => {
     if (!_settings.region) return;
-    fetchData1();
-  }, [_settings]);
+    fetchCityData();
+  }, [_settings, fetchCityData]);
 
   return (
     <Container className="py-6">
@@ -58,7 +58,6 @@ export default function Country() {
             });
 
             await fetchData(city.IlceID);
-
             await push(`/`);
           }}
           data={data.map(c => ({

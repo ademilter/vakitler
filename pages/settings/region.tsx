@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import Container from "@/components/container";
 import useTranslation from "next-translate/useTranslation";
 import SettingsList from "@/components/settings-list";
@@ -13,9 +13,9 @@ export default function Country() {
   const { _settings, _setSettings } = useContext(CommonStoreContext);
 
   const [data, setData] = useState<IRegion[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [_, setLoading] = useState(false);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       setLoading(true);
 
@@ -27,16 +27,16 @@ export default function Country() {
 
       setData(data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       setLoading(false);
     }
-  };
+  }, [_settings.country?.UlkeID]);
 
   useEffect(() => {
     if (!_settings.country) return;
     fetchData();
-  }, [_settings]);
+  }, [_settings, fetchData]);
 
   return (
     <Container className="py-6">
