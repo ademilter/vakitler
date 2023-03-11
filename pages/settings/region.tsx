@@ -56,6 +56,7 @@ export default function Country() {
             value: c.SehirID,
             label: c[t("settingsRegionKey") as keyof IRegion],
           }))}
+          supportBack
         />
       )}
     </Container>

@@ -65,6 +65,7 @@ export default function Country() {
             value: c.IlceID,
             label: c[t("settingsCityKey") as keyof ICity],
           }))}
+          supportBack
         />
       )}
     </Container>

@@ -57,6 +57,7 @@ export enum ICON_NAMES {
   sd5 = "sd5",
   sd6 = "sd6",
   ictima = "ictima",
+  back = "back",
 }
 
 const PATHS = {
@@ -711,6 +712,13 @@ const PATHS = {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
+    </>
+  ),
+  [ICON_NAMES.back]: (
+    <>
+      <path d="M5 12l14 0" stroke="black" />
+      <path d="M5 12l6 6" stroke="black" />
+      <path d="M5 12l6 -6" stroke="black" />
     </>
   ),
 };
