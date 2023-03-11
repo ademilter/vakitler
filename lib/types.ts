@@ -44,3 +44,14 @@ export enum TimeNames {
   Aksam = "Aksam",
   Yatsi = "Yatsi",
 }
+
+export interface IRelease {
+  id: number;
+  draft: boolean;
+  name: string;
+  body: string;
+  prerelease: boolean;
+  published_at: string;
+  tag_name: string;
+  url: string;
+}

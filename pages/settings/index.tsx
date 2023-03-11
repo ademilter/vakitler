@@ -40,7 +40,7 @@ export default function Settings() {
   };
 
   return (
-    <Container className="flex h-full flex-col gap-6 py-10">
+    <Container className="flex min-h-full flex-col gap-6 py-10">
       <div className="grid gap-6">
         <Link
           href="/settings/country"

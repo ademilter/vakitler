@@ -31,5 +31,6 @@
   "settingsTimeFormat24": "24-hour format",
   "settingsCustomAdjustments": "Custom Adjustments",
   "settingsCustomAdjustmentsDetails": "Make fine adjustments to prayer times for your personal preferences or local differences.",
-  "settingsNoAdjustments": "No adjustments"
+  "settingsNoAdjustments": "No adjustments",
+  "releaseBackButton": "Back"
 }

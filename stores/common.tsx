@@ -1,6 +1,13 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { Times } from "@/lib/model";
-import { ICity, ICountry, IRegion, TimeFormat, TypeTimer } from "@/lib/types";
+import {
+  ICity,
+  ICountry,
+  IRegion,
+  IRelease,
+  TimeFormat,
+  TypeTimer,
+} from "@/lib/types";
 import { useRouter } from "next/router";
 import useTranslation from "next-translate/useTranslation";
 import { DateTime } from "luxon";
@@ -33,6 +40,7 @@ interface ICommonStore {
   times: undefined | Times;
   rawTimes: undefined | Times;
   timer: TypeTimer;
+  releases: IRelease[];
 }
 
 export const CommonStoreContext = createContext<ICommonStore>({
@@ -57,6 +65,7 @@ export const CommonStoreContext = createContext<ICommonStore>({
   rawTimes: undefined,
   times: undefined,
   timer: [0, 0, 0],
+  releases: [],
 });
 
 export function CommonStoreProvider({ children }: { children: ReactNode }) {
@@ -81,9 +90,17 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
     adjustments: [0, 0, 0, 0, 0, 0],
   });
 
+  const [releases, setReleases] = useState<ICommonStore["releases"]>([]);
+
   const [times, setTimes] = useState<ICommonStore["times"]>();
   const [rawTimes, setRawTimes] = useState<ICommonStore["rawTimes"]>();
   const [timer, setTimer] = useState<TypeTimer>([0, 0, 0]);
+
+  const fetchReleases = async () => {
+    const res = await fetch("/api/releases");
+    const data = await res.json();
+    setReleases(data);
+  };
 
   const fetchData = async (cityID: string) => {
     if (!cityID) {
@@ -120,6 +137,7 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
       setSettings(parsedSettings);
       setTimes(new Times(JSON.parse(data), parsedSettings.adjustments));
       setRawTimes(new Times(JSON.parse(data)));
+      await fetchReleases();
     } else {
       await router.push("/settings/country");
     }
@@ -180,6 +198,7 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
         rawTimes,
         times,
         timer,
+        releases,
       }}
     >
       {children}
