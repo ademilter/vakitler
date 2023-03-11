@@ -50,12 +50,12 @@ const SettingsList = ({
 
   return (
     <div className="">
-      <div className="relative sticky top-0 -mx-2 bg-white p-2">
+      <div className="sticky top-0 p-2 -mx-2 bg-white">
         {!backButtonProps?.hidden && (
           <div className="flex items-center gap-1">
             <button
               type="button"
-              className="flex h-12 shrink-0 items-center"
+              className="flex items-center h-12 shrink-0"
               onClick={() => router.back()}
               {...backButtonProps}
             >
@@ -80,7 +80,7 @@ const SettingsList = ({
           <input
             type="text"
             autoFocus
-            className="h-12 w-full rounded-lg border px-4"
+            className="w-full h-12 px-4 border rounded-lg"
             {...inputProps}
             value={q}
             onChange={e => setQ(e.target.value)}
@@ -93,7 +93,7 @@ const SettingsList = ({
           <button
             key={item.value}
             type="button"
-            className="flex h-12 w-full items-center rounded-lg bg-zinc-100 px-4"
+            className="flex items-center w-full h-12 px-4 rounded-lg bg-zinc-100"
             onClick={() => onChange(item.value)}
           >
             {item.label}
