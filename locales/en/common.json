@@ -5,6 +5,7 @@
   "timesIkindi": "Asr",
   "timesAksam": "Maghrib",
   "timesYatsi": "Isha",
+  "timesJumuah": "Jumu'ah",
   "timerReminder": "Time to {{time}}",
   "timerHour": "<0>{{hour}}</0> h",
   "timerMinute": "<0>{{minute}}</0> min",

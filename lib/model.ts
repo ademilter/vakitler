@@ -185,4 +185,10 @@ export class Time {
     );
     return name.split(".")[0];
   }
+
+  get isJumuah(): boolean {
+    return (
+      DateTime.fromFormat(this.MiladiTarihKisa, "dd.MM.yyyy").weekday === 5
+    );
+  }
 }

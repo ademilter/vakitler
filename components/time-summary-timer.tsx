@@ -13,6 +13,11 @@ export default function TimeSummaryTimer() {
     <b className="tabular-nums" {...props} />
   );
 
+  let timeName = t(`times${times?.time.next as TimeNames}`)
+  if (times?.today?.isJumuah && times?.time.next === TimeNames.Ogle) {
+    timeName = t("timesJumuah");
+  }
+
   return (
     <div className="relative z-10 flex flex-col items-center px-6 py-2 text-xl">
       <span className="absolute inset-0 rounded-2xl bg-current opacity-10" />
@@ -21,7 +26,7 @@ export default function TimeSummaryTimer() {
         <Trans
           i18nKey="timerReminder"
           values={{
-            time: t(`times${times?.time.next as TimeNames}`),
+            time: timeName,
           }}
           ns={"common"}
         />
