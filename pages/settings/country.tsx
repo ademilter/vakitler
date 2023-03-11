@@ -13,7 +13,7 @@ export default function Country() {
   const { _settings, _setSettings } = useContext(CommonStoreContext);
 
   const [data, setData] = useState<ICountry[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [_, setLoading] = useState(false);
 
   const fetchData = async () => {
     try {
