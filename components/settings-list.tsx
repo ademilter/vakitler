@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import Fuse from "fuse.js";
+import { motion } from "framer-motion";
 import useTranslation from "next-translate/useTranslation";
 
 type Item = { value: string; label: string };
@@ -57,45 +58,47 @@ const SettingsList = ({
   }, [fuse, q, data, pushFirstData]);
 
   return (
-    <div className="">
-      <div className="sticky top-0 p-2 -mx-2 bg-white">
+    <div>
+      <motion.div
+        className="sticky top-0 p-2 -mx-2 bg-white"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
         {!backButtonProps?.hidden && (
-          <div className="flex items-center gap-1">
-            <button
-              type="button"
-              className="flex items-center h-12 shrink-0"
-              onClick={() => router.back()}
-              {...backButtonProps}
+          <button
+            type="button"
+            className="flex items-center h-12 shrink-0"
+            onClick={() => router.back()}
+            {...backButtonProps}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <polyline points="15 6 9 12 15 18" />
-              </svg>
+              <polyline points="15 6 9 12 15 18" />
+            </svg>
 
-              <span>{backButtonText}</span>
-            </button>
-          </div>
+            <span>{backButtonText}</span>
+          </button>
         )}
-        <div>
-          <input
-            type="text"
-            autoFocus
-            className="w-full h-12 px-4 transition-colors border rounded-lg outline-none hover:border-zinc-300 focus:border-zinc-400"
-            {...inputProps}
-            value={q}
-            onChange={e => setQ(e.target.value)}
-          />
-        </div>
-      </div>
+
+        <input
+          type="text"
+          autoFocus
+          className="w-full h-12 px-4 transition-colors border rounded-lg outline-none hover:border-zinc-300 focus:border-zinc-400"
+          {...inputProps}
+          value={q}
+          onChange={e => setQ(e.target.value)}
+        />
+      </motion.div>
 
       <div className="space-y-1">
         {loading ? (
