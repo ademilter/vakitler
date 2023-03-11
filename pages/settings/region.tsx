@@ -13,7 +13,7 @@ export default function Country() {
   const { _settings, _setSettings } = useContext(CommonStoreContext);
 
   const [data, setData] = useState<IRegion[]>([]);
-  const [_, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const fetchData = useCallback(async () => {
     try {
@@ -40,24 +40,23 @@ export default function Country() {
 
   return (
     <Container className="py-6">
-      {data.length > 0 && (
-        <SettingsList
-          inputProps={{
-            placeholder: t("settingsSearchRegion"),
-            name: "region",
-          }}
-          pushFirst={["539", "506"]}
-          onChange={id => {
-            const region = data.find(o => o.SehirID === id);
-            _setSettings({ ..._settings, region });
-            push(`/settings/city`);
-          }}
-          data={data.map(c => ({
-            value: c.SehirID,
-            label: c[t("settingsRegionKey") as keyof IRegion],
-          }))}
-        />
-      )}
+      <SettingsList
+        inputProps={{
+          placeholder: t("settingsSearchRegion"),
+          name: "region",
+        }}
+        pushFirst={["539", "506"]}
+        onChange={id => {
+          const region = data.find(o => o.SehirID === id);
+          _setSettings({ ..._settings, region });
+          push(`/settings/city`);
+        }}
+        loading={loading}
+        data={data.map(c => ({
+          value: c.SehirID,
+          label: c[t("settingsRegionKey") as keyof IRegion],
+        }))}
+      />
     </Container>
   );
 }

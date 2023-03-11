@@ -14,7 +14,7 @@ export default function Country() {
     useContext(CommonStoreContext);
 
   const [data, setData] = useState<ICity[]>([]);
-  const [_, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const fetchCityData = useCallback(async () => {
     try {
@@ -41,31 +41,30 @@ export default function Country() {
 
   return (
     <Container className="py-6">
-      {data.length > 0 && (
-        <SettingsList
-          inputProps={{
-            placeholder: t("settingsSearchCity"),
-            name: "city",
-          }}
-          onChange={async id => {
-            const city = data.find(o => o.IlceID === id) as ICity;
+      <SettingsList
+        inputProps={{
+          placeholder: t("settingsSearchCity"),
+          name: "city",
+        }}
+        onChange={async id => {
+          const city = data.find(o => o.IlceID === id) as ICity;
 
-            setSettings({
-              ...settings,
-              country: _settings.country,
-              region: _settings.region,
-              city,
-            });
+          setSettings({
+            ...settings,
+            country: _settings.country,
+            region: _settings.region,
+            city,
+          });
 
-            await fetchData(city.IlceID);
-            await push(`/`);
-          }}
-          data={data.map(c => ({
-            value: c.IlceID,
-            label: c[t("settingsCityKey") as keyof ICity],
-          }))}
-        />
-      )}
+          await fetchData(city.IlceID);
+          await push(`/`);
+        }}
+        loading={loading}
+        data={data.map(c => ({
+          value: c.IlceID,
+          label: c[t("settingsCityKey") as keyof ICity],
+        }))}
+      />
     </Container>
   );
 }

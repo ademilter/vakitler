@@ -13,7 +13,7 @@ export default function Country() {
   const { _settings, _setSettings } = useContext(CommonStoreContext);
 
   const [data, setData] = useState<ICountry[]>([]);
-  const [_, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -26,7 +26,7 @@ export default function Country() {
 
       setData(data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       setLoading(false);
     }
@@ -53,6 +53,7 @@ export default function Country() {
           value: c.UlkeID,
           label: c[t("settingsCountryKey") as keyof ICountry],
         }))}
+        loading={loading}
         backButtonProps={{
           hidden: true,
         }}
