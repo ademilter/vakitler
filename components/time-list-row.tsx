@@ -30,6 +30,11 @@ export default function TimeListRow({
 
   if (!times) return null;
 
+  let timeName = t(`times${time}`);
+  if (time === TimeNames.Ogle && times?.today?.isJumuah) {
+    timeName = t("timesJumuah");
+  }
+
   return (
     <motion.div
       variants={{
@@ -83,7 +88,7 @@ export default function TimeListRow({
               }}
             />
           )}
-          <h5 className="capitalize leading-none">{t(`times${time}`)}</h5>
+          <h5 className="capitalize leading-none">{timeName}</h5>
           <h4 className="tabular-nums leading-none">{formattedValue}</h4>
         </div>
       </Container>
