@@ -86,7 +86,7 @@ const SettingsList = ({
           <input
             type="text"
             autoFocus
-            className="w-full h-12 px-4 border rounded-lg"
+            className="w-full h-12 px-4 transition-colors border rounded-lg outline-none hover:border-zinc-300 focus:border-zinc-400"
             {...inputProps}
             value={q}
             onChange={e => setQ(e.target.value)}
@@ -99,7 +99,7 @@ const SettingsList = ({
           <button
             key={item.value}
             type="button"
-            className="flex items-center w-full h-12 px-4 transition-colors rounded-lg bg-zinc-100 hover:bg-zinc-200"
+            className="flex items-center w-full h-12 px-4 transition-colors border rounded-lg border-zinc-200 bg-zinc-50 hover:border-zinc-300 hover:bg-zinc-100"
             onClick={() => onChange(item.value)}
           >
             {item.label}
