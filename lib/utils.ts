@@ -20,15 +20,15 @@ export function secondSplit(second: number): TypeTimer {
   ];
 }
 
-export function adjustedTime(time: string = "00:00", adjustment: number) {
+export function adjustedTime(adjustment: number, time: string = "00:00") {
   const timeValue = DateTime.fromFormat(time, hourFormat);
   const newTime = timeValue.plus({ minutes: adjustment });
   return newTime.toFormat(hourFormat);
 }
 
 export function formattedTime(
-  baseTime: string = "00:00",
-  timeFormat: "12" | "24"
+  timeFormat: "12" | "24",
+  baseTime: string = "00:00"
 ) {
   return DateTime.fromFormat(baseTime, hourFormat)
     .toFormat(timeFormat === "12" ? hourFormat12 : hourFormat)
