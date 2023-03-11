@@ -18,7 +18,7 @@ export default function Adjust() {
   const today = rawTimes?.today;
 
   const timeFormat = settings.timeFormat;
-  const adjustments = settings.adjustments;
+  const adjustments = settings.adjustments ?? [0, 0, 0, 0, 0, 0];
   const [dirtyIndexes, setDirtyIndexes] = useState<Record<number, boolean>>({});
 
   useEffect(() => {
