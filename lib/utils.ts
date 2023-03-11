@@ -2,6 +2,7 @@ import { TypeTimer } from "@/lib/types";
 import { ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { DateTime } from "luxon";
+import { hourFormat, hourFormat12 } from "@/lib/const";
 
 export function cx(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs));
@@ -19,14 +20,17 @@ export function secondSplit(second: number): TypeTimer {
   ];
 }
 
-export function adjustedTime(
+export function adjustedTime(time: string = "00:00", adjustment: number) {
+  const timeValue = DateTime.fromFormat(time, hourFormat);
+  const newTime = timeValue.plus({ minutes: adjustment });
+  return newTime.toFormat(hourFormat);
+}
+
+export function formattedTime(
   baseTime: string = "00:00",
-  adjustment: number = 0,
   timeFormat: "12" | "24"
 ) {
-  const time = DateTime.fromFormat(baseTime, "HH:mm");
-  const newTime = time.plus({ minutes: adjustment });
-  return newTime
-    .toFormat(timeFormat === "12" ? "hh:mm a" : "HH:mm")
+  return DateTime.fromFormat(baseTime, hourFormat)
+    .toFormat(timeFormat === "12" ? hourFormat12 : hourFormat)
     .toLowerCase();
 }

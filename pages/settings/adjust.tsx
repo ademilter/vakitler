@@ -1,29 +1,59 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import Container from "@/components/container";
 import useTranslation from "next-translate/useTranslation";
 import { CommonStoreContext } from "@/stores/common";
 import { TimeNames } from "@/lib/types";
-import { adjustedTime, cx } from "@/lib/utils";
-import Link from "next/link";
+import { formattedTime, cx, adjustedTime } from "@/lib/utils";
 
 const timeKeys = Object.values(TimeNames);
 
 export default function Adjust() {
   const { t } = useTranslation("common");
+  const router = useRouter();
 
-  const { settings, times, setSettings } = useContext(CommonStoreContext);
+  const { settings, rawTimes, setSettings, fetchData } =
+    useContext(CommonStoreContext);
 
-  const today = times?.today;
+  const today = rawTimes?.today;
 
   const timeFormat = settings.timeFormat;
-  const adjustments = settings.adjustments || [0, 0, 0, 0, 0, 0];
+  const adjustments = settings.adjustments;
+  const [dirtyIndexes, setDirtyIndexes] = useState<Record<number, boolean>>({});
+
+  useEffect(() => {
+    setDirtyIndexes(
+      adjustments.reduce((acc, adj, index) => {
+        if (adj !== 0) {
+          acc[index] = true;
+        }
+        return acc;
+      }, {} as Record<number, boolean>)
+    );
+  }, [adjustments]);
+
+  const visualizeAdjustment = (i: number) => {
+    let time = today?.[timeKeys[i]];
+    if (dirtyIndexes[i]) {
+      time = adjustedTime(time, adjustments[i]);
+    }
+    return formattedTime(time, timeFormat);
+  };
 
   const onChangeAdjustment = async (value: number, timeIndex: number) => {
     adjustments[timeIndex] = value;
-    setSettings({
-      ...settings,
-      adjustments,
-    });
+    setDirtyIndexes({ ...dirtyIndexes, [timeIndex]: true });
+  };
+
+  const onSaveAdjustments = async () => {
+    if (!rawTimes) {
+      router.push("/settings");
+      return;
+    }
+
+    setSettings({ ...settings, adjustments });
+    await fetchData(settings.city?.IlceID as string);
+    router.push("/");
   };
 
   const Times = Array.from(Array(6).keys()).map(i => {
@@ -32,18 +62,16 @@ export default function Adjust() {
       <div
         key={`time${i}`}
         className={cx(
-          "flex items-center border-b bg-zinc-50 px-4 py-3 last:border-0",
+          "flex items-center border-b bg-zinc-50 px-4 py-3 first:rounded-t-lg last:rounded-b-lg last:border-0",
           isActive && "bg-white"
         )}
       >
         <span className="grid grow">
           <b>{t(`times${timeKeys[i]}`)}</b>
-          <span>
-            {adjustedTime(today?.[timeKeys[i]], adjustments[i], timeFormat)}
-          </span>
+          <span>{visualizeAdjustment(i)}</span>
         </span>
 
-        <span className="flex items-center gap-1">
+        <span className="flex items-center gap-2">
           {isActive && (
             <button
               type="button"
@@ -104,12 +132,12 @@ export default function Adjust() {
 
       <div className="grid rounded-lg border border-zinc-200">{Times}</div>
 
-      <Link
-        href="/settings"
-        className="mt-auto flex h-12 w-full items-center justify-center rounded-lg bg-current px-4"
+      <button
+        className="mt-auto flex h-12 w-full items-center justify-center rounded-lg border bg-current px-4"
+        onClick={() => onSaveAdjustments()}
       >
-        <span className="text-white">{t("settingsBack")}</span>
-      </Link>
+        <span className="text-white">{t("settingsSave")}</span>
+      </button>
     </Container>
   );
 }

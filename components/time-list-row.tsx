@@ -5,7 +5,7 @@ import { cx } from "@/lib/utils";
 import { useContext } from "react";
 import { CommonStoreContext } from "@/stores/common";
 import useTranslation from "next-translate/useTranslation";
-import { adjustedTime } from "@/lib/utils";
+import { formattedTime } from "@/lib/utils";
 
 export default function TimeListRow({
   time,
@@ -18,13 +18,12 @@ export default function TimeListRow({
 
   const {
     times,
-    settings: { timeFormat, adjustments },
+    settings: { timeFormat },
   } = useContext(CommonStoreContext);
 
-  const adjustment = adjustments && adjustments[index];
   const value = times?.today && times?.today?.[time];
 
-  const adjustedValue = adjustedTime(value, adjustment, timeFormat);
+  const formattedValue = formattedTime(value, timeFormat);
 
   const now = times?.time?.now;
   const isTimeActive = now === time;
@@ -85,7 +84,7 @@ export default function TimeListRow({
             />
           )}
           <h5 className="capitalize leading-none">{t(`times${time}`)}</h5>
-          <h4 className="tabular-nums leading-none">{adjustedValue}</h4>
+          <h4 className="tabular-nums leading-none">{formattedValue}</h4>
         </div>
       </Container>
     </motion.div>

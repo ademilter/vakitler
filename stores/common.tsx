@@ -31,6 +31,7 @@ interface ICommonStore {
   setSettings: (value: ICommonStore["_settings"]) => void;
   fetchData: (cityId: string) => Promise<void>;
   times: undefined | Times;
+  rawTimes: undefined | Times;
   timer: TypeTimer;
 }
 
@@ -53,6 +54,7 @@ export const CommonStoreContext = createContext<ICommonStore>({
   },
   setSettings: () => {},
   fetchData: () => Promise.resolve(),
+  rawTimes: undefined,
   times: undefined,
   timer: [0, 0, 0],
 });
@@ -80,9 +82,15 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
   });
 
   const [times, setTimes] = useState<ICommonStore["times"]>();
+  const [rawTimes, setRawTimes] = useState<ICommonStore["rawTimes"]>();
   const [timer, setTimer] = useState<TypeTimer>([0, 0, 0]);
 
   const fetchData = async (cityID: string) => {
+    if (!cityID) {
+      console.error("cityID is required");
+      return;
+    }
+
     try {
       setAppLoading(true);
       const url = `/api/times?cityID=${cityID}`;
@@ -91,10 +99,9 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
 
       localStorage.setItem(LOCAL_KEYS.Data, JSON.stringify(data));
 
-      const times = new Times(data);
-      setTimes(times);
+      setTimes(new Times(data, settings.adjustments));
+      setRawTimes(new Times(data));
     } catch (e) {
-      // TODO: global bir error mesaj göster
       console.error(e);
     } finally {
       setAppLoading(false);
@@ -109,10 +116,12 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
     const data = localStorage.getItem(LOCAL_KEYS.Data);
 
     if (settings && data) {
-      setSettings(JSON.parse(settings));
-      setTimes(new Times(JSON.parse(data)));
+      const parsedSettings = JSON.parse(settings);
+      setSettings(parsedSettings);
+      setTimes(new Times(JSON.parse(data), parsedSettings.adjustments));
+      setRawTimes(new Times(JSON.parse(data)));
     } else {
-      router.push("/settings/country");
+      await router.push("/settings/country");
     }
   };
 
@@ -168,6 +177,7 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
         settings,
         setSettings,
         fetchData,
+        rawTimes,
         times,
         timer,
       }}
