@@ -33,18 +33,18 @@ export default function Settings() {
   };
 
   const onChangeTimeFormat = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    await setSettings({
+    setSettings({
       ...settings,
       timeFormat: e.target.value as typeof settings.timeFormat,
     });
   };
 
   return (
-    <Container className="flex min-h-full flex-col gap-6 py-10">
+    <Container className="flex flex-col min-h-full gap-6 py-10">
       <div className="grid gap-6">
         <Link
           href="/settings/country"
-          className="flex rounded-lg border border-zinc-200 p-4 hover:bg-blue-50"
+          className="flex p-4 border rounded-lg border-zinc-200 hover:bg-blue-50"
         >
           <div className="grow">
             <h5 className="">{t("settingsCurrentLocation")}</h5>
@@ -57,7 +57,7 @@ export default function Settings() {
             </div>
           </div>
 
-          <span className="flex h-full w-10 shrink-0 items-center justify-center opacity-60">
+          <span className="flex items-center justify-center w-10 h-full shrink-0 opacity-60">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -75,7 +75,7 @@ export default function Settings() {
           </span>
         </Link>
 
-        <div className="flex items-center gap-px rounded-lg border border-zinc-200 bg-zinc-200 bg-zinc-200">
+        <div className="flex items-center gap-px border rounded-lg border-zinc-200 bg-zinc-200">
           <SettingsItem
             isSelected={lang === "tr"}
             name="lang"
@@ -96,7 +96,7 @@ export default function Settings() {
           </SettingsItem>
         </div>
 
-        <div className="flex items-center gap-px rounded-lg border border-zinc-200 bg-zinc-200 bg-zinc-200">
+        <div className="flex items-center gap-px border rounded-lg border-zinc-200 bg-zinc-200">
           <SettingsItem
             isSelected={timeFormat === TimeFormat.Twelve}
             name="timeFormat"
@@ -119,19 +119,19 @@ export default function Settings() {
 
         <Link
           href="/settings/adjust"
-          className="flex items-center gap-px rounded-lg border border-zinc-200 bg-zinc-200 bg-zinc-200"
+          className="flex items-center gap-px border rounded-lg border-zinc-200 bg-zinc-200"
         >
-          <label className="flex h-12 grow cursor-pointer items-center gap-2 rounded-lg bg-white px-4 hover:bg-blue-50">
+          <label className="flex items-center h-12 gap-2 px-4 bg-white rounded-lg cursor-pointer grow hover:bg-blue-50">
             <span className="grow">{t("settingsCustomAdjustments")}</span>
             <span className="">{adjustmentsAsText()}</span>
           </label>
         </Link>
 
-        <div className="space-y-px rounded-lg border border-zinc-200 bg-zinc-200">
+        <div className="space-y-px border rounded-lg border-zinc-200 bg-zinc-200">
           <a
             href="https://github.com/ademilter/vakitler"
             target="_blank"
-            className="flex items-center rounded-t-lg bg-white p-4 hover:bg-blue-50"
+            className="flex items-center p-4 bg-white rounded-t-lg hover:bg-blue-50"
           >
             <div className="grow">
               <p className="">{t("settingsOpenSource")}</p>
@@ -140,7 +140,7 @@ export default function Settings() {
               </p>
             </div>
 
-            <span className="flex h-full w-10 shrink-0 items-center justify-center opacity-80">
+            <span className="flex items-center justify-center w-10 h-full shrink-0 opacity-80">
               <svg
                 aria-hidden="true"
                 viewBox="0 0 16 16"
@@ -158,7 +158,7 @@ export default function Settings() {
           <a
             href="https://www.buymeacoffee.com/ademilter"
             target="_blank"
-            className="flex items-center rounded-b-lg bg-white p-4 hover:bg-blue-50"
+            className="flex items-center p-4 bg-white rounded-b-lg hover:bg-blue-50"
           >
             <div className="grow">
               <p className="">{t("settingsSourceCode")}</p>
@@ -167,7 +167,7 @@ export default function Settings() {
               </p>
             </div>
 
-            <span className="flex h-full w-10 shrink-0 items-center justify-center opacity-80">
+            <span className="flex items-center justify-center w-10 h-full shrink-0 opacity-80">
               <svg
                 width="20"
                 viewBox="0 0 884 1279"
@@ -190,7 +190,7 @@ export default function Settings() {
 
       <Link
         href="/"
-        className="mt-auto flex h-12 w-full items-center justify-center rounded-lg bg-current px-4"
+        className="flex items-center justify-center w-full h-12 px-4 mt-auto bg-current rounded-lg"
       >
         <span className="text-white">{t("settingsSave")}</span>
       </Link>
