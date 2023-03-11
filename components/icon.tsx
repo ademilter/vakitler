@@ -22,6 +22,8 @@ export default function Icon({ size = 32, icon, ...props }: IconProps) {
   );
 }
 
+// bu ikon seti sadece vakitlere ait ikonları içeriyor
+// diğer ikonları buraya EKLEMEyiniz
 export enum ICON_NAMES {
   Imsak = "Imsak",
   Gunes = "Gunes",

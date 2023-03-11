@@ -37,7 +37,7 @@ export default function Country() {
   }, []);
 
   return (
-    <Container className="py-10">
+    <Container className="py-6">
       <SettingsList
         inputProps={{
           placeholder: t("settingsSearchCountry"),
@@ -53,6 +53,9 @@ export default function Country() {
           value: c.UlkeID,
           label: c[t("settingsCountryKey") as keyof ICountry],
         }))}
+        backButtonProps={{
+          hidden: true,
+        }}
       />
     </Container>
   );

@@ -40,7 +40,7 @@ export default function Country() {
   }, [_settings]);
 
   return (
-    <Container className="py-10">
+    <Container className="py-6">
       {data.length > 0 && (
         <SettingsList
           inputProps={{

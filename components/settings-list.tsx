@@ -1,5 +1,7 @@
 import React, { useMemo, useState } from "react";
+import { useRouter } from "next/router";
 import Fuse from "fuse.js";
+import useTranslation from "next-translate/useTranslation";
 
 type Item = { value: string; label: string };
 
@@ -8,6 +10,8 @@ interface ISelect {
   data?: Item[];
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
   pushFirst?: string[];
+  backButtonText?: string;
+  backButtonProps?: React.ButtonHTMLAttributes<HTMLButtonElement>;
 }
 
 const options = {
@@ -20,7 +24,14 @@ const SettingsList = ({
   data = [],
   inputProps = {},
   pushFirst = [],
+  backButtonText = undefined,
+  backButtonProps = undefined,
 }: ISelect) => {
+  const router = useRouter();
+  const { t } = useTranslation("common");
+
+  backButtonText = backButtonText ?? t("settingsBack");
+
   const [q, setQ] = useState<string>("");
 
   const fuse = useMemo(() => {
@@ -39,15 +50,42 @@ const SettingsList = ({
 
   return (
     <div className="">
-      <div className="sticky top-0 -mx-2 bg-white p-2">
-        <input
-          type="text"
-          autoFocus
-          className="h-12 w-full rounded-lg border px-4"
-          {...inputProps}
-          value={q}
-          onChange={e => setQ(e.target.value)}
-        />
+      <div className="relative sticky top-0 -mx-2 bg-white p-2">
+        {!backButtonProps?.hidden && (
+          <div className="flex items-center gap-1">
+            <button
+              type="button"
+              className="flex h-12 shrink-0 items-center"
+              onClick={() => router.back()}
+              {...backButtonProps}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <polyline points="15 6 9 12 15 18" />
+              </svg>
+              <span>{backButtonText}</span>
+            </button>
+          </div>
+        )}
+        <div>
+          <input
+            type="text"
+            autoFocus
+            className="h-12 w-full rounded-lg border px-4"
+            {...inputProps}
+            value={q}
+            onChange={e => setQ(e.target.value)}
+          />
+        </div>
       </div>
 
       <div className="space-y-1">
