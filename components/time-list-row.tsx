@@ -32,7 +32,7 @@ export default function TimeListRow({
 
   let timeName = t(`times${time}`);
   if (time === TimeNames.Ogle && times?.today?.isJumuah) {
-    timeName = t("timesJumuah");
+    timeName = `${t("timesJumuah")} 🕌`;
   }
 
   return (

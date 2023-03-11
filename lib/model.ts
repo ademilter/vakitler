@@ -187,6 +187,8 @@ export class Time {
   }
 
   get isJumuah(): boolean {
-    return DateTime.fromFormat(this.MiladiTarihKisa, "dd.MM.yyyy").weekday === 5;
+    return (
+      DateTime.fromFormat(this.MiladiTarihKisa, "dd.MM.yyyy").weekday === 5
+    );
   }
 }
