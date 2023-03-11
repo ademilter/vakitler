@@ -99,7 +99,7 @@ const SettingsList = ({
           <button
             key={item.value}
             type="button"
-            className="flex items-center w-full h-12 px-4 rounded-lg bg-zinc-100"
+            className="flex items-center w-full h-12 px-4 transition-colors rounded-lg bg-zinc-100 hover:bg-zinc-200"
             onClick={() => onChange(item.value)}
           >
             {item.label}
