@@ -10,7 +10,6 @@ interface ISelect {
   data?: Item[];
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
   pushFirst?: string[];
-  backButton?: boolean;
   backButtonText?: string;
   backButtonProps?: React.ButtonHTMLAttributes<HTMLButtonElement>;
 }
@@ -25,13 +24,13 @@ const SettingsList = ({
   data = [],
   inputProps = {},
   pushFirst = [],
-  backButtonText = "Back",
+  backButtonText = undefined,
   backButtonProps = undefined,
 }: ISelect) => {
   const router = useRouter();
   const { t } = useTranslation("common");
 
-  backButtonText = t("settingsBack");
+  backButtonText = backButtonText ?? t("settingsBack");
 
   const [q, setQ] = useState<string>("");
 
