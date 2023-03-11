@@ -102,7 +102,6 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
       setTimes(new Times(data, settings.adjustments));
       setRawTimes(new Times(data));
     } catch (e) {
-      // TODO: global bir error mesaj göster
       console.error(e);
     } finally {
       setAppLoading(false);
@@ -122,7 +121,7 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
       setTimes(new Times(JSON.parse(data), parsedSettings.adjustments));
       setRawTimes(new Times(JSON.parse(data)));
     } else {
-      router.push("/settings/country");
+      await router.push("/settings/country");
     }
   };
 

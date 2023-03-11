@@ -11,7 +11,10 @@ export class Times {
   public timeTravel: [number, number, number];
   public adjustments: number[];
 
-  constructor(data: ITime[] = [], adjustments: number[] = timeNames.map(() => 0)) {
+  constructor(
+    data: ITime[] = [],
+    adjustments: number[] = timeNames.map(() => 0)
+  ) {
     this.adjustments = adjustments;
     this.times = data.map(day => new Time(day));
     this.localTime = DateTime.local();
