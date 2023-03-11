@@ -11,6 +11,7 @@ interface ISelect {
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
   pushFirst?: string[];
   backButtonText?: string;
+  loading?: boolean;
   backButtonProps?: React.ButtonHTMLAttributes<HTMLButtonElement>;
 }
 
@@ -24,6 +25,7 @@ const SettingsList = ({
   data = [],
   inputProps = {},
   pushFirst = [],
+  loading = true,
   backButtonText = undefined,
   backButtonProps = undefined,
 }: ISelect) => {
@@ -78,6 +80,7 @@ const SettingsList = ({
               >
                 <polyline points="15 6 9 12 15 18" />
               </svg>
+
               <span>{backButtonText}</span>
             </button>
           </div>
@@ -95,16 +98,61 @@ const SettingsList = ({
       </div>
 
       <div className="space-y-1">
-        {results.map(item => (
-          <button
-            key={item.value}
-            type="button"
-            className="flex items-center w-full h-12 px-4 transition-colors border rounded-lg border-zinc-200 bg-zinc-50 hover:border-zinc-300 hover:bg-zinc-100"
-            onClick={() => onChange(item.value)}
+        {loading ? (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            className="w-8 h-8 mx-auto my-4"
           >
-            {item.label}
-          </button>
-        ))}
+            <g stroke="currentColor">
+              <circle
+                cx="12"
+                cy="12"
+                r="9.5"
+                fill="none"
+                strokeLinecap="round"
+                strokeWidth="2"
+              >
+                <animate
+                  attributeName="stroke-dasharray"
+                  calcMode="spline"
+                  dur="1.5s"
+                  keySplines="0.42,0,0.58,1;0.42,0,0.58,1;0.42,0,0.58,1"
+                  keyTimes="0;0.475;0.95;1"
+                  repeatCount="indefinite"
+                  values="0 150;42 150;42 150;42 150"
+                ></animate>
+                <animate
+                  attributeName="stroke-dashoffset"
+                  calcMode="spline"
+                  dur="1.5s"
+                  keySplines="0.42,0,0.58,1;0.42,0,0.58,1;0.42,0,0.58,1"
+                  keyTimes="0;0.475;0.95;1"
+                  repeatCount="indefinite"
+                  values="0;-16;-59;-59"
+                ></animate>
+              </circle>
+              <animateTransform
+                attributeName="transform"
+                dur="2s"
+                repeatCount="indefinite"
+                type="rotate"
+                values="0 12 12;360 12 12"
+              ></animateTransform>
+            </g>
+          </svg>
+        ) : (
+          results.map(item => (
+            <button
+              key={item.value}
+              type="button"
+              className="flex items-center w-full h-12 px-4 transition-colors border rounded-lg border-zinc-200 bg-zinc-50 hover:border-zinc-300 hover:bg-zinc-100"
+              onClick={() => onChange(item.value)}
+            >
+              {item.label}
+            </button>
+          ))
+        )}
       </div>
     </div>
   );
