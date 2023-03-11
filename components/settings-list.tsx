@@ -45,7 +45,7 @@ const SettingsList = ({
 
   return (
     <div className="">
-      <div className="relative sticky top-0 -mx-2 flex flex-col md:flex-row bg-white p-2">
+      <div className="relative sticky top-0 -mx-2 flex flex-col bg-white p-2 md:flex-row">
         {supportBack && (
           <button
             type="button"
@@ -66,30 +66,16 @@ const SettingsList = ({
       </div>
 
       <div className="space-y-1">
-        {results.map(item => {
-          if (item.value === "back") {
-            return (
-              <button
-                key={item.value}
-                type="button"
-                className="flex h-12 w-full items-center rounded-lg bg-zinc-100 px-4"
-                onClick={() => router.back()}
-              >
-                {item.label}
-              </button>
-            );
-          }
-          return (
-            <button
-              key={item.value}
-              type="button"
-              className="flex h-12 w-full items-center rounded-lg bg-zinc-100 px-4"
-              onClick={() => onChange(item.value)}
-            >
-              {item.label}
-            </button>
-          );
-        })}
+        {results.map(item => (
+          <button
+            key={item.value}
+            type="button"
+            className="flex h-12 w-full items-center rounded-lg bg-zinc-100 px-4"
+            onClick={() => onChange(item.value)}
+          >
+            {item.label}
+          </button>
+        ))}
       </div>
     </div>
   );
