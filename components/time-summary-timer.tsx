@@ -9,11 +9,7 @@ export default function TimeSummaryTimer() {
 
   const { timer, times } = useContext(CommonStoreContext);
 
-  const ValueComp = (props: HTMLAttributes<HTMLSpanElement>) => (
-    <b className="tabular-nums" {...props} />
-  );
-
-  let timeName = t(`times${times?.time.next as TimeNames}`)
+  let timeName = t(`times${times?.time.next as TimeNames}`);
   if (times?.today?.isJumuah && times?.time.next === TimeNames.Ogle) {
     timeName = t("timesJumuah");
   }
@@ -78,3 +74,7 @@ export default function TimeSummaryTimer() {
     </div>
   );
 }
+
+const ValueComp = (props: HTMLAttributes<HTMLSpanElement>) => (
+  <b className="tabular-nums" {...props} />
+);
