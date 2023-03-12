@@ -23,7 +23,7 @@ export default function TimeListRow({
 
   const value = times?.today && times?.today?.[time];
 
-  const formattedValue = formattedTime(value, timeFormat);
+  const formattedValue = formattedTime(timeFormat, value);
 
   const now = times?.time?.now;
   const isTimeActive = now === time;
@@ -63,8 +63,7 @@ export default function TimeListRow({
     >
       <Container className={"flex h-full items-center px-2 py-2"}>
         <div
-          className="relative flex h-full w-full items-center justify-between
-        px-6 py-3 text-lg md:text-xl"
+          className="relative flex items-center justify-between w-full h-full px-6 py-3 text-lg md:text-xl"
         >
           {isTimeActive && (
             <motion.span
@@ -88,8 +87,8 @@ export default function TimeListRow({
               }}
             />
           )}
-          <h5 className="capitalize leading-none">{timeName}</h5>
-          <h4 className="tabular-nums leading-none">{formattedValue}</h4>
+          <h5 className="leading-none capitalize">{timeName}</h5>
+          <h4 className="leading-none tabular-nums">{formattedValue}</h4>
         </div>
       </Container>
     </motion.div>

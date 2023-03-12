@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import Container from "@/components/container";
 import useTranslation from "next-translate/useTranslation";
@@ -18,7 +18,10 @@ export default function Adjust() {
   const today = rawTimes?.today;
 
   const timeFormat = settings.timeFormat;
-  const adjustments = settings.adjustments ?? [0, 0, 0, 0, 0, 0];
+  const adjustments = useMemo(
+    () => settings.adjustments ?? [0, 0, 0, 0, 0, 0],
+    [settings.adjustments]
+  );
   const [dirtyIndexes, setDirtyIndexes] = useState<Record<number, boolean>>({});
 
   useEffect(() => {
@@ -35,9 +38,9 @@ export default function Adjust() {
   const visualizeAdjustment = (i: number) => {
     let time = today?.[timeKeys[i]];
     if (dirtyIndexes[i]) {
-      time = adjustedTime(time, adjustments[i]);
+      time = adjustedTime(adjustments[i], time);
     }
-    return formattedTime(time, timeFormat);
+    return formattedTime(timeFormat, time);
   };
 
   const onChangeAdjustment = async (value: number, timeIndex: number) => {
@@ -75,16 +78,16 @@ export default function Adjust() {
           {isActive && (
             <button
               type="button"
-              className="flex h-8 w-8 items-center justify-center"
+              className="flex items-center justify-center w-8 h-8"
               onClick={() => onChangeAdjustment(0, i)}
             >
               {adjustments[i]}
             </button>
           )}
 
-          <span className="flex items-center rounded border border-zinc-200 bg-white">
+          <span className="flex items-center bg-white border rounded border-zinc-200">
             <button
-              className="flex h-8 w-8 items-center justify-center"
+              className="flex items-center justify-center w-8 h-8"
               type="button"
               onClick={() => onChangeAdjustment(adjustments[i] - 1, i)}
             >
@@ -102,7 +105,7 @@ export default function Adjust() {
               </svg>
             </button>
             <button
-              className="flex h-8 w-8 items-center justify-center border-l border-l-zinc-200"
+              className="flex items-center justify-center w-8 h-8 border-l border-l-zinc-200"
               type="button"
               onClick={() => onChangeAdjustment(adjustments[i] + 1, i)}
             >
@@ -127,13 +130,13 @@ export default function Adjust() {
   });
 
   return (
-    <Container className="flex min-h-full flex-col gap-6 py-10">
+    <Container className="flex flex-col min-h-full gap-6 py-10">
       <p>{t("settingsCustomAdjustmentsDetails")}</p>
 
-      <div className="grid rounded-lg border border-zinc-200">{Times}</div>
+      <div className="grid border rounded-lg border-zinc-200">{Times}</div>
 
       <button
-        className="mt-auto flex h-12 w-full items-center justify-center rounded-lg border bg-current px-4"
+        className="flex items-center justify-center w-full h-12 px-4 mt-auto bg-current border rounded-lg"
         onClick={() => onSaveAdjustments()}
       >
         <span className="text-white">{t("settingsSave")}</span>
