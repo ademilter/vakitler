@@ -65,7 +65,7 @@ export default function Adjust() {
       <div
         key={`time${i}`}
         className={cx(
-          "flex items-center border-b bg-zinc-50 px-4 py-3 first:rounded-t-lg last:rounded-b-lg last:border-0",
+          " flex items-center border-b bg-zinc-50 px-4 py-3 first:rounded-t-lg last:rounded-b-lg last:border-0",
           isActive && "bg-white"
         )}
       >
@@ -78,16 +78,16 @@ export default function Adjust() {
           {isActive && (
             <button
               type="button"
-              className="flex items-center justify-center w-8 h-8"
+              className="flex h-8 w-8 items-center justify-center"
               onClick={() => onChangeAdjustment(0, i)}
             >
               {adjustments[i]}
             </button>
           )}
 
-          <span className="flex items-center bg-white border rounded border-zinc-200">
+          <span className="flex items-center rounded border border-zinc-200 bg-white">
             <button
-              className="flex items-center justify-center w-8 h-8"
+              className="flex h-8 w-8 items-center justify-center"
               type="button"
               onClick={() => onChangeAdjustment(adjustments[i] - 1, i)}
             >
@@ -105,7 +105,7 @@ export default function Adjust() {
               </svg>
             </button>
             <button
-              className="flex items-center justify-center w-8 h-8 border-l border-l-zinc-200"
+              className="flex h-8 w-8 items-center justify-center border-l border-l-zinc-200"
               type="button"
               onClick={() => onChangeAdjustment(adjustments[i] + 1, i)}
             >
@@ -130,13 +130,13 @@ export default function Adjust() {
   });
 
   return (
-    <Container className="flex flex-col min-h-full gap-6 py-10">
+    <Container className="flex min-h-full flex-col gap-6 py-10">
       <p>{t("settingsCustomAdjustmentsDetails")}</p>
 
-      <div className="grid border rounded-lg border-zinc-200">{Times}</div>
+      <div className="grid rounded-lg border border-zinc-200">{Times}</div>
 
       <button
-        className="flex items-center justify-center w-full h-12 px-4 mt-auto bg-current border rounded-lg"
+        className="mt-auto flex h-12 w-full items-center justify-center rounded-lg border bg-current px-4"
         onClick={() => onSaveAdjustments()}
       >
         <span className="text-white">{t("settingsSave")}</span>

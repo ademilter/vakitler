@@ -60,7 +60,7 @@ const SettingsList = ({
   return (
     <div>
       <motion.div
-        className="sticky top-0 p-2 -mx-2 bg-white"
+        className="sticky top-0 -mx-2 bg-white p-2"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -68,7 +68,7 @@ const SettingsList = ({
         {!backButtonProps?.hidden && (
           <button
             type="button"
-            className="flex items-center h-12 shrink-0"
+            className="flex h-12 shrink-0 items-center"
             onClick={() => router.back()}
             {...backButtonProps}
           >
@@ -93,7 +93,7 @@ const SettingsList = ({
         <input
           type="text"
           autoFocus
-          className="w-full h-12 px-4 transition-colors border rounded-lg outline-none hover:border-zinc-300 focus:border-zinc-400"
+          className="h-12 w-full rounded-lg border px-4 outline-none transition-colors hover:border-zinc-300 focus:border-zinc-400"
           {...inputProps}
           value={q}
           onChange={e => setQ(e.target.value)}
@@ -105,7 +105,7 @@ const SettingsList = ({
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
-            className="w-8 h-8 mx-auto my-4"
+            className="mx-auto my-4 h-8 w-8"
           >
             <g stroke="currentColor">
               <circle
@@ -149,7 +149,7 @@ const SettingsList = ({
             <button
               key={item.value}
               type="button"
-              className="flex items-center w-full h-12 px-4 transition-colors border rounded-lg border-zinc-200 bg-zinc-50 hover:border-zinc-300 hover:bg-zinc-100"
+              className="flex h-12 w-full items-center rounded-lg border border-zinc-200 bg-zinc-50 px-4 transition-colors hover:border-zinc-300 hover:bg-zinc-100"
               onClick={() => onChange(item.value)}
             >
               {item.label}
