@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prettier": "prettier ./**/*.{js,ts,tsx} --write",
+    "eslint": "eslint --ext .ts,.tsx --fix ."
   },
   "dependencies": {
     "@vercel/analytics": "^0.1.10",
