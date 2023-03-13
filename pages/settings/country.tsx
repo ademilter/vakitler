@@ -15,7 +15,7 @@ export default function Country() {
   const [data, setData] = useState<ICountry[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const fetchData = async () => {
+  const fetchCountries = async () => {
     try {
       setLoading(true);
 
@@ -26,14 +26,14 @@ export default function Country() {
 
       setData(data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchData();
+    fetchCountries();
   }, []);
 
   return (
@@ -53,6 +53,7 @@ export default function Country() {
           value: c.UlkeID,
           label: c[t("settingsCountryKey") as keyof ICountry],
         }))}
+        loading={loading}
         backButtonProps={{
           hidden: true,
         }}

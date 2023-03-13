@@ -33,7 +33,7 @@ export default function Settings() {
   };
 
   const onChangeTimeFormat = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    await setSettings({
+    setSettings({
       ...settings,
       timeFormat: e.target.value as typeof settings.timeFormat,
     });
@@ -75,7 +75,7 @@ export default function Settings() {
           </span>
         </Link>
 
-        <div className="flex items-center gap-px rounded-lg border border-zinc-200 bg-zinc-200 bg-zinc-200">
+        <div className="flex items-center gap-px rounded-lg border border-zinc-200 bg-zinc-200">
           <SettingsItem
             isSelected={lang === "tr"}
             name="lang"
@@ -96,7 +96,7 @@ export default function Settings() {
           </SettingsItem>
         </div>
 
-        <div className="flex items-center gap-px rounded-lg border border-zinc-200 bg-zinc-200 bg-zinc-200">
+        <div className="flex items-center gap-px rounded-lg border border-zinc-200 bg-zinc-200">
           <SettingsItem
             isSelected={timeFormat === TimeFormat.Twelve}
             name="timeFormat"
@@ -119,7 +119,7 @@ export default function Settings() {
 
         <Link
           href="/settings/adjust"
-          className="flex items-center gap-px rounded-lg border border-zinc-200 bg-zinc-200 bg-zinc-200"
+          className="flex items-center gap-px rounded-lg border border-zinc-200 bg-zinc-200"
         >
           <label className="flex h-12 grow cursor-pointer items-center gap-2 rounded-lg bg-white px-4 hover:bg-blue-50">
             <span className="grow">{t("settingsCustomAdjustments")}</span>

@@ -111,22 +111,23 @@ export class Times {
     if (!this.today) return false;
 
     return (
-      this.localTime > DateTime.fromFormat(this.today[TimeNames.Imsak], "HH:mm")
+      this.localTime >
+      DateTime.fromFormat(this.today[TimeNames.Imsak], hourFormat)
     );
   }
 
   timer(): TypeTimer {
     if (!this.today || !this.tomorrow) return [0, 0, 0];
 
-    let dateTime = DateTime.fromFormat(this.today[this.time.next], "HH:mm");
+    let dateTime = DateTime.fromFormat(this.today[this.time.next], hourFormat);
 
     if (this.time.now === TimeNames.Yatsi) {
-      dateTime = DateTime.fromFormat(this.today[TimeNames.Imsak], "HH:mm");
+      dateTime = DateTime.fromFormat(this.today[TimeNames.Imsak], hourFormat);
 
       if (this.isBeforeMidnight()) {
         dateTime = DateTime.fromFormat(
           this.tomorrow[TimeNames.Imsak],
-          "HH:mm"
+          hourFormat
         ).plus({ days: 1 });
       }
     }

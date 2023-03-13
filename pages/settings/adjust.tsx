@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import Container from "@/components/container";
 import useTranslation from "next-translate/useTranslation";
 import { CommonStoreContext } from "@/stores/common";
 import { TimeNames } from "@/lib/types";
-import { formattedTime, cx, adjustedTime } from "@/lib/utils";
+import { adjustedTime, cx, formattedTime } from "@/lib/utils";
 
 const timeKeys = Object.values(TimeNames);
 
@@ -18,7 +18,10 @@ export default function Adjust() {
   const today = rawTimes?.today;
 
   const timeFormat = settings.timeFormat;
-  const adjustments = settings.adjustments ?? [0, 0, 0, 0, 0, 0];
+  const adjustments = useMemo(
+    () => settings.adjustments ?? [0, 0, 0, 0, 0, 0],
+    [settings.adjustments]
+  );
   const [dirtyIndexes, setDirtyIndexes] = useState<Record<number, boolean>>({});
 
   useEffect(() => {
@@ -35,9 +38,9 @@ export default function Adjust() {
   const visualizeAdjustment = (i: number) => {
     let time = today?.[timeKeys[i]];
     if (dirtyIndexes[i]) {
-      time = adjustedTime(time, adjustments[i]);
+      time = adjustedTime(adjustments[i], time);
     }
-    return formattedTime(time, timeFormat);
+    return formattedTime(timeFormat, time);
   };
 
   const onChangeAdjustment = async (value: number, timeIndex: number) => {

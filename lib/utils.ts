@@ -1,4 +1,4 @@
-import { TypeTimer } from "@/lib/types";
+import { TimeFormat, TypeTimer } from "@/lib/types";
 import { ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { DateTime } from "luxon";
@@ -9,10 +9,6 @@ export function cx(...inputs: ClassValue[]): string {
 }
 
 export function secondSplit(second: number): TypeTimer {
-  let pad = (x: number): string => {
-    return x < 10 ? `0${x}` : `${x}`;
-  };
-
   return [
     Math.floor(second / 3600),
     Math.floor((second % 3600) / 60),
@@ -20,15 +16,15 @@ export function secondSplit(second: number): TypeTimer {
   ];
 }
 
-export function adjustedTime(time: string = "00:00", adjustment: number) {
+export function adjustedTime(adjustment: number, time: string = "00:00") {
   const timeValue = DateTime.fromFormat(time, hourFormat);
   const newTime = timeValue.plus({ minutes: adjustment });
   return newTime.toFormat(hourFormat);
 }
 
 export function formattedTime(
-  baseTime: string = "00:00",
-  timeFormat: "12" | "24"
+  timeFormat: TimeFormat,
+  baseTime: string = "00:00"
 ) {
   return DateTime.fromFormat(baseTime, hourFormat)
     .toFormat(timeFormat === "12" ? hourFormat12 : hourFormat)
