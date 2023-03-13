@@ -15,7 +15,7 @@ export default function Country() {
   const [data, setData] = useState<ICountry[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const fetchData = async () => {
+  const fetchCountries = async () => {
     try {
       setLoading(true);
 
@@ -33,7 +33,7 @@ export default function Country() {
   };
 
   useEffect(() => {
-    fetchData();
+    fetchCountries();
   }, []);
 
   return (

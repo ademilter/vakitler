@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Fuse from "fuse.js";
 import { motion } from "framer-motion";
 import useTranslation from "next-translate/useTranslation";
+import Loading from "@/components/loading";
 
 type Item = { value: string; label: string };
 
@@ -16,17 +17,12 @@ interface ISelect {
   backButtonProps?: React.ButtonHTMLAttributes<HTMLButtonElement>;
 }
 
-const options = {
-  keys: ["label"],
-  threshold: 0.5,
-};
-
 const SettingsList = ({
   onChange = () => {},
   data = [],
   inputProps = {},
   pushFirst = [],
-  loading = true,
+  loading = false,
   backButtonText = undefined,
   backButtonProps = undefined,
 }: ISelect) => {
@@ -37,8 +33,13 @@ const SettingsList = ({
 
   const [q, setQ] = useState<string>("");
 
+  const fuseOptions = {
+    keys: ["label"],
+    threshold: 0.5,
+  };
+
   const fuse = useMemo(() => {
-    return new Fuse(data, options);
+    return new Fuse(data, fuseOptions);
   }, [data]);
 
   const pushFirstData = useMemo(() => {
@@ -93,7 +94,7 @@ const SettingsList = ({
         <input
           type="text"
           autoFocus
-          className="h-12 w-full rounded-lg border px-4 outline-none transition-colors hover:border-zinc-300 focus:border-zinc-400"
+          className="h-12 w-full rounded-lg border px-4"
           {...inputProps}
           value={q}
           onChange={e => setQ(e.target.value)}
@@ -102,54 +103,13 @@ const SettingsList = ({
 
       <div className="space-y-1">
         {loading ? (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            className="mx-auto my-4 h-8 w-8"
-          >
-            <g stroke="currentColor">
-              <circle
-                cx="12"
-                cy="12"
-                r="9.5"
-                fill="none"
-                strokeLinecap="round"
-                strokeWidth="2"
-              >
-                <animate
-                  attributeName="stroke-dasharray"
-                  calcMode="spline"
-                  dur="1.5s"
-                  keySplines="0.42,0,0.58,1;0.42,0,0.58,1;0.42,0,0.58,1"
-                  keyTimes="0;0.475;0.95;1"
-                  repeatCount="indefinite"
-                  values="0 150;42 150;42 150;42 150"
-                ></animate>
-                <animate
-                  attributeName="stroke-dashoffset"
-                  calcMode="spline"
-                  dur="1.5s"
-                  keySplines="0.42,0,0.58,1;0.42,0,0.58,1;0.42,0,0.58,1"
-                  keyTimes="0;0.475;0.95;1"
-                  repeatCount="indefinite"
-                  values="0;-16;-59;-59"
-                ></animate>
-              </circle>
-              <animateTransform
-                attributeName="transform"
-                dur="2s"
-                repeatCount="indefinite"
-                type="rotate"
-                values="0 12 12;360 12 12"
-              ></animateTransform>
-            </g>
-          </svg>
+          <Loading />
         ) : (
           results.map(item => (
             <button
               key={item.value}
               type="button"
-              className="flex h-12 w-full items-center rounded-lg border border-zinc-200 bg-zinc-50 px-4 transition-colors hover:border-zinc-300 hover:bg-zinc-100"
+              className="flex h-12 w-full items-center rounded-lg bg-zinc-100 px-4"
               onClick={() => onChange(item.value)}
             >
               {item.label}

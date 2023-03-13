@@ -1,11 +1,10 @@
 import { TimeNames } from "@/lib/types";
 import Container from "@/components/container";
 import { motion } from "framer-motion";
-import { cx } from "@/lib/utils";
+import { cx, formattedTime } from "@/lib/utils";
 import { useContext } from "react";
 import { CommonStoreContext } from "@/stores/common";
 import useTranslation from "next-translate/useTranslation";
-import { formattedTime } from "@/lib/utils";
 
 export default function TimeListRow({
   time,
@@ -61,7 +60,7 @@ export default function TimeListRow({
         time === TimeNames.Yatsi && "pb-8 md:pb-14"
       )}
     >
-      <Container className={"flex h-full items-center px-2 py-2"}>
+      <Container className="flex h-full items-center px-2 py-2">
         <div className="relative flex h-full w-full items-center justify-between px-6 py-3 text-lg md:text-xl">
           {isTimeActive && (
             <motion.span

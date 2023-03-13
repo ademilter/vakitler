@@ -4,7 +4,7 @@ import Container from "@/components/container";
 import useTranslation from "next-translate/useTranslation";
 import { CommonStoreContext } from "@/stores/common";
 import { TimeNames } from "@/lib/types";
-import { formattedTime, cx, adjustedTime } from "@/lib/utils";
+import { adjustedTime, cx, formattedTime } from "@/lib/utils";
 
 const timeKeys = Object.values(TimeNames);
 
@@ -65,7 +65,7 @@ export default function Adjust() {
       <div
         key={`time${i}`}
         className={cx(
-          " flex items-center border-b bg-zinc-50 px-4 py-3 first:rounded-t-lg last:rounded-b-lg last:border-0",
+          "flex items-center border-b bg-zinc-50 px-4 py-3 first:rounded-t-lg last:rounded-b-lg last:border-0",
           isActive && "bg-white"
         )}
       >

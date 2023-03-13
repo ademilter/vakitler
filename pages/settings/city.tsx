@@ -16,7 +16,7 @@ export default function Country() {
   const [data, setData] = useState<ICity[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const fetchCityData = useCallback(async () => {
+  const fetchCities = useCallback(async () => {
     try {
       setLoading(true);
 
@@ -36,8 +36,8 @@ export default function Country() {
 
   useEffect(() => {
     if (!_settings.region) return;
-    fetchCityData();
-  }, [_settings, fetchCityData]);
+    fetchCities();
+  }, [_settings, fetchCities]);
 
   return (
     <Container className="py-6">

@@ -1,4 +1,4 @@
-import { TypeTimer } from "@/lib/types";
+import { TimeFormat, TypeTimer } from "@/lib/types";
 import { ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { DateTime } from "luxon";
@@ -23,7 +23,7 @@ export function adjustedTime(adjustment: number, time: string = "00:00") {
 }
 
 export function formattedTime(
-  timeFormat: "12" | "24",
+  timeFormat: TimeFormat,
   baseTime: string = "00:00"
 ) {
   return DateTime.fromFormat(baseTime, hourFormat)

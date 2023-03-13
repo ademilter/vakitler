@@ -15,7 +15,7 @@ export default function Country() {
   const [data, setData] = useState<IRegion[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const fetchData = useCallback(async () => {
+  const fetchRegionData = useCallback(async () => {
     try {
       setLoading(true);
 
@@ -35,8 +35,8 @@ export default function Country() {
 
   useEffect(() => {
     if (!_settings.country) return;
-    fetchData();
-  }, [_settings, fetchData]);
+    fetchRegionData();
+  }, [_settings, fetchRegionData]);
 
   return (
     <Container className="py-6">
