@@ -22,7 +22,7 @@ export default function TimeListRow({
 
   const value = times?.today && times?.today?.[time];
 
-  const formattedValue = formattedTime(value, timeFormat, lang);
+  const formattedValue = formattedTime(timeFormat, value, lang);
 
   const now = times?.time?.now;
   const isTimeActive = now === time;

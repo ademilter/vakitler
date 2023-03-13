@@ -40,7 +40,7 @@ export default function Adjust() {
     if (dirtyIndexes[i]) {
       time = adjustedTime(adjustments[i], time);
     }
-    return formattedTime(time, timeFormat, lang);
+    return formattedTime(timeFormat, time, lang);
   };
 
   const onChangeAdjustment = async (value: number, timeIndex: number) => {
