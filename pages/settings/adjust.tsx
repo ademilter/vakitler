@@ -9,7 +9,7 @@ import { adjustedTime, cx, formattedTime } from "@/lib/utils";
 const timeKeys = Object.values(TimeNames);
 
 export default function Adjust() {
-  const { t } = useTranslation("common");
+  const { t, lang } = useTranslation("common");
   const router = useRouter();
 
   const { settings, rawTimes, setSettings, fetchData } =
@@ -40,7 +40,7 @@ export default function Adjust() {
     if (dirtyIndexes[i]) {
       time = adjustedTime(adjustments[i], time);
     }
-    return formattedTime(timeFormat, time);
+    return formattedTime(time, timeFormat, lang);
   };
 
   const onChangeAdjustment = async (value: number, timeIndex: number) => {

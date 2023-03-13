@@ -23,10 +23,11 @@ export function adjustedTime(adjustment: number, time: string = "00:00") {
 }
 
 export function formattedTime(
-  timeFormat: TimeFormat,
-  baseTime: string = "00:00"
+  baseTime: string = "00:00",
+  timeFormat: "12" | "24",
+  locale?: string
 ) {
   return DateTime.fromFormat(baseTime, hourFormat)
-    .toFormat(timeFormat === "12" ? hourFormat12 : hourFormat)
+    .toFormat(timeFormat === "12" ? hourFormat12 : hourFormat, { locale })
     .toLowerCase();
 }

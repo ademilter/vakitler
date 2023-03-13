@@ -13,7 +13,7 @@ export default function TimeListRow({
   time: TimeNames;
   index: number;
 }) {
-  const { t } = useTranslation("common");
+  const { t, lang } = useTranslation("common");
 
   const {
     times,
@@ -22,7 +22,7 @@ export default function TimeListRow({
 
   const value = times?.today && times?.today?.[time];
 
-  const formattedValue = formattedTime(timeFormat, value);
+  const formattedValue = formattedTime(value, timeFormat, lang);
 
   const now = times?.time?.now;
   const isTimeActive = now === time;
