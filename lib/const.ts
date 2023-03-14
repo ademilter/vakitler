@@ -1,5 +1,5 @@
 export const hourFormat = "HH:mm";
-export const hourFormat12 = "hh:mm a";
+export const hourFormat12 = "h:mm a";
 
 export const LOCAL_KEYS = {
   Settings: "VAKITLER_SETTINGS",
