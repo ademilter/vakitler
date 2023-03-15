@@ -1,18 +1,26 @@
-import React, { useCallback, useContext, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { CommonStoreContext } from "@/stores/common";
 import { cx } from "@/lib/utils";
 
 const shouldShowTimePicker = process.env.NODE_ENV !== "production";
 
+type TimeTravels = [number, number, number];
+
 export default function TimeTravel() {
   const { times } = useContext(CommonStoreContext);
-  const timeTravel = times?.timeTravel || [0, 0, 0];
+  const [timeTravel, setTimeTravel] = useState<TimeTravels>(
+    times?.timeTravel || [0, 0, 0]
+  );
+
+  useEffect(() => {
+    times?.updateTimeTravel(timeTravel);
+  }, [times, timeTravel]);
 
   const [show, setShow] = useState(false);
 
   const onNowClick = useCallback(() => {
-    times?.updateTimeTravel([0, 0, 0]);
-  }, [times]);
+    setTimeTravel([0, 0, 0]);
+  }, []);
 
   if (!times) return null;
   if (!shouldShowTimePicker) return null;
@@ -34,39 +42,26 @@ export default function TimeTravel() {
           }}
         />
 
-        <input
-          type="number"
-          className="h-8 w-12 rounded-lg bg-zinc-100 pl-2"
-          defaultValue={timeTravel[0]}
-          onChange={e => {
-            const value = parseInt(e.target.value);
-            if (!isNaN(value)) {
-              times.updateTimeTravel([value, timeTravel[1], timeTravel[2]]);
-            }
-          }}
-        />
-        <input
-          type="number"
-          className="h-8 w-12 rounded-lg bg-zinc-100 pl-2"
-          defaultValue={timeTravel[1]}
-          onChange={e => {
-            const value = parseInt(e.target.value);
-            if (!isNaN(value)) {
-              times.updateTimeTravel([timeTravel[0], value, timeTravel[2]]);
-            }
-          }}
-        />
-        <input
-          type="number"
-          className="h-8 w-12 rounded-lg bg-zinc-100 pl-2"
-          defaultValue={timeTravel[2]}
-          onChange={e => {
-            const value = parseInt(e.target.value);
-            if (!isNaN(value)) {
-              times.updateTimeTravel([timeTravel[0], timeTravel[1], value]);
-            }
-          }}
-        />
+        {timeTravel.map((value, index) => {
+          return (
+            <input
+              key={index}
+              type="number"
+              className="h-8 w-12 rounded-lg bg-zinc-100 pl-2"
+              value={timeTravel[index]}
+              onChange={e => {
+                const value = parseInt(e.target.value);
+                const newTimeTravel = [...timeTravel] as TimeTravels;
+                newTimeTravel[index] = value;
+                if (isNaN(value)) {
+                  return;
+                }
+
+                setTimeTravel(newTimeTravel);
+              }}
+            />
+          );
+        })}
         <button onClick={onNowClick}>Clear</button>
       </div>
     </div>
