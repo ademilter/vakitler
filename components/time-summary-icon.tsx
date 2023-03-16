@@ -5,7 +5,7 @@ import Icon, { ICON_NAMES } from "@/components/icon";
 import { motion } from "framer-motion";
 import { DateTime } from "luxon";
 import { TimeNames } from "@/lib/types";
-import { hourFormat } from "@/lib/const";
+import { HOUR_FORMAT } from "@/lib/const";
 
 export default function TimeSummaryIcon() {
   const { lang } = useTranslation("common");
@@ -48,7 +48,7 @@ export default function TimeSummaryIcon() {
       >
         {/* hicri takvimde akşam ezanı ile tarih bir sonraki güne geçer */}
         {localTime >=
-        DateTime.fromFormat(times?.today[TimeNames.Aksam], hourFormat)
+        DateTime.fromFormat(times?.today[TimeNames.Aksam], HOUR_FORMAT)
           ? localTime
               .plus({ days: 1 })
               .reconfigure({ outputCalendar: "islamic" })
