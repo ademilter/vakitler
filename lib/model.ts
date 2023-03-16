@@ -1,7 +1,7 @@
 import { DateTime, Interval } from "luxon";
 import { ITime, TimeNames, TypeTimer } from "@/lib/types";
 import { secondSplit } from "@/lib/utils";
-import { hourFormat } from "@/lib/const";
+import { HOUR_FORMAT } from "@/lib/const";
 
 const timeNames = Object.values(TimeNames);
 
@@ -27,9 +27,9 @@ export class Times {
   adjustTimes(adjustments: number[]) {
     this.times.forEach((day, index) => {
       timeNames.forEach((time, i) => {
-        const timeValue = DateTime.fromFormat(day[time], hourFormat);
+        const timeValue = DateTime.fromFormat(day[time], HOUR_FORMAT);
         const newTime = timeValue.plus({ minutes: adjustments[i] });
-        day[time] = newTime.toFormat(hourFormat);
+        day[time] = newTime.toFormat(HOUR_FORMAT);
       });
     });
   }
@@ -67,15 +67,15 @@ export class Times {
     // TODO: check if today is undefined
     if (!this.today) return { now: TimeNames.Imsak, next: TimeNames.Imsak };
 
-    const Imsak = DateTime.fromFormat(this.today[TimeNames.Imsak], hourFormat);
-    const Gunes = DateTime.fromFormat(this.today[TimeNames.Gunes], hourFormat);
-    const Ogle = DateTime.fromFormat(this.today[TimeNames.Ogle], hourFormat);
+    const Imsak = DateTime.fromFormat(this.today[TimeNames.Imsak], HOUR_FORMAT);
+    const Gunes = DateTime.fromFormat(this.today[TimeNames.Gunes], HOUR_FORMAT);
+    const Ogle = DateTime.fromFormat(this.today[TimeNames.Ogle], HOUR_FORMAT);
     const Ikindi = DateTime.fromFormat(
       this.today[TimeNames.Ikindi],
-      hourFormat
+      HOUR_FORMAT
     );
-    const Aksam = DateTime.fromFormat(this.today[TimeNames.Aksam], hourFormat);
-    const Yatsi = DateTime.fromFormat(this.today[TimeNames.Yatsi], hourFormat);
+    const Aksam = DateTime.fromFormat(this.today[TimeNames.Aksam], HOUR_FORMAT);
+    const Yatsi = DateTime.fromFormat(this.today[TimeNames.Yatsi], HOUR_FORMAT);
 
     // default values = Isha
     const obj: { now: TimeNames; next: TimeNames } = {
@@ -112,22 +112,22 @@ export class Times {
 
     return (
       this.localTime >
-      DateTime.fromFormat(this.today[TimeNames.Imsak], hourFormat)
+      DateTime.fromFormat(this.today[TimeNames.Imsak], HOUR_FORMAT)
     );
   }
 
   timer(): TypeTimer {
     if (!this.today || !this.tomorrow) return [0, 0, 0];
 
-    let dateTime = DateTime.fromFormat(this.today[this.time.next], hourFormat);
+    let dateTime = DateTime.fromFormat(this.today[this.time.next], HOUR_FORMAT);
 
     if (this.time.now === TimeNames.Yatsi) {
-      dateTime = DateTime.fromFormat(this.today[TimeNames.Imsak], hourFormat);
+      dateTime = DateTime.fromFormat(this.today[TimeNames.Imsak], HOUR_FORMAT);
 
       if (this.isBeforeMidnight()) {
         dateTime = DateTime.fromFormat(
           this.tomorrow[TimeNames.Imsak],
-          hourFormat
+          HOUR_FORMAT
         ).plus({ days: 1 });
       }
     }

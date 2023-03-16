@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 import useTranslation from "next-translate/useTranslation";
 import { DateTime } from "luxon";
 import useInterval from "@/lib/use-interval";
-import { LOCAL_KEYS } from "@/lib/const";
+import { API_DATE_FORMAT, LOCAL_KEYS } from "@/lib/const";
 import setLanguage from "next-translate/setLanguage";
 import i18n from "@/i18n.json";
 // import colors from "tailwindcss/colors";
@@ -114,6 +114,13 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
       const res = await fetch(url);
       const data = await res.json();
 
+      const lastDate = DateTime.fromFormat(
+        data[data.length - 1].MiladiTarihKisa,
+        API_DATE_FORMAT
+      );
+      const updateDate = lastDate.minus({ days: 2 }).toUnixInteger() * 1000;
+
+      localStorage.setItem(LOCAL_KEYS.UpdateDate, `${updateDate}`);
       localStorage.setItem(LOCAL_KEYS.Data, JSON.stringify(data));
 
       setTimes(new Times(data, settings.adjustments));
@@ -131,12 +138,20 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
 
     const settings = localStorage.getItem(LOCAL_KEYS.Settings);
     const data = localStorage.getItem(LOCAL_KEYS.Data);
+    const updateDate = localStorage.getItem(LOCAL_KEYS.UpdateDate) ?? 0;
 
     if (settings && data) {
       const parsedSettings = JSON.parse(settings);
       setSettings(parsedSettings);
-      setTimes(new Times(JSON.parse(data), parsedSettings.adjustments));
-      setRawTimes(new Times(JSON.parse(data)));
+
+      if (+updateDate <= Date.now()) {
+        console.log("The prayer data is old, fetching new data...");
+        await fetchData(parsedSettings.city?.IlceID);
+      } else {
+        setTimes(new Times(JSON.parse(data), parsedSettings.adjustments));
+        setRawTimes(new Times(JSON.parse(data)));
+      }
+
       await fetchReleases();
     } else {
       await router.push("/settings/country");
