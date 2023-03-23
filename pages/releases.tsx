@@ -17,8 +17,7 @@ export default function Adjust() {
             <h5>{release.name}</h5>
             <div className="text-sm">
               {release.body.split(/\r?\n/).map((node, index) => (
-                // * feat: ... -> feat: ...
-                <p key={index}>{node.slice(2)}</p>
+                <p key={index}>{node}</p>
               ))}
             </div>
           </div>

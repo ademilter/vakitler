@@ -5,6 +5,7 @@ import { cx, formattedTime } from "@/lib/utils";
 import { useContext } from "react";
 import { CommonStoreContext } from "@/stores/common";
 import useTranslation from "next-translate/useTranslation";
+import RamadanTimer from "@/components/ramadan-timer";
 
 export default function TimeListRow({
   time,
@@ -49,6 +50,7 @@ export default function TimeListRow({
         },
       }}
       className={cx(
+        "relative",
         now === TimeNames.Imsak && "bg-sky-300",
         now === TimeNames.Gunes && "bg-orange-300",
         now === TimeNames.Ogle && "bg-yellow-300",
@@ -60,7 +62,7 @@ export default function TimeListRow({
         time === TimeNames.Yatsi && "pb-8 md:pb-14"
       )}
     >
-      <Container className="flex h-full items-center px-2 py-2">
+      <Container className="flex h-full flex-col items-center px-2 py-2">
         <div className="relative flex h-full w-full items-center justify-between px-6 py-3 text-lg md:text-xl">
           {isTimeActive && (
             <motion.span
@@ -86,6 +88,18 @@ export default function TimeListRow({
           )}
           <h5 className="capitalize leading-none">{timeName}</h5>
           <h4 className="tabular-nums leading-none">{formattedValue}</h4>
+
+          {/* imsak timer */}
+          {time === TimeNames.Imsak &&
+            [TimeNames.Aksam, TimeNames.Yatsi].includes(now!) && (
+              <RamadanTimer />
+            )}
+
+          {/* aksam timer */}
+          {time === TimeNames.Aksam &&
+            [TimeNames.Imsak, TimeNames.Gunes, TimeNames.Ogle].includes(
+              now!
+            ) && <RamadanTimer />}
         </div>
       </Container>
     </motion.div>

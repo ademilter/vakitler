@@ -9,14 +9,11 @@ import {
   TypeTimer,
 } from "@/lib/types";
 import { useRouter } from "next/router";
-import useTranslation from "next-translate/useTranslation";
 import { DateTime } from "luxon";
 import useInterval from "@/lib/use-interval";
 import { API_DATE_FORMAT, LOCAL_KEYS } from "@/lib/const";
 import setLanguage from "next-translate/setLanguage";
 import i18n from "@/i18n.json";
-// import colors from "tailwindcss/colors";
-// import { DefaultColors } from "tailwindcss/types/generated/colors";
 
 interface ICommonStore {
   appLoading: boolean;
@@ -40,6 +37,7 @@ interface ICommonStore {
   times: undefined | Times;
   rawTimes: undefined | Times;
   timer: TypeTimer;
+  timerRamadan: TypeTimer;
   releases: IRelease[];
 }
 
@@ -65,11 +63,11 @@ export const CommonStoreContext = createContext<ICommonStore>({
   rawTimes: undefined,
   times: undefined,
   timer: [0, 0, 0],
+  timerRamadan: [0, 0, 0],
   releases: [],
 });
 
 export function CommonStoreProvider({ children }: { children: ReactNode }) {
-  const { t } = useTranslation("common");
   const router = useRouter();
 
   const [appLoading, setAppLoading] =
@@ -95,6 +93,7 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
   const [times, setTimes] = useState<ICommonStore["times"]>();
   const [rawTimes, setRawTimes] = useState<ICommonStore["rawTimes"]>();
   const [timer, setTimer] = useState<TypeTimer>([0, 0, 0]);
+  const [timerRamadan, setTimerRamadan] = useState<TypeTimer>([0, 0, 0]);
 
   const fetchReleases = async () => {
     const res = await fetch("/api/releases");
@@ -161,6 +160,7 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
   const updateTimer = () => {
     if (!times) return;
     setTimer(times?.timer() as TypeTimer);
+    setTimerRamadan(times?.timerRamadan() as TypeTimer);
   };
 
   useEffect(() => {
@@ -199,8 +199,6 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
     times ? 1000 : null
   );
 
-  // TODO: uygulama çalıştıktan sonra datanın ne kadar eski olduğuna bakıp güncellenmesini sağla
-
   return (
     <CommonStoreContext.Provider
       value={{
@@ -213,6 +211,7 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
         rawTimes,
         times,
         timer,
+        timerRamadan,
         releases,
       }}
     >

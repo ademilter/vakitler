@@ -137,6 +137,23 @@ export class Times {
     return secondSplit(ms / 1000);
   }
 
+  timerRamadan(): TypeTimer {
+    if (!this.today || !this.tomorrow) return [0, 0, 0];
+
+    let dateTime = DateTime.fromFormat(this.today[TimeNames.Aksam], hourFormat);
+
+    if ([TimeNames.Aksam, TimeNames.Yatsi].includes(this.time.now)) {
+      dateTime = DateTime.fromFormat(
+        this.tomorrow[TimeNames.Imsak],
+        hourFormat
+      ).plus({ days: 1 });
+    }
+
+    const ms = dateTime.diff(this.localTime).toMillis();
+
+    return secondSplit(ms / 1000);
+  }
+
   get iconName(): string {
     if (!this.today || !this.yesterday) return "dolunay";
 
