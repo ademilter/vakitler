@@ -140,12 +140,15 @@ export class Times {
   timerRamadan(): TypeTimer {
     if (!this.today || !this.tomorrow) return [0, 0, 0];
 
-    let dateTime = DateTime.fromFormat(this.today[TimeNames.Aksam], hourFormat);
+    let dateTime = DateTime.fromFormat(
+      this.today[TimeNames.Aksam],
+      HOUR_FORMAT
+    );
 
     if ([TimeNames.Aksam, TimeNames.Yatsi].includes(this.time.now)) {
       dateTime = DateTime.fromFormat(
         this.tomorrow[TimeNames.Imsak],
-        hourFormat
+        HOUR_FORMAT
       ).plus({ days: 1 });
     }
 
