@@ -13,6 +13,12 @@ export default function TimeSummaryIcon() {
   const { times } = useContext(CommonStoreContext);
   const localTime = times?.localTime || DateTime.local();
 
+  // hicri takvimde akşam ezanı ile tarih bir sonraki güne geçer
+  const isAksam =
+    times?.today &&
+    localTime >=
+      DateTime.fromFormat(times?.today[TimeNames.Aksam], HOUR_FORMAT);
+
   const [showHijriCalendar, setShowHijriCalendar] = useState(true);
 
   useEffect(() => {
@@ -46,16 +52,9 @@ export default function TimeSummaryIcon() {
           },
         }}
       >
-        {/* hicri takvimde akşam ezanı ile tarih bir sonraki güne geçer */}
-        {localTime >=
-        DateTime.fromFormat(times?.today[TimeNames.Aksam], HOUR_FORMAT)
-          ? localTime
-              .plus({ days: 1 })
-              .reconfigure({ outputCalendar: "islamic" })
-              .toLocaleString(DateTime.DATE_FULL, { locale: lang })
-          : localTime
-              .reconfigure({ outputCalendar: "islamic" })
-              .toLocaleString(DateTime.DATE_FULL, { locale: lang })}
+        {localTime
+          .reconfigure({ outputCalendar: isAksam ? "islamic" : "islamicc" })
+          .toLocaleString(DateTime.DATE_FULL, { locale: lang })}
       </motion.span>
 
       <motion.span
