@@ -43,7 +43,17 @@ export default function Country() {
           placeholder: t("settingsSearchCountry"),
           name: "country",
         }}
-        pushFirst={["2", "13", "4", "35", "15", "21"]}
+        // Populer Country (vercel analytics)
+        // 2 = Türkiye,
+        // 13 = Almanya,
+        // 33 = ABD,
+        // 4 = Hollanda,
+        // 39 = Polonya,
+        // 15 = İngiltere
+        // 11 = Belçika
+        // 36 = Norveç
+        // 52 = Canada
+        pushFirst={["2", "13", "33", "4", "39", "15", "11", "36", "52"]}
         onChange={id => {
           const country = data.find(c => c.UlkeID === id);
           _setSettings({ ..._settings, country });
