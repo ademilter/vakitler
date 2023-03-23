@@ -89,12 +89,6 @@ export default function TimeListRow({
           <h5 className="capitalize leading-none">{timeName}</h5>
           <h4 className="tabular-nums leading-none">{formattedValue}</h4>
 
-          {/* imsak timer */}
-          {time === TimeNames.Imsak &&
-            [TimeNames.Aksam, TimeNames.Yatsi].includes(now!) && (
-              <RamadanTimer />
-            )}
-
           {/* aksam timer */}
           {time === TimeNames.Aksam &&
             [TimeNames.Imsak, TimeNames.Gunes, TimeNames.Ogle].includes(
