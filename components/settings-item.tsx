@@ -12,10 +12,9 @@ export default function SettingsItem({
   return (
     <label
       className={cx(
-        "flex h-12 grow cursor-pointer items-center gap-2 px-4",
-        "bg-white first:rounded-l-lg last:rounded-r-lg",
-        isSelected && "bg-blue-50",
-        "hover:bg-blue-50"
+        "flex h-12 grow cursor-pointer select-none items-center gap-2 px-4",
+        "first:rounded-l-lg last:rounded-r-lg",
+        isSelected && "bg-black bg-opacity-5 dark:bg-white dark:bg-opacity-10"
       )}
     >
       <input type="radio" {...props} />

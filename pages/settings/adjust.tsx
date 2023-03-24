@@ -5,6 +5,7 @@ import useTranslation from "next-translate/useTranslation";
 import { CommonStoreContext } from "@/stores/common";
 import { TimeNames } from "@/lib/types";
 import { adjustedTime, cx, formattedTime } from "@/lib/utils";
+import Box from "@/components/box";
 
 const timeKeys = Object.values(TimeNames);
 
@@ -62,16 +63,10 @@ export default function Adjust() {
   const Times = Array.from(Array(6).keys()).map(i => {
     const isActive = adjustments[i] !== 0;
     return (
-      <div
-        key={`time${i}`}
-        className={cx(
-          "flex items-center border-b bg-zinc-50 px-4 py-3 first:rounded-t-lg last:rounded-b-lg last:border-0",
-          isActive && "bg-white"
-        )}
-      >
+      <Box key={`time${i}`} className={cx("flex items-center px-4 py-3")}>
         <span className="grid grow">
           <b>{t(`times${timeKeys[i]}`)}</b>
-          <span>{visualizeAdjustment(i)}</span>
+          <span className="opacity-80">{visualizeAdjustment(i)}</span>
         </span>
 
         <span className="flex items-center gap-2">
@@ -85,7 +80,7 @@ export default function Adjust() {
             </button>
           )}
 
-          <span className="flex items-center rounded border border-zinc-200 bg-white">
+          <span className="flex items-center rounded bg-white">
             <button
               className="flex h-8 w-8 items-center justify-center"
               type="button"
@@ -105,7 +100,7 @@ export default function Adjust() {
               </svg>
             </button>
             <button
-              className="flex h-8 w-8 items-center justify-center border-l border-l-zinc-200"
+              className="flex h-8 w-8 items-center justify-center"
               type="button"
               onClick={() => onChangeAdjustment(adjustments[i] + 1, i)}
             >
@@ -125,7 +120,7 @@ export default function Adjust() {
             </button>
           </span>
         </span>
-      </div>
+      </Box>
     );
   });
 
@@ -133,7 +128,7 @@ export default function Adjust() {
     <Container className="flex min-h-full flex-col gap-6 py-10">
       <p>{t("settingsCustomAdjustmentsDetails")}</p>
 
-      <div className="grid rounded-lg border border-zinc-200">{Times}</div>
+      <div className="grid gap-px">{Times}</div>
 
       <button
         className="mt-auto flex h-12 w-full items-center justify-center rounded-lg border bg-current px-4"
