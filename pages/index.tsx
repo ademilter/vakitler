@@ -6,7 +6,7 @@ import TimeLocation from "@/components/time-location";
 import TimeSummary from "@/components/time-summary";
 import TimeList from "@/components/time-list";
 import TimeTravel from "@/components/time-travel";
-import Div100vh from "react-div-100vh";
+import MainPage from "@/components/layout/main";
 
 export default function Index() {
   const { times } = useContext(CommonStoreContext);
@@ -21,7 +21,7 @@ export default function Index() {
   if (!times) return null;
 
   return (
-    <Div100vh className="relative">
+    <MainPage>
       <motion.div
         initial={false}
         animate={start ? "open" : "closed"}
@@ -36,6 +36,6 @@ export default function Index() {
         <TimeList />
         <TimeTravel />
       </motion.div>
-    </Div100vh>
+    </MainPage>
   );
 }

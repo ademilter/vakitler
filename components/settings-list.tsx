@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import Fuse from "fuse.js";
+import { motion } from "framer-motion";
 import useTranslation from "next-translate/useTranslation";
 import Loading from "@/components/loading";
-import Box from "@/components/box";
 
 type Item = { value: string; label: string };
 
@@ -60,14 +60,16 @@ const SettingsList = ({
 
   return (
     <div>
-      <Box
-        className="sticky top-0 z-20 -mx-2 p-2"
-        helperClass="bg-white opacity-100"
+      <motion.div
+        className="sticky top-0 -mx-2 bg-white p-2 dark:bg-zinc-900"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
       >
         {!backButtonProps?.hidden && (
           <button
             type="button"
-            className="flex h-12 shrink-0 items-center text-zinc-500"
+            className="flex h-12 shrink-0 items-center"
             onClick={() => router.back()}
             {...backButtonProps}
           >
@@ -92,27 +94,26 @@ const SettingsList = ({
         <input
           type="text"
           autoFocus
-          className="h-12 w-full rounded-lg border bg-white px-4"
+          className="h-12 w-full rounded-xl border px-4 dark:border-zinc-600 dark:bg-zinc-900"
           {...inputProps}
           value={q}
           onChange={e => setQ(e.target.value)}
         />
-      </Box>
+      </motion.div>
 
-      <div className="mt-1 space-y-1">
+      <div className="space-y-1">
         {loading ? (
           <Loading />
         ) : (
           results.map(item => (
-            <Box key={item.value}>
-              <button
-                type="button"
-                className="flex h-12 w-full items-center rounded-lg px-4"
-                onClick={() => onChange(item.value)}
-              >
-                {item.label}
-              </button>
-            </Box>
+            <button
+              key={item.value}
+              type="button"
+              className="flex h-12 w-full items-center rounded-xl bg-zinc-100 px-4 dark:bg-zinc-800"
+              onClick={() => onChange(item.value)}
+            >
+              {item.label}
+            </button>
           ))
         )}
       </div>

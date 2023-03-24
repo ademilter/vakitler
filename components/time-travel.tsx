@@ -28,13 +28,13 @@ export default function TimeTravel() {
   return (
     <div
       className={cx(
-        "transform-x fixed top-2 right-4 z-30",
+        "transform-x fixed top-2 right-4 z-30 text-black",
         show ? "translate-x-0" : "translate-x-full"
       )}
     >
       <div
         className={cx(
-          "flex items-center gap-2 rounded-lg bg-zinc-100 px-3 py-2 shadow"
+          "flex items-center gap-2 rounded-lg bg-white px-3 py-2 shadow"
         )}
       >
         <button
@@ -49,7 +49,7 @@ export default function TimeTravel() {
             <input
               key={index}
               type="number"
-              className="h-8 w-12 rounded-lg bg-white pl-2"
+              className="h-8 w-12 rounded-lg bg-zinc-200 pl-2 "
               value={timeTravel[index]}
               onChange={e => {
                 const value = parseInt(e.target.value);

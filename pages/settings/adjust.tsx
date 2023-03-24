@@ -6,6 +6,7 @@ import { CommonStoreContext } from "@/stores/common";
 import { TimeNames } from "@/lib/types";
 import { adjustedTime, cx, formattedTime } from "@/lib/utils";
 import Box from "@/components/box";
+import SubPage from "@/components/layout/sub";
 
 const timeKeys = Object.values(TimeNames);
 
@@ -125,17 +126,21 @@ export default function Adjust() {
   });
 
   return (
-    <Container className="flex min-h-screen flex-col gap-6 py-10">
-      <p>{t("settingsCustomAdjustmentsDetails")}</p>
+    <SubPage>
+      <Container className="flex flex-col gap-6 py-10">
+        <p>{t("settingsCustomAdjustmentsDetails")}</p>
 
-      <div className="grid gap-px">{Times}</div>
+        <div className="grid gap-px">{Times}</div>
 
-      <button
-        className="mt-auto flex h-12 w-full items-center justify-center rounded-lg border bg-current px-4"
-        onClick={() => onSaveAdjustments()}
-      >
-        <span className="text-white dark:text-black">{t("settingsSave")}</span>
-      </button>
-    </Container>
+        <button
+          className="mt-auto flex h-12 w-full items-center justify-center rounded-lg border bg-current px-4"
+          onClick={() => onSaveAdjustments()}
+        >
+          <span className="text-white dark:text-black">
+            {t("settingsSave")}
+          </span>
+        </button>
+      </Container>
+    </SubPage>
   );
 }

@@ -58,6 +58,7 @@ export default function TimeListRow({
         now === TimeNames.Aksam && "bg-blue-300",
         now === TimeNames.Yatsi && "bg-indigo-300",
         `bg-opacity-${(index + 1) * 10}`,
+        `dark:bg-opacity-${(index + 1) * 5}`,
         // iphone bottom handle
         time === TimeNames.Yatsi && "pb-8 md:pb-14"
       )}

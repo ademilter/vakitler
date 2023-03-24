@@ -5,6 +5,7 @@ import SettingsList from "@/components/settings-list";
 import { ICity } from "@/lib/types";
 import { useRouter } from "next/router";
 import { CommonStoreContext } from "@/stores/common";
+import SubPage from "@/components/layout/sub";
 
 export default function Country() {
   const { t } = useTranslation("common");
@@ -40,31 +41,33 @@ export default function Country() {
   }, [_settings, fetchCities]);
 
   return (
-    <Container className="min-h-screen py-6">
-      <SettingsList
-        inputProps={{
-          placeholder: t("settingsSearchCity"),
-          name: "city",
-        }}
-        onChange={async id => {
-          const city = data.find(o => o.IlceID === id) as ICity;
+    <SubPage>
+      <Container className="py-6">
+        <SettingsList
+          inputProps={{
+            placeholder: t("settingsSearchCity"),
+            name: "city",
+          }}
+          onChange={async id => {
+            const city = data.find(o => o.IlceID === id) as ICity;
 
-          setSettings({
-            ...settings,
-            country: _settings.country,
-            region: _settings.region,
-            city,
-          });
+            setSettings({
+              ...settings,
+              country: _settings.country,
+              region: _settings.region,
+              city,
+            });
 
-          await fetchData(city.IlceID);
-          await push(`/`);
-        }}
-        loading={loading}
-        data={data.map(c => ({
-          value: c.IlceID,
-          label: c[t("settingsCityKey") as keyof ICity],
-        }))}
-      />
-    </Container>
+            await fetchData(city.IlceID);
+            await push(`/`);
+          }}
+          loading={loading}
+          data={data.map(c => ({
+            value: c.IlceID,
+            label: c[t("settingsCityKey") as keyof ICity],
+          }))}
+        />
+      </Container>
+    </SubPage>
   );
 }

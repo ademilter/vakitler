@@ -5,7 +5,6 @@ import { Analytics } from "@vercel/analytics/react";
 import { CommonStoreProvider } from "@/stores/common";
 import Head from "next/head";
 import { metadata } from "@/lib/meta";
-import Layout from "@/components/layout";
 import { ThemeProvider } from "next-themes";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
@@ -15,9 +14,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
       <ThemeProvider attribute="class">
         <CommonStoreProvider>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
+          <Component {...pageProps} />
         </CommonStoreProvider>
       </ThemeProvider>
 
