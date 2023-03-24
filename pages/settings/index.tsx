@@ -45,9 +45,12 @@ export default function Settings() {
 
   return (
     <Container className="flex min-h-full flex-col gap-6 py-10">
-      <div className="grid gap-6">
-        <Box className="p-4">
-          <Link href="/settings/country" className="flex items-center">
+      <div className="grid gap-4">
+        <Box className="p-2">
+          <Link
+            href="/settings/country"
+            className="flex items-center rounded-lg bg-white bg-opacity-80 p-4 dark:bg-opacity-10"
+          >
             <div className="grow">
               <h5 className="">{t("settingsCurrentLocation")}</h5>
               <div className="flex items-center gap-1">
@@ -78,7 +81,7 @@ export default function Settings() {
           </Link>
         </Box>
 
-        <Box className="flex items-center gap-px">
+        <Box className="flex items-center gap-px p-2">
           <SettingsItem
             name="lang"
             value="tr"
@@ -99,7 +102,7 @@ export default function Settings() {
           </SettingsItem>
         </Box>
 
-        <Box className="flex items-center">
+        <Box className="flex items-center p-2">
           {[
             ["system", "settingsThemeSystem"],
             ["light", "settingsThemeLight"],
@@ -118,7 +121,7 @@ export default function Settings() {
           ))}
         </Box>
 
-        <Box className="flex items-center gap-px">
+        <Box className="flex items-center gap-px p-2">
           <SettingsItem
             name="timeFormat"
             value={TimeFormat.Twelve}

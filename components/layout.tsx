@@ -2,7 +2,6 @@ import { ReactNode, useContext } from "react";
 import { cx } from "@/lib/utils";
 import { TimeNames } from "@/lib/types";
 import { CommonStoreContext } from "@/stores/common";
-import Div100vh from "react-div-100vh";
 
 const theme = {
   [TimeNames.Imsak]: "bg-sky-50 text-sky-900 dark:text-sky-50 dark:bg-sky-900",
@@ -25,8 +24,8 @@ export default function Layout({ children }: { children: ReactNode }) {
   const themeStyle = now ? theme[now] : "";
 
   return (
-    <Div100vh className={cx(themeStyle, "relative dark:bg-opacity-40")}>
+    <div className={cx(themeStyle, "min-h-screen dark:bg-opacity-40")}>
       {children}
-    </Div100vh>
+    </div>
   );
 }

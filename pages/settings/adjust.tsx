@@ -80,9 +80,9 @@ export default function Adjust() {
             </button>
           )}
 
-          <span className="flex items-center rounded bg-white">
+          <span className="flex items-center gap-px">
             <button
-              className="flex h-8 w-8 items-center justify-center"
+              className="flex h-8 w-8 items-center justify-center rounded-l bg-white dark:bg-black dark:bg-opacity-20"
               type="button"
               onClick={() => onChangeAdjustment(adjustments[i] - 1, i)}
             >
@@ -100,7 +100,7 @@ export default function Adjust() {
               </svg>
             </button>
             <button
-              className="flex h-8 w-8 items-center justify-center"
+              className="flex h-8 w-8 items-center justify-center rounded-r bg-white dark:bg-black dark:bg-opacity-20"
               type="button"
               onClick={() => onChangeAdjustment(adjustments[i] + 1, i)}
             >
@@ -134,7 +134,7 @@ export default function Adjust() {
         className="mt-auto flex h-12 w-full items-center justify-center rounded-lg border bg-current px-4"
         onClick={() => onSaveAdjustments()}
       >
-        <span className="text-white">{t("settingsSave")}</span>
+        <span className="text-white dark:text-black">{t("settingsSave")}</span>
       </button>
     </Container>
   );
