@@ -6,6 +6,7 @@ import {
   IRegion,
   IRelease,
   TimeFormat,
+  TimeNames,
   TypeTimer,
 } from "@/lib/types";
 import { useRouter } from "next/router";
@@ -14,9 +15,20 @@ import useInterval from "@/lib/use-interval";
 import { API_DATE_FORMAT, LOCAL_KEYS } from "@/lib/const";
 import setLanguage from "next-translate/setLanguage";
 import i18n from "@/i18n.json";
+import { useTheme } from "next-themes";
+
+const color = {
+  [TimeNames.Imsak]: "sky",
+  [TimeNames.Gunes]: "orange",
+  [TimeNames.Ogle]: "amber",
+  [TimeNames.Ikindi]: "rose",
+  [TimeNames.Aksam]: "blue",
+  [TimeNames.Yatsi]: "indigo",
+};
 
 interface ICommonStore {
   appLoading: boolean;
+  themeColor: string;
   _settings: {
     country: undefined | ICountry;
     region: undefined | IRegion;
@@ -43,6 +55,7 @@ interface ICommonStore {
 
 export const CommonStoreContext = createContext<ICommonStore>({
   appLoading: false,
+  themeColor: "#777",
   _settings: {
     country: undefined,
     region: undefined,
@@ -69,6 +82,8 @@ export const CommonStoreContext = createContext<ICommonStore>({
 
 export function CommonStoreProvider({ children }: { children: ReactNode }) {
   const router = useRouter();
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   const [appLoading, setAppLoading] =
     useState<ICommonStore["appLoading"]>(false);
@@ -94,6 +109,9 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
   const [rawTimes, setRawTimes] = useState<ICommonStore["rawTimes"]>();
   const [timer, setTimer] = useState<TypeTimer>([0, 0, 0]);
   const [timerRamadan, setTimerRamadan] = useState<TypeTimer>([0, 0, 0]);
+
+  const now = times?.time?.now ?? TimeNames.Imsak;
+  const themeColor = color[now];
 
   const fetchReleases = async () => {
     const res = await fetch("/api/releases");
@@ -199,10 +217,19 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
     times ? 1000 : null
   );
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
   return (
     <CommonStoreContext.Provider
       value={{
         appLoading,
+        themeColor,
         _settings,
         _setSettings,
         settings,

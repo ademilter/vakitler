@@ -10,7 +10,7 @@ import { HOUR_FORMAT } from "@/lib/const";
 export default function TimeSummaryIcon() {
   const { lang } = useTranslation("common");
 
-  const { times } = useContext(CommonStoreContext);
+  const { times, themeColor } = useContext(CommonStoreContext);
   const localTime = times?.localTime || DateTime.local();
 
   // hicri takvimde akşam ezanı ile tarih bir sonraki güne geçer
@@ -72,7 +72,8 @@ export default function TimeSummaryIcon() {
         <Icon
           icon={times?.iconName as keyof typeof ICON_NAMES}
           size="1em"
-          className="text-[32px] md:text-[48px]"
+          // size için font-size kullanıyoruz
+          className={`text-[44px] dark:text-[#ffffff14] md:text-[60px]`}
         />
       </motion.span>
     </motion.button>

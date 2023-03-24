@@ -5,6 +5,7 @@ import SettingsList from "@/components/settings-list";
 import { ICountry } from "@/lib/types";
 import { useRouter } from "next/router";
 import { CommonStoreContext } from "@/stores/common";
+import SubPage from "@/components/layout/sub";
 
 export default function Country() {
   const { t } = useTranslation("common");
@@ -37,37 +38,39 @@ export default function Country() {
   }, []);
 
   return (
-    <Container className="py-6">
-      <SettingsList
-        inputProps={{
-          placeholder: t("settingsSearchCountry"),
-          name: "country",
-        }}
-        // Populer Country (vercel analytics)
-        // 2 = Türkiye,
-        // 13 = Almanya,
-        // 33 = ABD,
-        // 4 = Hollanda,
-        // 39 = Polonya,
-        // 15 = İngiltere
-        // 11 = Belçika
-        // 36 = Norveç
-        // 52 = Canada
-        pushFirst={["2", "13", "33", "4", "39", "15", "11", "36", "52"]}
-        onChange={id => {
-          const country = data.find(c => c.UlkeID === id);
-          _setSettings({ ..._settings, country });
-          push(`/settings/region`);
-        }}
-        data={data.map(c => ({
-          value: c.UlkeID,
-          label: c[t("settingsCountryKey") as keyof ICountry],
-        }))}
-        loading={loading}
-        backButtonProps={{
-          hidden: true,
-        }}
-      />
-    </Container>
+    <SubPage>
+      <Container className="pt-8 pb-40">
+        <SettingsList
+          inputProps={{
+            placeholder: t("settingsSearchCountry"),
+            name: "country",
+          }}
+          // Populer Country (vercel analytics)
+          // 2 = Türkiye,
+          // 13 = Almanya,
+          // 33 = ABD,
+          // 4 = Hollanda,
+          // 39 = Polonya,
+          // 15 = İngiltere
+          // 11 = Belçika
+          // 36 = Norveç
+          // 52 = Canada
+          pushFirst={["2", "13", "33", "4", "39", "15", "11", "36", "52"]}
+          onChange={id => {
+            const country = data.find(c => c.UlkeID === id);
+            _setSettings({ ..._settings, country });
+            push(`/settings/region`);
+          }}
+          data={data.map(c => ({
+            value: c.UlkeID,
+            label: c[t("settingsCountryKey") as keyof ICountry],
+          }))}
+          loading={loading}
+          backButtonProps={{
+            hidden: true,
+          }}
+        />
+      </Container>
+    </SubPage>
   );
 }

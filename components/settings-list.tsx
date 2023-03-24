@@ -61,7 +61,7 @@ const SettingsList = ({
   return (
     <div>
       <motion.div
-        className="sticky top-0 -mx-2 bg-white p-2"
+        className="sticky top-0 -mx-2 bg-white p-2 dark:bg-zinc-900"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -94,7 +94,7 @@ const SettingsList = ({
         <input
           type="text"
           autoFocus
-          className="h-12 w-full rounded-lg border px-4"
+          className="h-12 w-full rounded-xl border px-4 dark:border-zinc-600 dark:bg-zinc-900"
           {...inputProps}
           value={q}
           onChange={e => setQ(e.target.value)}
@@ -109,7 +109,7 @@ const SettingsList = ({
             <button
               key={item.value}
               type="button"
-              className="flex h-12 w-full items-center rounded-lg bg-zinc-100 px-4"
+              className="flex h-12 w-full items-center rounded-xl bg-zinc-100 px-4 dark:bg-zinc-800"
               onClick={() => onChange(item.value)}
             >
               {item.label}

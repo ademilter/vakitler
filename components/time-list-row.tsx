@@ -58,6 +58,7 @@ export default function TimeListRow({
         now === TimeNames.Aksam && "bg-blue-300",
         now === TimeNames.Yatsi && "bg-indigo-300",
         `bg-opacity-${(index + 1) * 10}`,
+        `dark:bg-opacity-${(index + 1) * 5}`,
         // iphone bottom handle
         time === TimeNames.Yatsi && "pb-8 md:pb-14"
       )}
@@ -68,12 +69,12 @@ export default function TimeListRow({
             <motion.span
               layoutId="border"
               className={cx(
-                "absolute inset-0 rounded-2xl border border-current"
+                "absolute inset-0 rounded-2xl border-2 border-current"
               )}
               variants={{
                 open: {
                   scale: 1,
-                  opacity: 0.6,
+                  opacity: 0.3,
                   transition: {
                     duration: 0.3,
                     delay: 0.6,

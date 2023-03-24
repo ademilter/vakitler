@@ -51,7 +51,7 @@ export default function RamadanTimer() {
         )}
       </div>
 
-      <span className="absolute inset-0 rounded-xl bg-white" />
+      <span className="absolute inset-0 rounded-xl bg-white bg-opacity-80 dark:bg-black dark:bg-opacity-20" />
     </div>
   );
 }

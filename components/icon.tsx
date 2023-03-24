@@ -76,7 +76,7 @@ const PATHS = {
   ),
   [ICON_NAMES.Gunes]: (
     <>
-      <path d="M25 25a9 9 0 0 0-18 0h18Z" fill="#fff" />
+      {/*<path d="M25 25a9 9 0 0 0-18 0h18Z" fill="#fff" />*/}
       <path
         d="M7 25a9 9 0 0 1 18 0H7ZM30 25H2M16 6v6m0-6-3 3m3-3 3 3"
         stroke="currentColor"
@@ -94,7 +94,7 @@ const PATHS = {
   ),
   [ICON_NAMES.Ogle]: (
     <>
-      <circle cx={16} cy={16} r={9} fill="#fff" />
+      {/*<circle cx={16} cy={16} r={9} fill="#fff" />*/}
       <circle
         cx={16}
         cy={16}
@@ -114,7 +114,7 @@ const PATHS = {
   ),
   [ICON_NAMES.Ikindi]: (
     <>
-      <circle opacity={0.1} cx={16} cy={16} r={9} fill="currentColor" />
+      {/*<circle opacity={0.1} cx={16} cy={16} r={9} fill="currentColor" />*/}
       <circle
         cx={16}
         cy={16}
@@ -125,7 +125,7 @@ const PATHS = {
         strokeLinejoin="round"
       />
       <g
-        opacity={0.2}
+        opacity={0.4}
         fillRule="evenodd"
         clipRule="evenodd"
         fill="currentColor"

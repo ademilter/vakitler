@@ -5,6 +5,7 @@ import SettingsList from "@/components/settings-list";
 import { IRegion } from "@/lib/types";
 import { useRouter } from "next/router";
 import { CommonStoreContext } from "@/stores/common";
+import SubPage from "@/components/layout/sub";
 
 export default function Country() {
   const { t } = useTranslation("common");
@@ -39,24 +40,26 @@ export default function Country() {
   }, [_settings, fetchRegionData]);
 
   return (
-    <Container className="py-6">
-      <SettingsList
-        inputProps={{
-          placeholder: t("settingsSearchRegion"),
-          name: "region",
-        }}
-        pushFirst={["539", "506"]}
-        onChange={id => {
-          const region = data.find(o => o.SehirID === id);
-          _setSettings({ ..._settings, region });
-          push(`/settings/city`);
-        }}
-        loading={loading}
-        data={data.map(c => ({
-          value: c.SehirID,
-          label: c[t("settingsRegionKey") as keyof IRegion],
-        }))}
-      />
-    </Container>
+    <SubPage>
+      <Container className="pt-8 pb-40">
+        <SettingsList
+          inputProps={{
+            placeholder: t("settingsSearchRegion"),
+            name: "region",
+          }}
+          pushFirst={["539", "506"]}
+          onChange={id => {
+            const region = data.find(o => o.SehirID === id);
+            _setSettings({ ..._settings, region });
+            push(`/settings/city`);
+          }}
+          loading={loading}
+          data={data.map(c => ({
+            value: c.SehirID,
+            label: c[t("settingsRegionKey") as keyof IRegion],
+          }))}
+        />
+      </Container>
+    </SubPage>
   );
 }
