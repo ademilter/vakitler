@@ -7,7 +7,7 @@ export default function SubPage({ children }: { children: ReactNode }) {
   const { resolvedTheme } = useTheme();
 
   const themeColor =
-    resolvedTheme === "light" ? colors.white : colors.zinc["900"];
+    resolvedTheme === "light" ? colors.zinc["200"] : colors.zinc["900"];
 
   return (
     <>
