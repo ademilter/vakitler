@@ -5,7 +5,6 @@ import useTranslation from "next-translate/useTranslation";
 import { CommonStoreContext } from "@/stores/common";
 import { TimeNames } from "@/lib/types";
 import { adjustedTime, cx, formattedTime } from "@/lib/utils";
-import Box from "@/components/box";
 import SubPage from "@/components/layout/sub";
 
 const timeKeys = Object.values(TimeNames);
@@ -64,10 +63,18 @@ export default function Adjust() {
   const Times = Array.from(Array(6).keys()).map(i => {
     const isActive = adjustments[i] !== 0;
     return (
-      <Box key={`time${i}`} className={cx("flex items-center px-4 py-3")}>
+      <div
+        key={`time${i}`}
+        className={cx(
+          "flex items-center bg-zinc-100 px-4 py-3",
+          "first:rounded-t-lg last:rounded-b-lg",
+          "dark:bg-zinc-800",
+          isActive && "bg-zinc-200 dark:bg-zinc-700 dark:bg-opacity-60"
+        )}
+      >
         <span className="grid grow">
-          <b>{t(`times${timeKeys[i]}`)}</b>
-          <span className="opacity-80">{visualizeAdjustment(i)}</span>
+          <span>{t(`times${timeKeys[i]}`)}</span>
+          <span className="opacity-60">{visualizeAdjustment(i)}</span>
         </span>
 
         <span className="flex items-center gap-2">
@@ -81,9 +88,9 @@ export default function Adjust() {
             </button>
           )}
 
-          <span className="flex items-center gap-px">
+          <span className="flex items-center rounded bg-white dark:bg-zinc-700">
             <button
-              className="flex h-8 w-8 items-center justify-center rounded-l bg-white dark:bg-black dark:bg-opacity-20"
+              className="flex h-8 w-8 items-center justify-center"
               type="button"
               onClick={() => onChangeAdjustment(adjustments[i] - 1, i)}
             >
@@ -101,7 +108,7 @@ export default function Adjust() {
               </svg>
             </button>
             <button
-              className="flex h-8 w-8 items-center justify-center rounded-r bg-white dark:bg-black dark:bg-opacity-20"
+              className="flex h-8 w-8 items-center justify-center"
               type="button"
               onClick={() => onChangeAdjustment(adjustments[i] + 1, i)}
             >
@@ -121,19 +128,19 @@ export default function Adjust() {
             </button>
           </span>
         </span>
-      </Box>
+      </div>
     );
   });
 
   return (
     <SubPage>
-      <Container className="flex flex-col gap-6 py-10">
+      <Container className="grid gap-8 py-8">
         <p>{t("settingsCustomAdjustmentsDetails")}</p>
 
         <div className="grid gap-px">{Times}</div>
 
         <button
-          className="mt-auto flex h-12 w-full items-center justify-center rounded-lg border bg-current px-4"
+          className="mt-auto flex h-12 w-full items-center justify-center rounded-xl bg-current px-4"
           onClick={() => onSaveAdjustments()}
         >
           <span className="text-white dark:text-black">

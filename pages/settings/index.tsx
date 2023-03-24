@@ -44,8 +44,8 @@ export default function Settings() {
 
   return (
     <SubPage>
-      <Container className="flex flex-col gap-8 py-8">
-        <div className="grid gap-4">
+      <Container className="grid gap-8 py-8">
+        <div className="grid gap-6">
           <Box>
             <Box.Title>{t("settingsCurrentLocation")}</Box.Title>
             <Box.Body>
@@ -135,7 +135,7 @@ export default function Settings() {
             </Box.Body>
           </Box>
 
-          <div className="space-y-px text-sm">
+          <div className="space-y-px">
             <Box>
               {/* TODO: title */}
               <Box.Title>Uygulama Hakkında</Box.Title>

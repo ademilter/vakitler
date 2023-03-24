@@ -141,7 +141,7 @@ function BoxBodyRadio({
   return (
     <label
       className={cx(
-        "relative flex h-10 grow items-center gap-2 px-4",
+        "relative flex grow items-center gap-2 px-4 py-3",
         "cursor-pointer select-none",
         "first:rounded-t-lg last:rounded-b-lg",
         isSelected && "z-10 rounded-lg bg-white shadow-sm dark:bg-zinc-700",
