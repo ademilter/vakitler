@@ -29,7 +29,7 @@
   "settingsCancel": "Cancel",
   "settingsThemeLight": "Light",
   "settingsThemeDark": "Dark",
-  "settingsThemeSystem": "System",
+  "settingsThemeSystem": "Automatic",
   "settingsTimeFormat12": "12-hour format",
   "settingsTimeFormat24": "24-hour format",
   "settingsCustomAdjustments": "Custom Adjustments",
