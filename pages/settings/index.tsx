@@ -44,7 +44,7 @@ export default function Settings() {
   };
 
   return (
-    <Container className="flex min-h-full flex-col gap-6 py-10">
+    <Container className="flex min-h-screen min-h-full flex-col gap-6 py-10">
       <div className="grid gap-4">
         <Box className="p-2">
           <Link
@@ -53,11 +53,9 @@ export default function Settings() {
           >
             <div className="grow">
               <h5 className="">{t("settingsCurrentLocation")}</h5>
-              <div className="flex items-center gap-1">
-                <span>{city}</span>
-                <span className="opacity-30">/</span>
-                <span>{region}</span>
-                <span className="opacity-30">/</span>
+              <div className="flex flex-col md:flex-row md:items-center">
+                <span>{city},</span>
+                <span>{region},</span>
                 <span>{country}</span>
               </div>
             </div>

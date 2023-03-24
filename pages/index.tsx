@@ -21,7 +21,7 @@ export default function Index() {
   if (!times) return null;
 
   return (
-    <Div100vh>
+    <Div100vh className="relative">
       <motion.div
         initial={false}
         animate={start ? "open" : "closed"}

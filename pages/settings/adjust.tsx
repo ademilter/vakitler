@@ -125,7 +125,7 @@ export default function Adjust() {
   });
 
   return (
-    <Container className="flex min-h-full flex-col gap-6 py-10">
+    <Container className="flex min-h-screen flex-col gap-6 py-10">
       <p>{t("settingsCustomAdjustmentsDetails")}</p>
 
       <div className="grid gap-px">{Times}</div>

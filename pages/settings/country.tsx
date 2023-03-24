@@ -37,7 +37,7 @@ export default function Country() {
   }, []);
 
   return (
-    <Container className="py-6">
+    <Container className="min-h-screen py-6">
       <SettingsList
         inputProps={{
           placeholder: t("settingsSearchCountry"),
