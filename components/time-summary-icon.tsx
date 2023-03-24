@@ -73,7 +73,7 @@ export default function TimeSummaryIcon() {
           icon={times?.iconName as keyof typeof ICON_NAMES}
           size="1em"
           // size için font-size kullanıyoruz
-          className={`text-[44px] text-[#ffffff14] md:text-[60px]`}
+          className={`text-[44px] dark:text-[#ffffff14] md:text-[60px]`}
         />
       </motion.span>
     </motion.button>

@@ -44,7 +44,7 @@ export default function Settings() {
 
   return (
     <SubPage>
-      <Container className="grid gap-8 pt-8 pb-40">
+      <Container className="grid pt-8">
         <div className="grid gap-6">
           <Box>
             <Box.Title>{t("settingsCurrentLocation")}</Box.Title>
@@ -202,14 +202,17 @@ export default function Settings() {
           </div>
         </div>
 
-        <Link
-          href="/"
-          className="mt-auto flex h-12 w-full items-center justify-center rounded-xl bg-current px-4"
-        >
-          <span className="text-white dark:text-black">
-            {t("settingsSave")}
-          </span>
-        </Link>
+        <div className="sticky bottom-0 z-20 mt-60 pb-10">
+          <span className="pointer-events-none absolute inset-x-0 bottom-0 -top-24 -z-10 bg-gradient-to-t from-zinc-200 via-zinc-200 to-transparent dark:from-zinc-900 dark:via-zinc-900 dark:to-transparent" />
+          <Link
+            href="/"
+            className=" mt-auto flex h-12 w-full items-center justify-center rounded-xl bg-current px-4"
+          >
+            <span className="text-white dark:text-black">
+              {t("settingsSave")}
+            </span>
+          </Link>
+        </div>
       </Container>
     </SubPage>
   );
