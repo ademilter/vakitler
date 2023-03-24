@@ -69,7 +69,7 @@ function BoxBody({
 }) {
   return (
     <div
-      className={cx("rounded-xl bg-zinc-100 dark:bg-zinc-800", className)}
+      className={cx("rounded-xl bg-white dark:bg-zinc-800", className)}
       {...props}
     >
       {children}
@@ -132,25 +132,30 @@ function BoxBodyRadio({
   children,
   isSelected = false,
   className,
+  last,
   ...props
 }: React.InputHTMLAttributes<HTMLInputElement> & {
   children: React.ReactNode;
   isSelected?: boolean;
   className?: string;
+  last?: boolean;
 }) {
+  console.log(children, last);
+  const showBorder = !(isSelected || last);
+
   return (
     <label
       className={cx(
-        "relative flex grow items-center gap-2 px-4 py-3",
+        "relative flex h-12 grow items-center gap-2 px-4",
         "cursor-pointer select-none",
         "first:rounded-t-lg last:rounded-b-lg",
-        isSelected && "z-10 rounded-lg bg-white shadow-sm dark:bg-zinc-700",
+        isSelected &&
+          "z-10 rounded-lg border border-zinc-200 dark:border-zinc-700",
         className
       )}
     >
-      {/* TODO: hide last item */}
-      {!isSelected && (
-        <div className="pointer-events-none absolute left-4 -bottom-px right-4 h-px bg-zinc-200 dark:bg-opacity-10" />
+      {showBorder && (
+        <div className="pointer-events-none absolute left-4 -bottom-px right-4 h-px bg-zinc-300 dark:bg-opacity-5" />
       )}
 
       <span className="grow">{children}</span>

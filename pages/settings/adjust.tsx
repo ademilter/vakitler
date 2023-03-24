@@ -67,7 +67,7 @@ export default function Adjust() {
         key={`time${i}`}
         className={cx(
           "flex items-center bg-zinc-100 px-4 py-3",
-          "first:rounded-t-lg last:rounded-b-lg",
+          "first:rounded-t-xl last:rounded-b-xl",
           "dark:bg-zinc-800",
           isActive && "bg-zinc-200 dark:bg-zinc-700 dark:bg-opacity-60"
         )}
@@ -88,9 +88,9 @@ export default function Adjust() {
             </button>
           )}
 
-          <span className="flex items-center rounded bg-white dark:bg-zinc-700">
+          <span className="flex items-center gap-px">
             <button
-              className="flex h-8 w-8 items-center justify-center"
+              className="flex h-10 w-10 items-center justify-center rounded-l-lg bg-white dark:bg-zinc-700"
               type="button"
               onClick={() => onChangeAdjustment(adjustments[i] - 1, i)}
             >
@@ -108,7 +108,7 @@ export default function Adjust() {
               </svg>
             </button>
             <button
-              className="flex h-8 w-8 items-center justify-center"
+              className="flex h-10 w-10 items-center justify-center rounded-r-lg bg-white dark:bg-zinc-700"
               type="button"
               onClick={() => onChangeAdjustment(adjustments[i] + 1, i)}
             >
@@ -134,7 +134,7 @@ export default function Adjust() {
 
   return (
     <SubPage>
-      <Container className="grid gap-8 py-8">
+      <Container className="grid gap-8 pt-8 pb-40">
         <p>{t("settingsCustomAdjustmentsDetails")}</p>
 
         <div className="grid gap-px">{Times}</div>

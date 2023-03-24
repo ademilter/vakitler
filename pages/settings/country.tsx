@@ -39,7 +39,7 @@ export default function Country() {
 
   return (
     <SubPage>
-      <Container className="py-8">
+      <Container className="pt-8 pb-40">
         <SettingsList
           inputProps={{
             placeholder: t("settingsSearchCountry"),

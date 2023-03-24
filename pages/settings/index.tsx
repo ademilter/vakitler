@@ -44,7 +44,7 @@ export default function Settings() {
 
   return (
     <SubPage>
-      <Container className="grid gap-8 py-8">
+      <Container className="grid gap-8 pt-8 pb-40">
         <div className="grid gap-6">
           <Box>
             <Box.Title>{t("settingsCurrentLocation")}</Box.Title>
@@ -66,7 +66,7 @@ export default function Settings() {
               {[
                 ["tr", "settingsTr"],
                 ["en", "settingsEn"],
-              ].map(([value, label]) => (
+              ].map(([value, label], i) => (
                 <Box.BodyRadio
                   key={value}
                   name="lang"
@@ -74,6 +74,7 @@ export default function Settings() {
                   checked={lang === value}
                   isSelected={lang === value}
                   onChange={onChangeLang}
+                  last={i === 1}
                 >
                   {t(label)}
                 </Box.BodyRadio>
@@ -89,7 +90,7 @@ export default function Settings() {
                 ["system", "settingsThemeSystem"],
                 ["light", "settingsThemeLight"],
                 ["dark", "settingsThemeDark"],
-              ].map(([value, label]) => (
+              ].map(([value, label], i) => (
                 <Box.BodyRadio
                   key={value}
                   name="theme"
@@ -97,6 +98,7 @@ export default function Settings() {
                   checked={theme === value}
                   isSelected={theme === value}
                   onChange={e => setTheme(e.target.value)}
+                  last={i === 2}
                 >
                   {t(label)}
                 </Box.BodyRadio>
@@ -111,7 +113,7 @@ export default function Settings() {
               {[
                 [TimeFormat.Twelve, "settingsTimeFormat12"],
                 [TimeFormat.TwentyFour, "settingsTimeFormat24"],
-              ].map(([value, label]) => (
+              ].map(([value, label], i) => (
                 <Box.BodyRadio
                   key={value}
                   name="timeFormat"
@@ -119,6 +121,7 @@ export default function Settings() {
                   checked={timeFormat === value}
                   isSelected={timeFormat === value}
                   onChange={onChangeTimeFormat}
+                  last={i === 1}
                 >
                   {t(label)}
                 </Box.BodyRadio>
