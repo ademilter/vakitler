@@ -44,7 +44,7 @@ export default function Settings() {
 
   return (
     <SubPage>
-      <Container className="grid pt-8">
+      <Container className="grid py-8">
         <div className="grid gap-6">
           <Box>
             <Box.Title>{t("settingsCurrentLocation")}</Box.Title>
@@ -145,6 +145,7 @@ export default function Settings() {
 
               <Box.Body className="rounded-b-none">
                 <Box.BodyLink
+                  className="py-4"
                   href="https://github.com/ademilter/vakitler"
                   target="_blank"
                   icon={
@@ -172,6 +173,7 @@ export default function Settings() {
             <Box>
               <Box.Body className="rounded-t-none">
                 <Box.BodyLink
+                  className="py-4"
                   href="https://www.buymeacoffee.com/ademilter"
                   target="_blank"
                   icon={
@@ -206,7 +208,7 @@ export default function Settings() {
           <span className="pointer-events-none absolute inset-x-0 bottom-0 -top-24 -z-10 bg-gradient-to-t from-zinc-200 via-zinc-200 to-transparent dark:from-zinc-900 dark:via-zinc-900 dark:to-transparent" />
           <Link
             href="/"
-            className=" mt-auto flex h-12 w-full items-center justify-center rounded-xl bg-current px-4"
+            className="mt-auto flex h-12 w-full items-center justify-center rounded-xl bg-current px-4"
           >
             <span className="text-white dark:text-black">
               {t("settingsSave")}

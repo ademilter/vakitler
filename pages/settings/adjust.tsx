@@ -66,10 +66,10 @@ export default function Adjust() {
       <div
         key={`time${i}`}
         className={cx(
-          "flex items-center bg-zinc-100 px-4 py-3",
+          "flex items-center px-4 py-4",
           "first:rounded-t-xl last:rounded-b-xl",
-          "dark:bg-zinc-800",
-          isActive && "bg-zinc-200 dark:bg-zinc-700 dark:bg-opacity-60"
+          "bg-white dark:bg-zinc-800",
+          isActive && "bg-blue-50 dark:bg-zinc-700 dark:bg-opacity-60"
         )}
       >
         <span className="grid grow">
@@ -81,7 +81,7 @@ export default function Adjust() {
           {isActive && (
             <button
               type="button"
-              className="flex h-8 w-8 items-center justify-center"
+              className="flex h-10 w-10 items-center justify-center"
               onClick={() => onChangeAdjustment(0, i)}
             >
               {adjustments[i]}
@@ -90,7 +90,7 @@ export default function Adjust() {
 
           <span className="flex items-center gap-px">
             <button
-              className="flex h-10 w-10 items-center justify-center rounded-l-lg bg-white dark:bg-zinc-700"
+              className="flex h-10 w-10 items-center justify-center rounded-l-lg bg-zinc-200 dark:bg-zinc-700"
               type="button"
               onClick={() => onChangeAdjustment(adjustments[i] - 1, i)}
             >
@@ -108,7 +108,7 @@ export default function Adjust() {
               </svg>
             </button>
             <button
-              className="flex h-10 w-10 items-center justify-center rounded-r-lg bg-white dark:bg-zinc-700"
+              className="flex h-10 w-10 items-center justify-center rounded-r-lg bg-zinc-200 dark:bg-zinc-700"
               type="button"
               onClick={() => onChangeAdjustment(adjustments[i] + 1, i)}
             >
@@ -134,19 +134,22 @@ export default function Adjust() {
 
   return (
     <SubPage>
-      <Container className="grid gap-8 pt-8 pb-40">
+      <Container className="grid gap-8 pt-8">
         <p>{t("settingsCustomAdjustmentsDetails")}</p>
 
         <div className="grid gap-px">{Times}</div>
 
-        <button
-          className="mt-auto flex h-12 w-full items-center justify-center rounded-xl bg-current px-4"
-          onClick={() => onSaveAdjustments()}
-        >
-          <span className="text-white dark:text-black">
-            {t("settingsSave")}
-          </span>
-        </button>
+        <div className="sticky bottom-0 z-20 mt-60 pb-10">
+          <span className="pointer-events-none absolute inset-x-0 bottom-0 -top-24 -z-10 bg-gradient-to-t from-zinc-200 via-zinc-200 to-transparent dark:from-zinc-900 dark:via-zinc-900 dark:to-transparent" />
+          <button
+            className="mt-auto flex h-12 w-full items-center justify-center rounded-xl bg-current px-4"
+            onClick={() => onSaveAdjustments()}
+          >
+            <span className="text-white dark:text-black">
+              {t("settingsSave")}
+            </span>
+          </button>
+        </div>
       </Container>
     </SubPage>
   );

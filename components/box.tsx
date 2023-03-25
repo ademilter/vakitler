@@ -154,7 +154,7 @@ function BoxBodyRadio({
       )}
     >
       {showBorder && (
-        <div className="pointer-events-none absolute left-4 -bottom-[2px] right-4 h-px bg-zinc-300 dark:bg-opacity-5" />
+        <div className="pointer-events-none absolute left-4 -bottom-[2px] right-4 h-px bg-zinc-100 dark:bg-opacity-5" />
       )}
 
       <span className="grow">{children}</span>
