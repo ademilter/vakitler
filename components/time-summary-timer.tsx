@@ -1,13 +1,13 @@
 import { TimeNames } from "@/lib/types";
-import { HTMLAttributes, useContext } from "react";
-import { CommonStoreContext } from "@/stores/common";
+import { HTMLAttributes } from "react";
 import Trans from "next-translate/Trans";
 import useTranslation from "next-translate/useTranslation";
+import { useTimerStore } from "@/stores";
 
 export default function TimeSummaryTimer() {
   const { t } = useTranslation("common");
 
-  const { timer, times } = useContext(CommonStoreContext);
+  const { timer, times } = useTimerStore();
 
   let timeName = t(times?.time.next as TimeNames);
   if (times?.today?.isJumuah && times?.time.next === TimeNames.Ogle) {

@@ -1,11 +1,12 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import Container from "@/components/container";
 import useTranslation from "next-translate/useTranslation";
-import { CommonStoreContext } from "@/stores/common";
+import { useSettings, useRawTimes, useCommonStoreActions } from "@/stores";
 import { TimeNames } from "@/lib/types";
 import { adjustedTime, cx, formattedTime } from "@/lib/utils";
 import SubPage from "@/components/layout/sub";
+import useFetchData from "@/hooks/use-fetch-data";
 
 const timeKeys = Object.values(TimeNames);
 
@@ -13,8 +14,11 @@ export default function Adjust() {
   const { t, lang } = useTranslation("common");
   const router = useRouter();
 
-  const { settings, rawTimes, setSettings, fetchData } =
-    useContext(CommonStoreContext);
+  const settings = useSettings();
+  const rawTimes = useRawTimes();
+  const { setSettings } = useCommonStoreActions();
+
+  const [fetchData] = useFetchData();
 
   const today = rawTimes?.today;
 

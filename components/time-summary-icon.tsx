@@ -1,17 +1,17 @@
-import { useContext, useEffect, useState } from "react";
-import { CommonStoreContext } from "@/stores/common";
+import { useEffect, useState, memo } from "react";
 import useTranslation from "next-translate/useTranslation";
 import Icon, { ICON_NAMES } from "@/components/icon";
 import { motion } from "framer-motion";
 import { DateTime } from "luxon";
 import { TimeNames } from "@/lib/types";
 import { HOUR_FORMAT } from "@/lib/const";
-import { toHijri, toGregorian } from "hijri-converter";
+import { toHijri } from "hijri-converter";
+import { useTimes } from "@/stores/timerStore";
 
-export default function TimeSummaryIcon() {
+export default memo(function TimeSummaryIcon() {
   const { t } = useTranslation("common");
+  const times = useTimes();
 
-  const { times, themeColor } = useContext(CommonStoreContext);
   const localTime = times?.localTime || DateTime.local();
   const hijriMonths = [
     "Muharrem",
@@ -27,7 +27,7 @@ export default function TimeSummaryIcon() {
     "Zilkade",
   ];
   // hicri takvimde akşam ezanı ile tarih bir sonraki güne geçer
-  const isAksam =
+  const isMaghrib =
     times?.today &&
     localTime >=
       DateTime.fromFormat(times?.today[TimeNames.Aksam], HOUR_FORMAT);
@@ -48,7 +48,7 @@ export default function TimeSummaryIcon() {
   const hijriDate = toHijri(
     localTime.year,
     localTime.month,
-    localTime.day + (isAksam ? 1 : 0)
+    localTime.day + (isMaghrib ? 1 : 0)
   );
 
   const formattedHijriDate = `${hijriDate.hd} ${t(
@@ -99,4 +99,4 @@ export default function TimeSummaryIcon() {
       </motion.span>
     </motion.button>
   );
-}
+});

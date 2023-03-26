@@ -1,8 +1,9 @@
+import { memo } from "react";
 import Link from "next/link";
 import useTranslation from "next-translate/useTranslation";
 import useLocations from "@/hooks/use-locations";
 
-export default function TimeLocation() {
+export default memo(function TimeLocation() {
   const { lang } = useTranslation("common");
   const { city } = useLocations();
 
@@ -15,4 +16,4 @@ export default function TimeLocation() {
       </Link>
     </div>
   );
-}
+})

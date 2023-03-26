@@ -1,17 +1,18 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Container from "@/components/container";
 import useTranslation from "next-translate/useTranslation";
 import SettingsList from "@/components/settings-list";
 import { ICountry } from "@/lib/types";
 import { useRouter } from "next/router";
-import { CommonStoreContext } from "@/stores/common";
+import { useStore, useCommonStoreActions } from "@/stores";
 import SubPage from "@/components/layout/sub";
 
 export default function Country() {
   const { t } = useTranslation("common");
   const { push } = useRouter();
 
-  const { _settings, _setSettings } = useContext(CommonStoreContext);
+  const { _settings } = useStore();
+  const { _setSettings } = useCommonStoreActions();
 
   const [data, setData] = useState<ICountry[]>([]);
   const [loading, setLoading] = useState(false);
@@ -24,6 +25,16 @@ export default function Country() {
 
       const res = await fetch(url.toString());
       const data = await res.json();
+
+      // TODO: Remove this
+// {
+    //     "error": {
+    //         "message": "Diyanet Isleri Baskanligi servisine baglanilamiyor.",
+    //         "status": 502
+    //     }
+    // }
+
+      console.log({ data });
 
       setData(data);
     } catch (error) {
