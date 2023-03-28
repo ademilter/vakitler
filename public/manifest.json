@@ -1,10 +1,12 @@
 {
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
   "short_name": "Vakitler",
   "name": "Namaz Vakitleri",
   "description": "Namaz vakitlerini kolay şekilde öğrenin.",
   "theme_color": "#ffffff",
   "background_color": "#ffffff",
   "display": "standalone",
+  "orientation": "landscape-primary",
   "scope": "/",
   "start_url": "/",
   "icons": [
