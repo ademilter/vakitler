@@ -9,6 +9,7 @@
   "orientation": "portrait-primary",
   "scope": "/",
   "start_url": "/",
+  "start_URL": "/",
   "icons": [
     {
       "src": "/icons-vector.svg",
