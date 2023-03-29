@@ -45,6 +45,21 @@ export enum TimeNames {
   Yatsi = "Yatsi",
 }
 
+export enum HijriMonthNames {
+  Muharrem = 1,
+  Safer = 2,
+  Rebiulevvel = 3,
+  Rebiulahir = 4,
+  Cemaziyelevvel = 5,
+  Cemaziyelahir = 6,
+  Recep = 7,
+  Saban = 8,
+  Ramazan = 9,
+  Sevval = 10,
+  Zilkade = 11,
+  Zilhicce = 12,
+}
+
 export interface IRelease {
   id: number;
   draft: boolean;
