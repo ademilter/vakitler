@@ -73,7 +73,7 @@ export default function Adjust() {
         )}
       >
         <span className="grid grow">
-          <span>{t(`times${timeKeys[i]}`)}</span>
+          <span>{t(timeKeys[i])}</span>
           <span className="opacity-60">{visualizeAdjustment(i)}</span>
         </span>
 
@@ -135,7 +135,7 @@ export default function Adjust() {
   return (
     <SubPage>
       <Container className="grid gap-8 pt-8">
-        <p>{t("settingsCustomAdjustmentsDetails")}</p>
+        <p>{t("adjustments:description")}</p>
 
         <div className="grid gap-px">{Times}</div>
 
@@ -145,9 +145,7 @@ export default function Adjust() {
             className="mt-auto flex h-12 w-full items-center justify-center rounded-xl bg-current px-4"
             onClick={() => onSaveAdjustments()}
           >
-            <span className="text-white dark:text-black">
-              {t("settingsSave")}
-            </span>
+            <span className="text-white dark:text-black">{t("save")}</span>
           </button>
         </div>
       </Container>

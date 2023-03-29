@@ -7,13 +7,11 @@ export default function useLocations() {
   const { t } = useTranslation("common");
   const { settings } = useContext(CommonStoreContext);
 
-  const city =
-    settings.city && settings.city[t("settingsCityKey") as keyof ICity];
+  const city = settings.city && settings.city[t("cityKey") as keyof ICity];
   const region =
-    settings.region && settings.region[t("settingsRegionKey") as keyof IRegion];
+    settings.region && settings.region[t("regionKey") as keyof IRegion];
   const country =
-    settings.country &&
-    settings.country[t("settingsCountryKey") as keyof ICountry];
+    settings.country && settings.country[t("countryKey") as keyof ICountry];
 
   return {
     city,

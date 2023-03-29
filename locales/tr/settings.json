@@ -1,0 +1,21 @@
+{
+  "searchCountry": "Ülke ara",
+  "searchRegion": "Şehir ara",
+  "searchCity": "İlçe ara",
+  "currentLocationTitle": "Mevcut konum",
+  "langTitle": "Dil",
+  "langOptionTr": "Türkçe",
+  "langOptionEn": "English",
+  "themeTitle": "Görünüş",
+  "themeOptionSystem": "Otomatik",
+  "themeOptionLight": "Aydınlık",
+  "themeOptionDark": "Koyu",
+  "timeFormatTitle": "Saat formatı",
+  "timeFormatOption12": "12 saat biçimi",
+  "timeFormatOption24": "24 saat biçimi",
+  "customAdjustmentsTitle": "Dakika Ayarı",
+  "customAdjustmentsEmpty": "Ayarlanmamış",
+  "aboutTitle": "Uygulama hakkında",
+  "aboutOpenSource": "Bu proje ücretsiz ve açık kaynaktır",
+  "aboutSourceCode": "Desteğiniz için teşekkür ederim"
+}

@@ -36,7 +36,7 @@ export default function TimeSummary() {
         <TimeSummaryIcon />
 
         <h2 className="mt-2 text-4xl capitalize md:mt-4 md:text-5xl">
-          {t(`times${times?.time.now as TimeNames}`)}
+          {t(times?.time.now as TimeNames)}
         </h2>
 
         <div className="mt-5 md:mt-6">

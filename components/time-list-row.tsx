@@ -30,9 +30,9 @@ export default function TimeListRow({
 
   if (!times) return null;
 
-  let timeName = t(`times${time}`);
+  let timeName = t(time);
   if (time === TimeNames.Ogle && times?.today?.isJumuah) {
-    timeName = `${t("timesJumuah")} 🕌`;
+    timeName = `${t("Jumuah")} 🕌`;
   }
 
   return (

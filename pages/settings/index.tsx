@@ -25,7 +25,7 @@ export default function Settings() {
 
   const adjustmentsAsText = () => {
     if (adjustments.length === 0 || adjustments.every(a => a === 0)) {
-      return t("settingsNoAdjustments");
+      return t("settings:customAdjustmentsEmpty");
     }
     return adjustments.join(", ");
   };
@@ -47,7 +47,7 @@ export default function Settings() {
       <Container className="grid py-8">
         <div className="grid gap-6">
           <Box>
-            <Box.Title>{t("settingsCurrentLocation")}</Box.Title>
+            <Box.Title>{t("settings:currentLocationTitle")}</Box.Title>
             <Box.Body>
               <Box.BodyLink href="/settings/country">
                 <div className="flex items-center gap-0.5">
@@ -60,12 +60,11 @@ export default function Settings() {
           </Box>
 
           <Box>
-            {/* TODO: title */}
-            <Box.Title>Dil</Box.Title>
+            <Box.Title>{t("settings:langTitle")}</Box.Title>
             <Box.Body className="p-2">
               {[
-                ["tr", "settingsTr"],
-                ["en", "settingsEn"],
+                ["tr", "settings:langOptionTr"],
+                ["en", "settings:langOptionEn"],
               ].map(([value, label], i) => (
                 <Box.BodyRadio
                   key={value}
@@ -83,13 +82,12 @@ export default function Settings() {
           </Box>
 
           <Box>
-            {/* TODO: title */}
-            <Box.Title>Tema</Box.Title>
+            <Box.Title>{t("settings:themeTitle")}</Box.Title>
             <Box.Body className="p-2">
               {[
-                ["system", "settingsThemeSystem"],
-                ["light", "settingsThemeLight"],
-                ["dark", "settingsThemeDark"],
+                ["system", "settings:themeOptionSystem"],
+                ["light", "settings:themeOptionLight"],
+                ["dark", "settings:themeOptionDark"],
               ].map(([value, label], i) => (
                 <Box.BodyRadio
                   key={value}
@@ -107,12 +105,11 @@ export default function Settings() {
           </Box>
 
           <Box>
-            {/* TODO: title */}
-            <Box.Title>Saat Gösterimi</Box.Title>
+            <Box.Title>{t("settings:timeFormatTitle")}</Box.Title>
             <Box.Body className="p-2">
               {[
-                [TimeFormat.Twelve, "settingsTimeFormat12"],
-                [TimeFormat.TwentyFour, "settingsTimeFormat24"],
+                [TimeFormat.Twelve, "settings:timeFormatOption12"],
+                [TimeFormat.TwentyFour, "settings:timeFormatOption24"],
               ].map(([value, label], i) => (
                 <Box.BodyRadio
                   key={value}
@@ -130,7 +127,7 @@ export default function Settings() {
           </Box>
 
           <Box>
-            <Box.Title>{t("settingsCustomAdjustments")}</Box.Title>
+            <Box.Title>{t("settings:customAdjustmentsTitle")}</Box.Title>
             <Box.Body>
               <Box.BodyLink href="/settings/adjust">
                 {adjustmentsAsText()}
@@ -140,8 +137,7 @@ export default function Settings() {
 
           <div className="space-y-px">
             <Box>
-              {/* TODO: title */}
-              <Box.Title>Uygulama Hakkında</Box.Title>
+              <Box.Title>{t("settings:aboutTitle")}</Box.Title>
 
               <Box.Body className="rounded-b-none">
                 <Box.BodyLink
@@ -163,7 +159,7 @@ export default function Settings() {
                     </svg>
                   }
                 >
-                  <p className="">{t("settingsOpenSource")}</p>
+                  <p className="">{t("settings:aboutOpenSource")}</p>
                   <p className="underline decoration-zinc-300">
                     github.com/ademilter/vakitler
                   </p>
@@ -194,7 +190,7 @@ export default function Settings() {
                     </svg>
                   }
                 >
-                  <p className="">{t("settingsSourceCode")}</p>
+                  <p className="">{t("settings:aboutSourceCode")}</p>
                   <p className="underline decoration-zinc-300">
                     buymeacoffee.com/ademilter
                   </p>
@@ -210,9 +206,7 @@ export default function Settings() {
             href="/"
             className="mt-auto flex h-12 w-full items-center justify-center rounded-xl bg-current px-4"
           >
-            <span className="text-white dark:text-black">
-              {t("settingsSave")}
-            </span>
+            <span className="text-white dark:text-black">{t("save")}</span>
           </Link>
         </div>
       </Container>

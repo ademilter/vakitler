@@ -19,33 +19,33 @@ export default function RamadanTimer() {
         ) : timerRamadan[0] === 0 ? (
           // 0 hour 30 minute
           <Trans
+            ns="common"
             i18nKey="timerMinute"
             components={[<ValueComp key="minute" />]}
             values={{ minute: timerRamadan[1] }}
-            ns="common"
           />
         ) : timerRamadan[1] === 0 ? (
           // 2 hour 0 minute
           <Trans
+            ns="common"
             i18nKey="timerHour"
             components={[<ValueComp key="hour" />]}
             values={{ hour: timerRamadan[0] }}
-            ns="common"
           />
         ) : (
           // 2 hour 30 minute
           <>
             <Trans
+              ns="common"
               i18nKey="timerHour"
               components={[<ValueComp key="hour" />]}
               values={{ hour: timerRamadan[0] }}
-              ns="common"
             />{" "}
             <Trans
+              ns="common"
               i18nKey="timerMinute"
               components={[<ValueComp key="minute" />]}
               values={{ minute: timerRamadan[1] }}
-              ns="common"
             />
           </>
         )}

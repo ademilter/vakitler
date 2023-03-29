@@ -1,0 +1,21 @@
+{
+  "searchCountry": "Country search",
+  "searchRegion": "Region search",
+  "searchCity": "City search",
+  "currentLocationTitle": "Current location",
+  "langTitle": "Language",
+  "langOptionTr": "Türkçe",
+  "langOptionEn": "English",
+  "themeTitle": "Appearance",
+  "themeOptionSystem": "Automatic",
+  "themeOptionLight": "Light",
+  "themeOptionDark": "Dark",
+  "timeFormatTitle": "Time format",
+  "timeFormatOption12": "12-hour format",
+  "timeFormatOption24": "24-hour format",
+  "customAdjustmentsTitle": "Custom Adjustments",
+  "customAdjustmentsEmpty": "No adjustments",
+  "aboutTitle": "About the project",
+  "aboutOpenSource": "This project is free and open source",
+  "aboutSourceCode": "Thanks for your support"
+}

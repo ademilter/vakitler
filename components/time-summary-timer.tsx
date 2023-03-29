@@ -9,9 +9,9 @@ export default function TimeSummaryTimer() {
 
   const { timer, times } = useContext(CommonStoreContext);
 
-  let timeName = t(`times${times?.time.next as TimeNames}`);
+  let timeName = t(times?.time.next as TimeNames);
   if (times?.today?.isJumuah && times?.time.next === TimeNames.Ogle) {
-    timeName = t("timesJumuah");
+    timeName = t("Jumuah");
   }
 
   return (
@@ -20,11 +20,11 @@ export default function TimeSummaryTimer() {
 
       <span className="flex text-sm opacity-80">
         <Trans
-          i18nKey="timerReminder"
+          ns={"common"}
+          i18nKey="timerTitle"
           values={{
             time: timeName,
           }}
-          ns={"common"}
         />
       </span>
 
@@ -32,41 +32,41 @@ export default function TimeSummaryTimer() {
         {timer[0] === 0 && timer[1] === 0 ? (
           // 0 hour 0 minute 30 second
           <Trans
+            ns="common"
             i18nKey="timerSecond"
             components={[<ValueComp key="timer" />]}
             values={{ second: timer[2] }}
-            ns="common"
           />
         ) : timer[0] === 0 ? (
           // 0 hour 30 minute
           <Trans
+            ns="common"
             i18nKey="timerMinute"
             components={[<ValueComp key="minute" />]}
             values={{ minute: timer[1] }}
-            ns="common"
           />
         ) : timer[1] === 0 ? (
           // 2 hour 0 minute
           <Trans
+            ns="common"
             i18nKey="timerHour"
             components={[<ValueComp key="hour" />]}
             values={{ hour: timer[0] }}
-            ns="common"
           />
         ) : (
           // 2 hour 30 minute
           <>
             <Trans
+              ns="common"
               i18nKey="timerHour"
               components={[<ValueComp key="hour" />]}
               values={{ hour: timer[0] }}
-              ns="common"
             />{" "}
             <Trans
+              ns="common"
               i18nKey="timerMinute"
               components={[<ValueComp key="minute" />]}
               values={{ minute: timer[1] }}
-              ns="common"
             />
           </>
         )}

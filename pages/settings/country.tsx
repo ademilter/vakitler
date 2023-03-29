@@ -42,7 +42,7 @@ export default function Country() {
       <Container className="pt-8 pb-40">
         <SettingsList
           inputProps={{
-            placeholder: t("settingsSearchCountry"),
+            placeholder: t("settings:searchCountry"),
             name: "country",
           }}
           // Populer Country (vercel analytics)
@@ -63,7 +63,7 @@ export default function Country() {
           }}
           data={data.map(c => ({
             value: c.UlkeID,
-            label: c[t("settingsCountryKey") as keyof ICountry],
+            label: c[t("countryKey") as keyof ICountry],
           }))}
           loading={loading}
           backButtonProps={{

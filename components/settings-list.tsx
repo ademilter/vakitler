@@ -29,7 +29,7 @@ const SettingsList = ({
   const router = useRouter();
   const { t } = useTranslation("common");
 
-  backButtonText = backButtonText ?? t("settingsBack");
+  backButtonText = backButtonText ?? t("back");
 
   const [q, setQ] = useState<string>("");
 

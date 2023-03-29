@@ -28,7 +28,7 @@ export default function Adjust() {
         href="/"
         className="mt-auto flex h-12 w-full shrink-0 items-center justify-center rounded-lg border bg-current px-4"
       >
-        <span className="text-white">{t("releaseBackButton")}</span>
+        <span className="text-white">{t("back")}</span>
       </Link>
     </Container>
   );

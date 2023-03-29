@@ -45,7 +45,7 @@ export default function Country() {
       <Container className="pt-8 pb-40">
         <SettingsList
           inputProps={{
-            placeholder: t("settingsSearchCity"),
+            placeholder: t("settings:searchCity"),
             name: "city",
           }}
           onChange={async id => {
@@ -64,7 +64,7 @@ export default function Country() {
           loading={loading}
           data={data.map(c => ({
             value: c.IlceID,
-            label: c[t("settingsCityKey") as keyof ICity],
+            label: c[t("cityKey") as keyof ICity],
           }))}
         />
       </Container>

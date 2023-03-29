@@ -44,7 +44,7 @@ export default function Country() {
       <Container className="pt-8 pb-40">
         <SettingsList
           inputProps={{
-            placeholder: t("settingsSearchRegion"),
+            placeholder: t("settings:searchRegion"),
             name: "region",
           }}
           pushFirst={["539", "506"]}
@@ -56,7 +56,7 @@ export default function Country() {
           loading={loading}
           data={data.map(c => ({
             value: c.SehirID,
-            label: c[t("settingsRegionKey") as keyof IRegion],
+            label: c[t("regionKey") as keyof IRegion],
           }))}
         />
       </Container>

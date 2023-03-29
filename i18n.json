@@ -2,6 +2,7 @@
   "locales": ["en", "tr"],
   "defaultLocale": "tr",
   "pages": {
-    "*": ["common"]
+    "*": ["common", "settings"],
+    "/settings/adjust": ["adjustments"]
   }
 }
