@@ -6,9 +6,10 @@ import { motion } from "framer-motion";
 import { DateTime } from "luxon";
 import { TimeNames } from "@/lib/types";
 import { HOUR_FORMAT } from "@/lib/const";
+import { getHijriDate } from "@/lib/utils";
 
 export default function TimeSummaryIcon() {
-  const { lang } = useTranslation("common");
+  const { lang, t } = useTranslation("common");
 
   const { times, themeColor } = useContext(CommonStoreContext);
   const localTime = times?.localTime || DateTime.local();
@@ -20,7 +21,8 @@ export default function TimeSummaryIcon() {
       DateTime.fromFormat(times?.today[TimeNames.Aksam], HOUR_FORMAT);
 
   const [showHijriCalendar, setShowHijriCalendar] = useState(true);
-
+  const {gun, ayKey, yil} = getHijriDate(isAksam);
+  const hijriDate = `${gun} ${t(ayKey)} ${yil}`;
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowHijriCalendar(false);
@@ -52,9 +54,7 @@ export default function TimeSummaryIcon() {
           },
         }}
       >
-        {localTime
-          .reconfigure({ outputCalendar: isAksam ? "islamic" : "islamicc" })
-          .toLocaleString(DateTime.DATE_FULL, { locale: lang })}
+        {hijriDate}
       </motion.span>
 
       <motion.span
