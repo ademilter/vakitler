@@ -14,5 +14,17 @@
   "regionKey": "SehirAdiEn",
   "cityKey": "IlceAdiEn",
   "back": "Back",
-  "save": "Save"
+  "save": "Save",
+  "Muharrem": "Muharram",
+  "Safer": "Safar",
+  "Rebiulevvel": "Rabi al-Awwal",
+  "Rebiulahir": "Rabi al-Thani",
+  "Cemaziyelevvel": "Jumada al-Awwal",
+  "Cemaziyelahir": "Jumada al-Thani",
+  "Recep": "Rajab",
+  "Saban": "Shaban",
+  "Ramazan": "Ramadan",
+  "Sevval": "Shawwal",
+  "Zilkade": "Dhu al-Qadah",
+  "Zilhicce": "Dhu al-Hijjah"
 }
