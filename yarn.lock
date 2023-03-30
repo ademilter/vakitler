@@ -2592,6 +2592,11 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
+hijri-converter@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/hijri-converter/-/hijri-converter-1.1.1.tgz#5a0c6930ab3d1aaceb6d402464cc8710309748b9"
+  integrity sha512-uY2oDZllg7wcgvY7rdrM1VUE5iEqNjKGtrBUJlzniAsY73FuC5mb0kzdqLE/bU9Q50Iwhn6b9/Udw8SUIXHlhQ==
+
 idb@^7.0.1:
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/idb/-/idb-7.1.1.tgz#d910ded866d32c7ced9befc5bfdf36f572ced72b"

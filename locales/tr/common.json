@@ -14,5 +14,17 @@
   "regionKey": "SehirAdi",
   "cityKey": "IlceAdi",
   "back": "Geri",
-  "save": "Kaydet"
+  "save": "Kaydet",
+  "Muharrem": "Muharrem",
+  "Safer": "Safer",
+  "Rebiulevvel": "Rebiülevvel",
+  "Rebiulahir": "Rebiülahir",
+  "Cemaziyelevvel": "Cemaziyelevvel",
+  "Cemaziyelahir": "Cemaziyelahir",
+  "Recep": "Recep",
+  "Saban": "Şaban",
+  "Ramazan": "Ramazan",
+  "Sevval": "Şevval",
+  "Zilkade": "Zilkade",
+  "Zilhicce": "Zilhicce"
 }

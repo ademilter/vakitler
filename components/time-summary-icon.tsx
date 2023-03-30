@@ -6,13 +6,26 @@ import { motion } from "framer-motion";
 import { DateTime } from "luxon";
 import { TimeNames } from "@/lib/types";
 import { HOUR_FORMAT } from "@/lib/const";
+import { toHijri, toGregorian } from "hijri-converter";
 
 export default function TimeSummaryIcon() {
-  const { lang } = useTranslation("common");
+  const { t } = useTranslation("common");
 
   const { times, themeColor } = useContext(CommonStoreContext);
   const localTime = times?.localTime || DateTime.local();
-
+  const hijriMonths = [
+    "Muharrem",
+    "Safer",
+    "Rebiulevvel",
+    "Rebiulahir",
+    "Cemaziyelevvel",
+    "Cemaziyelahir",
+    "Recep",
+    "Saban",
+    "Ramazan",
+    "Sevval",
+    "Zilkade",
+  ];
   // hicri takvimde akşam ezanı ile tarih bir sonraki güne geçer
   const isAksam =
     times?.today &&
@@ -31,6 +44,16 @@ export default function TimeSummaryIcon() {
   }, []);
 
   if (!times?.today) return null;
+
+  const hijriDate = toHijri(
+    localTime.year,
+    localTime.month,
+    localTime.day + (isAksam ? 1 : 0)
+  );
+
+  const formattedHijriDate = `${hijriDate.hd} ${t(
+    hijriMonths[hijriDate.hm - 1]
+  )} ${hijriDate.hy}`;
 
   return (
     <motion.button
@@ -52,9 +75,7 @@ export default function TimeSummaryIcon() {
           },
         }}
       >
-        {localTime
-          .reconfigure({ outputCalendar: isAksam ? "islamic" : "islamicc" })
-          .toLocaleString(DateTime.DATE_FULL, { locale: lang })}
+        {formattedHijriDate}
       </motion.span>
 
       <motion.span
