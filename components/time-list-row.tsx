@@ -20,8 +20,12 @@ export default function TimeListRow({
   const {
     times,
     settings: { timeFormat },
+    timer,
   } = useContext(CommonStoreContext);
-  const inlineTimer = useMemo(() => times?.timer(time), [time, times]);
+  const inlineTimer = useMemo(
+    () => timer && times?.timer(time),
+    [time, timer, times]
+  );
 
   const value = times?.today && times?.today?.[time];
 
