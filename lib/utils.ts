@@ -1,4 +1,4 @@
-import { TimeFormat, TypeTimer } from "@/lib/types";
+import { TimeFormat, TimeNames, TypeTimer } from "@/lib/types";
 import { ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { DateTime } from "luxon";
@@ -31,3 +31,12 @@ export function formattedTime(
     .toFormat(timeFormat === "12" ? HOUR_FORMAT_12 : HOUR_FORMAT, { locale })
     .toLowerCase();
 }
+
+export const TIME_ORDER: Record<TimeNames, number> = {
+  [TimeNames.Imsak]: 0,
+  [TimeNames.Gunes]: 1,
+  [TimeNames.Ogle]: 2,
+  [TimeNames.Ikindi]: 3,
+  [TimeNames.Aksam]: 4,
+  [TimeNames.Yatsi]: 5,
+};

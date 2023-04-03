@@ -1,11 +1,11 @@
 import { TimeNames } from "@/lib/types";
 import Container from "@/components/container";
 import { motion } from "framer-motion";
-import { cx, formattedTime } from "@/lib/utils";
-import { useContext } from "react";
+import { TIME_ORDER, cx, formattedTime } from "@/lib/utils";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { CommonStoreContext } from "@/stores/common";
 import useTranslation from "next-translate/useTranslation";
-import RamadanTimer from "@/components/ramadan-timer";
+import InlineTimer from "@/components/inline-timer";
 
 export default function TimeListRow({
   time,
@@ -15,11 +15,13 @@ export default function TimeListRow({
   index: number;
 }) {
   const { t, lang } = useTranslation("common");
+  const [showInlineTimer, setShowInlineTimer] = useState(false);
 
   const {
     times,
     settings: { timeFormat },
   } = useContext(CommonStoreContext);
+  const inlineTimer = useMemo(() => times?.timer(time), [time, times]);
 
   const value = times?.today && times?.today?.[time];
 
@@ -27,6 +29,27 @@ export default function TimeListRow({
 
   const now = times?.time?.now;
   const isTimeActive = now === time;
+  const isNext = times?.time.next === time;
+  const isPrevious = now && TIME_ORDER[time] < TIME_ORDER[now];
+  const shouldShowRamadanTimer =
+    time === TimeNames.Aksam &&
+    [TimeNames.Imsak, TimeNames.Gunes, TimeNames.Ogle].includes(now!);
+
+  useEffect(() => {
+    let timeout: NodeJS.Timeout;
+
+    if (showInlineTimer) {
+      timeout = setTimeout(() => {
+        setShowInlineTimer(false);
+      }, 2500);
+    }
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [showInlineTimer]);
+
+  const onContainerClick = () => setShowInlineTimer(true);
 
   if (!times) return null;
 
@@ -64,7 +87,10 @@ export default function TimeListRow({
       )}
     >
       <Container className="flex h-full flex-col items-center px-2 py-2">
-        <div className="relative flex h-full w-full items-center justify-between px-6 py-3 text-lg md:text-xl">
+        <div
+          className="relative flex h-full w-full items-center justify-between px-6 py-3 text-lg md:text-xl"
+          onClick={onContainerClick}
+        >
           {isTimeActive && (
             <motion.span
               layoutId="border"
@@ -90,11 +116,15 @@ export default function TimeListRow({
           <h5 className="capitalize leading-none">{timeName}</h5>
           <h4 className="tabular-nums leading-none">{formattedValue}</h4>
 
-          {/* aksam timer */}
-          {time === TimeNames.Aksam &&
-            [TimeNames.Imsak, TimeNames.Gunes, TimeNames.Ogle].includes(
-              now!
-            ) && <RamadanTimer />}
+          {inlineTimer && (
+            <InlineTimer
+              timer={inlineTimer}
+              hide={
+                (isTimeActive || isNext || isPrevious || !showInlineTimer) &&
+                !shouldShowRamadanTimer
+              }
+            />
+          )}
         </div>
       </Container>
     </motion.div>

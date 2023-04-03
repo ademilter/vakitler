@@ -116,10 +116,10 @@ export class Times {
     );
   }
 
-  timer(): TypeTimer {
+  timer(next: TimeNames = this.time.next): TypeTimer {
     if (!this.today || !this.tomorrow) return [0, 0, 0];
 
-    let dateTime = DateTime.fromFormat(this.today[this.time.next], HOUR_FORMAT);
+    let dateTime = DateTime.fromFormat(this.today[next], HOUR_FORMAT);
 
     if (this.time.now === TimeNames.Yatsi) {
       dateTime = DateTime.fromFormat(this.today[TimeNames.Imsak], HOUR_FORMAT);
