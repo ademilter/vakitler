@@ -2,6 +2,7 @@ import { DateTime, Interval } from "luxon";
 import { ITime, TimeNames, TypeTimer } from "@/lib/types";
 import { secondSplit } from "@/lib/utils";
 import { HOUR_FORMAT } from "@/lib/const";
+import { toHijri } from "hijri-converter";
 
 const timeNames = Object.values(TimeNames);
 
@@ -19,9 +20,28 @@ export class Times {
     this.times = data.map(day => new Time(day));
     this.localTime = DateTime.local();
     this.timeTravel = [0, 0, 0];
+
     if (adjustments.some(a => a !== 0)) {
       this.adjustTimes(adjustments);
     }
+  }
+
+  get isRamadan() {
+    return this.hijriDate.hm === 9;
+  }
+
+  get hijriDate() {
+    // hicri takvimde akşam ezanı ile tarih bir sonraki güne geçer
+    const isAksam =
+      this.today &&
+      this.localTime >=
+        DateTime.fromFormat(this.today[TimeNames.Aksam], HOUR_FORMAT);
+
+    return toHijri(
+      this.localTime.year,
+      this.localTime.month,
+      this.localTime.day + (isAksam ? 1 : 0)
+    );
   }
 
   adjustTimes(adjustments: number[]) {

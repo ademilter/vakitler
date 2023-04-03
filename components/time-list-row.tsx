@@ -32,6 +32,7 @@ export default function TimeListRow({
   const isNext = times?.time.next === time;
   const isPrevious = now && TIME_ORDER[time] < TIME_ORDER[now];
   const shouldShowRamadanTimer =
+    times?.isRamadan &&
     time === TimeNames.Aksam &&
     [TimeNames.Imsak, TimeNames.Gunes, TimeNames.Ogle].includes(now!);
 
