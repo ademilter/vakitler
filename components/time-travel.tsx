@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, memo } from "react";
 import { cx } from "@/lib/utils";
 import { useTimes } from "@/stores";
 
@@ -6,7 +6,7 @@ const shouldShowTimePicker = process.env.NODE_ENV !== "production";
 
 type TimeTravels = [number, number, number];
 
-export default React.memo(function TimeTravel() {
+export default memo(function TimeTravel() {
   const times = useTimes();
   const [timeTravel, setTimeTravel] = useState<TimeTravels>(
     times?.timeTravel || [0, 0, 0]

@@ -26,16 +26,6 @@ export default function Country() {
       const res = await fetch(url.toString());
       const data = await res.json();
 
-      // TODO: Remove this
-// {
-    //     "error": {
-    //         "message": "Diyanet Isleri Baskanligi servisine baglanilamiyor.",
-    //         "status": 502
-    //     }
-    // }
-
-      console.log({ data });
-
       setData(data);
     } catch (error) {
       console.error(error);
