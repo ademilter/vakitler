@@ -1,18 +1,22 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Container from "@/components/container";
 import useTranslation from "next-translate/useTranslation";
 import SettingsList from "@/components/settings-list";
 import { ICity } from "@/lib/types";
 import { useRouter } from "next/router";
-import { CommonStoreContext } from "@/stores/common";
+import { useStore, useCommonStoreActions } from "@/stores";
+import useFetchData from "@/hooks/use-fetch-data";
+
 import SubPage from "@/components/layout/sub";
 
 export default function Country() {
   const { t } = useTranslation("common");
   const { push } = useRouter();
 
-  const { _settings, fetchData, setSettings, settings } =
-    useContext(CommonStoreContext);
+  const { setSettings } = useCommonStoreActions();
+  const { _settings, settings } = useStore();
+
+  const [fetchData] = useFetchData();
 
   const [data, setData] = useState<ICity[]>([]);
   const [loading, setLoading] = useState(false);

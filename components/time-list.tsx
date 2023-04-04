@@ -1,8 +1,9 @@
+import { memo } from "react";
 import { motion } from "framer-motion";
 import { TimeNames } from "@/lib/types";
 import Time from "@/components/time-list-row";
 
-export default function TimeList() {
+export default memo(function TimeList() {
   return (
     <motion.div
       className="grid h-full"
@@ -21,4 +22,4 @@ export default function TimeList() {
       })}
     </motion.div>
   );
-}
+})

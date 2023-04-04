@@ -1,13 +1,13 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
-import { CommonStoreContext } from "@/stores/common";
+import { useCallback, useEffect, useState, memo } from "react";
 import { cx } from "@/lib/utils";
+import { useTimes } from "@/stores";
 
 const shouldShowTimePicker = process.env.NODE_ENV !== "production";
 
 type TimeTravels = [number, number, number];
 
-export default function TimeTravel() {
-  const { times } = useContext(CommonStoreContext);
+export default memo(function TimeTravel() {
+  const times = useTimes();
   const [timeTravel, setTimeTravel] = useState<TimeTravels>(
     times?.timeTravel || [0, 0, 0]
   );
@@ -68,4 +68,4 @@ export default function TimeTravel() {
       </div>
     </div>
   );
-}
+});

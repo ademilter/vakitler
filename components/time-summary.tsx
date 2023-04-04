@@ -1,16 +1,15 @@
 import { TimeNames } from "@/lib/types";
-import { useContext } from "react";
-import { CommonStoreContext } from "@/stores/common";
 import useTranslation from "next-translate/useTranslation";
 import { motion } from "framer-motion";
 import TimeSummaryTimer from "@/components/time-summary-timer";
 import TimeSummaryIcon from "@/components/time-summary-icon";
 import Container from "@/components/container";
+import { useTimerStore } from "@/stores";
 
 export default function TimeSummary() {
   const { t } = useTranslation("common");
 
-  const { times } = useContext(CommonStoreContext);
+  const { times } = useTimerStore();
 
   const containerAnim = {
     variants: {

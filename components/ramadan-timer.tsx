@@ -1,9 +1,9 @@
-import { HTMLAttributes, useContext } from "react";
-import { CommonStoreContext } from "@/stores/common";
+import { HTMLAttributes } from "react";
 import Trans from "next-translate/Trans";
+import { useTimerStore } from "@/stores";
 
 export default function RamadanTimer() {
-  const { timerRamadan } = useContext(CommonStoreContext);
+  const { timerRamadan } = useTimerStore();
 
   return (
     <div className="absolute left-1/2 top-1/2 z-10 flex -translate-y-1/2 -translate-x-1/2 flex-col items-center py-1 px-2">

@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
+import { ChangeEvent } from "react";
 import Container from "@/components/container";
 import useTranslation from "next-translate/useTranslation";
-import { CommonStoreContext } from "@/stores/common";
+import { useStore, useCommonStoreActions } from "@/stores";
 import Link from "next/link";
 import setLanguage from "next-translate/setLanguage";
 import { LOCAL_KEYS } from "@/lib/const";
@@ -13,7 +13,8 @@ import SubPage from "@/components/layout/sub";
 
 export default function Settings() {
   const { t, lang } = useTranslation("common");
-  const { settings, setSettings } = useContext(CommonStoreContext);
+  const { settings } = useStore();
+  const { setSettings } = useCommonStoreActions();
   const { city, country, region } = useLocations();
   const { theme, setTheme } = useTheme();
 
@@ -30,12 +31,12 @@ export default function Settings() {
     return adjustments.join(", ");
   };
 
-  const onChangeLang = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeLang = async (e: ChangeEvent<HTMLInputElement>) => {
     await setLanguage(e.target.value);
     localStorage.setItem(LOCAL_KEYS.Lang, e.target.value);
   };
 
-  const onChangeTimeFormat = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeTimeFormat = async (e: ChangeEvent<HTMLInputElement>) => {
     setSettings({
       ...settings,
       timeFormat: e.target.value as typeof settings.timeFormat,

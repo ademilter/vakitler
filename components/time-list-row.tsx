@@ -2,10 +2,9 @@ import { TimeNames } from "@/lib/types";
 import Container from "@/components/container";
 import { motion } from "framer-motion";
 import { cx, formattedTime } from "@/lib/utils";
-import { useContext } from "react";
-import { CommonStoreContext } from "@/stores/common";
 import useTranslation from "next-translate/useTranslation";
 import RamadanTimer from "@/components/ramadan-timer";
+import { useSettings, useTimes, useNow } from "@/stores";
 
 export default function TimeListRow({
   time,
@@ -15,17 +14,14 @@ export default function TimeListRow({
   index: number;
 }) {
   const { t, lang } = useTranslation("common");
-
-  const {
-    times,
-    settings: { timeFormat },
-  } = useContext(CommonStoreContext);
+  const times = useTimes();
+  const now = useNow();
+  const timeFormat = useSettings().timeFormat;
 
   const value = times?.today && times?.today?.[time];
 
   const formattedValue = formattedTime(timeFormat, value, lang);
 
-  const now = times?.time?.now;
   const isTimeActive = now === time;
 
   if (!times) return null;
