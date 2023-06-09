@@ -35,6 +35,7 @@ interface ICommonStore {
     city: undefined | ICity;
     timeFormat: TimeFormat;
     adjustments: number[];
+    ramadanTimer: boolean;
   };
   _setSettings: (value: ICommonStore["_settings"]) => void;
   settings: {
@@ -43,6 +44,7 @@ interface ICommonStore {
     city: undefined | ICity;
     timeFormat: TimeFormat;
     adjustments: number[];
+    ramadanTimer: boolean;
   };
   setSettings: (value: ICommonStore["_settings"]) => void;
   fetchData: (cityId: string) => Promise<void>;
@@ -62,6 +64,7 @@ export const CommonStoreContext = createContext<ICommonStore>({
     city: undefined,
     timeFormat: TimeFormat.TwentyFour,
     adjustments: [0, 0, 0, 0, 0, 0],
+    ramadanTimer: false,
   },
   _setSettings: () => {},
   settings: {
@@ -70,6 +73,7 @@ export const CommonStoreContext = createContext<ICommonStore>({
     city: undefined,
     timeFormat: TimeFormat.TwentyFour,
     adjustments: [0, 0, 0, 0, 0, 0],
+    ramadanTimer: false,
   },
   setSettings: () => {},
   fetchData: () => Promise.resolve(),
@@ -94,6 +98,7 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
     city: undefined,
     timeFormat: TimeFormat.TwentyFour,
     adjustments: [0, 0, 0, 0, 0, 0],
+    ramadanTimer: false,
   });
   const [_settings, _setSettings] = useState<ICommonStore["settings"]>({
     country: undefined,
@@ -101,6 +106,7 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
     city: undefined,
     timeFormat: TimeFormat.TwentyFour,
     adjustments: [0, 0, 0, 0, 0, 0],
+    ramadanTimer: false,
   });
 
   const [releases, setReleases] = useState<ICommonStore["releases"]>([]);

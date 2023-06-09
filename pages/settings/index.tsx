@@ -127,6 +127,20 @@ export default function Settings() {
           </Box>
 
           <Box>
+            <Box.Title>{t("settings:otherTitle")}</Box.Title>
+            <Box.Body>
+              <Box.BoxBodyToggle
+                checked={settings.ramadanTimer}
+                onChange={e =>
+                  setSettings({ ...settings, ramadanTimer: e.target.checked })
+                }
+              >
+                {t("settings:ramadanTimerTitle")}
+              </Box.BoxBodyToggle>
+            </Box.Body>
+          </Box>
+
+          <Box>
             <Box.Title>{t("settings:customAdjustmentsTitle")}</Box.Title>
             <Box.Body>
               <Box.BodyLink href="/settings/adjust">
@@ -201,7 +215,7 @@ export default function Settings() {
         </div>
 
         <div className="sticky bottom-0 z-20 mt-60 pb-10">
-          <span className="pointer-events-none absolute inset-x-0 bottom-0 -top-24 -z-10 bg-gradient-to-t from-zinc-200 via-zinc-200 to-transparent dark:from-zinc-900 dark:via-zinc-900 dark:to-transparent" />
+          <span className="pointer-events-none absolute inset-x-0 -top-24 bottom-0 -z-10 bg-gradient-to-t from-zinc-200 via-zinc-200 to-transparent dark:from-zinc-900 dark:via-zinc-900 dark:to-transparent" />
           <Link
             href="/"
             className="mt-auto flex h-12 w-full items-center justify-center rounded-xl bg-current px-4"

@@ -97,7 +97,7 @@ function BoxBodyLink({
   return (
     <Comp
       href={href}
-      className={cx("flex items-center py-3 px-4", className)}
+      className={cx("flex items-center px-4 py-3", className)}
       {...props}
     >
       <div className="grow">{children}</div>
@@ -140,7 +140,6 @@ function BoxBodyRadio({
   className?: string;
   last?: boolean;
 }) {
-  console.log(children, last);
   const showBorder = !(isSelected || last);
 
   return (
@@ -154,7 +153,7 @@ function BoxBodyRadio({
       )}
     >
       {showBorder && (
-        <div className="pointer-events-none absolute left-4 -bottom-[2px] right-4 h-px bg-zinc-100 dark:bg-opacity-5" />
+        <div className="pointer-events-none absolute -bottom-[2px] left-4 right-4 h-px bg-zinc-100 dark:bg-opacity-5" />
       )}
 
       <span className="grow">{children}</span>
@@ -165,3 +164,29 @@ function BoxBodyRadio({
 
 BoxBodyRadio.displayName = "BoxBodyRadio";
 Box.BodyRadio = BoxBodyRadio;
+
+function BoxBodyToggle({
+  children,
+  className,
+  ...props
+}: React.InputHTMLAttributes<HTMLInputElement> & {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <label
+      className={cx(
+        "relative flex h-12 grow items-center gap-2 px-4",
+        "rounded-lg border border-transparent",
+        "cursor-pointer select-none",
+        className
+      )}
+    >
+      <span className="grow">{children}</span>
+      <input className="mr-2" type="checkbox" {...props} />
+    </label>
+  );
+}
+
+BoxBodyToggle.displayName = "BoxBodyToggle";
+Box.BoxBodyToggle = BoxBodyToggle;

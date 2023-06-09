@@ -90,11 +90,7 @@ export default function TimeListRow({
           <h5 className="capitalize leading-none">{timeName}</h5>
           <h4 className="tabular-nums leading-none">{formattedValue}</h4>
 
-          {/* aksam timer */}
-          {time === TimeNames.Aksam &&
-            [TimeNames.Imsak, TimeNames.Gunes, TimeNames.Ogle].includes(
-              now!
-            ) && <RamadanTimer />}
+          <RamadanTimer time={time} />
         </div>
       </Container>
     </motion.div>
