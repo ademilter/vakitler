@@ -1,7 +1,7 @@
 import "@/styles/globals.css";
 
 import type { AppProps } from "next/app";
-// import { Analytics } from "@vercel/analytics/react";
+import { Analytics } from "@vercel/analytics/react";
 import { CommonStoreProvider } from "@/stores/common";
 import Head from "next/head";
 import { metadata } from "@/lib/meta";
@@ -18,7 +18,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         </CommonStoreProvider>
       </ThemeProvider>
 
-      {/*<Analytics />*/}
+      <Analytics />
     </>
   );
 }
