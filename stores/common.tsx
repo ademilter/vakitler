@@ -2,9 +2,9 @@ import { createContext, ReactNode, useEffect, useState } from "react";
 import { Times } from "@/lib/model";
 import {
   ICity,
+  ICommonStore,
   ICountry,
   IRegion,
-  IRelease,
   TimeFormat,
   TimeNames,
   TypeTimer,
@@ -12,48 +12,9 @@ import {
 import { useRouter } from "next/router";
 import { DateTime } from "luxon";
 import useInterval from "@/lib/use-interval";
-import { API_DATE_FORMAT, LOCAL_KEYS } from "@/lib/const";
+import { API_DATE_FORMAT, LOCAL_KEYS, TIMES_COLOR } from "@/lib/const";
 import setLanguage from "next-translate/setLanguage";
 import i18n from "@/i18n.json";
-import { useTheme } from "next-themes";
-
-const color = {
-  [TimeNames.Imsak]: "sky",
-  [TimeNames.Gunes]: "orange",
-  [TimeNames.Ogle]: "amber",
-  [TimeNames.Ikindi]: "rose",
-  [TimeNames.Aksam]: "blue",
-  [TimeNames.Yatsi]: "indigo",
-};
-
-interface ICommonStore {
-  appLoading: boolean;
-  themeColor: string;
-  _settings: {
-    country: undefined | ICountry;
-    region: undefined | IRegion;
-    city: undefined | ICity;
-    timeFormat: TimeFormat;
-    adjustments: number[];
-    ramadanTimer: boolean;
-  };
-  _setSettings: (value: ICommonStore["_settings"]) => void;
-  settings: {
-    country: undefined | ICountry;
-    region: undefined | IRegion;
-    city: undefined | ICity;
-    timeFormat: TimeFormat;
-    adjustments: number[];
-    ramadanTimer: boolean;
-  };
-  setSettings: (value: ICommonStore["_settings"]) => void;
-  fetchData: (cityId: string) => Promise<void>;
-  times: undefined | Times;
-  rawTimes: undefined | Times;
-  timer: TypeTimer;
-  timerRamadan: TypeTimer;
-  releases: IRelease[];
-}
 
 export const CommonStoreContext = createContext<ICommonStore>({
   appLoading: false,
@@ -87,7 +48,6 @@ export const CommonStoreContext = createContext<ICommonStore>({
 export function CommonStoreProvider({ children }: { children: ReactNode }) {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
 
   const [appLoading, setAppLoading] =
     useState<ICommonStore["appLoading"]>(false);
@@ -117,7 +77,7 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
   const [timerRamadan, setTimerRamadan] = useState<TypeTimer>([0, 0, 0]);
 
   const now = times?.time?.now ?? TimeNames.Imsak;
-  const themeColor = color[now];
+  const themeColor = TIMES_COLOR[now];
 
   const fetchReleases = async () => {
     const res = await fetch("/api/releases");
@@ -177,6 +137,54 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
 
       await fetchReleases();
     } else {
+      // check query
+      // example: https://vakitler.app?countryID=11&regionID=664&cityID=11914
+
+      await setLanguage("en");
+      const { asPath } = router;
+      const query = new URL(asPath, "https://vakitler.app");
+      const countryID = query.searchParams.get("countryID");
+      const regionID = query.searchParams.get("regionID");
+      const cityID = query.searchParams.get("cityID");
+
+      if (countryID && regionID && cityID) {
+        try {
+          const [resCountries, resRegions, resCities]: [
+            ICountry[],
+            IRegion[],
+            ICity[],
+          ] = await Promise.all([
+            fetch(`/api/countries`).then(value => value.json()),
+            fetch(`/api/regions?countryID=${countryID}`).then(value =>
+              value.json()
+            ),
+            fetch(`/api/cities?regionID=${regionID}`).then(value =>
+              value.json()
+            ),
+          ]);
+
+          const country = resCountries.find(c => c.UlkeID === countryID);
+          const region = resRegions.find(c => c.SehirID === regionID);
+          const city = resCities.find(c => c.IlceID === cityID);
+
+          setSettings({
+            timeFormat: TimeFormat.TwentyFour,
+            adjustments: [0, 0, 0, 0, 0, 0],
+            ramadanTimer: false,
+            country,
+            region,
+            city,
+          });
+
+          await fetchData(cityID);
+          await router.replace("");
+          return;
+        } catch (e) {
+          await router.push("/settings/country");
+          return;
+        }
+      }
+
       await router.push("/settings/country");
     }
   };

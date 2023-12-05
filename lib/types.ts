@@ -1,3 +1,5 @@
+import { Times } from "@/lib/model";
+
 export type TypeTimer = [number, number, number];
 
 export enum TimeFormat {
@@ -54,4 +56,33 @@ export interface IRelease {
   published_at: string;
   tag_name: string;
   url: string;
+}
+
+export interface ICommonStore {
+  appLoading: boolean;
+  themeColor: string;
+  _settings: {
+    country: undefined | ICountry;
+    region: undefined | IRegion;
+    city: undefined | ICity;
+    timeFormat: TimeFormat;
+    adjustments: number[];
+    ramadanTimer: boolean;
+  };
+  _setSettings: (value: ICommonStore["_settings"]) => void;
+  settings: {
+    country: undefined | ICountry;
+    region: undefined | IRegion;
+    city: undefined | ICity;
+    timeFormat: TimeFormat;
+    adjustments: number[];
+    ramadanTimer: boolean;
+  };
+  setSettings: (value: ICommonStore["_settings"]) => void;
+  fetchData: (cityId: string) => Promise<void>;
+  times: undefined | Times;
+  rawTimes: undefined | Times;
+  timer: TypeTimer;
+  timerRamadan: TypeTimer;
+  releases: IRelease[];
 }
