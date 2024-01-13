@@ -65,6 +65,7 @@ export default function Settings() {
               {[
                 ["tr", "settings:langOptionTr"],
                 ["en", "settings:langOptionEn"],
+                ["nl", "settings:langOptionNl"]
               ].map(([value, label], i) => (
                 <Box.BodyRadio
                   key={value}
