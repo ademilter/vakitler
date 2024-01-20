@@ -47,7 +47,9 @@ export default function MainPage({ children }: { children: ReactNode }) {
         {themeColor && <meta name="theme-color" content={themeColor} />}
       </Head>
 
-      <div className={cx(themeStyle, "fixed inset-0 h-dvh")}>{children}</div>
+      <div className={cx(themeStyle, "fixed overflow-hidden inset-0 h-dvh")}>
+        {children}
+      </div>
     </>
   );
 }
