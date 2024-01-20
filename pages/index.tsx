@@ -1,15 +1,18 @@
 import { useContext, useEffect, useState } from "react";
+import useTranslation from "next-translate/useTranslation";
 import { CommonStoreContext } from "@/stores/common";
-import { cx } from "@/lib/utils";
+import { checkForNotification, cx } from "@/lib/utils";
 import { motion } from "framer-motion";
 import TimeLocation from "@/components/time-location";
 import TimeSummary from "@/components/time-summary";
 import TimeList from "@/components/time-list";
 import TimeTravel from "@/components/time-travel";
 import MainPage from "@/components/layout/main";
+import { TimeNames } from "@/lib/types";
 
 export default function Index() {
-  const { times } = useContext(CommonStoreContext);
+  const { t } = useTranslation("common");
+  const { times, timer } = useContext(CommonStoreContext);
 
   const [start, setStart] = useState(false);
 
@@ -19,6 +22,18 @@ export default function Index() {
   }, [times]);
 
   if (!times) return null;
+
+  if (start) {
+    checkForNotification(
+      t("timerTitle", {
+        time: t(times?.time.next as TimeNames),
+      }) +
+        ": " +
+        t("timerMinute", { minute: timer[1] }),
+      timer,
+      45
+    );
+  }
 
   return (
     <MainPage>

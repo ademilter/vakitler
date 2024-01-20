@@ -105,9 +105,9 @@ const SettingsList = ({
         {loading ? (
           <Loading />
         ) : (
-          results.map(item => (
+          results.map((item, index) => (
             <button
-              key={item.value}
+              key={`${item.value}_${index}`}
               type="button"
               className="flex h-12 w-full items-center rounded-xl bg-zinc-100 px-4 dark:bg-zinc-800"
               onClick={() => onChange(item.value)}

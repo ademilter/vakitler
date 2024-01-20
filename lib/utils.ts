@@ -31,3 +31,62 @@ export function formattedTime(
     .toFormat(timeFormat === "12" ? HOUR_FORMAT_12 : HOUR_FORMAT, { locale })
     .toLowerCase();
 }
+
+function checkNotificationPromise() {
+  try {
+    Notification.requestPermission().then();
+  } catch (e) {
+    return false;
+  }
+
+  return true;
+}
+
+export async function askNotificationPermission(
+  callback?: (status: NotificationPermission) => void
+) {
+  function handlePermission(permission: NotificationPermission) {
+    callback && callback(permission);
+  }
+
+  // Let's check if the browser supports notifications
+  if (!("Notification" in window)) {
+    console.log("This browser does not support notifications.");
+  } else if (checkNotificationPromise()) {
+    Notification.requestPermission().then(permission => {
+      handlePermission(permission);
+    });
+  } else {
+    Notification.requestPermission(permission => {
+      handlePermission(permission);
+    });
+  }
+}
+
+export function notify(text: string) {
+  askNotificationPermission(() => {
+    const notification = new Notification("Namaz Vakitleri", {
+      body: text,
+      badge: "/icons-512.png",
+      icon: "/icons-512.png",
+    });
+
+    notification.addEventListener("click", () => {
+      window.open(location.href, "_self");
+    });
+  });
+}
+
+export function checkForNotification(
+  text: string,
+  timer: number[],
+  whenByMin = 45
+) {
+  const notified = localStorage.getItem("notified");
+  if (!timer[0] && timer[1] <= whenByMin && !notified) {
+    localStorage.setItem("notified", "true");
+    notify(text);
+  } else if (!timer[0] && !timer[1] && !timer[2]) {
+    localStorage.removeItem("notified");
+  }
+}
