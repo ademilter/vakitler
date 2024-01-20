@@ -4,7 +4,7 @@ import Time from "@/components/time-list-row";
 
 export default function TimeList() {
   return (
-    <div className="m-5 mb-8">
+    <div className="m-6 mb-10">
       <motion.div
         className="grid gap-px h-full"
         variants={{

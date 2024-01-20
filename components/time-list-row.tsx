@@ -26,7 +26,10 @@ export default function TimeListRow({
   const formattedValue = formattedTime(timeFormat, value, lang);
 
   const now = times?.time?.now;
-  const isTimeActive = now === time;
+  // const isTimeActive = now === time;
+
+  const next = times?.time?.next;
+  const isTimeNext = next === time;
 
   if (!times) return null;
 
@@ -64,9 +67,9 @@ export default function TimeListRow({
         // isTimeActive && "bg-opacity-15"
       )}
     >
-      <Container className={cx("flex h-full", isTimeActive && "py-1")}>
+      <Container className={cx("flex h-full", isTimeNext && "py-1")}>
         <div className="relative flex h-full w-full items-center justify-between px-2 py-3 text-xl md:text-xl">
-          {isTimeActive && (
+          {isTimeNext && (
             <motion.span
               layoutId="border"
               className={cx(
@@ -75,7 +78,7 @@ export default function TimeListRow({
               variants={{
                 open: {
                   scale: 1,
-                  opacity: 0.6,
+                  opacity: 0.4,
                   transition: {
                     duration: 0.6,
                     delay: 0.6,
