@@ -3,9 +3,7 @@ import { cx } from "@/lib/utils";
 import { TimeNames } from "@/lib/types";
 import { CommonStoreContext } from "@/stores/common";
 import Head from "next/head";
-import colors from "tailwindcss/colors";
 import { useTheme } from "next-themes";
-import Div100vh from "react-div-100vh";
 
 const theme = {
   [TimeNames.Imsak]:
@@ -23,12 +21,12 @@ const theme = {
 };
 
 const color = {
-  [TimeNames.Imsak]: [colors.sky["300"], "#15222c"],
-  [TimeNames.Gunes]: [colors.orange["300"], "#2c1c1a"],
-  [TimeNames.Ogle]: [colors.yellow["300"], "#2a201a"],
-  [TimeNames.Ikindi]: [colors.rose["300"], "#2e1721"],
-  [TimeNames.Aksam]: [colors.blue["300"], "#191f32"],
-  [TimeNames.Yatsi]: [colors.indigo["300"], "#1d1c30"],
+  [TimeNames.Imsak]: ["#daf2fe", "#1a2d3f"],
+  [TimeNames.Gunes]: ["#feead6", "#42261d"],
+  [TimeNames.Ogle]: ["#fef6cc", "#3c2f1e"],
+  [TimeNames.Ikindi]: ["#ffe4e7", "#411c25"],
+  [TimeNames.Aksam]: ["#e0edff", "#1c2745"],
+  [TimeNames.Yatsi]: ["#e4e8fe", "#242144"],
 };
 
 export default function MainPage({ children }: { children: ReactNode }) {
@@ -49,7 +47,7 @@ export default function MainPage({ children }: { children: ReactNode }) {
         {themeColor && <meta name="theme-color" content={themeColor} />}
       </Head>
 
-      <Div100vh className={cx(themeStyle, "relative")}>{children}</Div100vh>
+      <div className={cx(themeStyle, "relative")}>{children}</div>
     </>
   );
 }
