@@ -42,14 +42,12 @@ export default function MainPage({ children }: { children: ReactNode }) {
     : "";
 
   return (
-    <>
+    <div className={cx("fixed bg-white inset-0")}>
       <Head>
         {themeColor && <meta name="theme-color" content={themeColor} />}
       </Head>
 
-      <div className={cx(themeStyle, "fixed overflow-hidden inset-0 h-dvh")}>
-        {children}
-      </div>
-    </>
+      <div className={cx(themeStyle, "h-dvh")}>{children}</div>
+    </div>
   );
 }
