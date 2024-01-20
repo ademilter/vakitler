@@ -1,20 +1,19 @@
 import { HTMLAttributes, useContext } from "react";
 import { CommonStoreContext } from "@/stores/common";
 import Trans from "next-translate/Trans";
+import { cx } from "@/lib/utils";
 
 export default function TimeSummaryTimer() {
   const { timer } = useContext(CommonStoreContext);
 
   return (
-    <>
+    <div className="flex items-baseline text-5xl font-light gap-2">
       {timer[0] === 0 && timer[1] === 0 ? (
         // 30 second
         <Trans
           ns="common"
           i18nKey="timerSecond"
-          components={[
-            <b key="timer" className="tabular-nums font-semibold" />,
-          ]}
+          components={[<ValueComp key="second" className="tabular-nums" />]}
           values={{ second: timer[2] }}
         />
       ) : timer[0] === 0 ? (
@@ -36,7 +35,7 @@ export default function TimeSummaryTimer() {
       ) : (
         // 2 hour 30 minute
         <>
-          <span className="flex gap-0.5">
+          <span className="flex items-baseline gap-0.5">
             <Trans
               ns="common"
               i18nKey="timerHour"
@@ -44,7 +43,7 @@ export default function TimeSummaryTimer() {
               values={{ hour: timer[0] }}
             />
           </span>
-          <span className="flex gap-0.5">
+          <span className="flex items-baseline gap-0.5">
             <Trans
               ns="common"
               i18nKey="timerMinute"
@@ -54,10 +53,12 @@ export default function TimeSummaryTimer() {
           </span>
         </>
       )}
-    </>
+    </div>
   );
 }
 
-const ValueComp = (props: HTMLAttributes<HTMLSpanElement>) => (
-  <b className="font-semibold" {...props} />
-);
+function ValueComp({ className, ...props }: HTMLAttributes<HTMLSpanElement>) {
+  return (
+    <b className={cx("font-semibold text-[1.2em]", className)} {...props} />
+  );
+}

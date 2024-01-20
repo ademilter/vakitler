@@ -38,7 +38,7 @@ export default function TimeSummary() {
   return (
     <motion.div {...containerAnim}>
       <Container className="flex h-full gap-1 flex-col items-center justify-center pt-8">
-        <span className="flex capitalize text-lg font-semibold">
+        <span className="flex capitalize text-xl font-medium">
           <Trans
             ns={"common"}
             i18nKey="timerTitle"
@@ -48,9 +48,7 @@ export default function TimeSummary() {
           />
         </span>
 
-        <div className="flex items-baseline text-5xl font-light gap-2">
-          <TimeSummaryTimer />
-        </div>
+        <TimeSummaryTimer />
       </Container>
     </motion.div>
   );
