@@ -26,7 +26,7 @@ export default function Index() {
         initial={false}
         animate={start ? "open" : "closed"}
         className={cx(
-          "min-h-dvh overflow-hidden select-none",
+          "h-full select-none",
           "grid grid-rows-[minmax(auto,_1fr)_minmax(auto,_480px)]",
           "md:grid-rows-[minmax(auto,_1fr)_minmax(auto,_520px)]"
         )}

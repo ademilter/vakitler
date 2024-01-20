@@ -47,7 +47,9 @@ export default function MainPage({ children }: { children: ReactNode }) {
         {themeColor && <meta name="theme-color" content={themeColor} />}
       </Head>
 
-      <div className={cx(themeStyle, "relative")}>{children}</div>
+      <div className={cx(themeStyle, "fixed min-h-dvh inset-0")}>
+        {children}
+      </div>
     </>
   );
 }
