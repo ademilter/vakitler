@@ -4,21 +4,23 @@ import Time from "@/components/time-list-row";
 
 export default function TimeList() {
   return (
-    <motion.div
-      className="grid h-full"
-      variants={{
-        open: {
-          transition: {
-            staggerChildren: 0.05,
-            delayChildren: 0.05,
-            staggerDirection: -1,
+    <div className="m-5 mb-8">
+      <motion.div
+        className="grid gap-px h-full"
+        variants={{
+          open: {
+            transition: {
+              staggerChildren: 0.05,
+              delayChildren: 0.05,
+              staggerDirection: -1,
+            },
           },
-        },
-      }}
-    >
-      {Object.keys(TimeNames).map((key, index) => {
-        return <Time key={key} index={index} time={key as TimeNames} />;
-      })}
-    </motion.div>
+        }}
+      >
+        {Object.keys(TimeNames).map((key, index) => {
+          return <Time key={key} index={index} time={key as TimeNames} />;
+        })}
+      </motion.div>
+    </div>
   );
 }

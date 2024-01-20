@@ -18,7 +18,7 @@ export default function TimeLocation() {
         className="relative flex items-center px-4 tracking-wider py-1 font-medium gap-1 text-sm uppercase"
         href="/settings"
       >
-        <span className="absolute inset-0 -z-10 rounded-2xl bg-current opacity-10" />
+        <span className="absolute inset-0 -z-10 rounded-2xl bg-current opacity-5" />
         {city?.toLocaleLowerCase(lang)}
       </Link>
     </div>

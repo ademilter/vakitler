@@ -51,25 +51,26 @@ export default function TimeListRow({
       }}
       className={cx(
         "relative",
-        now === TimeNames.Imsak && "bg-sky-300",
-        now === TimeNames.Gunes && "bg-orange-300",
-        now === TimeNames.Ogle && "bg-yellow-300",
-        now === TimeNames.Ikindi && "bg-rose-300",
-        now === TimeNames.Aksam && "bg-blue-300",
-        now === TimeNames.Yatsi && "bg-indigo-300",
-        `bg-opacity-${(index + 1) * 15}`,
-        `dark:bg-opacity-${(index + 1) * 5}`,
-        // iphone bottom handle
-        time === TimeNames.Yatsi && "pb-8 md:pb-14"
+        "first:rounded-t-3xl",
+        "last:rounded-b-3xl",
+        now === TimeNames.Imsak && "bg-sky-400 dark:bg-sky-900",
+        now === TimeNames.Gunes && "bg-orange-400 dark:bg-orange-900",
+        now === TimeNames.Ogle && "bg-yellow-400 dark:bg-yellow-900",
+        now === TimeNames.Ikindi && "bg-rose-400 dark:bg-rose-900",
+        now === TimeNames.Aksam && "bg-blue-400 dark:bg-blue-900",
+        now === TimeNames.Yatsi && "bg-indigo-400 dark:bg-indigo-900",
+        `bg-opacity-${Math.abs((index - 6) * 5)}`,
+        `dark:bg-opacity-${Math.abs((index - 6) * 5)}`
+        // isTimeActive && "bg-opacity-15"
       )}
     >
-      <Container className="flex h-full flex-col items-center px-2 py-2">
-        <div className="relative flex h-full w-full items-center justify-between px-6 py-3 text-lg md:text-xl">
+      <Container className={cx("flex h-full", isTimeActive && "py-1")}>
+        <div className="relative flex h-full w-full items-center justify-between px-2 py-3 text-xl md:text-xl">
           {isTimeActive && (
             <motion.span
               layoutId="border"
               className={cx(
-                "absolute inset-0 rounded-2xl border-2 border-current"
+                "absolute -inset-x-3 inset-y-1 rounded-2xl border-2 border-current"
               )}
               variants={{
                 open: {
