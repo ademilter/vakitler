@@ -74,9 +74,9 @@ export default function TimeListRow({
               variants={{
                 open: {
                   scale: 1,
-                  opacity: 0.3,
+                  opacity: 0.6,
                   transition: {
-                    duration: 0.3,
+                    duration: 0.6,
                     delay: 0.6,
                   },
                 },

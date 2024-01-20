@@ -8,26 +8,27 @@ import { useTheme } from "next-themes";
 import Div100vh from "react-div-100vh";
 
 const theme = {
-  [TimeNames.Imsak]: "bg-sky-50 text-sky-900 dark:text-sky-50 dark:bg-sky-900",
+  [TimeNames.Imsak]:
+    "bg-sky-300/30 text-sky-800 dark:bg-sky-600/20 dark:text-sky-200",
   [TimeNames.Gunes]:
-    "bg-orange-50 text-orange-900 dark:text-orange-50 dark:bg-orange-900",
+    "bg-orange-300/30 text-orange-800 dark:bg-orange-600/20 dark:text-orange-200",
   [TimeNames.Ogle]:
-    "bg-yellow-50 text-yellow-900 dark:text-yellow-50 dark:bg-yellow-900",
+    "bg-yellow-300/30 text-yellow-800 dark:bg-yellow-600/20 dark:text-yellow-200",
   [TimeNames.Ikindi]:
-    "bg-rose-50 text-rose-900 dark:text-rose-50 dark:bg-rose-900",
+    "bg-rose-300/30 text-rose-800 dark:bg-rose-600/20 dark:text-rose-200",
   [TimeNames.Aksam]:
-    "bg-blue-50 text-blue-900 dark:text-blue-50 dark:bg-blue-900",
+    "bg-blue-300/30 text-blue-800 dark:bg-blue-600/20 dark:text-blue-200",
   [TimeNames.Yatsi]:
-    "bg-indigo-50 text-indigo-900 dark:text-indigo-50 dark:bg-indigo-900",
+    "bg-indigo-300/30 text-indigo-800 dark:bg-indigo-600/20 dark:text-indigo-200",
 };
 
 const color = {
-  [TimeNames.Imsak]: [colors.sky["50"], "#15222c"],
-  [TimeNames.Gunes]: [colors.orange["50"], "#2c1c1a"],
-  [TimeNames.Ogle]: [colors.yellow["50"], "#2a201a"],
-  [TimeNames.Ikindi]: [colors.rose["50"], "#2e1721"],
-  [TimeNames.Aksam]: [colors.blue["50"], "#191f32"],
-  [TimeNames.Yatsi]: [colors.indigo["50"], "#1d1c30"],
+  [TimeNames.Imsak]: [colors.sky["300"], "#15222c"],
+  [TimeNames.Gunes]: [colors.orange["300"], "#2c1c1a"],
+  [TimeNames.Ogle]: [colors.yellow["300"], "#2a201a"],
+  [TimeNames.Ikindi]: [colors.rose["300"], "#2e1721"],
+  [TimeNames.Aksam]: [colors.blue["300"], "#191f32"],
+  [TimeNames.Yatsi]: [colors.indigo["300"], "#1d1c30"],
 };
 
 export default function MainPage({ children }: { children: ReactNode }) {
@@ -41,15 +42,14 @@ export default function MainPage({ children }: { children: ReactNode }) {
       ? color[now][0]
       : color[now][1]
     : "";
+
   return (
     <>
       <Head>
         {themeColor && <meta name="theme-color" content={themeColor} />}
       </Head>
 
-      <Div100vh className={cx(themeStyle, "relative dark:bg-opacity-20")}>
-        {children}
-      </Div100vh>
+      <Div100vh className={cx(themeStyle, "relative")}>{children}</Div100vh>
     </>
   );
 }

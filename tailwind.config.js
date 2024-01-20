@@ -5,21 +5,7 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
-  theme: {
-    extend: {
-      opacity: {
-        15: "0.15",
-        25: "0.25",
-        35: "0.35",
-        45: "0.45",
-        55: "0.55",
-        65: "0.65",
-        75: "0.75",
-        85: "0.85",
-        95: "0.95",
-      },
-    },
-  },
+  theme: {},
   safelist: [
     {
       pattern:
