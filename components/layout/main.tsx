@@ -1,9 +1,10 @@
-import { ReactNode, useContext } from "react";
+import { ReactNode, useContext, useEffect, useState } from "react";
 import { cx } from "@/lib/utils";
 import { TimeNames } from "@/lib/types";
 import { CommonStoreContext } from "@/stores/common";
 import Head from "next/head";
 import { useTheme } from "next-themes";
+import { motion } from "framer-motion";
 
 const theme = {
   [TimeNames.Imsak]:
@@ -33,6 +34,13 @@ export default function MainPage({ children }: { children: ReactNode }) {
   const { times } = useContext(CommonStoreContext);
   const { resolvedTheme } = useTheme();
 
+  const [start, setStart] = useState(false);
+
+  useEffect(() => {
+    if (!times) return;
+    setStart(true);
+  }, [times]);
+
   const now = times?.time?.now;
   const themeStyle = now ? theme[now] : "";
   const themeColor = now
@@ -47,7 +55,19 @@ export default function MainPage({ children }: { children: ReactNode }) {
         {themeColor && <meta name="theme-color" content={themeColor} />}
       </Head>
 
-      <div className={cx(themeStyle, "h-dvh")}>{children}</div>
+      <div className={cx(themeStyle, "h-dvh")}>
+        <motion.div
+          initial={false}
+          animate={start ? "open" : "closed"}
+          className={cx(
+            "h-full select-none",
+            "grid grid-rows-[minmax(auto,_1fr)_minmax(auto,_460px)]",
+            "md:grid-rows-[minmax(auto,_1fr)_minmax(auto,_600px)]"
+          )}
+        >
+          {children}
+        </motion.div>
+      </div>
     </div>
   );
 }
