@@ -21,12 +21,12 @@ const theme = {
 };
 
 const color = {
-  [TimeNames.Imsak]: ["#b7e5fd", "#08222e"],
-  [TimeNames.Gunes]: ["#ffd3b5", "#311808"],
-  [TimeNames.Ogle]: ["#fdeaaf", "#2f2407"],
-  [TimeNames.Ikindi]: ["#ffc7cf", "#310e14"],
-  [TimeNames.Aksam]: ["#c1dbfd", "#0d1a32"],
-  [TimeNames.Yatsi]: ["#ccd1fd", "#141431"],
+  [TimeNames.Imsak]: ["#daf2fe", "#08222e"],
+  [TimeNames.Gunes]: ["#feead6", "#311808"],
+  [TimeNames.Ogle]: ["#fef6cc", "#2f2407"],
+  [TimeNames.Ikindi]: ["#ffe4e7", "#310e14"],
+  [TimeNames.Aksam]: ["#e0edff", "#0d1a32"],
+  [TimeNames.Yatsi]: ["#e4e8fe", "#141431"],
 };
 
 export default function MainPage({ children }: { children: ReactNode }) {
