@@ -15,9 +15,11 @@ interface ISelect {
   backButtonText?: string;
   loading?: boolean;
   backButtonProps?: React.ButtonHTMLAttributes<HTMLButtonElement>;
+  children?: React.ReactNode;
 }
 
 const SettingsList = ({
+  children,
   onChange = () => {},
   data = [],
   inputProps = {},
@@ -102,6 +104,8 @@ const SettingsList = ({
       </motion.div>
 
       <div className="mt-4 space-y-1">
+        {children}
+
         {loading ? (
           <Loading />
         ) : (

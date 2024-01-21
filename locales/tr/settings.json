@@ -2,6 +2,8 @@
   "searchCountry": "Ülke ara",
   "searchRegion": "Şehir ara",
   "searchCity": "İlçe ara",
+  "cityAlertTitle": "Merkez ilçeler listede bulunmaz!",
+  "cityAlertDesc": "Aradığınız ilçeyi bulamıyorsanız il ile aynı seçimi yapın.",
   "currentLocationTitle": "Mevcut konum",
   "langTitle": "Dil",
   "langOptionTr": "Türkçe",

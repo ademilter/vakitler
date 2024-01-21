@@ -66,7 +66,12 @@ export default function Country() {
             value: c.IlceID,
             label: c[t("cityKey") as keyof ICity],
           }))}
-        />
+        >
+          <div className="bg-blue-50 dark:bg-blue-500/20 dark:text-blue-300 text-blue-600 rounded-xl px-6 py-3 mb-4">
+            <h4 className="font-semibold">{t("settings:cityAlertTitle")}</h4>
+            <p>{t("settings:cityAlertDesc")}</p>
+          </div>
+        </SettingsList>
       </Container>
     </SubPage>
   );

@@ -2,6 +2,8 @@
   "searchCountry": "Country search",
   "searchRegion": "Region search",
   "searchCity": "City search",
+  "cityAlertTitle": "Central city are not on the list!",
+  "cityAlertDesc": "If you cannot find the city you are looking for, make the same selection as the region.",
   "currentLocationTitle": "Current location",
   "langTitle": "Language",
   "langOptionTr": "Türkçe",
