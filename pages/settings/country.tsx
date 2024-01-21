@@ -11,7 +11,7 @@ export default function Country() {
   const { t } = useTranslation("common");
   const { push } = useRouter();
 
-  const { _settings, _setSettings } = useContext(CommonStoreContext);
+  const { settings, setSettings } = useContext(CommonStoreContext);
 
   const [data, setData] = useState<ICountry[]>([]);
   const [loading, setLoading] = useState(false);
@@ -41,6 +41,7 @@ export default function Country() {
     <SubPage>
       <Container className="pt-8 pb-40">
         <SettingsList
+          loading={loading}
           inputProps={{
             placeholder: t("settings:searchCountry"),
             name: "country",
@@ -58,14 +59,18 @@ export default function Country() {
           pushFirst={["2", "13", "33", "4", "39", "15", "11", "36", "52"]}
           onChange={id => {
             const country = data.find(c => c.UlkeID === id);
-            _setSettings({ ..._settings, country });
-            push(`/settings/region`);
+
+            setSettings({
+              ...settings,
+              _country: country,
+            });
+
+            return push(`/settings/region`);
           }}
           data={data.map(c => ({
             value: c.UlkeID,
             label: c[t("countryKey") as keyof ICountry],
           }))}
-          loading={loading}
           backButtonProps={{
             hidden: true,
           }}

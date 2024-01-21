@@ -11,7 +11,7 @@ export default function Country() {
   const { t } = useTranslation("common");
   const { push } = useRouter();
 
-  const { _settings, fetchData, setSettings, settings } =
+  const { settings, saveSettings, fetchData, setSettings } =
     useContext(CommonStoreContext);
 
   const [data, setData] = useState<ICity[]>([]);
@@ -22,7 +22,7 @@ export default function Country() {
       setLoading(true);
 
       const url = new URL("/api/cities", window.location.origin);
-      url.searchParams.set("regionID", _settings.region?.SehirID as string);
+      url.searchParams.set("regionID", settings._region?.SehirID as string);
 
       const res = await fetch(url.toString());
       const data = await res.json();
@@ -33,17 +33,18 @@ export default function Country() {
     } finally {
       setLoading(false);
     }
-  }, [_settings.region?.SehirID]);
+  }, [settings._region?.SehirID]);
 
   useEffect(() => {
-    if (!_settings.region) return;
+    if (!settings._region) return;
     fetchCities();
-  }, [_settings, fetchCities]);
+  }, [settings, fetchCities]);
 
   return (
     <SubPage>
       <Container className="pt-8 pb-40">
         <SettingsList
+          loading={loading}
           inputProps={{
             placeholder: t("settings:searchCity"),
             name: "city",
@@ -53,15 +54,21 @@ export default function Country() {
 
             setSettings({
               ...settings,
-              country: _settings.country,
-              region: _settings.region,
+              country: settings._country,
+              region: settings._region,
+              city,
+            });
+
+            saveSettings({
+              ...settings,
+              country: settings._country,
+              region: settings._region,
               city,
             });
 
             await fetchData(city.IlceID);
             await push(`/`);
           }}
-          loading={loading}
           data={data.map(c => ({
             value: c.IlceID,
             label: c[t("cityKey") as keyof ICity],
