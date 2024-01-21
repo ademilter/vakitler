@@ -7,17 +7,17 @@ import { useTheme } from "next-themes";
 
 const theme = {
   [TimeNames.Imsak]:
-    "bg-sky-400/40 text-sky-800 dark:bg-sky-500/20 dark:text-sky-200",
+    "bg-sky-300/30 text-sky-800 dark:bg-sky-500/20 dark:text-sky-200",
   [TimeNames.Gunes]:
-    "bg-orange-400/40 text-orange-800 dark:bg-orange-500/20 dark:text-orange-200",
+    "bg-orange-300/30 text-orange-800 dark:bg-orange-500/20 dark:text-orange-200",
   [TimeNames.Ogle]:
-    "bg-yellow-400/40 text-yellow-800 dark:bg-yellow-500/20 dark:text-yellow-200",
+    "bg-yellow-300/30 text-yellow-800 dark:bg-yellow-500/20 dark:text-yellow-200",
   [TimeNames.Ikindi]:
-    "bg-rose-400/40 text-rose-800 dark:bg-rose-500/20 dark:text-rose-200",
+    "bg-rose-300/30 text-rose-800 dark:bg-rose-500/20 dark:text-rose-200",
   [TimeNames.Aksam]:
-    "bg-blue-400/40 text-blue-800 dark:bg-blue-500/20 dark:text-blue-200",
+    "bg-blue-300/30 text-blue-800 dark:bg-blue-500/20 dark:text-blue-200",
   [TimeNames.Yatsi]:
-    "bg-indigo-400/40 text-indigo-800 dark:bg-indigo-500/20 dark:text-indigo-200",
+    "bg-indigo-300/30 text-indigo-800 dark:bg-indigo-500/20 dark:text-indigo-200",
 };
 
 const color = {

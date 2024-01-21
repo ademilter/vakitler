@@ -31,6 +31,9 @@ export default function TimeListRow({
   const next = times?.time?.next;
   const isTimeNext = next === time;
 
+  const timeIndex = Object.keys(TimeNames).indexOf(time ?? "");
+  const nextIndex = Object.keys(TimeNames).indexOf(next ?? "");
+
   if (!times) return null;
 
   let timeName = t(time);
@@ -53,27 +56,30 @@ export default function TimeListRow({
         },
       }}
       className={cx(
-        "relative",
-        "first:rounded-t-3xl",
-        "last:rounded-b-3xl",
-        now === TimeNames.Imsak && "bg-sky-400 dark:bg-sky-900",
-        now === TimeNames.Gunes && "bg-orange-400 dark:bg-orange-900",
-        now === TimeNames.Ogle && "bg-yellow-400 dark:bg-yellow-900",
-        now === TimeNames.Ikindi && "bg-rose-400 dark:bg-rose-900",
-        now === TimeNames.Aksam && "bg-blue-400 dark:bg-blue-900",
-        now === TimeNames.Yatsi && "bg-indigo-400 dark:bg-indigo-900",
-        `bg-opacity-${Math.abs((index - 6) * 5)}`,
+        "relative grow h-full",
+        now === TimeNames.Imsak && "bg-sky-500 dark:bg-sky-900",
+        now === TimeNames.Gunes && "bg-orange-500 dark:bg-orange-900",
+        now === TimeNames.Ogle && "bg-yellow-500 dark:bg-yellow-900",
+        now === TimeNames.Ikindi && "bg-rose-500 dark:bg-rose-900",
+        now === TimeNames.Aksam && "bg-blue-500 dark:bg-blue-900",
+        now === TimeNames.Yatsi && "bg-indigo-500 dark:bg-indigo-900",
+        `bg-opacity-${Math.abs((index + 1) * 5)}`,
         `dark:bg-opacity-${Math.abs((index - 6) * 5)}`
-        // isTimeActive && "bg-opacity-15"
       )}
     >
-      <Container className={cx("flex h-full", isTimeNext && "py-1")}>
-        <div className="relative flex h-full w-full items-center justify-between px-2 py-3 text-xl md:text-xl">
+      <Container
+        className={cx(
+          "flex h-full",
+          isTimeNext && "py-1",
+          timeIndex < nextIndex && "opacity-60"
+        )}
+      >
+        <div className="relative flex h-full w-full items-center justify-between px-10 py-3 text-xl md:text-xl">
           {isTimeNext && (
             <motion.span
               layoutId="border"
               className={cx(
-                "absolute -inset-x-3 inset-y-1 rounded-2xl border-2 border-current"
+                "absolute inset-x-2 inset-y-1 rounded-2xl border-2 border-current"
               )}
               variants={{
                 open: {
@@ -91,8 +97,22 @@ export default function TimeListRow({
               }}
             />
           )}
-          <h5 className="capitalize leading-none">{timeName}</h5>
-          <h4 className="tabular-nums leading-none">{formattedValue}</h4>
+          <h5
+            className={cx(
+              "capitalize leading-none",
+              timeIndex < nextIndex && "font-normal"
+            )}
+          >
+            {timeName}
+          </h5>
+          <h4
+            className={cx(
+              "tabular-nums leading-none",
+              timeIndex < nextIndex && "font-normal"
+            )}
+          >
+            {formattedValue}
+          </h4>
 
           <RamadanTimer time={time} />
         </div>
