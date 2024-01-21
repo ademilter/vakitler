@@ -57,21 +57,21 @@ export default function TimeListRow({
       }}
       className={cx(
         "relative grow h-full",
-        now === TimeNames.Imsak && "bg-sky-500 dark:bg-sky-900",
-        now === TimeNames.Gunes && "bg-orange-500 dark:bg-orange-900",
-        now === TimeNames.Ogle && "bg-yellow-500 dark:bg-yellow-900",
-        now === TimeNames.Ikindi && "bg-rose-500 dark:bg-rose-900",
-        now === TimeNames.Aksam && "bg-blue-500 dark:bg-blue-900",
-        now === TimeNames.Yatsi && "bg-indigo-500 dark:bg-indigo-900",
+        now === TimeNames.Imsak && "bg-sky-500 dark:bg-sky-500",
+        now === TimeNames.Gunes && "bg-orange-500 dark:bg-orange-500",
+        now === TimeNames.Ogle && "bg-yellow-500 dark:bg-yellow-500",
+        now === TimeNames.Ikindi && "bg-rose-500 dark:bg-rose-500",
+        now === TimeNames.Aksam && "bg-blue-500 dark:bg-blue-500",
+        now === TimeNames.Yatsi && "bg-indigo-500 dark:bg-indigo-500",
         `bg-opacity-${Math.abs((index + 1) * 5)}`,
-        `dark:bg-opacity-${Math.abs((index - 6) * 5)}`
+        `dark:bg-opacity-${Math.abs((index + 1) * 5)}`
       )}
     >
       <Container
         className={cx(
           "flex h-full",
-          isTimeNext && "py-1",
-          timeIndex < nowIndex && "opacity-60"
+          isTimeActive && "py-2",
+          timeIndex < nowIndex && "opacity-60 dark:opacity-40"
         )}
       >
         <div className="relative flex h-full w-full items-center justify-between px-10 py-3 text-xl md:text-xl">
@@ -84,7 +84,7 @@ export default function TimeListRow({
               variants={{
                 open: {
                   scale: 1,
-                  opacity: 0.4,
+                  opacity: 0.3,
                   transition: {
                     duration: 0.6,
                     delay: 0.6,
