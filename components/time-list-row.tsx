@@ -26,13 +26,13 @@ export default function TimeListRow({
   const formattedValue = formattedTime(timeFormat, value, lang);
 
   const now = times?.time?.now;
-  // const isTimeActive = now === time;
+  const isTimeActive = now === time;
 
   const next = times?.time?.next;
   const isTimeNext = next === time;
 
   const timeIndex = Object.keys(TimeNames).indexOf(time ?? "");
-  const nextIndex = Object.keys(TimeNames).indexOf(next ?? "");
+  const nowIndex = Object.keys(TimeNames).indexOf(now ?? "");
 
   if (!times) return null;
 
@@ -71,11 +71,11 @@ export default function TimeListRow({
         className={cx(
           "flex h-full",
           isTimeNext && "py-1",
-          timeIndex < nextIndex && "opacity-60"
+          timeIndex < nowIndex && "opacity-60"
         )}
       >
         <div className="relative flex h-full w-full items-center justify-between px-10 py-3 text-xl md:text-xl">
-          {isTimeNext && (
+          {isTimeActive && (
             <motion.span
               layoutId="border"
               className={cx(
@@ -100,7 +100,7 @@ export default function TimeListRow({
           <h5
             className={cx(
               "capitalize leading-none",
-              timeIndex < nextIndex && "font-normal"
+              timeIndex < nowIndex && "font-normal"
             )}
           >
             {timeName}
@@ -108,7 +108,7 @@ export default function TimeListRow({
           <h4
             className={cx(
               "tabular-nums leading-none",
-              timeIndex < nextIndex && "font-normal"
+              timeIndex < nowIndex && "font-normal"
             )}
           >
             {formattedValue}
