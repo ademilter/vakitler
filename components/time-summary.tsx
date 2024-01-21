@@ -37,7 +37,7 @@ export default function TimeSummary() {
 
   return (
     <motion.div {...containerAnim}>
-      <Container className="flex h-full gap-1 flex-col items-center justify-center pt-10">
+      <Container className="flex h-full gap-1 flex-col items-center justify-center pt-24 pb-14">
         <span className="flex capitalize text-xl font-semibold">
           <Trans
             ns={"common"}
