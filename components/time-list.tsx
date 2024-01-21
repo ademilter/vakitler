@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { TimeNames } from "@/lib/types";
 import Time from "@/components/time-list-row";
+import TimeListRowBottom from "@/components/time-list-row-last";
 
 export default function TimeList() {
   return (
@@ -19,6 +20,7 @@ export default function TimeList() {
       {Object.keys(TimeNames).map((key, index) => {
         return <Time key={key} index={index} time={key as TimeNames} />;
       })}
+      <TimeListRowBottom />
     </motion.div>
   );
 }

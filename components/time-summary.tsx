@@ -4,13 +4,18 @@ import { CommonStoreContext } from "@/stores/common";
 import useTranslation from "next-translate/useTranslation";
 import { motion } from "framer-motion";
 import TimeSummaryTimer from "@/components/time-summary-timer";
-import TimeSummaryIcon from "@/components/time-summary-icon";
 import Container from "@/components/container";
+import Trans from "next-translate/Trans";
 
 export default function TimeSummary() {
   const { t } = useTranslation("common");
 
   const { times } = useContext(CommonStoreContext);
+
+  let timeName = t(times?.time.next as TimeNames);
+  if (times?.today?.isJumuah && times?.time.next === TimeNames.Ogle) {
+    timeName = t("Jumuah");
+  }
 
   const containerAnim = {
     variants: {
@@ -32,16 +37,18 @@ export default function TimeSummary() {
 
   return (
     <motion.div {...containerAnim}>
-      <Container className="flex h-full flex-col items-center justify-center pb-12 pt-14">
-        <TimeSummaryIcon />
+      <Container className="flex h-full gap-1 flex-col items-center justify-center pt-10">
+        <span className="flex capitalize text-xl font-semibold">
+          <Trans
+            ns={"common"}
+            i18nKey="timerTitle"
+            values={{
+              time: timeName,
+            }}
+          />
+        </span>
 
-        <h2 className="mt-2 text-4xl capitalize md:mt-4 md:text-5xl">
-          {t(times?.time.now as TimeNames)}
-        </h2>
-
-        <div className="mt-5 md:mt-6">
-          <TimeSummaryTimer />
-        </div>
+        <TimeSummaryTimer />
       </Container>
     </motion.div>
   );

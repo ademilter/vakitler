@@ -3,31 +3,30 @@ import { cx } from "@/lib/utils";
 import { TimeNames } from "@/lib/types";
 import { CommonStoreContext } from "@/stores/common";
 import Head from "next/head";
-import colors from "tailwindcss/colors";
 import { useTheme } from "next-themes";
-import Div100vh from "react-div-100vh";
 
 const theme = {
-  [TimeNames.Imsak]: "bg-sky-50 text-sky-900 dark:text-sky-50 dark:bg-sky-900",
+  [TimeNames.Imsak]:
+    "bg-sky-300/30 text-sky-800 dark:bg-sky-800/30 dark:text-sky-200",
   [TimeNames.Gunes]:
-    "bg-orange-50 text-orange-900 dark:text-orange-50 dark:bg-orange-900",
+    "bg-orange-300/30 text-orange-800 dark:bg-orange-800/30 dark:text-orange-200",
   [TimeNames.Ogle]:
-    "bg-yellow-50 text-yellow-900 dark:text-yellow-50 dark:bg-yellow-900",
+    "bg-yellow-300/30 text-yellow-800 dark:bg-yellow-800/30 dark:text-yellow-200",
   [TimeNames.Ikindi]:
-    "bg-rose-50 text-rose-900 dark:text-rose-50 dark:bg-rose-900",
+    "bg-rose-300/30 text-rose-800 dark:bg-rose-800/30 dark:text-rose-200",
   [TimeNames.Aksam]:
-    "bg-blue-50 text-blue-900 dark:text-blue-50 dark:bg-blue-900",
+    "bg-blue-300/30 text-blue-800 dark:bg-blue-800/30 dark:text-blue-200",
   [TimeNames.Yatsi]:
-    "bg-indigo-50 text-indigo-900 dark:text-indigo-50 dark:bg-indigo-900",
+    "bg-indigo-300/30 text-indigo-800 dark:bg-indigo-800/30 dark:text-indigo-200",
 };
 
 const color = {
-  [TimeNames.Imsak]: [colors.sky["50"], "#15222c"],
-  [TimeNames.Gunes]: [colors.orange["50"], "#2c1c1a"],
-  [TimeNames.Ogle]: [colors.yellow["50"], "#2a201a"],
-  [TimeNames.Ikindi]: [colors.rose["50"], "#2e1721"],
-  [TimeNames.Aksam]: [colors.blue["50"], "#191f32"],
-  [TimeNames.Yatsi]: [colors.indigo["50"], "#1d1c30"],
+  [TimeNames.Imsak]: ["#daf2fe", "#192b3b"],
+  [TimeNames.Gunes]: ["#feead6", "#40221a"],
+  [TimeNames.Ogle]: ["#fef6cc", "#3a281a"],
+  [TimeNames.Ikindi]: ["#ffe4e7", "#421a25"],
+  [TimeNames.Aksam]: ["#e0edff", "#1b2448"],
+  [TimeNames.Yatsi]: ["#e4e8fe", "#212044"],
 };
 
 export default function MainPage({ children }: { children: ReactNode }) {
@@ -41,15 +40,14 @@ export default function MainPage({ children }: { children: ReactNode }) {
       ? color[now][0]
       : color[now][1]
     : "";
+
   return (
-    <>
+    <div className={cx("fixed bg-white dark:bg-zinc-900 inset-0")}>
       <Head>
         {themeColor && <meta name="theme-color" content={themeColor} />}
       </Head>
 
-      <Div100vh className={cx(themeStyle, "relative dark:bg-opacity-20")}>
-        {children}
-      </Div100vh>
-    </>
+      <div className={cx(themeStyle, "h-dvh")}>{children}</div>
+    </div>
   );
 }
