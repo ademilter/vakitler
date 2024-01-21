@@ -8,11 +8,12 @@ export default function TimeLocation() {
 
   return (
     <Link
-      className="relative inline-flex items-center px-4 tracking-wider py-1 font-medium gap-1 text-sm uppercase"
+      className="relative inline-flex items-center px-4 tracking-wider
+      py-1 font-medium gap-1 text-sm uppercase"
       href="/settings"
     >
       <span className="absolute inset-0 -z-10 rounded-2xl bg-current opacity-10" />
-      <span className="opacity-80">{city?.toLocaleLowerCase(lang)}</span>
+      <span className="">{city?.toLocaleLowerCase(lang)}</span>
     </Link>
   );
 }

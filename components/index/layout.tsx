@@ -30,7 +30,7 @@ const color = {
   [TimeNames.Yatsi]: ["#e4e8fe", "#212044"],
 };
 
-export default function MainPage({ children }: { children: ReactNode }) {
+export default function IndexLayout({ children }: { children: ReactNode }) {
   const { times } = useContext(CommonStoreContext);
   const { resolvedTheme } = useTheme();
 
