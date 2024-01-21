@@ -21,7 +21,10 @@ export default function IndexSummary() {
   };
 
   return (
-    <motion.div {...containerAnim} className="grid place-items-center pt-10">
+    <motion.div
+      {...containerAnim}
+      className="grid place-items-center pt-24 pb-14"
+    >
       <TimeSummary />
     </motion.div>
   );
