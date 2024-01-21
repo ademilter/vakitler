@@ -5,7 +5,7 @@ import SettingsList from "@/components/settings/list";
 import { IRegion } from "@/lib/types";
 import { useRouter } from "next/router";
 import { CommonStoreContext } from "@/stores/common";
-import SubPage from "@/components/layout/sub";
+import SettingsLayout from "@/components/settings/layout";
 
 export default function Country() {
   const { t } = useTranslation("common");
@@ -40,7 +40,7 @@ export default function Country() {
   }, [settings, fetchRegionData]);
 
   return (
-    <SubPage>
+    <SettingsLayout>
       <Container className="pt-8 pb-40">
         <SettingsList
           loading={loading}
@@ -65,6 +65,6 @@ export default function Country() {
           }))}
         />
       </Container>
-    </SubPage>
+    </SettingsLayout>
   );
 }

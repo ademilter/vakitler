@@ -3,7 +3,7 @@ import { CommonStoreContext } from "@/stores/common";
 import TimeLocation from "@/components/time-location";
 import TimeSummary from "@/components/time-summary";
 import TimeTravel from "@/components/time-travel";
-import MainPage from "@/components/layout/main-tv";
+import MainPage from "@/components/tv/main-tv";
 import { TimeNames } from "@/lib/types";
 import { cx, formattedTime } from "@/lib/utils";
 import Container from "@/components/container";

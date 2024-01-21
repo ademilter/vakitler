@@ -9,7 +9,7 @@ import useLocations from "@/hooks/use-locations";
 import { TimeFormat } from "@/lib/types";
 import { useTheme } from "next-themes";
 import Box from "@/components/box";
-import SubPage from "@/components/layout/sub";
+import SettingsLayout from "@/components/settings/layout";
 
 export default function Settings() {
   const { t, lang } = useTranslation("common");
@@ -43,7 +43,7 @@ export default function Settings() {
   };
 
   return (
-    <SubPage>
+    <SettingsLayout>
       <Container className="grid py-8">
         <div className="grid gap-6">
           <Box>
@@ -224,6 +224,6 @@ export default function Settings() {
           </Link>
         </div>
       </Container>
-    </SubPage>
+    </SettingsLayout>
   );
 }
