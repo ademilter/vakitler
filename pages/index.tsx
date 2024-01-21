@@ -31,7 +31,14 @@ export default function Index() {
           "md:grid-rows-[minmax(auto,_1fr)_minmax(auto,_600px)]"
         )}
       >
-        <TimeLocation />
+        <div
+          className={cx(
+            "absolute inset-x-0 top-0 z-20",
+            "flex items-center justify-center py-4 md:py-6"
+          )}
+        >
+          <TimeLocation />
+        </div>
         <TimeSummary />
         <TimeList />
         <TimeTravel />
