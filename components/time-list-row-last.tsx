@@ -26,7 +26,7 @@ export default function TimeListRowBottom({}: {}) {
         },
       }}
       className={cx(
-        "h-full min-h-1",
+        "h-full min-h-4",
         now === TimeNames.Imsak && "bg-sky-500 dark:bg-sky-500",
         now === TimeNames.Gunes && "bg-orange-500 dark:bg-orange-500",
         now === TimeNames.Ogle && "bg-yellow-500 dark:bg-yellow-500",
