@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { CommonStoreContext } from "@/stores/common";
-import TimeLocation from "@/components/time-location";
-import TimeSummary from "@/components/time-summary";
+import TimeLocation from "@/components/tv/time-location";
+import TimeSummary from "@/components/tv/time-summary";
 import TimeTravel from "@/components/time-travel";
 import Layout from "@/components/tv/layout";
 import { TimeNames } from "@/lib/types";

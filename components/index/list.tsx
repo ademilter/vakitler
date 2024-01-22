@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { TimeNames } from "@/lib/types";
-import Time from "@/components/time-list-row";
-import TimeListRowBottom from "@/components/time-list-row-last";
+import Time from "./list-row";
+import TimeListRowBottom from "./list-row-last";
 
 export default function TimeList() {
   return (

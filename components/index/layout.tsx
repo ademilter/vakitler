@@ -6,21 +6,6 @@ import Head from "next/head";
 import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
 
-const theme = {
-  [TimeNames.Imsak]:
-    "bg-sky-300/30 text-sky-800 dark:bg-sky-800/30 dark:text-sky-200",
-  [TimeNames.Gunes]:
-    "bg-orange-300/30 text-orange-800 dark:bg-orange-800/30 dark:text-orange-200",
-  [TimeNames.Ogle]:
-    "bg-yellow-300/30 text-yellow-800 dark:bg-yellow-800/30 dark:text-yellow-200",
-  [TimeNames.Ikindi]:
-    "bg-rose-300/30 text-rose-800 dark:bg-rose-800/30 dark:text-rose-200",
-  [TimeNames.Aksam]:
-    "bg-blue-300/30 text-blue-800 dark:bg-blue-800/30 dark:text-blue-200",
-  [TimeNames.Yatsi]:
-    "bg-indigo-300/30 text-indigo-800 dark:bg-indigo-800/30 dark:text-indigo-200",
-};
-
 const color = {
   [TimeNames.Imsak]: ["#daf2fe", "#192b3b"],
   [TimeNames.Gunes]: ["#feead6", "#40221a"],
@@ -28,6 +13,21 @@ const color = {
   [TimeNames.Ikindi]: ["#ffe4e7", "#421a25"],
   [TimeNames.Aksam]: ["#e0edff", "#1b2448"],
   [TimeNames.Yatsi]: ["#e4e8fe", "#212044"],
+};
+
+const theme = {
+  [TimeNames.Imsak]: `bg-sky-300/30 text-sky-800 dark:bg-sky-800/30 dark:text-sky-200 
+  bg-[${color[TimeNames.Imsak][0]}] dark:bg-[${color[TimeNames.Imsak][1]}]`,
+  [TimeNames.Gunes]: `bg-orange-300/30 text-orange-800 dark:bg-orange-800/30 dark:text-orange-200 
+  bg-[${color[TimeNames.Gunes][0]}] dark:bg-[${color[TimeNames.Gunes][1]}]`,
+  [TimeNames.Ogle]: `bg-yellow-300/30 text-yellow-800 dark:bg-yellow-800/30 dark:text-yellow-200 
+  bg-[${color[TimeNames.Ogle][0]}] dark:bg-[${color[TimeNames.Ogle][1]}]`,
+  [TimeNames.Ikindi]: `bg-rose-300/30 text-rose-800 dark:bg-rose-800/30 dark:text-rose-200 
+  bg-[${color[TimeNames.Ikindi][0]}] dark:bg-[${color[TimeNames.Ikindi][1]}]`,
+  [TimeNames.Aksam]: `bg-blue-300/30 text-blue-800 dark:bg-blue-800/30 dark:text-blue-200 
+  bg-[${color[TimeNames.Aksam][0]}] dark:bg-[${color[TimeNames.Aksam][1]}]`,
+  [TimeNames.Yatsi]: `bg-indigo-300/30 text-indigo-800 dark:bg-indigo-800/30 dark:text-indigo-200 
+  bg-[${color[TimeNames.Yatsi][0]}] dark:bg-[${color[TimeNames.Yatsi][1]}]`,
 };
 
 export default function IndexLayout({ children }: { children: ReactNode }) {

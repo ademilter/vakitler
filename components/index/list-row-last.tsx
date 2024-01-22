@@ -13,18 +13,7 @@ export default function TimeListRowBottom({}: {}) {
 
   return (
     <motion.div
-      variants={{
-        open: {
-          y: 0,
-          scale: 1,
-          opacity: 1,
-        },
-        closed: {
-          y: 30,
-          scale: 0.8,
-          opacity: 0,
-        },
-      }}
+      {...rowAnim}
       className={cx(
         "h-full min-h-1",
         now === TimeNames.Imsak && "bg-sky-500 dark:bg-sky-500",
@@ -39,3 +28,18 @@ export default function TimeListRowBottom({}: {}) {
     />
   );
 }
+
+const rowAnim = {
+  variants: {
+    open: {
+      y: 0,
+      scale: 1,
+      opacity: 1,
+    },
+    closed: {
+      y: 30,
+      scale: 0.8,
+      opacity: 0,
+    },
+  },
+};
