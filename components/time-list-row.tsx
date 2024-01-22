@@ -102,7 +102,7 @@ export default function TimeListRow({
           <h5
             className={cx(
               "capitalize leading-none",
-              timeIndex < nowIndex && "font-normal"
+              timeIndex < nowIndex && !tomorrow && "font-normal"
             )}
           >
             {timeName}
@@ -110,7 +110,7 @@ export default function TimeListRow({
           <h4
             className={cx(
               "tabular-nums leading-none",
-              timeIndex < nowIndex && "font-normal"
+              timeIndex < nowIndex && !tomorrow && "font-normal"
             )}
           >
             {formattedValue}

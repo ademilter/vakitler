@@ -8,9 +8,9 @@ import { CommonStoreContext } from "@/stores/common";
 export default function TimeList() {
   const { times } = useContext(CommonStoreContext);
 
-  // yatsı vaktiyse ve gece yarısındna önceyse imsak yer değiştiriyor
+  // yatsı vaktiyse imsak yer değiştiriyor
   const list: [TimeNames, boolean][] =
-    times!.time.now === TimeNames.Yatsi && times!.isBeforeMidnight()
+    times!.time.now === TimeNames.Yatsi
       ? [
           [TimeNames.Gunes, false],
           [TimeNames.Ogle, false],
