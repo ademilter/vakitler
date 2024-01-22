@@ -28,7 +28,7 @@ export default function Box({
   );
 
   return (
-    <div className={cx(className)} {...props}>
+    <div className={cx("grid gap-2", className)} {...props}>
       {BoxTitle}
       {BoxBody}
     </div>
@@ -46,7 +46,7 @@ function BoxTitle({
   return (
     <h5
       className={cx(
-        "mb-1 px-4 text-xs font-normal uppercase opacity-50",
+        "text-sm font-normal leading-none tracking-wide uppercase opacity-60",
         className
       )}
       {...props}
@@ -69,7 +69,7 @@ function BoxBody({
 }) {
   return (
     <div
-      className={cx("rounded-xl bg-white dark:bg-zinc-800", className)}
+      className={cx("rounded-xl p-1 bg-zinc-300 dark:bg-zinc-800", className)}
       {...props}
     >
       {children}

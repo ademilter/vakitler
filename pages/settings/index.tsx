@@ -10,6 +10,9 @@ import { TimeFormat } from "@/lib/types";
 import { useTheme } from "next-themes";
 import Box from "@/components/box";
 import SubPage from "@/components/layout/sub";
+import { IconCheck } from "@tabler/icons-react";
+import * as RadioGroup from "@radix-ui/react-radio-group";
+import * as Switch from "@radix-ui/react-switch";
 
 export default function Settings() {
   const { t, lang } = useTranslation("common");
@@ -30,15 +33,16 @@ export default function Settings() {
     return adjustments.join(", ");
   };
 
-  const onChangeLang = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    await setLanguage(e.target.value);
-    localStorage.setItem(LOCAL_KEYS.Lang, e.target.value);
+  const onChangeLang = async (value: string) => {
+    if (value === lang) return;
+    await setLanguage(value);
+    localStorage.setItem(LOCAL_KEYS.Lang, value);
   };
 
-  const onChangeTimeFormat = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeTimeFormat = async (value: string) => {
     setSettings({
       ...settings,
-      timeFormat: e.target.value as typeof settings.timeFormat,
+      timeFormat: value as typeof settings.timeFormat,
     });
   };
 
@@ -47,96 +51,144 @@ export default function Settings() {
       <Container className="grid py-8">
         <div className="grid gap-6">
           <Box>
-            <Box.Title>{t("settings:currentLocationTitle")}</Box.Title>
-            <Box.Body>
+            {/*<Box.Title>{t("settings:currentLocationTitle")}</Box.Title>*/}
+            <Box.Body className="bg-white dark:bg-zinc-700">
               <Box.BodyLink href="/settings/country">
+                <span className="font-semibold">{city},</span>
                 <div className="flex items-center gap-0.5">
-                  <span>{city},</span>
-                  <span>{region}</span>
+                  <span>{region},</span>
+                  <div>{country}</div>
                 </div>
-                <div>{country}</div>
               </Box.BodyLink>
             </Box.Body>
           </Box>
 
           <Box>
             <Box.Title>{t("settings:langTitle")}</Box.Title>
-            <Box.Body className="p-2">
-              {[
-                ["tr", "settings:langOptionTr"],
-                ["en", "settings:langOptionEn"],
-              ].map(([value, label], i) => (
-                <Box.BodyRadio
-                  key={value}
-                  name="lang"
-                  value={value}
-                  checked={lang === value}
-                  isSelected={lang === value}
-                  onChange={onChangeLang}
-                  last={i === 1}
-                >
-                  {t(label)}
-                </Box.BodyRadio>
-              ))}
+            <Box.Body>
+              <RadioGroup.Root
+                className="flex items-center"
+                name="lang"
+                defaultValue={lang}
+                onValueChange={onChangeLang}
+              >
+                {[
+                  ["tr", "settings:langOptionTr"],
+                  ["en", "settings:langOptionEn"],
+                ].map(([value, label], i) => (
+                  <RadioGroup.Item
+                    key={value}
+                    value={value}
+                    className="grow flex basis-0 opacity-80 items-center justify-center gap-1
+                    px-2 h-10 rounded-xl
+                    data-[state=checked]:opacity-100
+                    data-[state=checked]:font-semibold
+                    data-[state=checked]:bg-white
+                    data-[state=checked]:dark:bg-zinc-700"
+                  >
+                    {value === lang && (
+                      <IconCheck size={20} className="text-emerald-500" />
+                    )}
+                    {t(label)}
+                    <RadioGroup.Indicator className="absolute opacity-0" />
+                  </RadioGroup.Item>
+                ))}
+              </RadioGroup.Root>
             </Box.Body>
           </Box>
 
           <Box>
             <Box.Title>{t("settings:themeTitle")}</Box.Title>
-            <Box.Body className="p-2">
-              {[
-                ["system", "settings:themeOptionSystem"],
-                ["light", "settings:themeOptionLight"],
-                ["dark", "settings:themeOptionDark"],
-              ].map(([value, label], i) => (
-                <Box.BodyRadio
-                  key={value}
-                  name="theme"
-                  value={value}
-                  checked={theme === value}
-                  isSelected={theme === value}
-                  onChange={e => setTheme(e.target.value)}
-                  last={i === 2}
-                >
-                  {t(label)}
-                </Box.BodyRadio>
-              ))}
+            <Box.Body>
+              <RadioGroup.Root
+                className="flex items-center"
+                name="theme"
+                defaultValue={theme}
+                onValueChange={value => setTheme(value)}
+              >
+                {[
+                  ["system", "settings:themeOptionSystem"],
+                  ["light", "settings:themeOptionLight"],
+                  ["dark", "settings:themeOptionDark"],
+                ].map(([value, label], i) => (
+                  <RadioGroup.Item
+                    key={value}
+                    value={value}
+                    className="grow flex basis-0 opacity-80 items-center justify-center gap-1
+                    px-2 h-10 rounded-xl
+                    data-[state=checked]:opacity-100
+                    data-[state=checked]:font-semibold
+                    data-[state=checked]:bg-white
+                    data-[state=checked]:dark:bg-zinc-700"
+                  >
+                    {value === theme && (
+                      <IconCheck size={20} className="text-emerald-500" />
+                    )}
+                    {t(label)}
+                    <RadioGroup.Indicator className="absolute opacity-0" />
+                  </RadioGroup.Item>
+                ))}
+              </RadioGroup.Root>
             </Box.Body>
           </Box>
 
           <Box>
             <Box.Title>{t("settings:timeFormatTitle")}</Box.Title>
-            <Box.Body className="p-2">
-              {[
-                [TimeFormat.Twelve, "settings:timeFormatOption12"],
-                [TimeFormat.TwentyFour, "settings:timeFormatOption24"],
-              ].map(([value, label], i) => (
-                <Box.BodyRadio
-                  key={value}
-                  name="timeFormat"
-                  value={value}
-                  checked={timeFormat === value}
-                  isSelected={timeFormat === value}
-                  onChange={onChangeTimeFormat}
-                  last={i === 1}
-                >
-                  {t(label)}
-                </Box.BodyRadio>
-              ))}
+            <Box.Body>
+              <RadioGroup.Root
+                className="flex items-center"
+                name="timeFormat"
+                defaultValue={timeFormat}
+                onValueChange={onChangeTimeFormat}
+              >
+                {[
+                  [TimeFormat.Twelve, "settings:timeFormatOption12"],
+                  [TimeFormat.TwentyFour, "settings:timeFormatOption24"],
+                ].map(([value, label], i) => (
+                  <RadioGroup.Item
+                    key={value}
+                    value={value}
+                    className="grow flex basis-0 opacity-80 items-center justify-center gap-1
+                    px-2 h-10 rounded-xl
+                    data-[state=checked]:opacity-100
+                    data-[state=checked]:font-semibold
+                    data-[state=checked]:bg-white
+                    data-[state=checked]:dark:bg-zinc-700"
+                  >
+                    {value === timeFormat && (
+                      <IconCheck size={20} className="text-emerald-500" />
+                    )}
+                    {t(label)}
+                    <RadioGroup.Indicator className="absolute opacity-0" />
+                  </RadioGroup.Item>
+                ))}
+              </RadioGroup.Root>
             </Box.Body>
           </Box>
 
           <Box>
             <Box.Title>{t("settings:otherTitle")}</Box.Title>
-            <Box.Body>
-              <Box.BoxBodyToggle
+            <Box.Body className="flex items-center px-6 h-12">
+              <div className="grow">{t("settings:ramadanTimerTitle")}</div>
+              <Switch.Root
                 checked={settings.ramadanTimer}
-                onChange={e =>
-                  setSettings({ ...settings, ramadanTimer: e.target.checked })
+                onCheckedChange={checked =>
+                  setSettings({ ...settings, ramadanTimer: checked })
                 }
+                className="relative
+                h-8 w-12
+                bg-zinc-400
+                rounded-full
+                data-[state=checked]:bg-emerald-500"
               >
-                {t("settings:ramadanTimerTitle")}
-              </Box.BoxBodyToggle>
+                <Switch.Thumb
+                  className="block size-6
+                  bg-white rounded-full
+                  transition-transform will-change-transform duration-100
+                  translate-x-1
+                  data-[state=checked]:translate-x-5"
+                />
+              </Switch.Root>
             </Box.Body>
           </Box>
 
