@@ -1,6 +1,17 @@
-import React, { ReactNode } from "react";
+import React, { forwardRef, ReactNode } from "react";
 import { cx } from "@/lib/utils";
 import Link from "next/link";
+import {
+  IconCheck,
+  IconChevronDown,
+  IconChevronRight,
+  IconChevronUp,
+} from "@tabler/icons-react";
+import * as Select from "@radix-ui/react-select";
+import { SelectItemProps, SelectProps } from "@radix-ui/react-select";
+import useTranslation from "next-translate/useTranslation";
+import * as Switch from "@radix-ui/react-switch";
+import { SwitchProps } from "@radix-ui/react-switch";
 
 export default function Box({
   children,
@@ -10,27 +21,15 @@ export default function Box({
   children: ReactNode;
   className?: string;
 }) {
-  const childs: React.ReactNode[] = React.Children.map(
-    // @ts-ignore
-    children,
-    (child: React.ReactElement) => {
-      return React.cloneElement(child, {
-        ...child.props,
-      });
-    }
-  );
-
-  const BoxTitle = childs.find(
-    (child: any) => child.type.displayName === "BoxTitle"
-  );
-  const BoxBody = childs.find(
-    (child: any) => child.type.displayName === "BoxBody"
-  );
-
   return (
-    <div className={cx("grid gap-2", className)} {...props}>
-      {BoxTitle}
-      {BoxBody}
+    <div
+      className={cx(
+        "flex items-center py-3 px-4 border-b border-b-zinc-100 dark:border-b-zinc-900 gap-2",
+        className
+      )}
+      {...props}
+    >
+      {children}
     </div>
   );
 }
@@ -44,43 +43,15 @@ function BoxTitle({
   className?: string;
 }) {
   return (
-    <h5
-      className={cx(
-        "text-sm font-normal leading-none tracking-wide uppercase opacity-60",
-        className
-      )}
-      {...props}
-    >
+    <h5 className={cx("font-normal", className)} {...props}>
       {children}
     </h5>
   );
 }
 
-BoxTitle.displayName = "BoxTitle";
 Box.Title = BoxTitle;
 
-function BoxBody({
-  children,
-  className,
-  ...props
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  return (
-    <div
-      className={cx("rounded-xl p-1 bg-zinc-300 dark:bg-zinc-800", className)}
-      {...props}
-    >
-      {children}
-    </div>
-  );
-}
-
-BoxBody.displayName = "BoxBody";
-Box.Body = BoxBody;
-
-function BoxBodyLink({
+function BoxLink({
   href,
   className,
   children,
@@ -97,96 +68,125 @@ function BoxBodyLink({
   return (
     <Comp
       href={href}
-      className={cx("flex items-center px-4 py-3", className)}
+      className={cx("w-full flex gap-2 items-center", className)}
       {...props}
     >
       <div className="grow">{children}</div>
 
       <span className="flex shrink-0 items-center justify-center">
-        {icon ?? (
-          <svg
-            className="opacity-50"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <polyline points="9 6 15 12 9 18" />
-          </svg>
-        )}
+        {icon ?? <IconChevronRight size={16} className="opacity-40" />}
       </span>
     </Comp>
   );
 }
 
-BoxBodyLink.displayName = "BoxBodyLink";
-Box.BodyLink = BoxBodyLink;
+Box.BoxLink = BoxLink;
 
-function BoxBodyRadio({
-  children,
-  isSelected = false,
+function BoxSelect({
   className,
-  last,
+  value,
+  data,
   ...props
-}: React.InputHTMLAttributes<HTMLInputElement> & {
-  children: React.ReactNode;
-  isSelected?: boolean;
+}: SelectProps & {
+  value: string;
   className?: string;
-  last?: boolean;
+  data: [string, string][];
 }) {
-  const showBorder = !(isSelected || last);
+  const { t } = useTranslation("common");
 
   return (
-    <label
-      className={cx(
-        "relative flex h-12 grow items-center gap-2 px-4",
-        "rounded-lg border border-transparent",
-        "cursor-pointer select-none first:rounded-t-lg last:rounded-b-lg",
-        isSelected && "z-10 border-zinc-200 dark:border-zinc-700",
-        className
-      )}
-    >
-      {showBorder && (
-        <div className="pointer-events-none absolute -bottom-[2px] left-4 right-4 h-px bg-zinc-100 dark:bg-opacity-5" />
-      )}
+    <>
+      <Select.Root {...props}>
+        <Select.Trigger
+          className={cx(
+            "inline-flex items-center justify-center select-none h-10 leading-none font-semibold gap-2 outline-none"
+          )}
+        >
+          <Select.Value placeholder={value} />
+          <Select.Icon>
+            <IconChevronDown size={16} className="opacity-40" />
+          </Select.Icon>
+        </Select.Trigger>
 
-      <span className="grow">{children}</span>
-      <input type="radio" {...props} />
-    </label>
+        <Select.Portal>
+          <Select.Content
+            className="overflow-hidden bg-white dark:bg-zinc-800
+          shadow-2xl rounded-xl border border-zinc-200 dark:border-zinc-700"
+          >
+            <Select.ScrollUpButton className="flex items-center justify-center">
+              <IconChevronUp size={14} />
+            </Select.ScrollUpButton>
+            {/**/}
+            <Select.Viewport className="p-2">
+              <Select.Group>
+                {data.map(([value, label], i) => (
+                  <SelectItem key={value} value={value}>
+                    {t(label)}
+                  </SelectItem>
+                ))}
+              </Select.Group>
+            </Select.Viewport>
+
+            <Select.ScrollDownButton className="flex items-center justify-center">
+              <IconChevronDown size={14} />
+            </Select.ScrollDownButton>
+          </Select.Content>
+        </Select.Portal>
+      </Select.Root>
+    </>
   );
 }
 
-BoxBodyRadio.displayName = "BoxBodyRadio";
-Box.BodyRadio = BoxBodyRadio;
+Box.BodySelect = BoxSelect;
 
-function BoxBodyToggle({
-  children,
-  className,
-  ...props
-}: React.InputHTMLAttributes<HTMLInputElement> & {
-  children: React.ReactNode;
-  className?: string;
-}) {
+// eslint-disable-next-line react/display-name
+const SelectItem = forwardRef<
+  {
+    children?: ReactNode;
+    className: string;
+  },
+  SelectItemProps
+>(({ children, className, ...props }, forwardedRef) => {
   return (
-    <label
+    <Select.Item
+      // @ts-ignore TODO: ?
+      ref={forwardedRef}
       className={cx(
-        "relative flex h-12 grow items-center gap-2 px-4",
-        "rounded-lg border border-transparent",
-        "cursor-pointer select-none",
+        "leading-none h-10 pl-4 rounded-lg pr-6 flex gap-2 items-center relative select-none",
+        "data-[state=checked]:bg-emerald-50",
+        "dark:data-[state=checked]:bg-emerald-800",
+        "outline-none",
         className
       )}
+      {...props}
     >
-      <span className="grow">{children}</span>
-      <input className="mr-2" type="checkbox" {...props} />
-    </label>
+      <Select.ItemText>{children}</Select.ItemText>
+
+      <Select.ItemIndicator className="inline-flex items-center justify-center">
+        <IconCheck size={16} className="text-emerald-500" />
+      </Select.ItemIndicator>
+    </Select.Item>
+  );
+});
+
+function BoxSwitch({ className, ...props }: SwitchProps & {}) {
+  return (
+    <Switch.Root
+      className={cx(
+        "relative h-7 w-11 bg-zinc-400 rounded-full",
+        "data-[state=checked]:bg-emerald-500"
+      )}
+      {...props}
+    >
+      <Switch.Thumb
+        className="block size-5
+                  bg-white rounded-full
+                  transition-transform will-change-transform duration-100
+                  translate-x-1
+                  data-[state=checked]:translate-x-5"
+      />
+    </Switch.Root>
   );
 }
 
-BoxBodyToggle.displayName = "BoxBodyToggle";
-Box.BoxBodyToggle = BoxBodyToggle;
+Box.BoxSwitch = BoxSwitch;
