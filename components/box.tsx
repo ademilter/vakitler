@@ -24,7 +24,7 @@ export default function Box({
   return (
     <div
       className={cx(
-        "flex items-center py-3 px-4 border-b border-b-zinc-100 dark:border-b-zinc-900 gap-2",
+        "flex items-center py-3 px-4 border-b last:border-b-0 border-b-zinc-100 dark:border-b-zinc-900 gap-2",
         className
       )}
       {...props}
@@ -43,13 +43,36 @@ function BoxTitle({
   className?: string;
 }) {
   return (
-    <h5 className={cx("font-normal", className)} {...props}>
+    <h5 className={cx("font-normal opacity-80", className)} {...props}>
       {children}
     </h5>
   );
 }
 
 Box.Title = BoxTitle;
+
+function BoxContainer({
+  children,
+  className,
+  ...props
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div
+      className={cx(
+        "rounded-2xl bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-800",
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+}
+
+Box.BoxContainer = BoxContainer;
 
 function BoxLink({
   href,

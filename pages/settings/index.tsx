@@ -49,18 +49,20 @@ export default function Settings() {
         <div className="grid gap-4">
           {/**/}
 
-          <Box className="rounded-2xl bg-white border border-zinc-300 dark:border-zinc-800">
-            {/* LOOCATION */}
-            <Box.BoxLink href="/settings/country">
-              <span className="font-semibold">{city},</span>
-              <div className="flex items-center gap-0.5">
-                <span>{region},</span>
-                <div>{country}</div>
-              </div>
-            </Box.BoxLink>
-          </Box>
+          <Box.BoxContainer>
+            <Box>
+              {/* LOOCATION */}
+              <Box.BoxLink href="/settings/country">
+                <span className="font-semibold">{city},</span>
+                <div className="flex items-center gap-0.5">
+                  <span>{region},</span>
+                  <div>{country}</div>
+                </div>
+              </Box.BoxLink>
+            </Box>
+          </Box.BoxContainer>
 
-          <div className="rounded-2xl bg-white border border-zinc-300 dark:border-zinc-800">
+          <Box.BoxContainer>
             {/* LANGUAGES */}
             <Box>
               <div className="grow">
@@ -127,7 +129,7 @@ export default function Settings() {
             </Box>
 
             {/* FINE TUNE */}
-            <Box className="border-b-0">
+            <Box>
               <div className="grow shrink-0">
                 <Box.Title>{t("settings:customAdjustmentsTitle")}</Box.Title>
               </div>
@@ -138,9 +140,9 @@ export default function Settings() {
                 {adjustmentsAsText()}
               </Box.BoxLink>
             </Box>
-          </div>
+          </Box.BoxContainer>
 
-          <div className="rounded-2xl bg-white border border-zinc-300 dark:border-zinc-800">
+          <Box.BoxContainer>
             {/* ABOUT */}
             <Box className="flex-col px-6 items-start">
               <Box.BoxLink
@@ -170,7 +172,7 @@ export default function Settings() {
             </Box>
 
             {/* SUPPORT LINK */}
-            <Box className="flex-col px-6 border-b-0 items-start">
+            <Box className="flex-col px-6 items-start">
               <Box.BoxLink
                 className="py-2"
                 href="https://www.buymeacoffee.com/ademilter"
@@ -199,7 +201,7 @@ export default function Settings() {
                 </p>
               </Box.BoxLink>
             </Box>
-          </div>
+          </Box.BoxContainer>
         </div>
 
         <div className="sticky bottom-0 z-20 mt-40 pb-10">
