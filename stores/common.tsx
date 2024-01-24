@@ -6,32 +6,24 @@ import {
   ICountry,
   IRegion,
   TimeFormat,
-  TimeNames,
   TypeTimer,
 } from "@/lib/types";
 import { useRouter } from "next/router";
 import { DateTime } from "luxon";
 import useInterval from "@/lib/use-interval";
-import { API_DATE_FORMAT, LOCAL_KEYS, TIMES_COLOR } from "@/lib/const";
+import { API_DATE_FORMAT, LOCAL_KEYS } from "@/lib/const";
 import setLanguage from "next-translate/setLanguage";
 import i18n from "@/i18n.json";
+import * as process from "process";
 
 export const CommonStoreContext = createContext<ICommonStore>({
-  appLoading: false,
-  themeColor: "#777",
-  _settings: {
-    country: undefined,
-    region: undefined,
-    city: undefined,
-    timeFormat: TimeFormat.TwentyFour,
-    adjustments: [0, 0, 0, 0, 0, 0],
-    ramadanTimer: false,
-  },
-  _setSettings: () => {},
   settings: {
     country: undefined,
+    _country: undefined,
     region: undefined,
+    _region: undefined,
     city: undefined,
+    _city: undefined,
     timeFormat: TimeFormat.TwentyFour,
     adjustments: [0, 0, 0, 0, 0, 0],
     ramadanTimer: false,
@@ -43,27 +35,19 @@ export const CommonStoreContext = createContext<ICommonStore>({
   timer: [0, 0, 0],
   timerRamadan: [0, 0, 0],
   releases: [],
+  saveSettings: () => {},
 });
 
 export function CommonStoreProvider({ children }: { children: ReactNode }) {
   const router = useRouter();
-  const [mounted, setMounted] = useState(false);
-
-  const [appLoading, setAppLoading] =
-    useState<ICommonStore["appLoading"]>(false);
 
   const [settings, setSettings] = useState<ICommonStore["settings"]>({
     country: undefined,
+    _country: undefined,
     region: undefined,
+    _region: undefined,
     city: undefined,
-    timeFormat: TimeFormat.TwentyFour,
-    adjustments: [0, 0, 0, 0, 0, 0],
-    ramadanTimer: false,
-  });
-  const [_settings, _setSettings] = useState<ICommonStore["settings"]>({
-    country: undefined,
-    region: undefined,
-    city: undefined,
+    _city: undefined,
     timeFormat: TimeFormat.TwentyFour,
     adjustments: [0, 0, 0, 0, 0, 0],
     ramadanTimer: false,
@@ -76,9 +60,6 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
   const [timer, setTimer] = useState<TypeTimer>([0, 0, 0]);
   const [timerRamadan, setTimerRamadan] = useState<TypeTimer>([0, 0, 0]);
 
-  const now = times?.time?.now ?? TimeNames.Imsak;
-  const themeColor = TIMES_COLOR[now];
-
   const fetchReleases = async () => {
     const res = await fetch("/api/releases");
     const data = await res.json();
@@ -87,12 +68,10 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
 
   const fetchData = async (cityID: string) => {
     if (!cityID) {
-      console.error("cityID is required");
-      return;
+      return console.error("cityID is required");
     }
 
     try {
-      setAppLoading(true);
       const url = `/api/times?cityID=${cityID}`;
       const res = await fetch(url);
       const data = await res.json();
@@ -110,8 +89,6 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
       setRawTimes(new Times(data));
     } catch (e) {
       console.error(e);
-    } finally {
-      setAppLoading(false);
     }
   };
 
@@ -123,87 +100,95 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
     const data = localStorage.getItem(LOCAL_KEYS.Data);
     const updateDate = localStorage.getItem(LOCAL_KEYS.UpdateDate) ?? 0;
 
-    if (settings && data) {
-      const parsedSettings = JSON.parse(settings);
-      setSettings(parsedSettings);
+    // If there is NO LocalStorage
+    if (!settings || !data) {
+      return await checkQueryString();
+    }
 
-      if (+updateDate <= Date.now()) {
-        console.log("The prayer data is old, fetching new data...");
-        await fetchData(parsedSettings.city?.IlceID);
-      } else {
-        setTimes(new Times(JSON.parse(data), parsedSettings.adjustments));
-        setRawTimes(new Times(JSON.parse(data)));
-      }
+    // If there is LocalStorage, we parse and use it
+    const parsedSettings = JSON.parse(settings);
+    setSettings(parsedSettings);
 
-      await fetchReleases();
+    if (+updateDate <= Date.now()) {
+      console.log("The prayer data is old, fetching new data...");
+      await fetchData(parsedSettings.city?.IlceID);
     } else {
-      // check query
-      // example: https://vakitler.app?countryID=11&regionID=664&cityID=11914
+      setTimes(new Times(JSON.parse(data), parsedSettings.adjustments));
+      setRawTimes(new Times(JSON.parse(data)));
+    }
 
-      await setLanguage("en");
-      const { asPath } = router;
-      const query = new URL(asPath, "https://vakitler.app");
-      const countryID = query.searchParams.get("countryID");
-      const regionID = query.searchParams.get("regionID");
-      const cityID = query.searchParams.get("cityID");
+    await fetchReleases();
+  };
 
-      if (countryID && regionID && cityID) {
-        try {
-          const [resCountries, resRegions, resCities]: [
-            ICountry[],
-            IRegion[],
-            ICity[],
-          ] = await Promise.all([
-            fetch(`/api/countries`).then(value => value.json()),
-            fetch(`/api/regions?countryID=${countryID}`).then(value =>
-              value.json()
-            ),
-            fetch(`/api/cities?regionID=${regionID}`).then(value =>
-              value.json()
-            ),
-          ]);
+  const checkQueryString = async () => {
+    // example: https://vakitler.app?countryID=11&regionID=664&cityID=11914
 
-          const country = resCountries.find(c => c.UlkeID === countryID);
-          const region = resRegions.find(c => c.SehirID === regionID);
-          const city = resCities.find(c => c.IlceID === cityID);
+    await setLanguage("en");
+    const { asPath } = router;
+    const query = new URL(
+      asPath,
+      process.env.NODE_ENV === "production"
+        ? "https://vakitler.app"
+        : "http://localhost:3000"
+    );
 
-          setSettings({
-            timeFormat: TimeFormat.TwentyFour,
-            adjustments: [0, 0, 0, 0, 0, 0],
-            ramadanTimer: false,
-            country,
-            region,
-            city,
-          });
+    const countryID = query.searchParams.get("countryID");
+    const regionID = query.searchParams.get("regionID");
+    const cityID = query.searchParams.get("cityID");
 
-          await fetchData(cityID);
-          await router.replace("");
-          return;
-        } catch (e) {
-          await router.push("/settings/country");
-          return;
-        }
-      }
+    // Is there a city in the querystring data that it wants us to load?
+    if (!countryID || !regionID || !cityID) {
+      return await router.push("/settings/country");
+    }
 
+    try {
+      const [resCountries, resRegions, resCities]: [
+        ICountry[],
+        IRegion[],
+        ICity[],
+      ] = await Promise.all([
+        fetch(`/api/countries`).then(value => value.json()),
+        fetch(`/api/regions?countryID=${countryID}`).then(value =>
+          value.json()
+        ),
+        fetch(`/api/cities?regionID=${regionID}`).then(value => value.json()),
+      ]);
+
+      const country = resCountries.find(c => c.UlkeID === countryID);
+      const region = resRegions.find(c => c.SehirID === regionID);
+      const city = resCities.find(c => c.IlceID === cityID);
+
+      setSettings({
+        ...settings,
+        country,
+        region,
+        city,
+      });
+
+      await fetchData(cityID);
+      await router.replace("/");
+    } catch (e) {
       await router.push("/settings/country");
     }
   };
 
+  const saveSettings = (settings: ICommonStore["settings"]) => {
+    const { _country, _region, _city, ...rawSettings } = settings;
+    localStorage.setItem(
+      LOCAL_KEYS.Settings,
+      JSON.stringify({ ...rawSettings })
+    );
+  };
+
   const updateTimer = () => {
     if (!times) return;
-    setTimer(times?.timer() as TypeTimer);
-    setTimerRamadan(times?.timerRamadan() as TypeTimer);
+    setTimer(times.timer() as TypeTimer);
+    setTimerRamadan(times.timerRamadan() as TypeTimer);
   };
 
   useEffect(() => {
     initApp();
   }, []);
-
-  useEffect(() => {
-    if (settings.country && settings.region && settings.city) {
-      localStorage.setItem(LOCAL_KEYS.Settings, JSON.stringify(settings));
-    }
-  }, [settings]);
 
   useEffect(() => {
     if (!times) return;
@@ -214,7 +199,7 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
     () => {
       let localTime = DateTime.local();
 
-      const timeTravel = times?.timeTravel ?? [0, 0, 0];
+      const timeTravel = times!.timeTravel ?? [0, 0, 0];
       const hasChange = timeTravel.some(value => value !== 0);
 
       if (hasChange) {
@@ -231,21 +216,9 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
     times ? 1000 : null
   );
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return null;
-  }
-
   return (
     <CommonStoreContext.Provider
       value={{
-        appLoading,
-        themeColor,
-        _settings,
-        _setSettings,
         settings,
         setSettings,
         fetchData,
@@ -254,6 +227,7 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
         timer,
         timerRamadan,
         releases,
+        saveSettings,
       }}
     >
       {children}

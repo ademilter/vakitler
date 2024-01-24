@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { TimeNames } from "@/lib/types";
-import Time from "@/components/time-list-row";
-import TimeListRowBottom from "@/components/time-list-row-last";
+import Time from "@/components/index/list-row";
+import TimeListRowBottom from "@/components/index/list-row-last";
 import { useContext } from "react";
 import { CommonStoreContext } from "@/stores/common";
 

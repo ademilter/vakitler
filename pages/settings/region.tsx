@@ -1,17 +1,17 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import Container from "@/components/container";
 import useTranslation from "next-translate/useTranslation";
-import SettingsList from "@/components/settings-list";
+import SettingsList from "@/components/settings/list";
 import { IRegion } from "@/lib/types";
 import { useRouter } from "next/router";
 import { CommonStoreContext } from "@/stores/common";
-import SubPage from "@/components/layout/sub";
+import SettingsLayout from "@/components/settings/layout";
 
 export default function Country() {
   const { t } = useTranslation("common");
   const { push } = useRouter();
 
-  const { _settings, _setSettings } = useContext(CommonStoreContext);
+  const { settings, setSettings } = useContext(CommonStoreContext);
 
   const [data, setData] = useState<IRegion[]>([]);
   const [loading, setLoading] = useState(false);
@@ -21,7 +21,7 @@ export default function Country() {
       setLoading(true);
 
       const url = new URL("/api/regions", window.location.origin);
-      url.searchParams.set("countryID", _settings.country?.UlkeID as string);
+      url.searchParams.set("countryID", settings._country?.UlkeID as string);
 
       const res = await fetch(url.toString());
       const data = await res.json();
@@ -32,15 +32,15 @@ export default function Country() {
     } finally {
       setLoading(false);
     }
-  }, [_settings.country?.UlkeID]);
+  }, [settings._country?.UlkeID]);
 
   useEffect(() => {
-    if (!_settings.country) return;
+    if (!settings._country) return;
     fetchRegionData();
-  }, [_settings, fetchRegionData]);
+  }, [settings, fetchRegionData]);
 
   return (
-    <SubPage>
+    <SettingsLayout>
       <Container className="pt-8 pb-40">
         <SettingsList
           inputProps={{
@@ -50,8 +50,13 @@ export default function Country() {
           pushFirst={["539", "506"]}
           onChange={id => {
             const region = data.find(o => o.SehirID === id);
-            _setSettings({ ..._settings, region });
-            push(`/settings/city`);
+
+            setSettings({
+              ...settings,
+              _region: region,
+            });
+
+            return push(`/settings/city`);
           }}
           loading={loading}
           data={data.map(c => ({
@@ -60,6 +65,6 @@ export default function Country() {
           }))}
         />
       </Container>
-    </SubPage>
+    </SettingsLayout>
   );
 }

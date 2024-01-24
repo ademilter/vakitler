@@ -17,24 +17,6 @@ export default function TimeSummary() {
     timeName = t("Jumuah");
   }
 
-  const containerAnim = {
-    variants: {
-      open: {
-        y: 0,
-        scale: 1,
-        opacity: 1,
-      },
-      closed: {
-        y: 60,
-        scale: 0.8,
-        opacity: 0,
-      },
-    },
-    transition: {
-      delay: 0.3,
-    },
-  };
-
   return (
     <motion.div {...containerAnim}>
       <Container className="flex h-full gap-1 flex-col items-center justify-center pt-24 pb-14">
@@ -53,3 +35,21 @@ export default function TimeSummary() {
     </motion.div>
   );
 }
+
+const containerAnim = {
+  variants: {
+    open: {
+      y: 0,
+      scale: 1,
+      opacity: 1,
+    },
+    closed: {
+      y: 60,
+      scale: 0.8,
+      opacity: 0,
+    },
+  },
+  transition: {
+    delay: 0.3,
+  },
+};

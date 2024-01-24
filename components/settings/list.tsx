@@ -18,7 +18,7 @@ interface ISelect {
   children?: React.ReactNode;
 }
 
-const SettingsList = ({
+export default function SettingsList({
   children,
   onChange = () => {},
   data = [],
@@ -27,7 +27,7 @@ const SettingsList = ({
   loading = false,
   backButtonText = undefined,
   backButtonProps = undefined,
-}: ISelect) => {
+}: ISelect) {
   const router = useRouter();
   const { t } = useTranslation("common");
 
@@ -123,8 +123,4 @@ const SettingsList = ({
       </div>
     </div>
   );
-};
-
-SettingsList.displayName = "SettingsList";
-
-export default SettingsList;
+}
