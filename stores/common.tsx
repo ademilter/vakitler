@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
-import { Times } from "@/utils/model";
+import { Times } from "@/model/times";
 import {
   ICity,
   ICommonStore,
@@ -200,7 +200,7 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
       let localTime = DateTime.local();
 
       const timeTravel = times!.timeTravel ?? [0, 0, 0];
-      const hasChange = timeTravel.some(value => value !== 0);
+      const hasChange = timeTravel.some((value: number) => value !== 0);
 
       if (hasChange) {
         localTime = localTime.set({

@@ -46,7 +46,7 @@ export default function IndexLayout({ children }: { children: ReactNode }) {
     setStart(true);
   }, [times]);
 
-  const now = times!.time.now;
+  const now: TimeNames = times!.time.now;
 
   const themeColor =
     resolvedTheme === "light"

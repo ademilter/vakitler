@@ -15,7 +15,7 @@ const theme = {
 export default function MainPage({ children }: { children: ReactNode }) {
   const { times } = useContext(CommonStoreContext);
 
-  const now = times?.time?.now;
+  const now: TimeNames = times!.time?.now;
   const themeStyle = now ? theme[now] : "";
 
   return (
