@@ -3,7 +3,7 @@ import Head from "next/head";
 import { useTheme } from "next-themes";
 import colors from "tailwindcss/colors";
 
-export default function SubPage({ children }: { children: ReactNode }) {
+export default function SettingsLayout({ children }: { children: ReactNode }) {
   const { resolvedTheme } = useTheme();
 
   const themeColor =
