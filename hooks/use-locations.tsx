@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { CommonStoreContext } from "@/stores/common";
 import useTranslation from "next-translate/useTranslation";
-import { ICity, ICountry, IRegion } from "@/lib/types";
+import { ICity, ICountry, IRegion } from "@/types";
 
 export default function useLocations() {
   const { t } = useTranslation("common");

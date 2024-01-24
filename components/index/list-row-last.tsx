@@ -1,6 +1,6 @@
-import { TimeNames } from "@/lib/types";
+import { TimeNames } from "@/types";
 import { motion } from "framer-motion";
-import { cx } from "@/lib/utils";
+import { cx } from "@/utils/helper";
 import { useContext } from "react";
 import { CommonStoreContext } from "@/stores/common";
 

@@ -1,4 +1,4 @@
-import { Times } from "@/lib/model";
+import { Times } from "@/utils/model";
 
 export type TypeTimer = [number, number, number];
 

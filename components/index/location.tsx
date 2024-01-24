@@ -1,4 +1,4 @@
-import { cx } from "@/lib/utils";
+import { cx } from "@/utils/helper";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import useTranslation from "next-translate/useTranslation";

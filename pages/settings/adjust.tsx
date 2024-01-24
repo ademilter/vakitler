@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 import Container from "@/components/container";
 import useTranslation from "next-translate/useTranslation";
 import { CommonStoreContext } from "@/stores/common";
-import { TimeNames } from "@/lib/types";
-import { adjustedTime, cx, formattedTime } from "@/lib/utils";
+import { TimeNames } from "@/types";
+import { adjustedTime, cx, formattedTime } from "@/utils/helper";
 import SettingsLayout from "@/components/settings/layout";
 
 const timeKeys = Object.values(TimeNames);

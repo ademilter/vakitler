@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
-import { Times } from "@/lib/model";
+import { Times } from "@/utils/model";
 import {
   ICity,
   ICommonStore,
@@ -7,11 +7,11 @@ import {
   IRegion,
   TimeFormat,
   TypeTimer,
-} from "@/lib/types";
+} from "@/types";
 import { useRouter } from "next/router";
 import { DateTime } from "luxon";
-import useInterval from "@/lib/use-interval";
-import { API_DATE_FORMAT, LOCAL_KEYS } from "@/lib/const";
+import useInterval from "@/hooks/use-interval";
+import { API_DATE_FORMAT, LOCAL_KEYS } from "@/utils/const";
 import setLanguage from "next-translate/setLanguage";
 import i18n from "@/i18n.json";
 import * as process from "process";

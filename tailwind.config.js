@@ -1,4 +1,4 @@
-const { TimeNames } = require("./lib/types");
+const { TimeNames } = require("./types");
 
 /** @type {import("tailwindcss").Config} */
 module.exports = {

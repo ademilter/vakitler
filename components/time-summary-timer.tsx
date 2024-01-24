@@ -1,7 +1,7 @@
 import { HTMLAttributes, useContext } from "react";
 import { CommonStoreContext } from "@/stores/common";
 import Trans from "next-translate/Trans";
-import { cx } from "@/lib/utils";
+import { cx } from "@/utils/helper";
 
 export default function TimeSummaryTimer() {
   const { timer } = useContext(CommonStoreContext);

@@ -1,8 +1,8 @@
-import { TimeFormat, TypeTimer } from "@/lib/types";
+import { TimeFormat, TypeTimer } from "@/types";
 import { ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { DateTime } from "luxon";
-import { HOUR_FORMAT, HOUR_FORMAT_12 } from "@/lib/const";
+import { HOUR_FORMAT, HOUR_FORMAT_12 } from "@/utils/const";
 
 export function cx(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs));

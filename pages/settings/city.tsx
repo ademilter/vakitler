@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useEffect, useState } from "react";
 import Container from "@/components/container";
 import useTranslation from "next-translate/useTranslation";
 import SettingsList from "@/components/settings/list";
-import { ICity } from "@/lib/types";
+import { ICity } from "@/types";
 import { useRouter } from "next/router";
 import { CommonStoreContext } from "@/stores/common";
 import SettingsLayout from "@/components/settings/layout";

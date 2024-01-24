@@ -1,4 +1,4 @@
-import { TimeNames } from "@/lib/types";
+import { TimeNames } from "@/types";
 
 export const HOUR_FORMAT = "HH:mm";
 export const HOUR_FORMAT_12 = "h:mm a";

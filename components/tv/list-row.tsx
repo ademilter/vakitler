@@ -1,6 +1,6 @@
-import { TimeNames } from "@/lib/types";
+import { TimeNames } from "@/types";
 import Container from "@/components/container";
-import { cx, formattedTime } from "@/lib/utils";
+import { cx, formattedTime } from "@/utils/helper";
 import { useContext } from "react";
 import { CommonStoreContext } from "@/stores/common";
 import useTranslation from "next-translate/useTranslation";

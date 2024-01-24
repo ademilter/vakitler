@@ -1,7 +1,7 @@
 import { DateTime, Interval } from "luxon";
-import { ITime, TimeNames, TypeTimer } from "@/lib/types";
-import { secondSplit } from "@/lib/utils";
-import { HOUR_FORMAT } from "@/lib/const";
+import { ITime, TimeNames, TypeTimer } from "@/types";
+import { secondSplit } from "@/utils/helper";
+import { HOUR_FORMAT } from "@/utils/const";
 
 const timeNames = Object.values(TimeNames);
 
