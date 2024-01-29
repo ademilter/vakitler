@@ -1,4 +1,4 @@
-import { Times } from "@/lib/model";
+import { Times } from "@/model/times";
 
 export type TypeTimer = [number, number, number];
 
@@ -59,30 +59,23 @@ export interface IRelease {
 }
 
 export interface ICommonStore {
-  appLoading: boolean;
-  themeColor: string;
-  _settings: {
-    country: undefined | ICountry;
-    region: undefined | IRegion;
-    city: undefined | ICity;
-    timeFormat: TimeFormat;
-    adjustments: number[];
-    ramadanTimer: boolean;
-  };
-  _setSettings: (value: ICommonStore["_settings"]) => void;
   settings: {
     country: undefined | ICountry;
+    _country: undefined | ICountry;
     region: undefined | IRegion;
+    _region: undefined | IRegion;
     city: undefined | ICity;
+    _city: undefined | ICity;
     timeFormat: TimeFormat;
     adjustments: number[];
     ramadanTimer: boolean;
   };
-  setSettings: (value: ICommonStore["_settings"]) => void;
+  setSettings: (value: ICommonStore["settings"]) => void;
   fetchData: (cityId: string) => Promise<void>;
   times: undefined | Times;
   rawTimes: undefined | Times;
   timer: TypeTimer;
   timerRamadan: TypeTimer;
   releases: IRelease[];
+  saveSettings: (settings: ICommonStore["settings"]) => void;
 }

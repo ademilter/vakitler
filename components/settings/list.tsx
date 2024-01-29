@@ -15,9 +15,11 @@ interface ISelect {
   backButtonText?: string;
   loading?: boolean;
   backButtonProps?: React.ButtonHTMLAttributes<HTMLButtonElement>;
+  children?: React.ReactNode;
 }
 
-const SettingsList = ({
+export default function SettingsList({
+  children,
   onChange = () => {},
   data = [],
   inputProps = {},
@@ -25,7 +27,7 @@ const SettingsList = ({
   loading = false,
   backButtonText = undefined,
   backButtonProps = undefined,
-}: ISelect) => {
+}: ISelect) {
   const router = useRouter();
   const { t } = useTranslation("common");
 
@@ -61,7 +63,7 @@ const SettingsList = ({
   return (
     <div>
       <motion.div
-        className="sticky top-0 -mx-2 bg-white p-2 dark:bg-zinc-900"
+        className="sticky top-0 -mx-2 bg-zinc-200 p-2 dark:bg-zinc-900"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -101,7 +103,9 @@ const SettingsList = ({
         />
       </motion.div>
 
-      <div className="space-y-1">
+      <div className="mt-4 space-y-1">
+        {children}
+
         {loading ? (
           <Loading />
         ) : (
@@ -119,8 +123,4 @@ const SettingsList = ({
       </div>
     </div>
   );
-};
-
-SettingsList.displayName = "SettingsList";
-
-export default SettingsList;
+}

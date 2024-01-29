@@ -1,7 +1,7 @@
 import { HTMLAttributes, useContext } from "react";
 import { CommonStoreContext } from "@/stores/common";
 import Trans from "next-translate/Trans";
-import { TimeNames } from "@/lib/types";
+import { TimeNames } from "@/types";
 
 export default function RamadanTimer({ time }: { time: TimeNames }) {
   const { timerRamadan, times, settings } = useContext(CommonStoreContext);

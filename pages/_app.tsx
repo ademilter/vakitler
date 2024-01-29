@@ -4,7 +4,7 @@ import type { AppProps } from "next/app";
 import { Analytics } from "@vercel/analytics/react";
 import { CommonStoreProvider } from "@/stores/common";
 import Head from "next/head";
-import { metadata } from "@/lib/meta";
+import { metadata } from "@/utils/meta";
 import { ThemeProvider } from "next-themes";
 
 export default function MyApp({ Component, pageProps }: AppProps) {

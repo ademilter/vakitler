@@ -1,17 +1,17 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import Container from "@/components/container";
 import useTranslation from "next-translate/useTranslation";
-import SettingsList from "@/components/settings-list";
-import { ICity } from "@/lib/types";
+import SettingsList from "@/components/settings/list";
+import { ICity } from "@/types";
 import { useRouter } from "next/router";
 import { CommonStoreContext } from "@/stores/common";
-import SubPage from "@/components/layout/sub";
+import SettingsLayout from "@/components/settings/layout";
 
 export default function Country() {
   const { t } = useTranslation("common");
   const { push } = useRouter();
 
-  const { _settings, fetchData, setSettings, settings } =
+  const { settings, saveSettings, fetchData, setSettings } =
     useContext(CommonStoreContext);
 
   const [data, setData] = useState<ICity[]>([]);
@@ -22,7 +22,7 @@ export default function Country() {
       setLoading(true);
 
       const url = new URL("/api/cities", window.location.origin);
-      url.searchParams.set("regionID", _settings.region?.SehirID as string);
+      url.searchParams.set("regionID", settings._region?.SehirID as string);
 
       const res = await fetch(url.toString());
       const data = await res.json();
@@ -33,15 +33,15 @@ export default function Country() {
     } finally {
       setLoading(false);
     }
-  }, [_settings.region?.SehirID]);
+  }, [settings._region?.SehirID]);
 
   useEffect(() => {
-    if (!_settings.region) return;
+    if (!settings._region) return;
     fetchCities();
-  }, [_settings, fetchCities]);
+  }, [settings, fetchCities]);
 
   return (
-    <SubPage>
+    <SettingsLayout>
       <Container className="pt-8 pb-40">
         <SettingsList
           inputProps={{
@@ -53,8 +53,15 @@ export default function Country() {
 
             setSettings({
               ...settings,
-              country: _settings.country,
-              region: _settings.region,
+              country: settings._country,
+              region: settings._region,
+              city,
+            });
+
+            saveSettings({
+              ...settings,
+              country: settings._country,
+              region: settings._region,
               city,
             });
 
@@ -66,8 +73,13 @@ export default function Country() {
             value: c.IlceID,
             label: c[t("cityKey") as keyof ICity],
           }))}
-        />
+        >
+          <div className="bg-blue-50 dark:bg-blue-500/20 dark:text-blue-300 text-blue-600 rounded-xl px-6 py-3 mb-4">
+            <h4 className="font-semibold">{t("settings:cityAlertTitle")}</h4>
+            <p>{t("settings:cityAlertDesc")}</p>
+          </div>
+        </SettingsList>
       </Container>
-    </SubPage>
+    </SettingsLayout>
   );
 }

@@ -1,80 +1,79 @@
-import { TimeNames } from "@/lib/types";
 import { HTMLAttributes, useContext } from "react";
 import { CommonStoreContext } from "@/stores/common";
 import Trans from "next-translate/Trans";
-import useTranslation from "next-translate/useTranslation";
+import { cx } from "@/utils/helper";
 
 export default function TimeSummaryTimer() {
-  const { t } = useTranslation("common");
-
-  const { timer, times } = useContext(CommonStoreContext);
-
-  let timeName = t(times?.time.next as TimeNames);
-  if (times?.today?.isJumuah && times?.time.next === TimeNames.Ogle) {
-    timeName = t("Jumuah");
-  }
+  const { timer } = useContext(CommonStoreContext);
 
   return (
-    <div className="relative z-10 flex flex-col items-center px-6 py-2 text-xl">
-      <span className="absolute inset-0 rounded-2xl bg-current opacity-10" />
-
-      <span className="flex text-sm opacity-80">
-        <Trans
-          ns={"common"}
-          i18nKey="timerTitle"
-          values={{
-            time: timeName,
-          }}
-        />
-      </span>
-
-      <div className="relative z-10">
-        {timer[0] === 0 && timer[1] === 0 ? (
-          // 0 hour 0 minute 30 second
+    <div className="flex items-baseline text-5xl font-light gap-2">
+      {timer[0] === 0 && timer[1] === 0 ? (
+        // 30 second
+        <KeyValueComp>
           <Trans
             ns="common"
             i18nKey="timerSecond"
-            components={[<ValueComp key="timer" />]}
+            components={[<ValueComp key="second" className="tabular-nums" />]}
             values={{ second: timer[2] }}
           />
-        ) : timer[0] === 0 ? (
-          // 0 hour 30 minute
+        </KeyValueComp>
+      ) : timer[0] === 0 ? (
+        // 30 minute
+        <KeyValueComp>
           <Trans
             ns="common"
             i18nKey="timerMinute"
             components={[<ValueComp key="minute" />]}
             values={{ minute: timer[1] }}
           />
-        ) : timer[1] === 0 ? (
-          // 2 hour 0 minute
+        </KeyValueComp>
+      ) : timer[1] === 0 ? (
+        // 2 hour 0 minute
+        <KeyValueComp>
           <Trans
             ns="common"
             i18nKey="timerHour"
             components={[<ValueComp key="hour" />]}
             values={{ hour: timer[0] }}
           />
-        ) : (
-          // 2 hour 30 minute
-          <>
+        </KeyValueComp>
+      ) : (
+        // 2 hour 30 minute
+        <>
+          <KeyValueComp>
             <Trans
               ns="common"
               i18nKey="timerHour"
               components={[<ValueComp key="hour" />]}
               values={{ hour: timer[0] }}
-            />{" "}
+            />
+          </KeyValueComp>
+          <KeyValueComp>
             <Trans
               ns="common"
               i18nKey="timerMinute"
               components={[<ValueComp key="minute" />]}
               values={{ minute: timer[1] }}
             />
-          </>
-        )}
-      </div>
+          </KeyValueComp>
+        </>
+      )}
     </div>
   );
 }
 
-const ValueComp = (props: HTMLAttributes<HTMLSpanElement>) => (
-  <b className="tabular-nums" {...props} />
-);
+function KeyValueComp({
+  className,
+  ...props
+}: HTMLAttributes<HTMLSpanElement>) {
+  return (
+    <span className={cx("flex items-baseline gap-0.5", className)} {...props} />
+  );
+}
+
+function ValueComp({ className, ...props }: HTMLAttributes<HTMLSpanElement>) {
+  return (
+    <b className={cx("font-semibold text-[1.1em]", className)} {...props} />
+  );
+}

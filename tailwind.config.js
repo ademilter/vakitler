@@ -1,3 +1,5 @@
+const { TimeNames } = require("./types");
+
 /** @type {import("tailwindcss").Config} */
 module.exports = {
   darkMode: "class",
@@ -7,20 +9,38 @@ module.exports = {
   ],
   theme: {
     extend: {
-      opacity: {
-        15: "0.15",
-        25: "0.25",
-        35: "0.35",
-        45: "0.45",
-        55: "0.55",
-        65: "0.65",
-        75: "0.75",
-        85: "0.85",
-        95: "0.95",
+      colors: {
+        [TimeNames.Imsak]: {
+          light: "#daf2fe",
+          dark: "#192b3b",
+        },
+        [TimeNames.Gunes]: {
+          light: "#feead6",
+          dark: "#40221a",
+        },
+        [TimeNames.Ogle]: {
+          light: "#fef6cc",
+          dark: "#3a281a",
+        },
+        [TimeNames.Ikindi]: {
+          light: "#ffe4e7",
+          dark: "#421a25",
+        },
+        [TimeNames.Aksam]: {
+          light: "#e0edff",
+          dark: "#1b2448",
+        },
+        [TimeNames.Yatsi]: {
+          light: "#e4e8fe",
+          dark: "#212044",
+        },
       },
     },
   },
   safelist: [
+    {
+      pattern: /bg-(imsak|gunes|ogle|ikindi|aksam|yatsi)-(light|dark)/,
+    },
     {
       pattern:
         /bg-(sky|orange|yellow|rose|blue|indigo)-(50|100|200|300|400|500|600|700|800|900)/,

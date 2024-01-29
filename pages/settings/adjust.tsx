@@ -3,9 +3,9 @@ import { useRouter } from "next/router";
 import Container from "@/components/container";
 import useTranslation from "next-translate/useTranslation";
 import { CommonStoreContext } from "@/stores/common";
-import { TimeNames } from "@/lib/types";
-import { adjustedTime, cx, formattedTime } from "@/lib/utils";
-import SubPage from "@/components/layout/sub";
+import { TimeNames } from "@/types";
+import { adjustedTime, cx, formattedTime } from "@/utils/helper";
+import SettingsLayout from "@/components/settings/layout";
 
 const timeKeys = Object.values(TimeNames);
 
@@ -27,12 +27,15 @@ export default function Adjust() {
 
   useEffect(() => {
     setDirtyIndexes(
-      adjustments.reduce((acc, adj, index) => {
-        if (adj !== 0) {
-          acc[index] = true;
-        }
-        return acc;
-      }, {} as Record<number, boolean>)
+      adjustments.reduce(
+        (acc, adj, index) => {
+          if (adj !== 0) {
+            acc[index] = true;
+          }
+          return acc;
+        },
+        {} as Record<number, boolean>
+      )
     );
   }, [adjustments]);
 
@@ -133,7 +136,7 @@ export default function Adjust() {
   });
 
   return (
-    <SubPage>
+    <SettingsLayout>
       <Container className="grid gap-8 pt-8">
         <p>{t("adjustments:description")}</p>
 
@@ -149,6 +152,6 @@ export default function Adjust() {
           </button>
         </div>
       </Container>
-    </SubPage>
+    </SettingsLayout>
   );
 }
