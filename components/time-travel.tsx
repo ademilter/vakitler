@@ -29,14 +29,14 @@ export default function TimeTravel() {
     <div
       className={cx(
         "transform-x fixed top-2 right-4 z-30 text-black",
-        show ? "translate-x-0" : "translate-x-full"
+        show ? "translate-x-0" : "translate-x-full",
+        "rounded-lg bg-white px-3 py-2 shadow"
       )}
     >
-      <div
-        className={cx(
-          "flex items-center gap-2 rounded-lg bg-white px-3 py-2 shadow"
-        )}
-      >
+      <div className="mb-2 ml-3">
+        {times.localTime.toFormat("HH:mm:ss dd/MM/yyyy")}
+      </div>
+      <div className={"flex items-center gap-2"}>
         <button
           className="-ml-3 flex h-8 w-3 rounded-lg"
           onClick={() => {
