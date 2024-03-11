@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import Container from "@/components/container";
 import useTranslation from "next-translate/useTranslation";
 import { CommonStoreContext } from "@/stores/common";
-import Link from "next/link";
 import setLanguage from "next-translate/setLanguage";
 import { LOCAL_KEYS } from "@/utils/const";
 import useLocations from "@/hooks/use-locations";
@@ -11,10 +10,13 @@ import Box from "@/components/box";
 import SettingsLayout from "@/components/settings/layout";
 import { TimeFormat } from "@/types";
 import Trans from "next-translate/Trans";
+import { useRouter } from "next/router";
 
 export default function Settings() {
+  const router = useRouter();
   const { t, lang } = useTranslation("common");
-  const { settings, setSettings } = useContext(CommonStoreContext);
+  const { settings, setSettings, saveSettings } =
+    useContext(CommonStoreContext);
   const { city, country, region } = useLocations();
   const { theme, setTheme } = useTheme();
 
@@ -123,9 +125,9 @@ export default function Settings() {
               </div>
               <Box.BoxSwitch
                 checked={settings.ramadanTimer}
-                onCheckedChange={checked =>
-                  setSettings({ ...settings, ramadanTimer: checked })
-                }
+                onCheckedChange={checked => {
+                  setSettings({ ...settings, ramadanTimer: checked });
+                }}
               />
             </Box>
 
@@ -235,12 +237,16 @@ export default function Settings() {
           dark:from-zinc-900 dark:via-zinc-900 dark:to-transparent"
           />
 
-          <Link
-            href="/"
+          <button
+            type="button"
             className="mt-auto flex h-12 w-full items-center justify-center rounded-xl bg-current px-4"
+            onClick={() => {
+              saveSettings(settings);
+              return router.push("/");
+            }}
           >
             <span className="text-white dark:text-black">{t("save")}</span>
-          </Link>
+          </button>
         </div>
       </Container>
     </SettingsLayout>
