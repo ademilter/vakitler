@@ -15,10 +15,10 @@
   "timeFormatTitle": "Saat formatı",
   "timeFormatOption12": "12 saat biçimi",
   "timeFormatOption24": "24 saat biçimi",
-  "otherTitle": "Diğer",
   "ramadanTimerTitle": "İftar Sayacı",
   "customAdjustmentsTitle": "Dakika Ayarı",
   "customAdjustmentsEmpty": "Ayarlanmamış",
+  "aboutAPI": "Bu proje <0>Türkiye Diyanet İşleri Başkanlığı</0>'nın verileri kullanılarak geliştirilmiştir.",
   "aboutTitle": "Uygulama hakkında",
   "aboutOpenSource": "Bu proje ücretsiz ve açık kaynaktır",
   "aboutSourceCode": "Desteğiniz için teşekkür ederim"

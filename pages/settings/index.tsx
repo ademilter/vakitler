@@ -10,6 +10,7 @@ import { useTheme } from "next-themes";
 import Box from "@/components/box";
 import SettingsLayout from "@/components/settings/layout";
 import { TimeFormat } from "@/types";
+import Trans from "next-translate/Trans";
 
 export default function Settings() {
   const { t, lang } = useTranslation("common");
@@ -146,14 +147,16 @@ export default function Settings() {
             className="border-0 bg-yellow-50 text-yellow-700
            dark:text-yellow-600 dark:bg-yellow-500/10"
           >
-            <Box className="">
+            <Box className="text-sm">
               <Box.BoxLink
                 href="https://ezanvakti.herokuapp.com"
                 target="_blank"
               >
-                <p className="text-pretty mr-6">
-                  Bu proje <b>Diyanet İşleri Başkanlığı</b>&apos;nın verileri
-                  kullanılarak hazırlanmıştır.
+                <p className="text-pretty mr-10">
+                  <Trans
+                    i18nKey="settings:aboutAPI"
+                    components={[<b key="0" />]}
+                  />
                 </p>
                 <p className="underline decoration-amber-500/50">
                   ezanvakti.herokuapp.com
