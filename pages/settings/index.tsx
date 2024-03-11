@@ -6,10 +6,10 @@ import Link from "next/link";
 import setLanguage from "next-translate/setLanguage";
 import { LOCAL_KEYS } from "@/utils/const";
 import useLocations from "@/hooks/use-locations";
-import { TimeFormat } from "@/types";
 import { useTheme } from "next-themes";
 import Box from "@/components/box";
 import SettingsLayout from "@/components/settings/layout";
+import { TimeFormat } from "@/types";
 
 export default function Settings() {
   const { t, lang } = useTranslation("common");
@@ -68,7 +68,7 @@ export default function Settings() {
               <div className="grow">
                 <Box.Title>{t("settings:langTitle")}</Box.Title>
               </div>
-              <Box.BodySelect
+              <Box.BoxSelect
                 name="lang"
                 value={lang}
                 defaultValue={lang}
@@ -85,7 +85,7 @@ export default function Settings() {
               <div className="grow">
                 <Box.Title>{t("settings:themeTitle")}</Box.Title>
               </div>
-              <Box.BodySelect
+              <Box.BoxSelect
                 name="theme"
                 value={theme || ""}
                 defaultValue={theme}
@@ -103,7 +103,7 @@ export default function Settings() {
               <div className="grow">
                 <Box.Title>{t("settings:timeFormatTitle")}</Box.Title>
               </div>
-              <Box.BodySelect
+              <Box.BoxSelect
                 name="timeFormat"
                 value={timeFormat}
                 defaultValue={timeFormat}
@@ -134,10 +134,30 @@ export default function Settings() {
                 <Box.Title>{t("settings:customAdjustmentsTitle")}</Box.Title>
               </div>
               <Box.BoxLink
-                className="w-auto font-semibold"
                 href="/settings/adjust"
+                className="w-auto font-semibold"
               >
                 {adjustmentsAsText()}
+              </Box.BoxLink>
+            </Box>
+          </Box.BoxContainer>
+
+          <Box.BoxContainer
+            className="border-0 bg-yellow-50 text-yellow-700
+           dark:text-yellow-600 dark:bg-yellow-500/10"
+          >
+            <Box className="">
+              <Box.BoxLink
+                href="https://ezanvakti.herokuapp.com"
+                target="_blank"
+              >
+                <p className="text-pretty mr-6">
+                  Bu proje <b>Diyanet İşleri Başkanlığı</b>&apos;nın verileri
+                  kullanılarak hazırlanmıştır.
+                </p>
+                <p className="underline decoration-amber-500/50">
+                  ezanvakti.herokuapp.com
+                </p>
               </Box.BoxLink>
             </Box>
           </Box.BoxContainer>
@@ -146,8 +166,8 @@ export default function Settings() {
             {/* ABOUT */}
             <Box className="flex-col px-6 items-start">
               <Box.BoxLink
-                className="py-2"
                 href="https://github.com/ademilter/vakitler"
+                className="py-2"
                 target="_blank"
                 icon={
                   <svg
@@ -174,8 +194,8 @@ export default function Settings() {
             {/* SUPPORT LINK */}
             <Box className="flex-col px-6 items-start">
               <Box.BoxLink
-                className="py-2"
                 href="https://www.buymeacoffee.com/ademilter"
+                className="py-2"
                 target="_blank"
                 icon={
                   <svg

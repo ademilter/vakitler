@@ -120,6 +120,7 @@ function BoxSelect({
   return (
     <>
       <Select.Root {...props}>
+        {/* trigger */}
         <Select.Trigger
           className={cx(
             "inline-flex items-center justify-center select-none h-10 leading-none font-semibold gap-2 outline-none"
@@ -131,7 +132,9 @@ function BoxSelect({
           </Select.Icon>
         </Select.Trigger>
 
+        {/* portal */}
         <Select.Portal>
+          {/* up */}
           <Select.Content
             className="overflow-hidden bg-white dark:bg-zinc-800
           shadow-2xl rounded-xl border border-zinc-200 dark:border-zinc-700"
@@ -139,7 +142,8 @@ function BoxSelect({
             <Select.ScrollUpButton className="flex items-center justify-center">
               <IconChevronUp size={14} />
             </Select.ScrollUpButton>
-            {/**/}
+
+            {/* list */}
             <Select.Viewport className="p-2">
               <Select.Group>
                 {data.map(([value, label], i) => (
@@ -150,6 +154,7 @@ function BoxSelect({
               </Select.Group>
             </Select.Viewport>
 
+            {/* down */}
             <Select.ScrollDownButton className="flex items-center justify-center">
               <IconChevronDown size={14} />
             </Select.ScrollDownButton>
@@ -160,7 +165,7 @@ function BoxSelect({
   );
 }
 
-Box.BodySelect = BoxSelect;
+Box.BoxSelect = BoxSelect;
 
 // eslint-disable-next-line react/display-name
 const SelectItem = forwardRef<
