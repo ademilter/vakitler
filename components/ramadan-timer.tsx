@@ -25,7 +25,7 @@ export default function RamadanTimer() {
       <span>{t("iftarTime")}</span>
 
       <span className="flex items-center gap-1">
-        {timer[0] > 0 && (
+        {timerRamadan[0] > 0 && (
           <span className="flex items-baseline gap-px">
             <Trans
               ns="common"
