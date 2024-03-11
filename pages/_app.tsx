@@ -6,8 +6,19 @@ import { CommonStoreProvider } from "@/stores/common";
 import Head from "next/head";
 import { metadata } from "@/utils/meta";
 import { ThemeProvider } from "next-themes";
+import { useEffect, useState } from "react";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
   return (
     <>
       <Meta />
