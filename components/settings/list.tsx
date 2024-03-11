@@ -96,7 +96,7 @@ export default function SettingsList({
         <input
           type="text"
           autoFocus
-          className="h-12 w-full rounded-xl border px-4 dark:border-zinc-600 dark:bg-zinc-900"
+          className="h-12 w-full text-base rounded-xl border px-4 dark:border-zinc-600 dark:bg-zinc-900"
           {...inputProps}
           value={q}
           onChange={e => setQ(e.target.value)}
