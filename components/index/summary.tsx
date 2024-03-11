@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import TimeSummaryTimer from "@/components/time-summary-timer";
 import Container from "@/components/container";
 import Trans from "next-translate/Trans";
+import RamadanTimer from "@/components/ramadan-timer";
 
 export default function TimeSummary() {
   const { t } = useTranslation("common");
@@ -31,6 +32,10 @@ export default function TimeSummary() {
         </span>
 
         <TimeSummaryTimer />
+
+        <div className="mt-3">
+          <RamadanTimer />
+        </div>
       </Container>
     </motion.div>
   );

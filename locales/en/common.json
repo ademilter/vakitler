@@ -10,6 +10,7 @@
   "timerHour": "<0>{{hour}}</0> h",
   "timerMinute": "<0>{{minute}}</0> min",
   "timerSecond": "<0>{{second}}</0> sec",
+  "iftarTime": "Iftar Time:",
   "countryKey": "UlkeAdiEn",
   "regionKey": "SehirAdiEn",
   "cityKey": "IlceAdiEn",

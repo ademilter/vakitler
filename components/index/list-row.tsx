@@ -5,7 +5,6 @@ import { cx, formattedTime } from "@/utils/helper";
 import { useContext } from "react";
 import { CommonStoreContext } from "@/stores/common";
 import useTranslation from "next-translate/useTranslation";
-import RamadanTimer from "@/components/ramadan-timer";
 
 export default function TimeListRow({
   time,
@@ -115,8 +114,6 @@ export default function TimeListRow({
           >
             {formattedValue}
           </h4>
-
-          <RamadanTimer time={time} />
         </div>
       </Container>
     </motion.div>

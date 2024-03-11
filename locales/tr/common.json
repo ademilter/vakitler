@@ -10,6 +10,7 @@
   "timerHour": "<0>{{hour}}</0> sa",
   "timerMinute": "<0>{{minute}}</0> dk",
   "timerSecond": "<0>{{second}}</0> saniye",
+  "iftarTime": "İftar Vaktine:",
   "countryKey": "UlkeAdi",
   "regionKey": "SehirAdi",
   "cityKey": "IlceAdi",
