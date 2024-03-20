@@ -64,9 +64,18 @@ export class Times {
     });
   }
 
-  get time(): { now: TimeNames; next: TimeNames } {
+  get time(): {
+    now: TimeNames;
+    next: TimeNames;
+    isTimeBelongsToYesterday: boolean;
+  } {
     // TODO: check if today is undefined
-    if (!this.today) return { now: TimeNames.Imsak, next: TimeNames.Imsak };
+    if (!this.today)
+      return {
+        now: TimeNames.Imsak,
+        next: TimeNames.Imsak,
+        isTimeBelongsToYesterday: false,
+      };
 
     const Imsak = DateTime.fromFormat(this.today[TimeNames.Imsak], HOUR_FORMAT);
     const Gunes = DateTime.fromFormat(this.today[TimeNames.Gunes], HOUR_FORMAT);
@@ -79,9 +88,14 @@ export class Times {
     const Yatsi = DateTime.fromFormat(this.today[TimeNames.Yatsi], HOUR_FORMAT);
 
     // default values = Isha
-    const obj: { now: TimeNames; next: TimeNames } = {
+    const obj: {
+      now: TimeNames;
+      next: TimeNames;
+      isTimeBelongsToYesterday: boolean;
+    } = {
       now: TimeNames.Yatsi,
       next: TimeNames.Imsak,
+      isTimeBelongsToYesterday: false,
     };
 
     if (Interval.fromDateTimes(Imsak, Gunes).contains(this.localTime)) {
@@ -104,6 +118,10 @@ export class Times {
       obj.now = TimeNames.Aksam;
       obj.next = TimeNames.Yatsi;
     }
+
+    obj.isTimeBelongsToYesterday =
+      obj.now === TimeNames.Yatsi &&
+      this.localTime.diff(Yatsi).as("millisecond") > 0;
 
     return obj;
   }

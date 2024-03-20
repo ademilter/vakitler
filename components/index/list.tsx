@@ -8,16 +8,17 @@ import { CommonStoreContext } from "@/stores/common";
 export default function TimeList() {
   const { times } = useContext(CommonStoreContext);
 
+  const isTomorrow = !times?.time.isTimeBelongsToYesterday;
   // yatsı vaktiyse imsak yer değiştiriyor
   const list: [TimeNames, boolean][] =
     times!.time.now === TimeNames.Yatsi
       ? [
-          [TimeNames.Gunes, false],
-          [TimeNames.Ogle, false],
-          [TimeNames.Ikindi, false],
           [TimeNames.Aksam, false],
           [TimeNames.Yatsi, false],
-          [TimeNames.Imsak, true],
+          [TimeNames.Imsak, isTomorrow],
+          [TimeNames.Gunes, isTomorrow],
+          [TimeNames.Ogle, isTomorrow],
+          [TimeNames.Ikindi, isTomorrow],
         ]
       : (Object.keys(TimeNames).map(k => [k, false]) as [TimeNames, boolean][]);
 
