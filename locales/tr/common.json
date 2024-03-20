@@ -9,7 +9,7 @@
   "timerTitle": "{{time}} vaktine",
   "timerHour": "<0>{{hour}}</0> sa",
   "timerMinute": "<0>{{minute}}</0> dk",
-  "timerSecond": "<0>{{second}}</0> saniye",
+  "timerSecond": "<0>{{second}}</0> sn",
   "iftarTime": "İftar Vaktine:",
   "countryKey": "UlkeAdi",
   "regionKey": "SehirAdi",
