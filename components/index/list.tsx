@@ -2,25 +2,8 @@ import { motion } from "framer-motion";
 import { TimeNames } from "@/types";
 import Time from "@/components/index/list-row";
 import TimeListRowBottom from "@/components/index/list-row-last";
-import { useContext } from "react";
-import { CommonStoreContext } from "@/stores/common";
 
 export default function TimeList() {
-  const { times } = useContext(CommonStoreContext);
-
-  // yatsı vaktiyse imsak yer değiştiriyor
-  const list: [TimeNames, boolean][] =
-    times!.time.now === TimeNames.Yatsi
-      ? [
-          [TimeNames.Gunes, false],
-          [TimeNames.Ogle, false],
-          [TimeNames.Ikindi, false],
-          [TimeNames.Aksam, false],
-          [TimeNames.Yatsi, false],
-          [TimeNames.Imsak, true],
-        ]
-      : (Object.keys(TimeNames).map(k => [k, false]) as [TimeNames, boolean][]);
-
   return (
     <motion.div
       className="grid h-full"
@@ -34,15 +17,8 @@ export default function TimeList() {
         },
       }}
     >
-      {list.map(([key, tomorrow], index) => {
-        return (
-          <Time
-            key={key}
-            index={index}
-            time={key as TimeNames}
-            tomorrow={tomorrow}
-          />
-        );
+      {Object.keys(TimeNames).map((time, index) => {
+        return <Time key={time} index={index} time={time as TimeNames} />;
       })}
       <TimeListRowBottom />
     </motion.div>

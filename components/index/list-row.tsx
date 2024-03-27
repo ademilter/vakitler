@@ -9,11 +9,9 @@ import useTranslation from "next-translate/useTranslation";
 export default function TimeListRow({
   time,
   index,
-  tomorrow = false,
 }: {
   time: TimeNames;
   index: number;
-  tomorrow?: boolean;
 }) {
   const { t, lang } = useTranslation("common");
 
@@ -22,7 +20,7 @@ export default function TimeListRow({
     settings: { timeFormat },
   } = useContext(CommonStoreContext);
 
-  const value = tomorrow ? times!.tomorrow![time] : times!.today![time];
+  const value = times!.today![time];
 
   const formattedValue = formattedTime(timeFormat, value, lang);
 
@@ -72,7 +70,7 @@ export default function TimeListRow({
         className={cx(
           "flex h-full",
           isTimeActive && "py-2",
-          timeIndex < nowIndex && !tomorrow && "opacity-60 dark:opacity-40"
+          timeIndex < nowIndex && "opacity-60 dark:opacity-40"
         )}
       >
         <div className="relative flex h-full w-full items-center justify-between px-10 py-3 text-xl md:text-xl">
@@ -101,7 +99,7 @@ export default function TimeListRow({
           <h5
             className={cx(
               "capitalize leading-none",
-              timeIndex < nowIndex && !tomorrow && "font-normal"
+              timeIndex < nowIndex && "font-normal"
             )}
           >
             {timeName}
@@ -109,7 +107,7 @@ export default function TimeListRow({
           <h4
             className={cx(
               "tabular-nums leading-none",
-              timeIndex < nowIndex && !tomorrow && "font-normal"
+              timeIndex < nowIndex && "font-normal"
             )}
           >
             {formattedValue}
