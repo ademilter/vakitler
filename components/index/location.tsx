@@ -18,7 +18,7 @@ export default function IndexLocation() {
         tracking-wider font-medium text-sm uppercase"
         href="/settings"
       >
-        <span className="absolute inset-0 -z-10 bg-white rounded-3xl" />
+        <span className="absolute inset-0 -z-10 bg-white dark:bg-white/10 rounded-3xl" />
 
         <svg
           xmlns="http://www.w3.org/2000/svg"
