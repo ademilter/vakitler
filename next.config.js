@@ -10,6 +10,15 @@ const withPWA = require("next-pwa")({
 /** @type {import("next").NextConfig} */
 const nextConfig = withPWA({
   reactStrictMode: false,
+  images: {
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "namazvakti.diyanet.gov.tr",
+        pathname: "/images/**",
+      },
+    ],
+  },
 });
 
 module.exports = nextTranslate(nextConfig);

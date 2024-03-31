@@ -43,31 +43,34 @@ export class Times {
     this.localTime = datetime;
   }
 
-  get today(): undefined | Time {
-    return this.times.find(o => {
-      const day = this.localTime.toFormat("dd.MM.yyyy");
-      return o.MiladiTarihKisa === day;
-    });
+  get today(): Time {
+    return (
+      this.times.find(o => {
+        const day = this.localTime.toFormat("dd.MM.yyyy");
+        return o.MiladiTarihKisa === day;
+      }) || this.times[0]
+    );
   }
 
-  get tomorrow(): undefined | Time {
-    return this.times.find(o => {
-      const day = this.localTime.plus({ days: 1 }).toFormat("dd.MM.yyyy");
-      return o.MiladiTarihKisa === day;
-    });
+  get tomorrow(): Time {
+    return (
+      this.times.find(o => {
+        const day = this.localTime.plus({ days: 1 }).toFormat("dd.MM.yyyy");
+        return o.MiladiTarihKisa === day;
+      }) || this.times[1]
+    );
   }
 
-  get yesterday(): undefined | Time {
-    return this.times.find(o => {
-      const day = this.localTime.minus({ days: 1 }).toFormat("dd.MM.yyyy");
-      return o.MiladiTarihKisa === day;
-    });
+  get yesterday(): Time {
+    return (
+      this.times.find(o => {
+        const day = this.localTime.minus({ days: 1 }).toFormat("dd.MM.yyyy");
+        return o.MiladiTarihKisa === day;
+      }) || this.times[0]
+    );
   }
 
   get time(): { now: TimeNames; next: TimeNames } {
-    // TODO: check if today is undefined
-    if (!this.today) return { now: TimeNames.Imsak, next: TimeNames.Imsak };
-
     const Imsak = DateTime.fromFormat(this.today[TimeNames.Imsak], HOUR_FORMAT);
     const Gunes = DateTime.fromFormat(this.today[TimeNames.Gunes], HOUR_FORMAT);
     const Ogle = DateTime.fromFormat(this.today[TimeNames.Ogle], HOUR_FORMAT);
@@ -108,9 +111,7 @@ export class Times {
     return obj;
   }
 
-  isBeforeMidnight(): boolean {
-    if (!this.today) return false;
-
+  get isBeforeMidnight(): boolean {
     return (
       this.localTime >
       DateTime.fromFormat(this.today[TimeNames.Imsak], HOUR_FORMAT)
@@ -118,14 +119,12 @@ export class Times {
   }
 
   timer(): TypeTimer {
-    if (!this.today || !this.tomorrow) return [0, 0, 0];
-
     let dateTime = DateTime.fromFormat(this.today[this.time.next], HOUR_FORMAT);
 
     if (this.time.now === TimeNames.Yatsi) {
       dateTime = DateTime.fromFormat(this.today[TimeNames.Imsak], HOUR_FORMAT);
 
-      if (this.isBeforeMidnight()) {
+      if (this.isBeforeMidnight) {
         dateTime = DateTime.fromFormat(
           this.tomorrow[TimeNames.Imsak],
           HOUR_FORMAT
@@ -139,8 +138,6 @@ export class Times {
   }
 
   timerRamadan(): TypeTimer {
-    if (!this.today || !this.tomorrow) return [0, 0, 0];
-
     let dateTime = DateTime.fromFormat(
       this.today[TimeNames.Aksam],
       HOUR_FORMAT
@@ -156,24 +153,5 @@ export class Times {
     const ms = dateTime.diff(this.localTime).toMillis();
 
     return secondSplit(ms / 1000);
-  }
-
-  get iconName(): string {
-    if (!this.today || !this.yesterday) return "dolunay";
-
-    let key = this.time.now as string;
-
-    if (this.time.now === TimeNames.Aksam) {
-      key = this.today.moonKey;
-    } //
-    else if (this.time.now === TimeNames.Yatsi) {
-      key = this.today.moonKey;
-
-      if (!this.isBeforeMidnight()) {
-        key = this.yesterday.moonKey;
-      }
-    }
-
-    return key;
   }
 }

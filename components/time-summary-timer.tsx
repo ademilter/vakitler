@@ -1,13 +1,20 @@
-import { HTMLAttributes, useContext } from "react";
+import React, { HTMLAttributes, useContext } from "react";
 import { CommonStoreContext } from "@/stores/common";
 import Trans from "next-translate/Trans";
 import { cx } from "@/utils/helper";
 
-export default function TimeSummaryTimer() {
+export interface Props extends React.ComponentPropsWithoutRef<"div"> {}
+
+export default function TimeSummaryTimer({ className }: Props) {
   const { timer } = useContext(CommonStoreContext);
 
   return (
-    <div className="flex items-baseline text-5xl md:text-6xl font-light gap-2">
+    <div
+      className={cx(
+        "flex items-baseline justify-center text-5xl md:text-6xl font-light gap-2",
+        className
+      )}
+    >
       {timer[0] > 0 ? (
         <>
           <KeyValueComp>
@@ -64,7 +71,10 @@ function KeyValueComp({
   ...props
 }: HTMLAttributes<HTMLSpanElement>) {
   return (
-    <span className={cx("flex items-baseline gap-0.5", className)} {...props} />
+    <span
+      className={cx("inline-flex items-baseline gap-0.5", className)}
+      {...props}
+    />
   );
 }
 

@@ -1,5 +1,6 @@
 import { DateTime } from "luxon";
 import { ITime, TimeNames } from "@/types";
+import { Phease } from "@/utils/const";
 
 export class Time {
   public [TimeNames.Imsak]: string;
@@ -24,11 +25,12 @@ export class Time {
     this.AyinSekliURL = props.AyinSekliURL;
   }
 
-  get moonKey(): string {
-    const [_, name] = this.AyinSekliURL.split(
+  get moonPhease(): Phease {
+    const [_, file] = this.AyinSekliURL.split(
       "http://namazvakti.diyanet.gov.tr/images/"
     );
-    return name.split(".")[0];
+    const [name, __] = file.split(".");
+    return Phease[name as keyof typeof Phease];
   }
 
   get isJumuah(): boolean {

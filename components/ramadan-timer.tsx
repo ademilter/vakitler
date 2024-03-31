@@ -1,10 +1,13 @@
-import { HTMLAttributes, useContext } from "react";
+import React, { HTMLAttributes, useContext } from "react";
 import { CommonStoreContext } from "@/stores/common";
 import Trans from "next-translate/Trans";
 import { TimeNames } from "@/types";
 import useTranslation from "next-translate/useTranslation";
+import { cx } from "@/utils/helper";
 
-export default function RamadanTimer() {
+export interface Props extends React.ComponentPropsWithoutRef<"div"> {}
+
+export default function RamadanTimer({ className }: Props) {
   const { t } = useTranslation("common");
   const { timerRamadan, times, timer, settings } =
     useContext(CommonStoreContext);
@@ -19,12 +22,16 @@ export default function RamadanTimer() {
     return null;
 
   return (
-    <div className="relative z-0 px-4 py-1 flex gap-1 items-center text-base md:text-xl">
-      <span className="absolute -z-10 inset-0 rounded-xl bg-white bg-opacity-80 dark:bg-black dark:bg-opacity-20 shadow" />
-
+    <div
+      className={cx(
+        "inline-flex items-center gap-1 px-4 py-1",
+        "rounded-xl bg-white shadow text-lg md:text-xl",
+        className
+      )}
+    >
       <span>{t("iftarTime")}</span>
 
-      <span className="flex items-center gap-1">
+      <span className="inline-flex items-center gap-1">
         {timerRamadan[0] > 0 && (
           <span className="flex items-baseline gap-px">
             <Trans

@@ -4,7 +4,12 @@ export default function Document({ locale }: { locale: string }) {
   return (
     <Html lang={locale} suppressHydrationWarning>
       <Head />
-      <body className="bg-zinc-200 text-zinc-800 antialiased dark:bg-zinc-900 dark:text-zinc-300">
+      <body
+        className="antialiased
+      bg-white text-zinc-950
+      dark:bg-black dark:text-white
+      "
+      >
         <Main />
         <NextScript />
       </body>

@@ -59,6 +59,8 @@ export interface IRelease {
 }
 
 export interface ICommonStore {
+  devMode: boolean;
+  setDevMode: (value: boolean) => void;
   settings: {
     country: undefined | ICountry;
     _country: undefined | ICountry;

@@ -17,6 +17,8 @@ import i18n from "@/i18n.json";
 import * as process from "process";
 
 export const CommonStoreContext = createContext<ICommonStore>({
+  devMode: false,
+  setDevMode: () => {},
   settings: {
     country: undefined,
     _country: undefined,
@@ -55,6 +57,9 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
 
   const [releases, setReleases] = useState<ICommonStore["releases"]>([]);
 
+  const [devMode, setDevMode] = useState<ICommonStore["devMode"]>(
+    process.env.NODE_ENV === "development"
+  );
   const [times, setTimes] = useState<ICommonStore["times"]>();
   const [rawTimes, setRawTimes] = useState<ICommonStore["rawTimes"]>();
   const [timer, setTimer] = useState<TypeTimer>([0, 0, 0]);
@@ -219,6 +224,8 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
   return (
     <CommonStoreContext.Provider
       value={{
+        devMode,
+        setDevMode,
         settings,
         setSettings,
         fetchData,
