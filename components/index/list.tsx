@@ -7,22 +7,23 @@ import { cx } from "@/utils/helper";
 export default function TimeList() {
   const { times } = useContext(CommonStoreContext);
 
+  if (!times) return null;
+
   const names = [
-    // times?.time.now,
-    times?.time.next,
+    times.time.now,
+    // TODO: eğer imsak ise 00:00'den sonra ise sonraki günün imsak vaktini göster
+    times.time.next,
   ];
 
   return (
     <div
-      className={
-        cx()
-        // "grid p-2 gap-2 w-full max-w-full rounded-3xl",
-        // "border border-white/10"
-        // "rounded-3xl bg-black/20"
-      }
+      className={cx(
+        "grid p-2 gap-1 w-full max-w-full rounded-3xl",
+        "rounded-3xl bg-black/20"
+      )}
     >
-      {names.map((time, index) => {
-        return <Time key={time} index={index} time={time as TimeNames} />;
+      {names.map(time => {
+        return <Time key={time} time={time as TimeNames} />;
       })}
     </div>
   );

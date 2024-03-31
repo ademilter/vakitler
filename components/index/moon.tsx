@@ -17,10 +17,9 @@ export default function Moon({ className }: Props) {
 
   useEffect(() => {
     if (phease === Phease.ictima) return;
-
     //  set phease from 0 to current
     for (let i = 0; i <= phease; i++) {
-      setTimeout(() => setPhease(i), i * 40);
+      setTimeout(() => setPhease(i), i * 30);
     }
   }, []);
 
@@ -30,11 +29,10 @@ export default function Moon({ className }: Props) {
     <>
       <div
         className={cx(
-          "size-32 -rotate-[30deg]",
+          "size-24 -rotate-[30deg]",
           "relative overflow-hidden rounded-full",
           "inline-flex justify-center items-center",
-          // "ring-1 ring-white/20",
-          "shadow-[0_0_40px_rgba(255,255,255,0.3)]",
+          "shadow-[0_0_40px_rgba(255,255,255,0.2)]",
           debugCSS,
           className
         )}
@@ -42,7 +40,7 @@ export default function Moon({ className }: Props) {
         <span
           className={cx(
             "absolute inset-0 rounded-full",
-            phease > Phease.dolunay ? "bg-blue-300" : "bg-white"
+            phease > Phease.dolunay ? "bg-moon-dark" : "bg-moon-light"
           )}
         />
 
@@ -51,7 +49,7 @@ export default function Moon({ className }: Props) {
             <span
               data-name="11"
               className={cx(
-                "absolute left-0 h-full bg-blue-300 rounded-l-full w-1/2",
+                "absolute left-0 h-full bg-moon-dark rounded-l-full w-1/2",
                 debugCSS
               )}
             />
@@ -67,7 +65,7 @@ export default function Moon({ className }: Props) {
                 phease === Phease.r4 && "w-[35%]",
                 phease === Phease.r5 && "w-[20%]",
                 phease === Phease.ilkdordun && "w-[10%]",
-                phease > Phease.ilkdordun ? "bg-white" : "bg-blue-300",
+                phease > Phease.ilkdordun ? "bg-moon-light" : "bg-moon-dark",
                 phease === Phease.i1 && "w-[22%]",
                 phease === Phease.i2 && "w-[34%]",
                 phease === Phease.i3 && "w-[46%]",
@@ -87,7 +85,7 @@ export default function Moon({ className }: Props) {
             <span
               data-name="21"
               className={cx(
-                "absolute left-0 h-full bg-white rounded-l-full w-1/2",
+                "absolute left-0 h-full bg-moon-light rounded-l-full w-1/2",
                 debugCSS
               )}
             />
@@ -104,7 +102,7 @@ export default function Moon({ className }: Props) {
                 phease === Phease.d6 && "w-[30%]",
                 phease === Phease.d7 && "w-[20%]",
                 phease === Phease.sondordun && "w-[10%]",
-                phease > Phease.sondordun ? "bg-blue-300" : "bg-white",
+                phease > Phease.sondordun ? "bg-moon-dark" : "bg-moon-light",
                 phease === Phease.sd1 && "w-[20%]",
                 phease === Phease.sd2 && "w-[30%]",
                 phease === Phease.sd3 && "w-[45%]",

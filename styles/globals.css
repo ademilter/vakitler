@@ -3,18 +3,16 @@
 @tailwind utilities;
 
 @layer base {
-  button {
-    @apply text-left;
-  }
+    :root {
+        --primary: black;
+        --secondary: white;
+        --gradient-from: #222;
+        --gradient-to: #444;
+        --moon-light: white;
+        --moon-dark: black;
+    }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  strong,
-  b {
-    @apply font-medium;
-  }
+    button {
+        @apply text-left;
+    }
 }

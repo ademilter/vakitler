@@ -14,6 +14,7 @@ export default function IndexLayout({ className, ...props }: Props) {
 
   const now = times!.time.now;
   const style = ThemeStyle[now];
+  const style1 = Variables[now];
 
   const themeColor =
     resolvedTheme === "light"
@@ -25,14 +26,19 @@ export default function IndexLayout({ className, ...props }: Props) {
       <Head>{<meta name="theme-color" content={themeColor} />}</Head>
 
       <div
+        data-name="layout"
         className={cx(
           "fixed inset-0 overflow-hidden",
-          "grid place-items-center place-content-center",
-          "gap-10 grid-rows-[auto_1fr_auto]",
-          "p-10 pb-16 text-center",
+          "grid grid-rows-[auto_1fr_auto] gap-10",
+          "p-12 md:py-24",
+          "bg-primary bg-gradient-to-t from-gradient-1 to-gradient-2",
+          "text-secondary text-center",
           style,
           className
         )}
+        style={{
+          ...style1,
+        }}
         {...props}
       />
     </>
@@ -41,8 +47,8 @@ export default function IndexLayout({ className, ...props }: Props) {
 
 export const MainColors = {
   [TimeNames.Imsak]: {
-    light: colors.blue[400],
-    dark: colors.blue[400],
+    light: colors.blue[950],
+    dark: colors.blue[950],
   },
   [TimeNames.Gunes]: {
     light: colors.blue[400],
@@ -66,6 +72,22 @@ export const MainColors = {
   },
 };
 
+export const Variables: Record<TimeNames, Record<string, string>> = {
+  [TimeNames.Imsak]: { "--bg-theme": "red", "--text-theme": "white" },
+  [TimeNames.Gunes]: { "--bg-theme": "red", "--text-theme": "white" },
+  [TimeNames.Ogle]: { "--bg-theme": "red", "--text-theme": "white" },
+  [TimeNames.Ikindi]: { "--bg-theme": "red", "--text-theme": "white" },
+  [TimeNames.Aksam]: { "--bg-theme": "red", "--text-theme": "white" },
+  [TimeNames.Yatsi]: {
+    "--primary": colors.blue[950],
+    "--secondary": colors.blue[50],
+    "--gradient-from": colors.blue[800],
+    "--gradient-to": colors.blue[950],
+    "--moon-light": colors.blue[50],
+    "--moon-dark": colors.blue[800],
+  },
+};
+
 // imsak from-orange-400 to-sky-700/50
 
 export const ThemeStyle = {
@@ -84,7 +106,6 @@ export const ThemeStyle = {
   [TimeNames.Aksam]: cx(
     "bg-gradient-to-t from-orange-300 to-blue-700 to-80% text-blue-900"
   ),
-  [TimeNames.Yatsi]: cx(
-    "bg-gradient-to-t from-blue-800 to-blue-950 text-blue-50"
-  ),
+  [TimeNames.Yatsi]: cx(),
+  // "bg-gradient-to-t from-blue-800 to-blue-950 text-blue-50"
 };
