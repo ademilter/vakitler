@@ -29,7 +29,7 @@ export default function IndexLayout({ className, ...props }: Props) {
           "fixed inset-0 overflow-hidden",
           "grid place-items-center place-content-center",
           "gap-10 grid-rows-[auto_1fr_auto]",
-          "p-10 text-center",
+          "p-10 pb-16 text-center",
           style,
           className
         )}

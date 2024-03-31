@@ -38,7 +38,7 @@ export default function TimeListRow({
         "z-10 relative",
         "inline-flex items-center justify-between",
         "px-6 h-12 text-lg rounded-2xl",
-        isTimeNext ? "bg-white text-blue-950" : "font-light opacity-60"
+        isTimeNext ? "bg-white" : "font-light opacity-60"
       )}
     >
       <h5 className={cx("capitalize leading-none pr-2")}>{timeName}:</h5>

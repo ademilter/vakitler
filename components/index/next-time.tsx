@@ -18,7 +18,7 @@ export default function NextTime({ className }: Props) {
   }
 
   return (
-    <div className={cx("capitalize text-xl", className)}>
+    <div className={cx("capitalize font-medium text-lg", className)}>
       <Trans
         ns={"common"}
         i18nKey="timerTitle"

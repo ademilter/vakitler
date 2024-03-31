@@ -19,22 +19,21 @@ export default function Index() {
 
   return (
     <IndexLayout>
-      <div className="w-full pt-8">
-        <Moon />
+      <div className="w-full">
+        <Location className="font-semibold" />
+        <IslamicDate className="opacity-80" />
       </div>
 
-      <div className="w-full">
-        <NextTime className="mb-2 opacity-80" />
+      <div className="w-full pb-6">
+        <Moon className="mb-8" />
+        <NextTime className="mb-2" />
         <TimeSummaryTimer />
-        <div className="mt-6">
-          <IndexTimeList />
-        </div>
-        <RamadanTimer className="mt-10" />
       </div>
 
       <div className="w-full place-self-end pt-10">
-        <Location className="" />
-        <IslamicDate className="mt-1 opacity-60" />
+        <IndexTimeList />
+
+        <RamadanTimer className="mt-10" />
       </div>
 
       {/*{devMode && <TimeTravel />}*/}
