@@ -6,8 +6,7 @@ import useTranslation from "next-translate/useTranslation";
 
 export default function RamadanTimer() {
   const { t } = useTranslation("common");
-  const { timerRamadan, times, timer, settings } =
-    useContext(CommonStoreContext);
+  const { timerRamadan, times, settings } = useContext(CommonStoreContext);
 
   const now = times?.time?.now;
 

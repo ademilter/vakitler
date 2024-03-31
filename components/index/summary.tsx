@@ -7,6 +7,7 @@ import TimeSummaryTimer from "@/components/time-summary-timer";
 import Container from "@/components/container";
 import Trans from "next-translate/Trans";
 import RamadanTimer from "@/components/ramadan-timer";
+import IslamicDate from "@/components/islamic-date";
 
 export default function TimeSummary() {
   const { t } = useTranslation("common");
@@ -20,8 +21,8 @@ export default function TimeSummary() {
 
   return (
     <motion.div {...containerAnim}>
-      <Container className="flex h-full gap-1 flex-col items-center justify-center pt-24 pb-14">
-        <span className="flex capitalize text-xl font-semibold">
+      <Container className="flex h-full gap-1 flex-col items-center justify-center pt-16 pb-4">
+        <span className="flex capitalize text-lg md:text-xl font-medium">
           <Trans
             ns={"common"}
             i18nKey="timerTitle"
@@ -32,6 +33,8 @@ export default function TimeSummary() {
         </span>
 
         <TimeSummaryTimer />
+
+        <IslamicDate className="mt-2 opacity-80" />
 
         <div className="mt-3">
           <RamadanTimer />

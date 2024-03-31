@@ -23,7 +23,7 @@ const themeStyle = {
   ),
   [TimeNames.Ikindi]: cx(
     "bg-Ikindi-light dark:bg-Ikindi-dark",
-    "text-rose-800 dark:text-rose-200"
+    "text-orange-800 dark:text-orange-200"
   ),
   [TimeNames.Aksam]: cx(
     "bg-Aksam-light dark:bg-Aksam-dark",

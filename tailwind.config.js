@@ -23,7 +23,7 @@ module.exports = {
           dark: "#3a281a",
         },
         [TimeNames.Ikindi]: {
-          light: "#ffe4e7",
+          light: "#ffedd5",
           dark: "#421a25",
         },
         [TimeNames.Aksam]: {

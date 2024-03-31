@@ -68,6 +68,7 @@ export interface ICommonStore {
     _city: undefined | ICity;
     timeFormat: TimeFormat;
     adjustments: number[];
+    islamicDate: boolean;
     ramadanTimer: boolean;
   };
   setSettings: (value: ICommonStore["settings"]) => void;

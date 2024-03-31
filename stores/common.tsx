@@ -26,6 +26,7 @@ export const CommonStoreContext = createContext<ICommonStore>({
     _city: undefined,
     timeFormat: TimeFormat.TwentyFour,
     adjustments: [0, 0, 0, 0, 0, 0],
+    islamicDate: false,
     ramadanTimer: false,
   },
   setSettings: () => {},
@@ -50,6 +51,7 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
     _city: undefined,
     timeFormat: TimeFormat.TwentyFour,
     adjustments: [0, 0, 0, 0, 0, 0],
+    islamicDate: false,
     ramadanTimer: false,
   });
 

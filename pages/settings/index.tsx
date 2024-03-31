@@ -118,6 +118,19 @@ export default function Settings() {
               />
             </Box>
 
+            {/* ISLAMIC DATE */}
+            <Box>
+              <div className="grow">
+                <Box.Title>{t("settings:islamicDateTitle")}</Box.Title>
+              </div>
+              <Box.BoxSwitch
+                checked={settings.islamicDate}
+                onCheckedChange={checked => {
+                  setSettings({ ...settings, islamicDate: checked });
+                }}
+              />
+            </Box>
+
             {/* RAMADAN TIMER */}
             <Box>
               <div className="grow">
@@ -160,7 +173,7 @@ export default function Settings() {
                     components={[<b key="0" />]}
                   />
                 </p>
-                <p className="underline decoration-amber-500/50">
+                <p className="underline decoration-orange-500/50">
                   ezanvakti.herokuapp.com
                 </p>
               </Box.BoxLink>

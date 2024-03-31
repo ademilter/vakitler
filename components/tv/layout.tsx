@@ -7,7 +7,7 @@ const theme = {
   [TimeNames.Imsak]: "bg-sky-300/30 text-sky-800",
   [TimeNames.Gunes]: "bg-orange-300/30 text-orange-800",
   [TimeNames.Ogle]: "bg-yellow-300/30 text-yellow-800",
-  [TimeNames.Ikindi]: "bg-rose-300/30 text-rose-800",
+  [TimeNames.Ikindi]: "bg-orange-300/30 text-orange-800",
   [TimeNames.Aksam]: "bg-blue-300/30 text-blue-800",
   [TimeNames.Yatsi]: "bg-indigo-300/30 text-indigo-800",
 };
