@@ -1,17 +1,20 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "@/components/container";
 import useTranslation from "next-translate/useTranslation";
 import SettingsList from "@/components/settings/list";
 import { ICountry } from "@/utils/types";
 import { useRouter } from "next/router";
-import { CommonStoreContext } from "@/stores/common";
 import SettingsLayout from "@/components/settings/layout";
+import { useStore } from "@/stores/global";
 
 export default function Country() {
   const { t } = useTranslation("common");
   const { push } = useRouter();
 
-  const { settings, setSettings } = useContext(CommonStoreContext);
+  const { settings, setSettings } = useStore(store => ({
+    settings: store.settings,
+    setSettings: store.setSettings,
+  }));
 
   const [data, setData] = useState<ICountry[]>([]);
   const [loading, setLoading] = useState(false);

@@ -1,13 +1,15 @@
-import React, { useContext } from "react";
+import React from "react";
 import Container from "@/components/container";
 import useTranslation from "next-translate/useTranslation";
-import { CommonStoreContext } from "@/stores/common";
 import Link from "next/link";
+import { useStore } from "@/stores/global";
 
 export default function Releases() {
   const { t } = useTranslation("common");
 
-  const { releases } = useContext(CommonStoreContext);
+  const { releases } = useStore(store => ({
+    releases: store.releases,
+  }));
 
   return (
     <Container className="flex min-h-full flex-col gap-6 py-10">

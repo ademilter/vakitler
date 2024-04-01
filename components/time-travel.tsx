@@ -1,13 +1,16 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
-import { CommonStoreContext } from "@/stores/common";
+import React, { useCallback, useEffect, useState } from "react";
 import { cx } from "@/utils/helper";
+import { useStore } from "@/stores/global";
 
 const shouldShowTimePicker = process.env.NODE_ENV !== "production";
 
 type TimeTravels = [number, number, number];
 
 export default function TimeTravel() {
-  const { times } = useContext(CommonStoreContext);
+  const { times } = useStore(store => ({
+    times: store.times,
+  }));
+
   const [timeTravel, setTimeTravel] = useState<TimeTravels>(
     times?.timeTravel || [0, 0, 0]
   );

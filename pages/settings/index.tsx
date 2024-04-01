@@ -1,7 +1,6 @@
-import React, { useContext } from "react";
+import React from "react";
 import Container from "@/components/container";
 import useTranslation from "next-translate/useTranslation";
-import { CommonStoreContext } from "@/stores/common";
 import setLanguage from "next-translate/setLanguage";
 import { LOCAL_KEYS } from "@/utils/const";
 import useLocations from "@/hooks/use-locations";
@@ -11,14 +10,20 @@ import SettingsLayout from "@/components/settings/layout";
 import { TimeFormat } from "@/utils/types";
 import Trans from "next-translate/Trans";
 import { useRouter } from "next/router";
+import { useStore } from "@/stores/global";
 
 export default function Settings() {
   const router = useRouter();
+
   const { t, lang } = useTranslation("common");
-  const { settings, setSettings, saveSettings } =
-    useContext(CommonStoreContext);
   const { city, country, region } = useLocations();
   const { theme, setTheme } = useTheme();
+
+  const { settings, saveSettings, setSettings } = useStore(store => ({
+    settings: store.settings,
+    saveSettings: store.saveSettings,
+    setSettings: store.setSettings,
+  }));
 
   const timeFormat = settings.timeFormat;
 
