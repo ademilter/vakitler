@@ -1,12 +1,14 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { cx } from "@/utils/helper";
 import { Phease } from "@/utils/const";
-import { CommonStoreContext } from "@/stores/common";
+import { useStore } from "@/stores/global";
 
 export interface Props extends React.ComponentPropsWithoutRef<"div"> {}
 
 export default function Moon({ className }: Props) {
-  const { times } = useContext(CommonStoreContext);
+  const { times } = useStore(store => ({
+    times: store.times,
+  }));
 
   const [slider, _] = React.useState<boolean>(false);
   const [debug, __] = React.useState<boolean>(false);

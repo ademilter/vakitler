@@ -1,10 +1,10 @@
-import "@/styles/globals.css";
+import "./globals.css";
 
 import type { AppProps } from "next/app";
 import { Analytics } from "@vercel/analytics/react";
-import { CommonStoreProvider } from "@/stores/common";
 import Head from "next/head";
 import { metadata } from "@/utils/meta";
+import StoreProvider from "@/stores/StoreProvider";
 import { ThemeProvider } from "next-themes";
 import { useEffect, useState } from "react";
 
@@ -24,9 +24,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       <Meta />
 
       <ThemeProvider attribute="class">
-        <CommonStoreProvider>
+        <StoreProvider>
           <Component {...pageProps} />
-        </CommonStoreProvider>
+        </StoreProvider>
       </ThemeProvider>
 
       <Analytics />

@@ -1,16 +1,18 @@
-import { TimeNames } from "@/types";
+import { TimeNames } from "@/utils/types";
 import { cx, formattedTime } from "@/utils/helper";
-import { useContext } from "react";
-import { CommonStoreContext } from "@/stores/common";
 import useTranslation from "next-translate/useTranslation";
+import { useStore } from "@/stores/global";
 
 export default function TimeListRow({ time }: { time: TimeNames }) {
   const { t, lang } = useTranslation("common");
 
   const {
-    times,
     settings: { timeFormat },
-  } = useContext(CommonStoreContext);
+    times,
+  } = useStore(store => ({
+    settings: store.settings,
+    times: store.times,
+  }));
 
   const value = times!.today![time];
 

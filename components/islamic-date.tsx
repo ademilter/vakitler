@@ -1,14 +1,18 @@
-import React, { useContext } from "react";
+import React from "react";
 import { cx } from "@/utils/helper";
-import { CommonStoreContext } from "@/stores/common";
 import useTranslation from "next-translate/useTranslation";
 import { DateTime } from "luxon";
+import { useStore } from "@/stores/global";
 
 export interface Props extends React.ComponentPropsWithoutRef<"div"> {}
 
 export default function IslamicDate({ className }: Props) {
-  const { times } = useContext(CommonStoreContext);
   const { lang } = useTranslation("common");
+
+  const { times } = useStore(store => ({
+    times: store.times,
+  }));
+
   const localTime = times?.localTime || DateTime.local();
 
   // hicri takvimde akşam ezanı ile tarih bir sonraki güne geçer

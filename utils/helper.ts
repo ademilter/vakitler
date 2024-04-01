@@ -1,4 +1,4 @@
-import { TimeFormat, TypeTimer } from "@/types";
+import { TimeFormat, TypeTimer } from "@/utils/types";
 import { ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { DateTime } from "luxon";

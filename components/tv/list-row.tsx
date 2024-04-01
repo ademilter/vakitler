@@ -1,4 +1,4 @@
-import { TimeNames } from "@/types";
+import { TimeNames } from "@/utils/types";
 import Container from "@/components/container";
 import { cx, formattedTime } from "@/utils/helper";
 import { useContext } from "react";

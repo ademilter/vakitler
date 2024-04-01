@@ -4,7 +4,7 @@ import TimeLocation from "@/components/tv/time-location";
 import TimeSummary from "@/components/tv/time-summary";
 import TimeTravel from "@/components/time-travel";
 import Layout from "@/components/tv/layout";
-import { TimeNames } from "@/types";
+import { TimeNames } from "@/utils/types";
 import TimeListRow from "@/components/tv/list-row";
 
 export default function Index() {

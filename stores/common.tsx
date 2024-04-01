@@ -7,7 +7,7 @@ import {
   IRegion,
   TimeFormat,
   TypeTimer,
-} from "@/types";
+} from "@/utils/types";
 import { useRouter } from "next/router";
 import { DateTime } from "luxon";
 import useInterval from "@/hooks/use-interval";

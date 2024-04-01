@@ -1,16 +1,20 @@
-import React, { HTMLAttributes, useContext } from "react";
-import { CommonStoreContext } from "@/stores/common";
+import React, { HTMLAttributes } from "react";
 import Trans from "next-translate/Trans";
-import { TimeNames } from "@/types";
+import { TimeNames } from "@/utils/types";
 import useTranslation from "next-translate/useTranslation";
 import { cx } from "@/utils/helper";
+import { useStore } from "@/stores/global";
 
 export interface Props extends React.ComponentPropsWithoutRef<"div"> {}
 
 export default function RamadanTimer({ className }: Props) {
   const { t } = useTranslation("common");
-  const { timerRamadan, times, timer, settings } =
-    useContext(CommonStoreContext);
+
+  const { timerRamadan, settings, times } = useStore(store => ({
+    settings: store.settings,
+    times: store.times,
+    timerRamadan: store.timerRamadan,
+  }));
 
   const now = times?.time?.now;
 

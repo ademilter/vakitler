@@ -1,24 +1,20 @@
-import React, { useContext } from "react";
+import React from "react";
 import { cx } from "@/utils/helper";
-import { TimeNames } from "@/types";
-import { CommonStoreContext } from "@/stores/common";
+import { TimeNames } from "@/utils/types";
 import Head from "next/head";
-import { useTheme } from "next-themes";
 import colors from "tailwindcss/colors";
+import { useStore } from "@/stores/global";
 
 export interface Props extends React.ComponentPropsWithoutRef<"div"> {}
 
 export default function IndexLayout({ className, ...props }: Props) {
-  const { times } = useContext(CommonStoreContext);
-  const { resolvedTheme } = useTheme();
+  const { times } = useStore(store => ({
+    times: store.times,
+  }));
 
   const now = times!.time.now;
   const style = Variables[now];
-
-  const themeColor =
-    resolvedTheme === "light"
-      ? MainColors[now]["light"]
-      : MainColors[now]["dark"];
+  const themeColor = MainColors[now];
 
   return (
     <>
@@ -29,7 +25,7 @@ export default function IndexLayout({ className, ...props }: Props) {
         className={cx(
           "fixed inset-0 overflow-hidden",
           "grid grid-rows-[auto_1fr_auto] gap-10",
-          "p-12 md:py-24",
+          "p-12 py-16 md:py-32",
           "bg-primary bg-gradient-to-t",
           "from-gradient-from via-gradient-via to-gradient-to",
           "text-secondary text-center",
@@ -45,50 +41,32 @@ export default function IndexLayout({ className, ...props }: Props) {
 }
 
 export const MainColors = {
-  [TimeNames.Imsak]: {
-    light: colors.blue[950],
-    dark: colors.blue[950],
-  },
-  [TimeNames.Gunes]: {
-    light: colors.blue[400],
-    dark: colors.blue[400],
-  },
-  [TimeNames.Ogle]: {
-    light: colors.blue[300],
-    dark: colors.blue[300],
-  },
-  [TimeNames.Ikindi]: {
-    light: colors.blue[400],
-    dark: colors.blue[400],
-  },
-  [TimeNames.Aksam]: {
-    light: colors.blue[400],
-    dark: colors.blue[400],
-  },
-  [TimeNames.Yatsi]: {
-    light: colors.indigo[950],
-    dark: colors.indigo[950],
-  },
+  [TimeNames.Imsak]: colors.indigo[900],
+  [TimeNames.Gunes]: colors.blue[400],
+  [TimeNames.Ogle]: colors.blue[300],
+  [TimeNames.Ikindi]: colors.blue[400],
+  [TimeNames.Aksam]: colors.blue[400],
+  [TimeNames.Yatsi]: colors.indigo[950],
 };
 
 export const Variables: Record<TimeNames, Record<string, string>> = {
   [TimeNames.Imsak]: {
-    "--primary": colors.blue[950],
-    "--secondary": colors.blue[50],
-    "--gradient-to": colors.indigo[950],
-    "--gradient-via": colors.blue[950],
-    "--gradient-from": colors.blue[800],
-    "--moon-light": colors.blue[50],
-    "--moon-dark": colors.blue[900],
+    "--primary": colors.indigo[950],
+    "--secondary": colors.indigo[50],
+    "--gradient-to": colors.indigo[900],
+    "--gradient-via": colors.indigo[800],
+    "--gradient-from": colors.orange[500],
+    "--moon-light": colors.orange[50],
+    "--moon-dark": colors.indigo[900],
   },
   [TimeNames.Gunes]: {
-    "--primary": colors.blue[950],
-    "--secondary": colors.blue[50],
-    "--gradient-to": colors.indigo[950],
-    "--gradient-via": colors.blue[950],
-    "--gradient-from": colors.blue[800],
+    "--primary": colors.indigo[950],
+    "--secondary": colors.indigo[50],
+    "--gradient-to": colors.blue[700],
+    "--gradient-via": colors.orange[500],
+    "--gradient-from": colors.orange[300],
     "--moon-light": colors.blue[50],
-    "--moon-dark": colors.blue[900],
+    "--moon-dark": colors.orange[800],
   },
   [TimeNames.Ogle]: {
     "--primary": colors.blue[950],

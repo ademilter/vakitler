@@ -1,4 +1,4 @@
-import { TimeNames } from "@/types";
+import { TimeNames } from "@/utils/types";
 import { useContext } from "react";
 import { CommonStoreContext } from "@/stores/common";
 import useTranslation from "next-translate/useTranslation";

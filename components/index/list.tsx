@@ -1,11 +1,12 @@
-import { TimeNames } from "@/types";
+import { TimeNames } from "@/utils/types";
 import Time from "@/components/index/list-row";
-import { useContext } from "react";
-import { CommonStoreContext } from "@/stores/common";
 import { cx } from "@/utils/helper";
+import { useStore } from "@/stores/global";
 
 export default function TimeList() {
-  const { times } = useContext(CommonStoreContext);
+  const { times } = useStore(store => ({
+    times: store.times,
+  }));
 
   if (!times) return null;
 

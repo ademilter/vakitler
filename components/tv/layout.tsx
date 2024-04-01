@@ -1,6 +1,6 @@
 import { ReactNode, useContext } from "react";
 import { cx } from "@/utils/helper";
-import { TimeNames } from "@/types";
+import { TimeNames } from "@/utils/types";
 import { CommonStoreContext } from "@/stores/common";
 
 const theme = {

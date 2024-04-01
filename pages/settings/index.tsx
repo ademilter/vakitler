@@ -8,7 +8,7 @@ import useLocations from "@/hooks/use-locations";
 import { useTheme } from "next-themes";
 import Box from "@/components/box";
 import SettingsLayout from "@/components/settings/layout";
-import { TimeFormat } from "@/types";
+import { TimeFormat } from "@/utils/types";
 import Trans from "next-translate/Trans";
 import { useRouter } from "next/router";
 

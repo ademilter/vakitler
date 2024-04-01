@@ -1,12 +1,14 @@
-import React, { HTMLAttributes, useContext } from "react";
-import { CommonStoreContext } from "@/stores/common";
+import React, { HTMLAttributes } from "react";
 import Trans from "next-translate/Trans";
 import { cx } from "@/utils/helper";
+import { useStore } from "@/stores/global";
 
 export interface Props extends React.ComponentPropsWithoutRef<"div"> {}
 
 export default function TimeSummaryTimer({ className }: Props) {
-  const { timer } = useContext(CommonStoreContext);
+  const { timer } = useStore(store => ({
+    timer: store.timer,
+  }));
 
   return (
     <div

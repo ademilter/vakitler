@@ -1,5 +1,5 @@
 import { DateTime, Interval } from "luxon";
-import { ITime, TimeNames, TypeTimer } from "@/types";
+import { ITime, TimeNames, TypeTimer } from "@/utils/types";
 import { secondSplit } from "@/utils/helper";
 import { HOUR_FORMAT } from "@/utils/const";
 import { Time } from "./time";

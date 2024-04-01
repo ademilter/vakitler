@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import { ITime, TimeNames } from "@/types";
+import { ITime, TimeNames } from "@/utils/types";
 import { Phease } from "@/utils/const";
 
 export class Time {
