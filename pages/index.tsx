@@ -9,9 +9,11 @@ import TimeSummaryTimer from "@/components/time-summary-timer";
 import IslamicDate from "@/components/islamic-date";
 import useInterval from "@/hooks/use-interval";
 import { DateTime } from "luxon";
+import TimeTravel from "@/components/time-travel";
 
 export default function Index() {
-  const { times, updateTimer } = useStore(store => ({
+  const { devMode, times, updateTimer } = useStore(store => ({
+    devMode: store.devMode,
     times: store.times,
     updateTimer: store.updateTimer,
   }));
@@ -64,7 +66,7 @@ export default function Index() {
           <Location className="font-semibold" />
         </div>
 
-        {/*{devMode && <TimeTravel />}*/}
+        {devMode && <TimeTravel />}
       </IndexLayout>
     </div>
   );
