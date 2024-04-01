@@ -1,7 +1,7 @@
-import { TimeNames } from "@/utils/types";
-import { cx, formattedTime } from "@/utils/helper";
+import { TimeNames } from "utils/types";
+import { cx, formattedTime } from "utils/helper";
 import useTranslation from "next-translate/useTranslation";
-import { useStore } from "@/stores/global";
+import { useStore } from "stores/global";
 
 export default function TimeListRow({ time }: { time: TimeNames }) {
   const { t, lang } = useTranslation("common");

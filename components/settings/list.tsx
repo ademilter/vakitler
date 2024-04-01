@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Fuse from "fuse.js";
 import { motion } from "framer-motion";
 import useTranslation from "next-translate/useTranslation";
-import Loading from "@/components/loading";
+import Loading from "components/loading";
 
 type Item = { value: string; label: string };
 

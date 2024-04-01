@@ -1,9 +1,9 @@
-import { TimeNames } from "@/utils/types";
+import { TimeNames } from "utils/types";
 import React from "react";
 import useTranslation from "next-translate/useTranslation";
 import Trans from "next-translate/Trans";
-import { cx } from "@/utils/helper";
-import { useStore } from "@/stores/global";
+import { cx } from "utils/helper";
+import { useStore } from "stores/global";
 
 export interface Props extends React.ComponentPropsWithoutRef<"div"> {}
 

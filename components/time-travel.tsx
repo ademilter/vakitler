@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { cx } from "@/utils/helper";
-import { useStore } from "@/stores/global";
+import { cx } from "utils/helper";
+import { useStore } from "stores/global";
 
 const shouldShowTimePicker = process.env.NODE_ENV !== "production";
 

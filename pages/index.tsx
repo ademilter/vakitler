@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
-import { useStore } from "@/stores/global";
-import IndexLayout from "@/components/index/layout";
-import Moon from "@/components/index/moon";
-import List from "@/components/index/list";
-import NextTime from "@/components/index/next-time";
-import Location from "@/components/index/location";
-import TimeSummaryTimer from "@/components/time-summary-timer";
-import IslamicDate from "@/components/islamic-date";
-import useInterval from "@/hooks/use-interval";
+import { useStore } from "stores/global";
+import IndexLayout from "components/index/layout";
+import Moon from "components/index/moon";
+import List from "components/index/list";
+import NextTime from "components/index/next-time";
+import Location from "components/index/location";
+import TimeSummaryTimer from "components/time-summary-timer";
+import IslamicDate from "components/islamic-date";
+import useInterval from "hooks/use-interval";
 import { DateTime } from "luxon";
-import TimeTravel from "@/components/time-travel";
+import TimeTravel from "components/time-travel";
 
 export default function Index() {
   const { devMode, times, updateTimer } = useStore(store => ({

@@ -1,7 +1,7 @@
-import { TimeNames } from "@/utils/types";
-import Time from "@/components/index/list-row";
-import { cx } from "@/utils/helper";
-import { useStore } from "@/stores/global";
+import { TimeNames } from "utils/types";
+import Time from "components/index/list-row";
+import { cx } from "utils/helper";
+import { useStore } from "stores/global";
 
 export default function TimeList() {
   const { times } = useStore(store => ({

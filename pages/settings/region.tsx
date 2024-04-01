@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
-import Container from "@/components/container";
+import Container from "components/container";
 import useTranslation from "next-translate/useTranslation";
-import SettingsList from "@/components/settings/list";
-import { IRegion } from "@/utils/types";
+import SettingsList from "components/settings/list";
+import { IRegion } from "utils/types";
 import { useRouter } from "next/router";
-import SettingsLayout from "@/components/settings/layout";
-import { useStore } from "@/stores/global";
+import SettingsLayout from "components/settings/layout";
+import { useStore } from "stores/global";
 
 export default function Country() {
   const { t } = useTranslation("common");

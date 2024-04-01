@@ -1,7 +1,7 @@
-import { cx } from "@/utils/helper";
+import { cx } from "utils/helper";
 import Link from "next/link";
 import useTranslation from "next-translate/useTranslation";
-import useLocations from "@/hooks/use-locations";
+import useLocations from "hooks/use-locations";
 import React from "react";
 
 export interface Props extends React.ComponentPropsWithoutRef<"div"> {}

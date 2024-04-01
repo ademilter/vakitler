@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
-import { ITime, TimeNames } from "@/utils/types";
-import { Phease } from "@/utils/const";
+import { ITime, TimeNames } from "utils/types";
+import { Phease } from "utils/const";
 
 export class Time {
   public [TimeNames.Imsak]: string;

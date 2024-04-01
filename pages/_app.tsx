@@ -3,8 +3,8 @@ import "./globals.css";
 import type { AppProps } from "next/app";
 import { Analytics } from "@vercel/analytics/react";
 import Head from "next/head";
-import { metadata } from "@/utils/meta";
-import StoreProvider from "@/stores/StoreProvider";
+import { metadata } from "utils/meta";
+import StoreProvider from "stores/StoreProvider";
 import { ThemeProvider } from "next-themes";
 import { useEffect, useState } from "react";
 

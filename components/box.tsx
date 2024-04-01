@@ -1,5 +1,5 @@
 import React, { forwardRef, ReactNode } from "react";
-import { cx } from "@/utils/helper";
+import { cx } from "utils/helper";
 import Link from "next/link";
 import {
   IconCheck,

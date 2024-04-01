@@ -1,6 +1,6 @@
 import useTranslation from "next-translate/useTranslation";
-import { ICity, ICountry, IRegion } from "@/utils/types";
-import { useStore } from "@/stores/global";
+import { ICity, ICountry, IRegion } from "utils/types";
+import { useStore } from "stores/global";
 
 export default function useLocations() {
   const { t } = useTranslation("common");

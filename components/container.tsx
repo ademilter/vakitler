@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { cx } from "@/utils/helper";
+import { cx } from "utils/helper";
 
 export default function Container({
   children,

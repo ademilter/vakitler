@@ -1,7 +1,7 @@
 import React, { HTMLAttributes } from "react";
 import Trans from "next-translate/Trans";
-import { cx } from "@/utils/helper";
-import { useStore } from "@/stores/global";
+import { cx } from "utils/helper";
+import { useStore } from "stores/global";
 
 export interface Props extends React.ComponentPropsWithoutRef<"div"> {}
 

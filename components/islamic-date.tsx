@@ -1,8 +1,8 @@
 import React from "react";
-import { cx } from "@/utils/helper";
+import { cx } from "utils/helper";
 import useTranslation from "next-translate/useTranslation";
 import { DateTime } from "luxon";
-import { useStore } from "@/stores/global";
+import { useStore } from "stores/global";
 
 export interface Props extends React.ComponentPropsWithoutRef<"div"> {}
 

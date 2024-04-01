@@ -1,8 +1,8 @@
 import React from "react";
-import Container from "@/components/container";
+import Container from "components/container";
 import useTranslation from "next-translate/useTranslation";
 import Link from "next/link";
-import { useStore } from "@/stores/global";
+import { useStore } from "stores/global";
 
 export default function Releases() {
   const { t } = useTranslation("common");

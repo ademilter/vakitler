@@ -1,12 +1,12 @@
 import { createContext, useContext } from "react";
 import { createStore, useStore as useZustandStore } from "zustand";
 import { PreloadedStoreInterface } from "./StoreProvider";
-import { StoreInterface, TimeFormat, TypeTimer } from "@/utils/types";
+import { StoreInterface, TimeFormat, TypeTimer } from "utils/types";
 import process from "process";
 import { DateTime } from "luxon";
-import { API_DATE_FORMAT, LOCAL_KEYS } from "@/utils/const";
-import { Times } from "@/model/times";
-import i18n from "@/i18n.json";
+import { API_DATE_FORMAT, LOCAL_KEYS } from "utils/const";
+import { Times } from "model/times";
+import i18n from "i18n.json";
 import setLanguage from "next-translate/setLanguage";
 
 function getDefaultInitialState() {

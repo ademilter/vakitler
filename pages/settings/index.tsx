@@ -1,16 +1,16 @@
 import React from "react";
-import Container from "@/components/container";
+import Container from "components/container";
 import useTranslation from "next-translate/useTranslation";
 import setLanguage from "next-translate/setLanguage";
-import { LOCAL_KEYS } from "@/utils/const";
-import useLocations from "@/hooks/use-locations";
+import { LOCAL_KEYS } from "utils/const";
+import useLocations from "hooks/use-locations";
 import { useTheme } from "next-themes";
-import Box from "@/components/box";
-import SettingsLayout from "@/components/settings/layout";
-import { TimeFormat } from "@/utils/types";
+import Box from "components/box";
+import SettingsLayout from "components/settings/layout";
+import { TimeFormat } from "utils/types";
 import Trans from "next-translate/Trans";
 import { useRouter } from "next/router";
-import { useStore } from "@/stores/global";
+import { useStore } from "stores/global";
 
 export default function Settings() {
   const router = useRouter();

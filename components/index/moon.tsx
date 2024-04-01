@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { cx } from "@/utils/helper";
-import { Phease } from "@/utils/const";
-import { useStore } from "@/stores/global";
+import { cx } from "utils/helper";
+import { Phease } from "utils/const";
+import { useStore } from "stores/global";
 
 export interface Props extends React.ComponentPropsWithoutRef<"div"> {}
 

@@ -1,9 +1,9 @@
 import React from "react";
-import { cx } from "@/utils/helper";
-import { TimeNames } from "@/utils/types";
+import { cx } from "utils/helper";
+import { TimeNames } from "utils/types";
 import Head from "next/head";
 import colors from "tailwindcss/colors";
-import { useStore } from "@/stores/global";
+import { useStore } from "stores/global";
 
 export interface Props extends React.ComponentPropsWithoutRef<"div"> {}
 
