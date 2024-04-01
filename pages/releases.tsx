@@ -4,7 +4,7 @@ import useTranslation from "next-translate/useTranslation";
 import { CommonStoreContext } from "@/stores/common";
 import Link from "next/link";
 
-export default function Adjust() {
+export default function Releases() {
   const { t } = useTranslation("common");
 
   const { releases } = useContext(CommonStoreContext);

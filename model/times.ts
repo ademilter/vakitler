@@ -10,37 +10,11 @@ export class Times {
   public times: Time[];
   public localTime: DateTime;
   public timeTravel: [number, number, number];
-  public adjustments: number[];
 
-  constructor(
-    data: ITime[] = [],
-    adjustments: number[] = timeNames.map(() => 0)
-  ) {
-    this.adjustments = adjustments;
+  constructor(data: ITime[] = []) {
     this.times = data.map(day => new Time(day));
     this.localTime = DateTime.local();
     this.timeTravel = [0, 0, 0];
-    if (adjustments.some(a => a !== 0)) {
-      this.adjustTimes(adjustments);
-    }
-  }
-
-  adjustTimes(adjustments: number[]) {
-    this.times.forEach((day, index) => {
-      timeNames.forEach((time, i) => {
-        const timeValue = DateTime.fromFormat(day[time], HOUR_FORMAT);
-        const newTime = timeValue.plus({ minutes: adjustments[i] });
-        day[time] = newTime.toFormat(HOUR_FORMAT);
-      });
-    });
-  }
-
-  updateTimeTravel(value: [number, number, number]): void {
-    this.timeTravel = value;
-  }
-
-  updateDateTime(datetime: DateTime): void {
-    this.localTime = datetime;
   }
 
   get today(): Time {
@@ -116,6 +90,14 @@ export class Times {
       this.localTime >
       DateTime.fromFormat(this.today[TimeNames.Imsak], HOUR_FORMAT)
     );
+  }
+
+  updateTimeTravel(value: [number, number, number]): void {
+    this.timeTravel = value;
+  }
+
+  updateDateTime(datetime: DateTime): void {
+    this.localTime = datetime;
   }
 
   timer(): TypeTimer {

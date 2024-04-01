@@ -16,12 +16,6 @@ export function secondSplit(second: number): TypeTimer {
   ];
 }
 
-export function adjustedTime(adjustment: number, time: string = "00:00") {
-  const timeValue = DateTime.fromFormat(time, HOUR_FORMAT);
-  const newTime = timeValue.plus({ minutes: adjustment });
-  return newTime.toFormat(HOUR_FORMAT);
-}
-
 export function formattedTime(
   timeFormat: TimeFormat,
   baseTime: string = "00:00",

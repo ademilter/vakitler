@@ -10,8 +10,9 @@ module.exports = {
       colors: {
         primary: "var(--primary)",
         secondary: "var(--secondary)",
-        "gradient-1": "var(--gradient-from)",
-        "gradient-2": "var(--gradient-to)",
+        "gradient-from": "var(--gradient-from)",
+        "gradient-via": "var(--gradient-via)",
+        "gradient-to": "var(--gradient-to)",
         "moon-light": "var(--moon-light)",
         "moon-dark": "var(--moon-dark)",
       },

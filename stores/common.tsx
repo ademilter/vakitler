@@ -27,7 +27,6 @@ export const CommonStoreContext = createContext<ICommonStore>({
     city: undefined,
     _city: undefined,
     timeFormat: TimeFormat.TwentyFour,
-    adjustments: [0, 0, 0, 0, 0, 0],
     ramadanTimer: false,
   },
   setSettings: () => {},
@@ -51,7 +50,6 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
     city: undefined,
     _city: undefined,
     timeFormat: TimeFormat.TwentyFour,
-    adjustments: [0, 0, 0, 0, 0, 0],
     ramadanTimer: false,
   });
 
@@ -90,7 +88,7 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
       localStorage.setItem(LOCAL_KEYS.UpdateDate, `${updateDate}`);
       localStorage.setItem(LOCAL_KEYS.Data, JSON.stringify(data));
 
-      setTimes(new Times(data, settings.adjustments));
+      setTimes(new Times(data));
       setRawTimes(new Times(data));
     } catch (e) {
       console.error(e);
@@ -118,11 +116,11 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
       console.log("The prayer data is old, fetching new data...");
       await fetchData(parsedSettings.city?.IlceID);
     } else {
-      setTimes(new Times(JSON.parse(data), parsedSettings.adjustments));
+      setTimes(new Times(JSON.parse(data)));
       setRawTimes(new Times(JSON.parse(data)));
     }
 
-    await fetchReleases();
+    // await fetchReleases();
   };
 
   const checkQueryString = async () => {

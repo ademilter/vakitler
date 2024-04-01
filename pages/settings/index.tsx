@@ -21,17 +21,6 @@ export default function Settings() {
   const { theme, setTheme } = useTheme();
 
   const timeFormat = settings.timeFormat;
-  const adjustments = (settings.adjustments || []).map(a => {
-    if (a <= 0) return a;
-    if (a > 0) return `+${a}`;
-  });
-
-  const adjustmentsAsText = () => {
-    if (adjustments.length === 0 || adjustments.every(a => a === 0)) {
-      return t("settings:customAdjustmentsEmpty");
-    }
-    return adjustments.join(", ");
-  };
 
   const onChangeLang = async (value: string) => {
     if (value === lang) return;
@@ -129,19 +118,6 @@ export default function Settings() {
                   setSettings({ ...settings, ramadanTimer: checked });
                 }}
               />
-            </Box>
-
-            {/* FINE TUNE */}
-            <Box>
-              <div className="grow shrink-0">
-                <Box.Title>{t("settings:customAdjustmentsTitle")}</Box.Title>
-              </div>
-              <Box.BoxLink
-                href="/settings/adjust"
-                className="w-auto font-semibold"
-              >
-                {adjustmentsAsText()}
-              </Box.BoxLink>
             </Box>
           </Box.BoxContainer>
 
