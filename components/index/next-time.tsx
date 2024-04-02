@@ -4,6 +4,7 @@ import useTranslation from "next-translate/useTranslation";
 import Trans from "next-translate/Trans";
 import { cx } from "utils/helper";
 import { useStore } from "stores/global";
+import { motion } from "framer-motion";
 
 export interface Props extends React.ComponentPropsWithoutRef<"div"> {}
 
@@ -20,7 +21,13 @@ export default function NextTime({ className }: Props) {
   }
 
   return (
-    <div className={cx("uppercase font-medium tracking-wide", className)}>
+    <motion.div
+      layout
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      // animate={{ y: 0, opacity: 1 }}
+      // exit={{ y: -40, opacity: 0 }}
+      className={cx("uppercase font-medium tracking-wide", className)}
+    >
       <Trans
         ns={"common"}
         i18nKey="timerTitle"
@@ -28,6 +35,6 @@ export default function NextTime({ className }: Props) {
           time: timeName,
         }}
       />
-    </div>
+    </motion.div>
   );
 }

@@ -4,7 +4,6 @@ import useTranslation from "next-translate/useTranslation";
 import setLanguage from "next-translate/setLanguage";
 import { LOCAL_KEYS } from "utils/const";
 import useLocations from "hooks/use-locations";
-import { useTheme } from "next-themes";
 import Box from "components/box";
 import SettingsLayout from "components/settings/layout";
 import { TimeFormat } from "utils/types";
@@ -17,7 +16,6 @@ export default function Settings() {
 
   const { t, lang } = useTranslation("common");
   const { city, country, region } = useLocations();
-  const { theme, setTheme } = useTheme();
 
   const { times, settings, saveSettings, setSettings } = useStore(store => ({
     times: store.times,
@@ -35,7 +33,6 @@ export default function Settings() {
   };
 
   const onChangeTimeFormat = async (value: string) => {
-    console.log("value", value);
     setSettings({
       ...settings,
       timeFormat: value as typeof settings.timeFormat,
@@ -81,24 +78,6 @@ export default function Settings() {
               />
             </Box>
 
-            {/* THEMES */}
-            <Box>
-              <div className="grow">
-                <Box.Title>{t("settings:themeTitle")}</Box.Title>
-              </div>
-              <Box.BoxSelect
-                name="theme"
-                value={theme || ""}
-                defaultValue={theme}
-                onValueChange={value => setTheme(value)}
-                data={[
-                  ["system", "settings:themeOptionSystem"],
-                  ["light", "settings:themeOptionLight"],
-                  ["dark", "settings:themeOptionDark"],
-                ]}
-              />
-            </Box>
-
             {/* TIME FORMAT */}
             <Box>
               <div className="grow">
@@ -132,28 +111,6 @@ export default function Settings() {
                   setSettings({ ...settings, ramadanTimer: checked });
                 }}
               />
-            </Box>
-          </Box.BoxContainer>
-
-          <Box.BoxContainer
-            className="border-0 bg-yellow-50 text-yellow-700
-           dark:text-yellow-600 dark:bg-yellow-500/10"
-          >
-            <Box className="text-sm">
-              <Box.BoxLink
-                href="https://ezanvakti.herokuapp.com"
-                target="_blank"
-              >
-                <p className="text-pretty mr-10">
-                  <Trans
-                    i18nKey="settings:aboutAPI"
-                    components={[<b key="0" />]}
-                  />
-                </p>
-                <p className="underline decoration-amber-500/50">
-                  ezanvakti.herokuapp.com
-                </p>
-              </Box.BoxLink>
             </Box>
           </Box.BoxContainer>
 
@@ -213,6 +170,28 @@ export default function Settings() {
                 <p className="">{t("settings:aboutSourceCode")}</p>
                 <p className="underline decoration-zinc-300">
                   buymeacoffee.com/ademilter
+                </p>
+              </Box.BoxLink>
+            </Box>
+          </Box.BoxContainer>
+
+          <Box.BoxContainer
+            className="border-0 bg-yellow-50 text-yellow-700
+           dark:text-yellow-600 dark:bg-yellow-500/10"
+          >
+            <Box className="text-sm">
+              <Box.BoxLink
+                href="https://ezanvakti.herokuapp.com"
+                target="_blank"
+              >
+                <p className="text-pretty mr-10">
+                  <Trans
+                    i18nKey="settings:aboutAPI"
+                    components={[<React.Fragment key="0" />]}
+                  />
+                </p>
+                <p className="underline decoration-amber-500/50">
+                  ezanvakti.herokuapp.com
                 </p>
               </Box.BoxLink>
             </Box>

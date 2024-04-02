@@ -1,6 +1,6 @@
 /** @type {import("tailwindcss").Config} */
 module.exports = {
-  darkMode: "class",
+  // darkMode: "class",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
@@ -15,10 +15,12 @@ module.exports = {
         "gradient-to": "var(--gradient-to)",
         "moon-light": "var(--moon-light)",
         "moon-dark": "var(--moon-dark)",
+        card: "var(--card-bg)",
       },
       textColor: {
         primary: "var(--primary)",
         secondary: "var(--secondary)",
+        card: "var(--card-text)",
       },
     },
   },

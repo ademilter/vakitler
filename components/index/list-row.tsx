@@ -2,8 +2,13 @@ import { TimeNames } from "utils/types";
 import { cx, formattedTime } from "utils/helper";
 import useTranslation from "next-translate/useTranslation";
 import { useStore } from "stores/global";
+import React from "react";
 
-export default function TimeListRow({ time }: { time: TimeNames }) {
+export interface Props extends React.ComponentPropsWithoutRef<"div"> {
+  time: TimeNames;
+}
+
+export default function TimeListRow({ className, time }: Props) {
   const { t, lang } = useTranslation("common");
 
   const {
@@ -30,21 +35,19 @@ export default function TimeListRow({ time }: { time: TimeNames }) {
 
   return (
     <div
+      data-time={isTimeActive ? "active" : isTimeNext ? "next" : ""}
       className={cx(
         "z-10 relative",
         "inline-flex gap-2 items-baseline justify-between",
         "px-6 py-4 text-xl rounded-2xl",
-        isTimeNext ? "bg-white/10 font-medium" : "opacity-80"
+        "data-[time='next']:bg-white",
+        "data-[time='next']:text-card",
+        "data-[time='next']:font-medium",
+        className
       )}
     >
       <h5 className={cx("capitalize leading-none")}>{timeName}</h5>
-      <span
-        className={cx(
-          "w-16"
-          // "opacity-10 font-light",
-          // "border-b border-b-white"
-        )}
-      />
+      <span className={cx("w-16")} />
       <h4 className={cx("tabular-nums leading-none")}>{formattedValue}</h4>
     </div>
   );

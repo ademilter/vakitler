@@ -11,6 +11,8 @@
         --gradient-to: #444;
         --moon-light: white;
         --moon-dark: black;
+        --card-bg: white;
+        --card-text: black;
     }
 
     button {

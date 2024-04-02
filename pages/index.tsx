@@ -11,9 +11,13 @@ import useInterval from "hooks/use-interval";
 import { DateTime } from "luxon";
 import TimeTravel from "components/time-travel";
 import { useRouter } from "next/router";
+import { motion } from "framer-motion";
+import TimeListFull from "../components/index/list-full";
 
 export default function Index() {
   const { push } = useRouter();
+
+  const [showList, setShowList] = React.useState(false);
 
   const { hasLocalData, initApp, devMode, times, updateTimer } = useStore(
     store => ({
@@ -62,22 +66,46 @@ export default function Index() {
   if (!times) return null;
 
   return (
-    <IndexLayout>
-      <div className="">
+    <IndexLayout
+      initial="simple"
+      animate={showList ? "full" : "simple"}
+      showList={showList}
+    >
+      <motion.div
+        variants={{
+          simple: { opacity: 1, y: 0 },
+          full: { opacity: 0, y: -20 },
+        }}
+      >
         <Moon className="mb-8" />
         <NextTime className="mb-1" />
         <TimeSummaryTimer />
+      </motion.div>
+
+      <div className="flex grow" />
+
+      <div className="flex items-center flex-col">
+        <List showList={showList} onClick={() => setShowList(true)} />
+        {showList && (
+          <TimeListFull
+            showList={showList}
+            onClick={() => setShowList(false)}
+          />
+        )}
       </div>
 
-      <div className="grid place-content-center place-items-center">
-        <List />
-        {/*<RamadanTimer className="mt-10" />*/}
-      </div>
+      <div className="flex grow" />
 
-      <div className="">
-        <IslamicDate className="mb-1 opacity-60" />
-        <Location className="font-semibold" />
-      </div>
+      <motion.div
+        className="opacity-80"
+        variants={{
+          simple: { opacity: 1, y: 0 },
+          full: { opacity: 0, y: 10 },
+        }}
+      >
+        <IslamicDate className="mb-1" />
+        <Location />
+      </motion.div>
 
       {devMode && <TimeTravel />}
     </IndexLayout>

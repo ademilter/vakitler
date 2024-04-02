@@ -25,7 +25,7 @@ export default function Moon({ className }: Props) {
     }
   }, []);
 
-  const debugCSS = debug && "ring-2 ring-red-500";
+  const debugCSS = debug ? "ring-2 ring-red-500" : "";
 
   return (
     <>
@@ -39,82 +39,7 @@ export default function Moon({ className }: Props) {
           className
         )}
       >
-        <span
-          className={cx(
-            "absolute inset-0 rounded-full",
-            phease > Phease.dolunay ? "bg-moon-dark" : "bg-moon-light"
-          )}
-        />
-
-        {phease < Phease.dolunay && (
-          <>
-            <span
-              data-name="11"
-              className={cx(
-                "absolute left-0 h-full bg-moon-dark rounded-l-full w-1/2",
-                debugCSS
-              )}
-            />
-            <span
-              data-name="12"
-              className={cx(
-                "absolute h-full rounded-[100%] w-full",
-                debugCSS,
-                phease === Phease.ruyet && "w-[90%]",
-                phease === Phease.r1 && "w-[80%]",
-                phease === Phease.r2 && "w-[70%]",
-                phease === Phease.r3 && "w-[55%]",
-                phease === Phease.r4 && "w-[35%]",
-                phease === Phease.r5 && "w-[20%]",
-                phease === Phease.ilkdordun && "w-[10%]",
-                phease > Phease.ilkdordun ? "bg-moon-light" : "bg-moon-dark",
-                phease === Phease.i1 && "w-[22%]",
-                phease === Phease.i2 && "w-[34%]",
-                phease === Phease.i3 && "w-[46%]",
-                phease === Phease.i4 && "w-[58%]",
-                phease === Phease.i5 && "w-[70%]",
-                phease === Phease.i6 && "w-[82%]",
-                phease === Phease.i7 && "w-[90%]"
-              )}
-            />
-          </>
-        )}
-
-        {/* -------------- */}
-
-        {phease > Phease.dolunay && (
-          <>
-            <span
-              data-name="21"
-              className={cx(
-                "absolute left-0 h-full bg-moon-light rounded-l-full w-1/2",
-                debugCSS
-              )}
-            />
-            <span
-              data-name="22"
-              className={cx(
-                "absolute h-full rounded-[100%] w-full",
-                debugCSS,
-                phease === Phease.d1 && "w-[85%]",
-                phease === Phease.d2 && "w-[70%]",
-                phease === Phease.d3 && "w-[60%]",
-                phease === Phease.d4 && "w-[50%]",
-                phease === Phease.d5 && "w-[40%]",
-                phease === Phease.d6 && "w-[30%]",
-                phease === Phease.d7 && "w-[20%]",
-                phease === Phease.sondordun && "w-[10%]",
-                phease > Phease.sondordun ? "bg-moon-dark" : "bg-moon-light",
-                phease === Phease.sd1 && "w-[20%]",
-                phease === Phease.sd2 && "w-[30%]",
-                phease === Phease.sd3 && "w-[45%]",
-                phease === Phease.sd4 && "w-[60%]",
-                phease === Phease.sd5 && "w-[75%]",
-                phease === Phease.sd6 && "w-[90%]"
-              )}
-            />
-          </>
-        )}
+        <Moon1 phease={phease} debugCSS={debugCSS} />
       </div>
 
       {slider && (
@@ -127,6 +52,91 @@ export default function Moon({ className }: Props) {
             onChange={e => setPhease(Number(e.target.value) as Phease)}
           />
         </div>
+      )}
+    </>
+  );
+}
+
+function Moon1({ phease, debugCSS }: { phease: Phease; debugCSS: string }) {
+  return (
+    <>
+      <span
+        className={cx(
+          "absolute inset-0 rounded-full",
+          phease > Phease.dolunay ? "bg-moon-dark" : "bg-moon-light"
+        )}
+      />
+
+      {phease < Phease.dolunay && (
+        <>
+          <span
+            data-name="11"
+            className={cx(
+              "absolute left-0 h-full bg-moon-dark rounded-l-full w-1/2",
+              debugCSS
+            )}
+          />
+          <span
+            data-name="12"
+            className={cx(
+              "absolute h-full rounded-[100%] w-full",
+              "transition-transform duration-[30ms]",
+              debugCSS,
+              phease === Phease.ruyet && "w-[90%]",
+              phease === Phease.r1 && "w-[80%]",
+              phease === Phease.r2 && "w-[70%]",
+              phease === Phease.r3 && "w-[55%]",
+              phease === Phease.r4 && "w-[35%]",
+              phease === Phease.r5 && "w-[20%]",
+              phease === Phease.ilkdordun && "w-[10%]",
+              phease > Phease.ilkdordun ? "bg-moon-light" : "bg-moon-dark",
+              phease === Phease.i1 && "w-[22%]",
+              phease === Phease.i2 && "w-[34%]",
+              phease === Phease.i3 && "w-[46%]",
+              phease === Phease.i4 && "w-[58%]",
+              phease === Phease.i5 && "w-[70%]",
+              phease === Phease.i6 && "w-[82%]",
+              phease === Phease.i7 && "w-[90%]"
+            )}
+          />
+        </>
+      )}
+
+      {/* -------------- */}
+
+      {phease > Phease.dolunay && (
+        <>
+          <span
+            data-name="21"
+            className={cx(
+              "absolute left-0 h-full bg-moon-light rounded-l-full w-1/2",
+              debugCSS
+            )}
+          />
+          <span
+            data-name="22"
+            className={cx(
+              "absolute h-full rounded-[100%] w-full",
+              "transition-transform duration-[30ms]",
+              debugCSS,
+              phease === Phease.d1 && "w-[85%]",
+              phease === Phease.d2 && "w-[70%]",
+              phease === Phease.d3 && "w-[60%]",
+              phease === Phease.d4 && "w-[50%]",
+              phease === Phease.d5 && "w-[40%]",
+              phease === Phease.d6 && "w-[30%]",
+              phease === Phease.d7 && "w-[20%]",
+              phease === Phease.sondordun && "w-[10%]",
+              phease > Phease.sondordun ? "bg-moon-dark" : "bg-moon-light",
+              phease === Phease.sd1 && "w-[20%]",
+              phease === Phease.sd2 && "w-[30%]",
+              phease === Phease.sd3 && "w-[45%]",
+              phease === Phease.sd4 && "w-[60%]",
+              phease === Phease.sd5 && "w-[75%]",
+              phease === Phease.sd6 && "w-[90%]"
+            )}
+          />
+        </>
       )}
     </>
   );

@@ -4,10 +4,13 @@ import { TimeNames } from "utils/types";
 import Head from "next/head";
 import colors from "tailwindcss/colors";
 import { useStore } from "stores/global";
+import { HTMLMotionProps, motion } from "framer-motion";
 
-export interface Props extends React.ComponentPropsWithoutRef<"div"> {}
+export interface Props extends HTMLMotionProps<"div"> {
+  showList: boolean;
+}
 
-export default function IndexLayout({ className, ...props }: Props) {
+export default function IndexLayout({ showList, className, ...props }: Props) {
   const { times } = useStore(store => ({
     times: store.times,
   }));
@@ -20,11 +23,10 @@ export default function IndexLayout({ className, ...props }: Props) {
     <>
       <Head>{<meta name="theme-color" content={themeColor} />}</Head>
 
-      <div
-        data-name="layout"
+      <motion.div
         className={cx(
-          "fixed inset-0 overflow-hidden",
-          "grid grid-rows-[auto_1fr_auto] gap-10",
+          "fixed inset-0 overflow-hidden select-none",
+          "flex flex-col",
           "p-12 py-16 md:py-32",
           "bg-primary bg-gradient-to-t",
           "from-gradient-from via-gradient-via to-gradient-to",
@@ -44,64 +46,76 @@ export const MainColors = {
   [TimeNames.Imsak]: colors.indigo[950],
   [TimeNames.Gunes]: colors.indigo[700],
   [TimeNames.Ogle]: colors.blue[500],
-  [TimeNames.Ikindi]: colors.blue[500],
+  [TimeNames.Ikindi]: colors.blue[400],
   [TimeNames.Aksam]: colors.indigo[800],
   [TimeNames.Yatsi]: colors.indigo[950],
 };
 
 export const Variables: Record<TimeNames, Record<string, string>> = {
   [TimeNames.Imsak]: {
-    "--primary": colors.indigo[950],
+    "--primary": colors.indigo[900],
     "--secondary": colors.indigo[50],
     "--gradient-to": colors.indigo[950],
     "--gradient-via": colors.indigo[800],
     "--gradient-from": colors.yellow[700],
     "--moon-light": colors.orange[50],
     "--moon-dark": colors.indigo[950],
+    "--card-bg": "rgba(255,255,255,0.2)",
+    "--card-text": "var(--primary)",
   },
   [TimeNames.Gunes]: {
-    "--primary": colors.indigo[950],
+    "--primary": colors.indigo[900],
     "--secondary": colors.indigo[50],
     "--gradient-to": colors.indigo[700],
     "--gradient-via": colors.blue[600],
     "--gradient-from": colors.orange[300],
     "--moon-light": colors.blue[50],
     "--moon-dark": colors.blue[800],
+    "--card-bg": "rgba(255,255,255,0.2)",
+    "--card-text": "var(--primary)",
   },
   [TimeNames.Ogle]: {
     "--primary": colors.blue[50],
-    "--secondary": colors.blue[950],
+    "--secondary": colors.blue[900],
     "--gradient-to": colors.blue[500],
     "--gradient-via": colors.blue[300],
     "--gradient-from": colors.yellow[50],
-    "--moon-light": colors.blue[50],
+    "--moon-light": colors.white,
     "--moon-dark": colors.blue[300],
+    "--list-bg": "rgba(0,0,0,0.1)",
+    "--card-text": "var(--secondary)",
   },
   [TimeNames.Ikindi]: {
     "--primary": colors.blue[50],
-    "--secondary": colors.blue[950],
-    "--gradient-to": colors.blue[500],
-    "--gradient-via": colors.purple[200],
+    "--secondary": colors.blue[900],
+    "--gradient-to": colors.blue[400],
+    "--gradient-via": colors.indigo[200],
     "--gradient-from": colors.orange[200],
-    "--moon-light": colors.blue[50],
+    "--moon-light": colors.white,
     "--moon-dark": colors.blue[300],
+    "--card-bg": "rgba(255,255,255,0.2)",
+    "--card-text": "var(--secondary)",
   },
   [TimeNames.Aksam]: {
-    "--primary": colors.blue[950],
+    "--primary": colors.blue[900],
     "--secondary": colors.blue[50],
     "--gradient-to": colors.indigo[800],
     "--gradient-via": colors.blue[600],
     "--gradient-from": colors.sky[400],
     "--moon-light": colors.blue[50],
     "--moon-dark": colors.blue[500],
+    "--card-bg": "rgba(255,255,255,0.2)",
+    "--card-text": "var(--primary)",
   },
   [TimeNames.Yatsi]: {
-    "--primary": colors.blue[950],
+    "--primary": colors.blue[900],
     "--secondary": colors.blue[50],
     "--gradient-to": colors.indigo[950],
     "--gradient-via": colors.blue[950],
     "--gradient-from": colors.blue[800],
     "--moon-light": colors.blue[50],
     "--moon-dark": colors.blue[900],
+    "--card-bg": "rgba(255,255,255,0.2)",
+    "--card-text": "var(--primary)",
   },
 };

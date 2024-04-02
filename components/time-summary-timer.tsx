@@ -2,6 +2,7 @@ import React, { HTMLAttributes } from "react";
 import Trans from "next-translate/Trans";
 import { cx } from "utils/helper";
 import { useStore } from "stores/global";
+import { motion } from "framer-motion";
 
 export interface Props extends React.ComponentPropsWithoutRef<"div"> {}
 
@@ -11,7 +12,9 @@ export default function TimeSummaryTimer({ className }: Props) {
   }));
 
   return (
-    <div
+    <motion.div
+      layout
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
       className={cx(
         "flex items-baseline justify-center text-5xl md:text-6xl font-light gap-2",
         className
@@ -64,7 +67,7 @@ export default function TimeSummaryTimer({ className }: Props) {
           )}
         </>
       )}
-    </div>
+    </motion.div>
   );
 }
 

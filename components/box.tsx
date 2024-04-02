@@ -239,7 +239,7 @@ function BoxRadio({
       {items.map(item => (
         <RadioGroup.Item
           key={item.value}
-          className="flex items-center justify-center px-3 h-7
+          className="flex items-center justify-center px-3 h-8
           cursor-default rounded-md
           data-[state='checked']:font-semibold
           data-[state='checked']:shadow
@@ -248,7 +248,10 @@ function BoxRadio({
           {...item}
         >
           {item["aria-label"]}
-          <RadioGroup.Indicator className="text-emerald-500 ml-1 -mr-1" asChild>
+          <RadioGroup.Indicator
+            className="text-emerald-500 ml-1 -mr-0.5"
+            asChild
+          >
             <IconCheck size={16} />
           </RadioGroup.Indicator>
         </RadioGroup.Item>

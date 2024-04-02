@@ -15,7 +15,7 @@ export default function Location({ className }: Props) {
       href="/settings"
       className={cx(
         "inline-flex items-center",
-        "tracking-wider font-medium text-sm",
+        "tracking-wider font-medium",
         className
       )}
     >
