@@ -4,6 +4,8 @@ import { cx } from "utils/helper";
 import { useStore } from "stores/global";
 import React from "react";
 import { motion } from "framer-motion";
+import IslamicDate from "../islamic-date";
+import Location from "./location";
 
 export interface Props extends React.ComponentPropsWithoutRef<"div"> {
   showList: boolean;
@@ -30,7 +32,7 @@ export default function TimeListFull({ onClick, showList }: Props) {
           },
         },
         simple: {
-          scale: 0.8,
+          scale: 0.6,
           opacity: 0,
           transition: {
             duration: 2,
@@ -40,7 +42,9 @@ export default function TimeListFull({ onClick, showList }: Props) {
           },
         },
       }}
-      className={cx("fixed z-10 inset-10 flex items-center justify-center")}
+      className={cx(
+        "fixed z-10 inset-10 flex flex-col items-center justify-center"
+      )}
       onClick={onClick}
     >
       <div className="grid gap-1 px-10 py-8 max-w-full rounded-3xl bg-white text-card shadow-2xl">
@@ -49,10 +53,15 @@ export default function TimeListFull({ onClick, showList }: Props) {
             <Time
               key={time}
               time={time as TimeNames}
-              className="border-b rounded-none px-0 last:border-b-0"
+              className="border-b rounded-none last:border-b-0"
             />
           );
         })}
+      </div>
+
+      <div className="mt-6">
+        <IslamicDate className="mb-1" />
+        <Location />
       </div>
     </motion.div>
   );

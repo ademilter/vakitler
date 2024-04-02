@@ -1,5 +1,4 @@
 import { cx } from "utils/helper";
-import Link from "next/link";
 import useTranslation from "next-translate/useTranslation";
 import useLocations from "hooks/use-locations";
 import React from "react";
@@ -11,15 +10,8 @@ export default function Location({ className }: Props) {
   const { city } = useLocations();
 
   return (
-    <Link
-      href="/settings"
-      className={cx(
-        "inline-flex items-center",
-        "tracking-wider font-medium",
-        className
-      )}
-    >
+    <span className={cx("tracking-wider font-medium", className)}>
       {city?.toLocaleUpperCase(lang)}
-    </Link>
+    </span>
   );
 }

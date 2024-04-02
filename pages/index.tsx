@@ -13,6 +13,7 @@ import TimeTravel from "components/time-travel";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import TimeListFull from "../components/index/list-full";
+import Link from "next/link";
 
 export default function Index() {
   const { push } = useRouter();
@@ -104,7 +105,9 @@ export default function Index() {
         }}
       >
         <IslamicDate className="mb-1" />
-        <Location />
+        <Link href="/settings">
+          <Location />
+        </Link>
       </motion.div>
 
       {devMode && <TimeTravel />}

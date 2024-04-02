@@ -39,7 +39,7 @@ export default function TimeListRow({ className, time }: Props) {
       className={cx(
         "z-10 relative",
         "inline-flex gap-2 items-baseline justify-between",
-        "px-6 py-4 text-xl rounded-2xl",
+        "px-4 py-4 text-xl rounded-2xl",
         "data-[time='next']:bg-white",
         "data-[time='next']:text-card",
         "data-[time='next']:font-medium",
