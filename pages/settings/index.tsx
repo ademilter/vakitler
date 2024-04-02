@@ -101,7 +101,7 @@ export default function Settings() {
             </Box>
 
             {/* RAMADAN TIMER */}
-            <Box>
+            {/*<Box>
               <div className="grow">
                 <Box.Title>{t("settings:ramadanTimerTitle")}</Box.Title>
               </div>
@@ -111,7 +111,7 @@ export default function Settings() {
                   setSettings({ ...settings, ramadanTimer: checked });
                 }}
               />
-            </Box>
+            </Box>*/}
           </Box.BoxContainer>
 
           <Box.BoxContainer>

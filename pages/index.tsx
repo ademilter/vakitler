@@ -14,6 +14,7 @@ import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import TimeListFull from "../components/index/list-full";
 import Link from "next/link";
+import { IconDots } from "@tabler/icons-react";
 
 export default function Index() {
   const { push } = useRouter();
@@ -97,8 +98,9 @@ export default function Index() {
         }}
       >
         <IslamicDate className="mb-1" />
-        <Link href="/settings">
+        <Link href="/settings" className="inline-flex items-center gap-1 ">
           <Location />
+          <IconDots size={20} stroke={1.2} className="opacity-50" />
         </Link>
       </motion.div>
 
