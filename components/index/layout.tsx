@@ -42,7 +42,7 @@ export default function IndexLayout({ className, ...props }: Props) {
 
 export const MainColors = {
   [TimeNames.Imsak]: colors.indigo[950],
-  [TimeNames.Gunes]: colors.blue[700],
+  [TimeNames.Gunes]: colors.indigo[700],
   [TimeNames.Ogle]: colors.blue[500],
   [TimeNames.Ikindi]: colors.blue[500],
   [TimeNames.Aksam]: colors.indigo[800],
@@ -53,20 +53,20 @@ export const Variables: Record<TimeNames, Record<string, string>> = {
   [TimeNames.Imsak]: {
     "--primary": colors.indigo[950],
     "--secondary": colors.indigo[50],
-    "--gradient-to": colors.indigo[900],
+    "--gradient-to": colors.indigo[950],
     "--gradient-via": colors.indigo[800],
-    "--gradient-from": colors.orange[500],
+    "--gradient-from": colors.yellow[700],
     "--moon-light": colors.orange[50],
-    "--moon-dark": colors.indigo[900],
+    "--moon-dark": colors.indigo[950],
   },
   [TimeNames.Gunes]: {
     "--primary": colors.indigo[950],
     "--secondary": colors.indigo[50],
-    "--gradient-to": colors.blue[700],
-    "--gradient-via": colors.orange[500],
+    "--gradient-to": colors.indigo[700],
+    "--gradient-via": colors.blue[600],
     "--gradient-from": colors.orange[300],
     "--moon-light": colors.blue[50],
-    "--moon-dark": colors.orange[800],
+    "--moon-dark": colors.blue[800],
   },
   [TimeNames.Ogle]: {
     "--primary": colors.blue[50],
