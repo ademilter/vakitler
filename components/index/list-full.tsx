@@ -1,5 +1,5 @@
 import { TimeNames } from "utils/types";
-import Time from "components/index/list-row";
+import Time from "components/index/time";
 import { cx } from "utils/helper";
 import { useStore } from "stores/global";
 import React from "react";
@@ -8,11 +8,10 @@ import IslamicDate from "../islamic-date";
 import Location from "./location";
 
 export interface Props extends React.ComponentPropsWithoutRef<"div"> {
-  showList: boolean;
   onClick: () => void;
 }
 
-export default function TimeListFull({ onClick, showList }: Props) {
+export default function TimeListFull({ onClick }: Props) {
   const { times } = useStore(store => ({
     times: store.times,
   }));
@@ -22,15 +21,6 @@ export default function TimeListFull({ onClick, showList }: Props) {
   return (
     <motion.div
       variants={{
-        full: {
-          scale: 1,
-          opacity: 1,
-          transition: {
-            type: "spring",
-            stiffness: 500,
-            damping: 30,
-          },
-        },
         simple: {
           scale: 0.6,
           opacity: 0,
@@ -38,6 +28,15 @@ export default function TimeListFull({ onClick, showList }: Props) {
             duration: 2,
             type: "spring",
             stiffness: 100,
+            damping: 30,
+          },
+        },
+        full: {
+          scale: 1,
+          opacity: 1,
+          transition: {
+            type: "spring",
+            stiffness: 500,
             damping: 30,
           },
         },

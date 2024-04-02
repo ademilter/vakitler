@@ -6,11 +6,9 @@ import colors from "tailwindcss/colors";
 import { useStore } from "stores/global";
 import { HTMLMotionProps, motion } from "framer-motion";
 
-export interface Props extends HTMLMotionProps<"div"> {
-  showList: boolean;
-}
+export interface Props extends HTMLMotionProps<"div"> {}
 
-export default function IndexLayout({ showList, className, ...props }: Props) {
+export default function IndexLayout({ className, ...props }: Props) {
   const { times } = useStore(store => ({
     times: store.times,
   }));

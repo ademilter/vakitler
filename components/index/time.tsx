@@ -8,7 +8,7 @@ export interface Props extends React.ComponentPropsWithoutRef<"div"> {
   time: TimeNames;
 }
 
-export default function TimeListRow({ className, time }: Props) {
+export default function Time({ className, time }: Props) {
   const { t, lang } = useTranslation("common");
 
   const {

@@ -18,7 +18,7 @@ import Link from "next/link";
 export default function Index() {
   const { push } = useRouter();
 
-  const [showList, setShowList] = React.useState(false);
+  const [anim, setAnim] = React.useState<"simple" | "full">("simple");
 
   const { hasLocalData, initApp, devMode, times, updateTimer } = useStore(
     store => ({
@@ -33,6 +33,7 @@ export default function Index() {
   useEffect(() => {
     if (hasLocalData()) {
       initApp();
+      setAnim("simple");
     } else {
       push("/settings/country");
     }
@@ -67,11 +68,7 @@ export default function Index() {
   if (!times) return null;
 
   return (
-    <IndexLayout
-      initial="simple"
-      animate={showList ? "full" : "simple"}
-      showList={showList}
-    >
+    <IndexLayout initial="simple" animate={anim}>
       <motion.div
         variants={{
           simple: { opacity: 1, y: 0 },
@@ -86,13 +83,8 @@ export default function Index() {
       <div className="flex grow" />
 
       <div className="flex items-center flex-col">
-        <List showList={showList} onClick={() => setShowList(true)} />
-        {showList && (
-          <TimeListFull
-            showList={showList}
-            onClick={() => setShowList(false)}
-          />
-        )}
+        <List onClick={() => setAnim("full")} />
+        {anim === "full" && <TimeListFull onClick={() => setAnim("simple")} />}
       </div>
 
       <div className="flex grow" />

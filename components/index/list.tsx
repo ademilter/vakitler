@@ -1,16 +1,15 @@
 import { TimeNames } from "utils/types";
-import Time from "components/index/list-row";
+import Time from "components/index/time";
 import { cx } from "utils/helper";
 import { useStore } from "stores/global";
 import React from "react";
 import { motion } from "framer-motion";
 
 export interface Props extends React.ComponentPropsWithoutRef<"div"> {
-  showList: boolean;
   onClick: () => void;
 }
 
-export default function TimeList({ onClick, showList }: Props) {
+export default function TimeList({ onClick }: Props) {
   const { times } = useStore(store => ({
     times: store.times,
   }));
@@ -23,8 +22,8 @@ export default function TimeList({ onClick, showList }: Props) {
   return (
     <motion.div
       variants={{
-        full: { scale: 1.2, opacity: 0 },
         simple: { scale: 1, opacity: 1 },
+        full: { scale: 1.2, opacity: 0 },
       }}
       className={cx("grid p-2 gap-1 rounded-3xl bg-card")}
       onClick={onClick}
