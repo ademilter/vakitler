@@ -83,4 +83,5 @@ export interface StoreInterface {
   initApp: () => void;
   fetchReleases: () => void;
   checkQueryString: () => void;
+  hasLocalData: () => boolean;
 }

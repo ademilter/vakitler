@@ -6,8 +6,8 @@ import process from "process";
 import { DateTime } from "luxon";
 import { API_DATE_FORMAT, LOCAL_KEYS } from "utils/const";
 import { Times } from "model/times";
-import i18n from "i18n.json";
 import setLanguage from "next-translate/setLanguage";
+import i18n from "../i18n.json";
 
 function getDefaultInitialState() {
   return {
@@ -35,6 +35,7 @@ function getDefaultInitialState() {
     initApp: () => {},
     fetchReleases: () => {},
     checkQueryString: () => {},
+    hasLocalData: () => {},
   } as const;
 }
 
@@ -58,6 +59,7 @@ export function initializeStore(preloadedState: PreloadedStoreInterface) {
     ...preloadedState,
     devMode: process.env.NODE_ENV === "development",
     setDevMode: () => {},
+
     settings: {
       country: undefined,
       _country: undefined,
@@ -68,11 +70,20 @@ export function initializeStore(preloadedState: PreloadedStoreInterface) {
       timeFormat: TimeFormat.TwentyFour,
       ramadanTimer: false,
     },
+
+    rawTimes: undefined,
+    times: undefined,
+    timer: [0, 0, 0],
+    timerRamadan: [0, 0, 0],
+
+    releases: [],
+
     setSettings: settings => {
       set({
         settings: { ...get().settings, ...settings },
       });
     },
+
     fetchData: async (cityID: string) => {
       if (!cityID) {
         return console.error("cityID is required");
@@ -100,11 +111,49 @@ export function initializeStore(preloadedState: PreloadedStoreInterface) {
         console.error(e);
       }
     },
-    rawTimes: undefined,
-    times: undefined,
-    timer: [0, 0, 0],
-    timerRamadan: [0, 0, 0],
-    releases: [],
+
+    initApp: async () => {
+      const local = localStorage.getItem(LOCAL_KEYS.Lang) || i18n.defaultLocale;
+      await setLanguage(local);
+
+      const data = localStorage.getItem(LOCAL_KEYS.Data);
+      const settings = localStorage.getItem(LOCAL_KEYS.Settings);
+      const updateDate = localStorage.getItem(LOCAL_KEYS.UpdateDate) ?? 0;
+
+      if (!data || !settings) {
+        return;
+      }
+
+      const parsedSettings = JSON.parse(settings);
+
+      set({
+        settings: { ...JSON.parse(settings) },
+        times: new Times(JSON.parse(data)),
+        rawTimes: new Times(JSON.parse(data)),
+      });
+
+      if (+updateDate <= Date.now()) {
+        await get().fetchData(parsedSettings.city?.IlceID);
+      }
+    },
+
+    hasLocalData: () => {
+      const settings = localStorage.getItem(LOCAL_KEYS.Settings);
+      const data = localStorage.getItem(LOCAL_KEYS.Data);
+
+      if (!settings || !data) {
+        return false;
+      }
+
+      return true;
+    },
+
+    fetchReleases: async () => {
+      const res = await fetch("/api/releases");
+      const data = await res.json();
+      set({ releases: data });
+    },
+
     saveSettings: settings => {
       const { _country, _region, _city, ...rawSettings } = settings;
 
@@ -113,6 +162,7 @@ export function initializeStore(preloadedState: PreloadedStoreInterface) {
         JSON.stringify({ ...rawSettings })
       );
     },
+
     updateTimer: () => {
       const times = get().times;
       if (!times) return;
@@ -121,42 +171,7 @@ export function initializeStore(preloadedState: PreloadedStoreInterface) {
         timerRamadan: times.timerRamadan() as TypeTimer,
       });
     },
-    initApp: async () => {
-      const local = localStorage.getItem(LOCAL_KEYS.Lang) || i18n.defaultLocale;
-      await setLanguage(local);
 
-      const settings = localStorage.getItem(LOCAL_KEYS.Settings);
-      const data = localStorage.getItem(LOCAL_KEYS.Data);
-      const updateDate = localStorage.getItem(LOCAL_KEYS.UpdateDate) ?? 0;
-
-      // If there is NO LocalStorage
-      if (!settings || !data) {
-        return; //await checkQueryString();
-      }
-
-      // If there is LocalStorage, we parse and use it
-      const parsedSettings = JSON.parse(settings);
-      set({
-        settings: { ...parsedSettings },
-      });
-
-      if (+updateDate <= Date.now()) {
-        console.log("The prayer data is old, fetching new data...");
-        await get().fetchData(parsedSettings.city?.IlceID);
-      } else {
-        set({
-          times: new Times(JSON.parse(data)),
-          rawTimes: new Times(JSON.parse(data)),
-        });
-      }
-
-      // await fetchReleases();
-    },
-    fetchReleases: async () => {
-      const res = await fetch("/api/releases");
-      const data = await res.json();
-      set({ releases: data });
-    },
     checkQueryString: async () => {
       // example: https://vakitler.app?countryID=11&regionID=664&cityID=11914
       // await setLanguage("en");

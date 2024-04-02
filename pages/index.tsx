@@ -10,13 +10,28 @@ import IslamicDate from "components/islamic-date";
 import useInterval from "hooks/use-interval";
 import { DateTime } from "luxon";
 import TimeTravel from "components/time-travel";
+import { useRouter } from "next/router";
 
 export default function Index() {
-  const { devMode, times, updateTimer } = useStore(store => ({
-    devMode: store.devMode,
-    times: store.times,
-    updateTimer: store.updateTimer,
-  }));
+  const { push } = useRouter();
+
+  const { hasLocalData, initApp, devMode, times, updateTimer } = useStore(
+    store => ({
+      devMode: store.devMode,
+      times: store.times,
+      updateTimer: store.updateTimer,
+      hasLocalData: store.hasLocalData,
+      initApp: store.initApp,
+    })
+  );
+
+  useEffect(() => {
+    if (hasLocalData()) {
+      initApp();
+    } else {
+      push("/settings/country");
+    }
+  }, []);
 
   useEffect(() => {
     if (!times) return;
@@ -47,27 +62,24 @@ export default function Index() {
   if (!times) return null;
 
   return (
-    <div>
-      {times?.localTime.toString()}
-      <IndexLayout>
-        <div className="">
-          <Moon className="mb-8" />
-          <NextTime className="mb-1" />
-          <TimeSummaryTimer />
-        </div>
+    <IndexLayout>
+      <div className="">
+        <Moon className="mb-8" />
+        <NextTime className="mb-1" />
+        <TimeSummaryTimer />
+      </div>
 
-        <div className="grid place-content-center place-items-center">
-          <List />
-          {/*<RamadanTimer className="mt-10" />*/}
-        </div>
+      <div className="grid place-content-center place-items-center">
+        <List />
+        {/*<RamadanTimer className="mt-10" />*/}
+      </div>
 
-        <div className="">
-          <IslamicDate className="mb-1 opacity-60" />
-          <Location className="font-semibold" />
-        </div>
+      <div className="">
+        <IslamicDate className="mb-1 opacity-60" />
+        <Location className="font-semibold" />
+      </div>
 
-        {devMode && <TimeTravel />}
-      </IndexLayout>
-    </div>
+      {devMode && <TimeTravel />}
+    </IndexLayout>
   );
 }
