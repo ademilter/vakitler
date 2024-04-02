@@ -34,7 +34,7 @@ export default function Moon({ className }: Props) {
           "size-24 -rotate-[30deg]",
           "relative overflow-hidden rounded-full",
           "inline-flex justify-center items-center",
-          "shadow-[0_0_40px_rgba(255,255,255,0.2)]",
+          "shadow-[0_0_50px_rgba(255,255,255,0.3)]",
           debugCSS,
           className
         )}
