@@ -12,6 +12,11 @@ import { SelectItemProps, SelectProps } from "@radix-ui/react-select";
 import useTranslation from "next-translate/useTranslation";
 import * as Switch from "@radix-ui/react-switch";
 import { SwitchProps } from "@radix-ui/react-switch";
+import * as RadioGroup from "@radix-ui/react-radio-group";
+import {
+  RadioGroupItemProps,
+  RadioGroupProps,
+} from "@radix-ui/react-radio-group";
 
 export default function Box({
   children,
@@ -218,3 +223,38 @@ function BoxSwitch({ className, ...props }: SwitchProps & {}) {
 }
 
 Box.BoxSwitch = BoxSwitch;
+
+function BoxRadio({
+  items,
+  className,
+  ...props
+}: RadioGroupProps & {
+  items: RadioGroupItemProps[];
+}) {
+  return (
+    <RadioGroup.Root
+      className="flex items-center gap-0.5 bg-zinc-200 dark:bg-zinc-900 p-0.5 rounded-lg overflow-hidden"
+      {...props}
+    >
+      {items.map(item => (
+        <RadioGroup.Item
+          key={item.value}
+          className="flex items-center justify-center px-3 h-7
+          cursor-default rounded-md
+          data-[state='checked']:font-semibold
+          data-[state='checked']:shadow
+          data-[state='checked']:bg-white
+          dark:data-[state='checked']:bg-zinc-800"
+          {...item}
+        >
+          {item["aria-label"]}
+          <RadioGroup.Indicator className="text-emerald-500 ml-1 -mr-1" asChild>
+            <IconCheck size={16} />
+          </RadioGroup.Indicator>
+        </RadioGroup.Item>
+      ))}
+    </RadioGroup.Root>
+  );
+}
+
+Box.BoxRadio = BoxRadio;

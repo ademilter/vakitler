@@ -19,7 +19,8 @@ export default function Settings() {
   const { city, country, region } = useLocations();
   const { theme, setTheme } = useTheme();
 
-  const { settings, saveSettings, setSettings } = useStore(store => ({
+  const { times, settings, saveSettings, setSettings } = useStore(store => ({
+    times: store.times,
     settings: store.settings,
     saveSettings: store.saveSettings,
     setSettings: store.setSettings,
@@ -34,11 +35,14 @@ export default function Settings() {
   };
 
   const onChangeTimeFormat = async (value: string) => {
+    console.log("value", value);
     setSettings({
       ...settings,
       timeFormat: value as typeof settings.timeFormat,
     });
   };
+
+  if (!times) return null;
 
   return (
     <SettingsLayout>
@@ -100,14 +104,19 @@ export default function Settings() {
               <div className="grow">
                 <Box.Title>{t("settings:timeFormatTitle")}</Box.Title>
               </div>
-              <Box.BoxSelect
+              <Box.BoxRadio
                 name="timeFormat"
-                value={timeFormat}
                 defaultValue={timeFormat}
                 onValueChange={onChangeTimeFormat}
-                data={[
-                  [TimeFormat.Twelve, "settings:timeFormatOption12"],
-                  [TimeFormat.TwentyFour, "settings:timeFormatOption24"],
+                items={[
+                  {
+                    value: TimeFormat.Twelve,
+                    "aria-label": t`settings:timeFormatOption12`,
+                  },
+                  {
+                    value: TimeFormat.TwentyFour,
+                    "aria-label": t`settings:timeFormatOption24`,
+                  },
                 ]}
               />
             </Box>

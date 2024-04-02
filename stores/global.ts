@@ -68,7 +68,11 @@ export function initializeStore(preloadedState: PreloadedStoreInterface) {
       timeFormat: TimeFormat.TwentyFour,
       ramadanTimer: false,
     },
-    setSettings: () => {},
+    setSettings: settings => {
+      set({
+        settings: { ...get().settings, ...settings },
+      });
+    },
     fetchData: async (cityID: string) => {
       if (!cityID) {
         return console.error("cityID is required");
@@ -103,6 +107,7 @@ export function initializeStore(preloadedState: PreloadedStoreInterface) {
     releases: [],
     saveSettings: settings => {
       const { _country, _region, _city, ...rawSettings } = settings;
+
       localStorage.setItem(
         LOCAL_KEYS.Settings,
         JSON.stringify({ ...rawSettings })

@@ -58,29 +58,6 @@ export interface IRelease {
   url: string;
 }
 
-export interface ICommonStore {
-  devMode: boolean;
-  setDevMode: (value: boolean) => void;
-  settings: {
-    country: undefined | ICountry;
-    _country: undefined | ICountry;
-    region: undefined | IRegion;
-    _region: undefined | IRegion;
-    city: undefined | ICity;
-    _city: undefined | ICity;
-    timeFormat: TimeFormat;
-    ramadanTimer: boolean;
-  };
-  setSettings: (value: ICommonStore["settings"]) => void;
-  fetchData: (cityId: string) => Promise<void>;
-  times: undefined | Times;
-  rawTimes: undefined | Times;
-  timer: TypeTimer;
-  timerRamadan: TypeTimer;
-  releases: IRelease[];
-  saveSettings: (settings: ICommonStore["settings"]) => void;
-}
-
 export interface StoreInterface {
   devMode: boolean;
   setDevMode: (value: boolean) => void;
