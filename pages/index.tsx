@@ -10,35 +10,21 @@ import IslamicDate from "components/islamic-date";
 import useInterval from "hooks/use-interval";
 import { DateTime } from "luxon";
 import TimeTravel from "components/time-travel";
-import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import TimeListFull from "../components/index/list-full";
 import Link from "next/link";
 import { IconDots } from "@tabler/icons-react";
 
 export default function Index() {
-  const { push } = useRouter();
-
   const [anim, setAnim] = React.useState<"simple" | "full">("simple");
 
-  const { hasLocalData, initApp, devMode, times, updateTimer } = useStore(
-    store => ({
-      devMode: store.devMode,
-      times: store.times,
-      updateTimer: store.updateTimer,
-      hasLocalData: store.hasLocalData,
-      initApp: store.initApp,
-    })
-  );
-
-  useEffect(() => {
-    if (hasLocalData()) {
-      initApp();
-      setAnim("simple");
-    } else {
-      push("/settings/country");
-    }
-  }, []);
+  const { devMode, times, updateTimer } = useStore(store => ({
+    devMode: store.devMode,
+    times: store.times,
+    updateTimer: store.updateTimer,
+    hasLocalData: store.hasLocalData,
+    initApp: store.initApp,
+  }));
 
   useEffect(() => {
     if (!times) return;
