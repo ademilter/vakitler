@@ -29,7 +29,8 @@ export default function Box({
   return (
     <div
       className={cx(
-        "flex items-center py-3 px-4 border-b last:border-b-0 border-b-zinc-100 dark:border-b-zinc-900 gap-2",
+        "flex items-center py-4 px-6 gap-2",
+        "border-b last:border-b-0 border-b-zinc-100 dark:border-b-zinc-900",
         className
       )}
       {...props}

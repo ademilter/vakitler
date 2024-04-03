@@ -9,13 +9,14 @@ import SettingsLayout from "components/settings/layout";
 import { TimeFormat } from "utils/types";
 import Trans from "next-translate/Trans";
 import { useStore } from "stores/global";
+import { IconMoodEdit } from "@tabler/icons-react";
 import {
   Header,
   HeaderBackButton,
   HeaderContent,
   HeaderContentTitle,
   HeaderLeft,
-} from "../../components/page-header";
+} from "components/page-header";
 
 export default function Settings() {
   const { t, lang } = useTranslation("common");
@@ -128,10 +129,22 @@ export default function Settings() {
 
         <Box.BoxContainer>
           {/* ABOUT */}
-          <Box className="flex-col px-6 items-start">
+          <Box className="flex-col items-start">
             <Box.BoxLink
               href="https://github.com/ademilter/vakitler"
-              className="py-2"
+              target="_blank"
+              icon={<IconMoodEdit stroke={2} size={24} />}
+            >
+              {t("settings:feedbackButton")}
+            </Box.BoxLink>
+          </Box>
+        </Box.BoxContainer>
+
+        <Box.BoxContainer>
+          {/* ABOUT */}
+          <Box className="flex-col items-start">
+            <Box.BoxLink
+              href="https://github.com/ademilter/vakitler"
               target="_blank"
               icon={
                 <svg
@@ -156,10 +169,9 @@ export default function Settings() {
           </Box>
 
           {/* SUPPORT LINK */}
-          <Box className="flex-col px-6 items-start">
+          <Box className="flex-col items-start">
             <Box.BoxLink
               href="https://www.buymeacoffee.com/ademilter"
-              className="py-2"
               target="_blank"
               icon={
                 <svg
@@ -185,13 +197,7 @@ export default function Settings() {
               </p>
             </Box.BoxLink>
           </Box>
-        </Box.BoxContainer>
-
-        <Box.BoxContainer
-          className="border-0 bg-yellow-50 text-yellow-700
-           dark:text-yellow-600 dark:bg-yellow-500/10"
-        >
-          <Box className="text-sm">
+          <Box>
             <Box.BoxLink href="https://ezanvakti.herokuapp.com" target="_blank">
               <p className="text-pretty mr-10">
                 <Trans
@@ -199,7 +205,7 @@ export default function Settings() {
                   components={[<React.Fragment key="0" />]}
                 />
               </p>
-              <p className="underline decoration-amber-500/50">
+              <p className="underline decoration-zinc-300">
                 ezanvakti.herokuapp.com
               </p>
             </Box.BoxLink>

@@ -20,5 +20,6 @@
   "aboutTitle": "About the project",
   "aboutOpenSource": "This project is free and open source",
   "aboutSourceCode": "Thanks for your support",
-  "feedbackTitle": "Feedback"
+  "feedbackTitle": "Feedback",
+  "feedbackButton": "Give feedback"
 }
