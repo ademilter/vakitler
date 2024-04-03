@@ -7,6 +7,7 @@ export const LOCAL_KEYS = {
   Data: "VAKITLER_DATA",
   Lang: "VAKITLER_LANG",
   UpdateDate: "VAKITLER_UPDATE_DATE",
+  FeedbackModal: "VAKITLER_FEEDBACK_MODAL",
 };
 
 export enum Phease {

@@ -19,5 +19,6 @@
   "aboutAPI": "Bu proje <0>Türkiye Diyanet İşleri Başkanlığı</0>'nın verileri kullanılarak geliştirilmiştir.",
   "aboutTitle": "Uygulama hakkında",
   "aboutOpenSource": "Bu proje ücretsiz ve açık kaynaktır",
-  "aboutSourceCode": "Desteğiniz için teşekkür ederim"
+  "aboutSourceCode": "Desteğiniz için teşekkür ederim",
+  "feedbackTitle": "Geri bildirim"
 }

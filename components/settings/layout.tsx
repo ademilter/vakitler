@@ -15,9 +15,7 @@ export default function SettingsLayout({ children }: { children: ReactNode }) {
         <meta name="theme-color" content={themeColor} />
       </Head>
 
-      <div className="relative bg-zinc-200 dark:bg-zinc-900 min-h-dvh">
-        {children}
-      </div>
+      <div className="bg-zinc-200 dark:bg-zinc-900 min-h-dvh">{children}</div>
     </>
   );
 }

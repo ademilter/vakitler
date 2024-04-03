@@ -43,7 +43,7 @@ export default function Settings() {
     });
   };
 
-  if (!times) return null;
+  if (!settings) return null;
 
   return (
     <SettingsLayout>

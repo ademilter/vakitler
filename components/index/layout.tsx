@@ -25,7 +25,7 @@ export default function IndexLayout({ className, ...props }: Props) {
         className={cx(
           "fixed inset-0 overflow-hidden select-none",
           "flex flex-col gap-4",
-          "p-12 py-16 md:py-32",
+          "px-12 pt-16 pb-12 sm:py-32",
           "bg-primary bg-gradient-to-t",
           "from-gradient-from via-gradient-via via-30% to-gradient-to",
           "text-secondary text-center",
