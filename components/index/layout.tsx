@@ -42,7 +42,7 @@ export default function IndexLayout({ className, ...props }: Props) {
 
 export const MainColors = {
   [TimeNames.Imsak]: colors.indigo[950],
-  [TimeNames.Gunes]: colors.indigo[700],
+  [TimeNames.Gunes]: colors.blue[700],
   [TimeNames.Ogle]: colors.blue[500],
   [TimeNames.Ikindi]: colors.blue[400],
   [TimeNames.Aksam]: colors.indigo[800],
@@ -66,9 +66,9 @@ export const Variables: Record<TimeNames, Record<string, string>> = {
     "--secondary": colors.indigo[50],
     "--gradient-to": colors.blue[700],
     "--gradient-via": colors.blue[400],
-    "--gradient-from": colors.orange[400],
+    "--gradient-from": colors.orange[200],
     "--moon-light": colors.blue[50],
-    "--moon-dark": colors.blue[500],
+    "--moon-dark": colors.blue[400],
     "--card-bg": "rgba(255,255,255,0.2)",
     "--card-text": "var(--primary)",
   },
