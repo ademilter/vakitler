@@ -128,11 +128,9 @@ export default function Settings() {
         </Box.BoxContainer>
 
         <Box.BoxContainer>
-          {/* ABOUT */}
           <Box className="flex-col items-start">
             <Box.BoxLink
-              href="https://github.com/ademilter/vakitler"
-              target="_blank"
+              href="/settings/feedback"
               icon={<IconMoodEdit stroke={2} size={24} />}
             >
               {t("settings:feedbackButton")}
