@@ -6,6 +6,13 @@ import { ICountry } from "utils/types";
 import { useRouter } from "next/router";
 import SettingsLayout from "components/settings/layout";
 import { useStore } from "stores/global";
+import {
+  Header,
+  HeaderBackButton,
+  HeaderContent,
+  HeaderContentTitle,
+  HeaderLeft,
+} from "../../components/page-header";
 
 export default function Country() {
   const { t } = useTranslation("common");
@@ -42,7 +49,16 @@ export default function Country() {
 
   return (
     <SettingsLayout>
-      <Container className="pt-8 pb-40">
+      <Header>
+        <HeaderLeft>
+          <HeaderBackButton href="/settings" />
+        </HeaderLeft>
+        <HeaderContent>
+          <HeaderContentTitle>{t("settings:searchCountry")}</HeaderContentTitle>
+        </HeaderContent>
+      </Header>
+
+      <Container className="pb-40">
         <SettingsList
           inputProps={{
             placeholder: t("settings:searchCountry"),
@@ -74,9 +90,6 @@ export default function Country() {
             label: c[t("countryKey") as keyof ICountry],
           }))}
           loading={loading}
-          backButtonProps={{
-            hidden: true,
-          }}
         />
       </Container>
     </SettingsLayout>

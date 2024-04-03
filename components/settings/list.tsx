@@ -1,8 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { useRouter } from "next/router";
 import Fuse from "fuse.js";
-import { motion } from "framer-motion";
-import useTranslation from "next-translate/useTranslation";
 import Loading from "components/loading";
 
 type Item = { value: string; label: string };
@@ -12,9 +9,7 @@ interface ISelect {
   data?: Item[];
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
   pushFirst?: string[];
-  backButtonText?: string;
   loading?: boolean;
-  backButtonProps?: React.ButtonHTMLAttributes<HTMLButtonElement>;
   children?: React.ReactNode;
 }
 
@@ -25,14 +20,7 @@ export default function SettingsList({
   inputProps = {},
   pushFirst = [],
   loading = false,
-  backButtonText = undefined,
-  backButtonProps = undefined,
 }: ISelect) {
-  const router = useRouter();
-  const { t } = useTranslation("common");
-
-  backButtonText = backButtonText ?? t("back");
-
   const [q, setQ] = useState<string>("");
 
   const fuseOptions = {
@@ -61,38 +49,10 @@ export default function SettingsList({
   }, [fuse, q, data, pushFirstData]);
 
   return (
-    <div>
-      <motion.div
-        className="sticky top-0 -mx-2 bg-zinc-200 p-2 dark:bg-zinc-900"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-      >
-        {!backButtonProps?.hidden && (
-          <button
-            type="button"
-            className="flex h-12 shrink-0 items-center"
-            onClick={() => router.back()}
-            {...backButtonProps}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <polyline points="15 6 9 12 15 18" />
-            </svg>
+    <div className="grid gap-2">
+      {children}
 
-            <span>{backButtonText}</span>
-          </button>
-        )}
-
+      <div className="sticky top-0 -mx-2 bg-zinc-200 p-2 dark:bg-zinc-900">
         <input
           type="text"
           autoFocus
@@ -101,11 +61,9 @@ export default function SettingsList({
           value={q}
           onChange={e => setQ(e.target.value)}
         />
-      </motion.div>
+      </div>
 
-      <div className="mt-4 space-y-1">
-        {children}
-
+      <div className="space-y-1">
         {loading ? (
           <Loading />
         ) : (
