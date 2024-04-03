@@ -15,11 +15,12 @@ export default function IndexLayout({ className, ...props }: Props) {
 
   const now = times!.time.now;
   const style = Variables[now];
-  const themeColor = MainColors[now];
 
   return (
     <>
-      <Head>{<meta name="theme-color" content={themeColor} />}</Head>
+      <Head>
+        {<meta name="theme-color" content={style["--gradient-to"]} />}
+      </Head>
 
       <motion.div
         className={cx(
@@ -39,15 +40,6 @@ export default function IndexLayout({ className, ...props }: Props) {
     </>
   );
 }
-
-export const MainColors = {
-  [TimeNames.Imsak]: colors.indigo[950],
-  [TimeNames.Gunes]: colors.blue[700],
-  [TimeNames.Ogle]: colors.blue[500],
-  [TimeNames.Ikindi]: colors.blue[400],
-  [TimeNames.Aksam]: colors.indigo[800],
-  [TimeNames.Yatsi]: colors.black,
-};
 
 export const Variables: Record<TimeNames, Record<string, string>> = {
   [TimeNames.Imsak]: {
