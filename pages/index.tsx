@@ -21,13 +21,17 @@ export default function Index() {
   const [anim, setAnim] = React.useState<"simple" | "full">("simple");
   const [hasNotify, setNotify] = React.useState<boolean>(false);
 
-  const { devMode, times, updateTimer } = useStore(store => ({
-    devMode: store.devMode,
-    times: store.times,
-    updateTimer: store.updateTimer,
-    hasLocalData: store.hasLocalData,
-    initApp: store.initApp,
-  }));
+  const { devMode, times, updateTimer, showFullList, setFullList } = useStore(
+    store => ({
+      devMode: store.devMode,
+      times: store.times,
+      updateTimer: store.updateTimer,
+      hasLocalData: store.hasLocalData,
+      initApp: store.initApp,
+      showFullList: store.showFullList,
+      setFullList: store.setFullList,
+    })
+  );
 
   useEffect(() => {
     if (!times) return;
@@ -37,6 +41,17 @@ export default function Index() {
   useEffect(() => {
     const feedback = localStorage.getItem(LOCAL_KEYS.FeedbackModal);
     setNotify(JSON.parse(feedback || "true"));
+  }, []);
+
+  useEffect(() => {
+    if (!showFullList) return;
+
+    setAnim("full");
+    setFullList();
+
+    setTimeout(() => {
+      setAnim("simple");
+    }, 2000);
   }, []);
 
   useInterval(
@@ -95,7 +110,7 @@ export default function Index() {
 
         <Link
           href={hasNotify ? "/settings/feedback" : "/settings"}
-          className="inline-flex items-center gap-1"
+          className="inline-flex items-center gap-1.5"
         >
           <Location />
           {hasNotify ? (

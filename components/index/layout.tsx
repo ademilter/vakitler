@@ -102,7 +102,7 @@ export const Variables: Record<TimeNames, Record<string, string>> = {
     "--secondary": colors.blue[50],
     "--gradient-to": colors.black,
     "--gradient-via": colors.indigo[900],
-    "--gradient-from": colors.indigo[800],
+    "--gradient-from": colors.blue[900],
     "--moon-light": colors.blue[50],
     "--moon-dark": colors.blue[950],
     "--card-bg": "rgba(0,0,0,0.2)",

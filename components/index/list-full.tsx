@@ -46,13 +46,13 @@ export default function TimeListFull({ onClick }: Props) {
       )}
       onClick={onClick}
     >
-      <div className="grid gap-1 px-10 py-8 max-w-full rounded-3xl bg-white text-card shadow-2xl">
+      <div className="grid gap-1 px-10 w-full max-w-[300px] py-8 rounded-3xl bg-white text-card shadow-2xl">
         {Object.keys(TimeNames).map(time => {
           return (
             <Time
               key={time}
               time={time as TimeNames}
-              className="border-b rounded-none last:border-b-0"
+              className="border-b px-0 rounded-none last:border-b-0"
             />
           );
         })}

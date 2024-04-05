@@ -25,7 +25,10 @@ export default function TimeList({ onClick }: Props) {
         simple: { scale: 1, opacity: 1 },
         full: { scale: 1.2, opacity: 0 },
       }}
-      className={cx("grid p-2 gap-1 rounded-3xl bg-card")}
+      className={cx(
+        "grid p-3 gap-1 w-full max-w-[230px]",
+        "rounded-3xl bg-card"
+      )}
       onClick={onClick}
     >
       {list.map(time => {

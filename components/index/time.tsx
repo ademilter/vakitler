@@ -39,16 +39,17 @@ export default function Time({ className, time }: Props) {
       className={cx(
         "z-10 relative",
         "inline-flex gap-2 items-baseline justify-between",
-        "px-4 py-4 text-xl rounded-2xl",
+        "px-5 py-4 text-xl rounded-2xl",
         "data-[time='next']:bg-white",
         "data-[time='next']:text-card",
         "data-[time='next']:font-medium",
         className
       )}
     >
-      <h5 className={cx("capitalize leading-none")}>{timeName}</h5>
-      <span className={cx("w-16")} />
-      <h4 className={cx("tabular-nums leading-none")}>{formattedValue}</h4>
+      <h5 className={cx("text-left capitalize leading-none")}>{timeName}</h5>
+      <h4 className={cx("text-right tabular-nums leading-none")}>
+        {formattedValue}
+      </h4>
     </div>
   );
 }
