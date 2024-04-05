@@ -28,12 +28,12 @@ export default function Country() {
         </HeaderContent>
       </Header>
 
-      <div className="relative p-4">
+      <div className="relative">
         <iframe
           className="bg-transparent border-none rounded-xl"
           src="https://airtable.com/embed/appXYoGXmgiZd5HqP/pagZy890atZvMkWu7/form"
           width="100%"
-          height="800"
+          height="1200"
         />
       </div>
     </SettingsLayout>
