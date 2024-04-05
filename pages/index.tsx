@@ -15,6 +15,7 @@ import TimeListFull from "../components/index/list-full";
 import { IconDots } from "@tabler/icons-react";
 import Link from "next/link";
 import { LOCAL_KEYS } from "../utils/const";
+import NotifyBubble from "../components/notify-bubble";
 
 export default function Index() {
   const [anim, setAnim] = React.useState<"simple" | "full">("simple");
@@ -98,29 +99,11 @@ export default function Index() {
         >
           <Location />
           {hasNotify ? (
-            <span
-              className="relative inline-flex items-center justify-center px-2 py-1 leading-none
-          bg-white text-xs font-mono rounded-full font-bold
-          after:content after:absolute after:-right-0 after:-top-0 after:-mr-[2px]
-          after:block after:size-2 after:rounded-full after:bg-red-500
-          "
-              title="Düşüncelerinizi paylaşın"
-            >
-              1
-            </span>
+            <NotifyBubble>1</NotifyBubble>
           ) : (
             <IconDots size={20} stroke={1.2} className="opacity-50" />
           )}
         </Link>
-
-        {/*<Link
-          href="/settings"
-          className="inline-flex items-center gap-2 px-4 py-1
-          bg-secondary text-primary rounded-full mt-6"
-          title="Düşüncelerinizi paylaşın"
-        >
-          <IconMessageCircle2 size={20} stroke={1.5} className="" />
-        </Link>*/}
       </motion.div>
 
       {devMode && <TimeTravel />}
