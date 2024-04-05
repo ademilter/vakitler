@@ -28,7 +28,7 @@ export default function IndexLayout({ className, ...props }: Props) {
           "flex flex-col gap-4",
           "px-12 pt-16 pb-12 sm:py-32",
           "bg-primary bg-gradient-to-t",
-          "from-gradient-from via-gradient-via via-30% to-gradient-to",
+          "from-gradient-from via-gradient-via to-gradient-to",
           "text-secondary text-center",
           className
         )}
