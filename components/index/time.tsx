@@ -37,10 +37,11 @@ export default function Time({ className, time }: Props) {
     <div
       data-time={isTimeActive ? "active" : isTimeNext ? "next" : ""}
       className={cx(
-        "z-10 relative",
-        "inline-flex gap-2 items-baseline justify-between",
+        "z-10 relative w-full",
+        "flex gap-2 items-baseline justify-between",
         "px-5 py-4 text-xl rounded-2xl",
         "data-[time='next']:bg-white",
+        "data-[time='next']:shadow",
         "data-[time='next']:text-card",
         "data-[time='next']:font-medium",
         className

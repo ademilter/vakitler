@@ -42,7 +42,7 @@ export default function TimeListFull({ onClick }: Props) {
         },
       }}
       className={cx(
-        "fixed z-10 inset-10 flex flex-col items-center justify-center"
+        "fixed z-10 inset-0 p-10 flex flex-col items-center justify-center"
       )}
       onClick={onClick}
     >
@@ -52,7 +52,7 @@ export default function TimeListFull({ onClick }: Props) {
             <Time
               key={time}
               time={time as TimeNames}
-              className="border-b px-0 rounded-none last:border-b-0"
+              className="border-b px-0 rounded-none last:border-b-0 data-[time='next']:shadow-none"
             />
           );
         })}

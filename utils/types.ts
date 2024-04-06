@@ -84,6 +84,4 @@ export interface StoreInterface {
   fetchReleases: () => void;
   checkQueryString: () => void;
   hasLocalData: () => boolean;
-  showFullList: boolean;
-  setFullList: () => void;
 }

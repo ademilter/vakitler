@@ -36,8 +36,6 @@ function getDefaultInitialState() {
     fetchReleases: () => {},
     checkQueryString: () => {},
     hasLocalData: () => {},
-    showFullList: true,
-    setFullList: () => {},
   } as const;
 }
 
@@ -61,10 +59,6 @@ export function initializeStore(preloadedState: PreloadedStoreInterface) {
     ...preloadedState,
     devMode: process.env.NODE_ENV === "development",
     setDevMode: () => {},
-    showFullList: true,
-    setFullList: () => {
-      set({ showFullList: false });
-    },
 
     settings: {
       country: undefined,

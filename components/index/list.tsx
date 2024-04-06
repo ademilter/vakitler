@@ -4,6 +4,7 @@ import { cx } from "utils/helper";
 import { useStore } from "stores/global";
 import React from "react";
 import { motion } from "framer-motion";
+import { IconChevronDown } from "@tabler/icons-react";
 
 export interface Props extends React.ComponentPropsWithoutRef<"div"> {
   onClick: () => void;
@@ -26,7 +27,8 @@ export default function TimeList({ onClick }: Props) {
         full: { scale: 1.2, opacity: 0 },
       }}
       className={cx(
-        "grid p-3 gap-1 w-full max-w-[230px]",
+        "grid place-items-center p-2 gap-1",
+        "w-full max-w-[230px]",
         "rounded-3xl bg-card"
       )}
       onClick={onClick}
@@ -34,6 +36,12 @@ export default function TimeList({ onClick }: Props) {
       {list.map(time => {
         return <Time key={time} time={time as TimeNames} />;
       })}
+
+      <IconChevronDown
+        className="mt-1 -mb-1.5 opacity-40 scale-x-125"
+        size={20}
+        stroke={1.5}
+      />
     </motion.div>
   );
 }
