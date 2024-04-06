@@ -7,31 +7,26 @@ import NextTime from "components/index/next-time";
 import Location from "components/index/location";
 import TimeSummaryTimer from "components/time-summary-timer";
 import IslamicDate from "components/islamic-date";
-import useInterval from "hooks/use-interval";
-import { DateTime } from "luxon";
 import TimeTravel from "components/time-travel";
 import { motion } from "framer-motion";
-import TimeListFull from "../components/index/list-full";
-import { IconDots } from "@tabler/icons-react";
+import TimeListFull from "components/index/list-full";
+import RamadanTimer from "components/ramadan-timer";
 import Link from "next/link";
-import { LOCAL_KEYS } from "../utils/const";
-import NotifyBubble from "../components/notify-bubble";
+import { LOCAL_KEYS } from "utils/const";
+import NotifyBubble from "components/notify-bubble";
+import useTimer from "hooks/use-timer";
 
 export default function Index() {
   const [anim, setAnim] = React.useState<"simple" | "full">("simple");
   const [hasNotify, setNotify] = React.useState<boolean>(false);
 
-  const { devMode, times, updateTimer, showFullList, setFullList } = useStore(
-    store => ({
-      devMode: store.devMode,
-      times: store.times,
-      updateTimer: store.updateTimer,
-      hasLocalData: store.hasLocalData,
-      initApp: store.initApp,
-      showFullList: store.showFullList,
-      setFullList: store.setFullList,
-    })
-  );
+  const { devMode, times, updateTimer } = useStore(store => ({
+    devMode: store.devMode,
+    times: store.times,
+    updateTimer: store.updateTimer,
+  }));
+
+  useTimer({ times, updateTimer });
 
   useEffect(() => {
     if (!times) return;
@@ -43,38 +38,6 @@ export default function Index() {
     setNotify(JSON.parse(feedback || "true"));
   }, []);
 
-  useEffect(() => {
-    if (!showFullList) return;
-
-    setAnim("full");
-    setFullList();
-
-    setTimeout(() => {
-      setAnim("simple");
-    }, 2000);
-  }, []);
-
-  useInterval(
-    () => {
-      let localTime = DateTime.local();
-
-      const timeTravel = times!.timeTravel ?? [0, 0, 0];
-      const hasChange = timeTravel.some((value: number) => value !== 0);
-
-      if (hasChange) {
-        localTime = localTime.set({
-          hour: localTime.hour + timeTravel[0],
-          minute: localTime.minute + timeTravel[1],
-          second: localTime.second + timeTravel[2],
-        });
-      }
-
-      times?.updateDateTime(localTime);
-      updateTimer();
-    },
-    times ? 1000 : null
-  );
-
   if (!times) return null;
 
   return (
@@ -82,12 +45,13 @@ export default function Index() {
       <motion.div
         variants={{
           simple: { opacity: 1, y: 0 },
-          full: { opacity: 0, y: -20 },
+          full: { opacity: 0.1, y: -20 },
         }}
       >
         <Moon className="mb-8" />
         <NextTime className="mb-1" />
         <TimeSummaryTimer />
+        <RamadanTimer className="mt-3" />
       </motion.div>
 
       <div className="flex grow" />
@@ -106,18 +70,14 @@ export default function Index() {
           full: { opacity: 0, y: 10 },
         }}
       >
-        <IslamicDate className="mb-2" />
+        <IslamicDate className="mb-1 opacity-80" />
 
         <Link
           href={hasNotify ? "/settings/feedback" : "/settings"}
           className="inline-flex items-center gap-1.5"
         >
           <Location />
-          {hasNotify ? (
-            <NotifyBubble>1</NotifyBubble>
-          ) : (
-            <IconDots size={20} stroke={1.2} className="opacity-50" />
-          )}
+          {hasNotify && <NotifyBubble>1</NotifyBubble>}
         </Link>
       </motion.div>
 

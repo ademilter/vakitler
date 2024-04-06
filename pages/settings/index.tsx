@@ -22,8 +22,7 @@ export default function Settings() {
   const { t, lang } = useTranslation("common");
   const { city, country, region } = useLocations();
 
-  const { times, settings, setSettings } = useStore(store => ({
-    times: store.times,
+  const { settings, setSettings, saveSettings } = useStore(store => ({
     settings: store.settings,
     saveSettings: store.saveSettings,
     setSettings: store.setSettings,
@@ -38,10 +37,12 @@ export default function Settings() {
   };
 
   const onChangeTimeFormat = async (value: string) => {
-    setSettings({
+    const newSettings = {
       ...settings,
       timeFormat: value as typeof settings.timeFormat,
-    });
+    };
+    setSettings(newSettings);
+    saveSettings(newSettings);
   };
 
   if (!settings) return null;
@@ -114,17 +115,22 @@ export default function Settings() {
           </Box>
 
           {/* RAMADAN TIMER */}
-          {/*<Box>
-              <div className="grow">
-                <Box.Title>{t("settings:ramadanTimerTitle")}</Box.Title>
-              </div>
-              <Box.BoxSwitch
-                checked={settings.ramadanTimer}
-                onCheckedChange={checked => {
-                  setSettings({ ...settings, ramadanTimer: checked });
-                }}
-              />
-            </Box>*/}
+          <Box>
+            <div className="grow">
+              <Box.Title>{t("settings:ramadanTimerTitle")}</Box.Title>
+            </div>
+            <Box.BoxSwitch
+              checked={settings.ramadanTimer}
+              onCheckedChange={checked => {
+                const newSettings = {
+                  ...settings,
+                  ramadanTimer: checked,
+                };
+                setSettings(newSettings);
+                saveSettings(newSettings);
+              }}
+            />
+          </Box>
         </Box.BoxContainer>
 
         <Box.BoxContainer>
