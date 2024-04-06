@@ -29,7 +29,7 @@ export default function RamadanTimer({ className }: Props) {
     <div
       className={cx(
         "inline-flex items-center gap-1 px-4 py-1",
-        "rounded-xl bg-secondary text-primary shadow text-lg md:text-xl",
+        "rounded-xl bg-secondary text-primary shadow text-lg sm:text-xl",
         className
       )}
     >

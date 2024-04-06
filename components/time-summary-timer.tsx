@@ -16,7 +16,7 @@ export default function TimeSummaryTimer({ className }: Props) {
       layout
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
       className={cx(
-        "flex items-baseline justify-center text-5xl md:text-6xl font-light gap-2",
+        "flex items-baseline justify-center text-5xl sm:text-7xl font-light gap-2",
         className
       )}
     >
