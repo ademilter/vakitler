@@ -27,7 +27,7 @@ export default function TimeList({ onClick }: Props) {
         full: { scale: 1.2, opacity: 0 },
       }}
       className={cx(
-        "grid place-items-center p-2 gap-1",
+        "grid place-items-center p-3 gap-1",
         "w-full max-w-[230px]",
         "rounded-3xl bg-card"
       )}
@@ -38,7 +38,7 @@ export default function TimeList({ onClick }: Props) {
       })}
 
       <IconChevronDown
-        className="mt-1 -mb-1.5 opacity-40 scale-x-125"
+        className="mt-1 -mb-1 opacity-40 scale-x-125"
         size={20}
         stroke={1.5}
       />
