@@ -32,14 +32,16 @@ export function formattedTime(
     .toLowerCase();
 }
 
-export function numberToTimezoneOffset(offset: number): string {
+export function numberToUTCOffset(offset: number): string {
   const offsetHours = Math.floor(offset);
   const offsetMinutes = Math.round((offset - offsetHours) * 60);
 
   const sign = offset >= 0 ? "+" : "-";
 
-  const hoursString = Math.abs(offsetHours).toString().padStart(2, "0");
-  const minutesString = Math.abs(offsetMinutes).toString().padStart(2, "0");
+  const format = (value: number) => Math.abs(value).toString().padStart(2, "0");
+
+  const hoursString = format(offsetHours);
+  const minutesString = format(offsetMinutes);
 
   return `UTC${sign}${hoursString}:${minutesString}`;
 }
