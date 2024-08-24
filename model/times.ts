@@ -122,12 +122,12 @@ export class Times {
     let dateTime = DateTime.fromFormat(this.today[this.time.next], HOUR_FORMAT, { zone: "UTC" })
 
     if (this.time.now === TimeNames.Yatsi) {
-      dateTime = DateTime.fromFormat(this.today[TimeNames.Imsak], HOUR_FORMAT);
+      dateTime = DateTime.fromFormat(this.today[TimeNames.Imsak], HOUR_FORMAT, { zone: "UTC" });
 
       if (this.isBeforeMidnight()) {
         dateTime = DateTime.fromFormat(
           this.tomorrow[TimeNames.Imsak],
-          HOUR_FORMAT
+          HOUR_FORMAT, { zone: "UTC" }
         ).plus({ days: 1 });
       }
     }
