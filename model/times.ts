@@ -73,7 +73,10 @@ export class Times {
     const Imsak = DateTime.fromFormat(this.today[TimeNames.Imsak], HOUR_FORMAT);
     const Gunes = DateTime.fromFormat(this.today[TimeNames.Gunes], HOUR_FORMAT);
     const Ogle = DateTime.fromFormat(this.today[TimeNames.Ogle], HOUR_FORMAT);
-    const Ikindi = DateTime.fromFormat(this.today[TimeNames.Ikindi], HOUR_FORMAT);
+    const Ikindi = DateTime.fromFormat(
+      this.today[TimeNames.Ikindi],
+      HOUR_FORMAT
+    );
     const Aksam = DateTime.fromFormat(this.today[TimeNames.Aksam], HOUR_FORMAT);
     const Yatsi = DateTime.fromFormat(this.today[TimeNames.Yatsi], HOUR_FORMAT);
 
@@ -140,7 +143,10 @@ export class Times {
   timerRamadan(): TypeTimer {
     if (!this.today || !this.tomorrow) return [0, 0, 0];
 
-    let dateTime = DateTime.fromFormat(this.today[TimeNames.Aksam], HOUR_FORMAT);
+    let dateTime = DateTime.fromFormat(
+      this.today[TimeNames.Aksam],
+      HOUR_FORMAT
+    );
 
     if ([TimeNames.Aksam, TimeNames.Yatsi].includes(this.time.now)) {
       dateTime = DateTime.fromFormat(
