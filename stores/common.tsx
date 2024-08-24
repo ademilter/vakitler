@@ -199,7 +199,7 @@ export function CommonStoreProvider({ children }: { children: ReactNode }) {
 
   useInterval(
     () => {
-      let localTime = DateTime.utc()
+      let localTime = DateTime.local()
 
       const timeTravel = times!.timeTravel ?? [0, 0, 0];
       const hasChange = timeTravel.some((value: number) => value !== 0);

@@ -1,4 +1,4 @@
-import { DateTime, Interval } from "luxon";
+import { DateTime, Interval, Settings } from "luxon";
 import { ITime, TimeNames, TypeTimer } from "@/types";
 import { secondSplit } from "@/utils/helper";
 import { HOUR_FORMAT } from "@/utils/const";
@@ -17,10 +17,11 @@ export class Times {
     data: ITime[] = [],
     adjustments: number[] = timeNames.map(() => 0)
   ) {
+    Settings.defaultZone = "UTC+0";
     this.adjustments = adjustments;
     this.utcOffset = data[0].GreenwichOrtalamaZamani;
     this.times = data.map(day => new Time(day));
-    this.localTime = DateTime.utc().plus({ hours: this.utcOffset });
+    this.localTime = DateTime.local().plus({ hours: this.utcOffset });
     this.timeTravel = [0, 0, 0];
     if (adjustments.some(a => a !== 0)) {
       this.adjustTimes(adjustments);
@@ -70,12 +71,12 @@ export class Times {
     // TODO: check if today is undefined
     if (!this.today) return { now: TimeNames.Imsak, next: TimeNames.Imsak };
 
-    const Imsak = DateTime.fromFormat(this.today[TimeNames.Imsak], HOUR_FORMAT, { zone: "UTC" });
-    const Gunes = DateTime.fromFormat(this.today[TimeNames.Gunes], HOUR_FORMAT, { zone: "UTC" });
-    const Ogle = DateTime.fromFormat(this.today[TimeNames.Ogle], HOUR_FORMAT, { zone: "UTC" });
-    const Ikindi = DateTime.fromFormat(this.today[TimeNames.Ikindi], HOUR_FORMAT, { zone: "UTC" });
-    const Aksam = DateTime.fromFormat(this.today[TimeNames.Aksam], HOUR_FORMAT, { zone: "UTC" });
-    const Yatsi = DateTime.fromFormat(this.today[TimeNames.Yatsi], HOUR_FORMAT, { zone: "UTC" });
+    const Imsak = DateTime.fromFormat(this.today[TimeNames.Imsak], HOUR_FORMAT);
+    const Gunes = DateTime.fromFormat(this.today[TimeNames.Gunes], HOUR_FORMAT);
+    const Ogle = DateTime.fromFormat(this.today[TimeNames.Ogle], HOUR_FORMAT);
+    const Ikindi = DateTime.fromFormat(this.today[TimeNames.Ikindi], HOUR_FORMAT);
+    const Aksam = DateTime.fromFormat(this.today[TimeNames.Aksam], HOUR_FORMAT);
+    const Yatsi = DateTime.fromFormat(this.today[TimeNames.Yatsi], HOUR_FORMAT);
 
     // default values = Isha
     const obj: { now: TimeNames; next: TimeNames } = {
@@ -119,15 +120,15 @@ export class Times {
   timer(): TypeTimer {
     if (!this.today || !this.tomorrow) return [0, 0, 0];
 
-    let dateTime = DateTime.fromFormat(this.today[this.time.next], HOUR_FORMAT, { zone: "UTC" })
+    let dateTime = DateTime.fromFormat(this.today[this.time.next], HOUR_FORMAT);
 
     if (this.time.now === TimeNames.Yatsi) {
-      dateTime = DateTime.fromFormat(this.today[TimeNames.Imsak], HOUR_FORMAT, { zone: "UTC" });
+      dateTime = DateTime.fromFormat(this.today[TimeNames.Imsak], HOUR_FORMAT);
 
       if (this.isBeforeMidnight()) {
         dateTime = DateTime.fromFormat(
           this.tomorrow[TimeNames.Imsak],
-          HOUR_FORMAT, { zone: "UTC" }
+          HOUR_FORMAT
         ).plus({ days: 1 });
       }
     }
@@ -140,7 +141,7 @@ export class Times {
   timerRamadan(): TypeTimer {
     if (!this.today || !this.tomorrow) return [0, 0, 0];
 
-    let dateTime = DateTime.fromFormat(this.today[TimeNames.Aksam], HOUR_FORMAT, { zone: "UTC" })
+    let dateTime = DateTime.fromFormat(this.today[TimeNames.Aksam], HOUR_FORMAT);
 
     if ([TimeNames.Aksam, TimeNames.Yatsi].includes(this.time.now)) {
       dateTime = DateTime.fromFormat(
