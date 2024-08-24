@@ -17,7 +17,7 @@ export class Times {
     data: ITime[] = [],
     adjustments: number[] = timeNames.map(() => 0)
   ) {
-    Settings.defaultZone = "UTC+0";
+    Settings.defaultZone = "UTC";
     this.adjustments = adjustments;
     this.utcOffset = data[0].GreenwichOrtalamaZamani;
     this.times = data.map(day => new Time(day));
