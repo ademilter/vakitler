@@ -70,12 +70,12 @@ export class Times {
     // TODO: check if today is undefined
     if (!this.today) return { now: TimeNames.Imsak, next: TimeNames.Imsak };
 
-    const Imsak = DateTime.fromFormat(this.today[TimeNames.Imsak],HOUR_FORMAT, { zone: "UTC" });
-    const Gunes = DateTime.fromFormat(this.today[TimeNames.Gunes],HOUR_FORMAT, { zone: "UTC" });
+    const Imsak = DateTime.fromFormat(this.today[TimeNames.Imsak], HOUR_FORMAT, { zone: "UTC" });
+    const Gunes = DateTime.fromFormat(this.today[TimeNames.Gunes], HOUR_FORMAT, { zone: "UTC" });
     const Ogle = DateTime.fromFormat(this.today[TimeNames.Ogle], HOUR_FORMAT, { zone: "UTC" });
     const Ikindi = DateTime.fromFormat(this.today[TimeNames.Ikindi], HOUR_FORMAT, { zone: "UTC" });
     const Aksam = DateTime.fromFormat(this.today[TimeNames.Aksam], HOUR_FORMAT, { zone: "UTC" });
-    const Yatsi = DateTime.fromFormat(this.today[TimeNames.Yatsi],HOUR_FORMAT, { zone: "UTC" });
+    const Yatsi = DateTime.fromFormat(this.today[TimeNames.Yatsi], HOUR_FORMAT, { zone: "UTC" });
 
     // default values = Isha
     const obj: { now: TimeNames; next: TimeNames } = {
