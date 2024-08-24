@@ -1,6 +1,6 @@
 import { DateTime, Interval, Settings } from "luxon";
 import { ITime, TimeNames, TypeTimer } from "@/types";
-import { secondSplit } from "@/utils/helper";
+import { secondSplit, numberToTimezoneOffset } from "@/utils/helper";
 import { HOUR_FORMAT } from "@/utils/const";
 import { Time } from "./time";
 
@@ -11,17 +11,16 @@ export class Times {
   public localTime: DateTime;
   public timeTravel: [number, number, number];
   public adjustments: number[];
-  public utcOffset: number;
 
   constructor(
     data: ITime[] = [],
     adjustments: number[] = timeNames.map(() => 0)
   ) {
-    Settings.defaultZone = "UTC";
     this.adjustments = adjustments;
-    this.utcOffset = data[0].GreenwichOrtalamaZamani;
+    const timeZone = data[0].GreenwichOrtalamaZamani;
+    Settings.defaultZone = numberToTimezoneOffset(timeZone);
     this.times = data.map(day => new Time(day));
-    this.localTime = DateTime.local().plus({ hours: this.utcOffset });
+    this.localTime = DateTime.local();
     this.timeTravel = [0, 0, 0];
     if (adjustments.some(a => a !== 0)) {
       this.adjustTimes(adjustments);
@@ -43,7 +42,7 @@ export class Times {
   }
 
   updateDateTime(datetime: DateTime): void {
-    this.localTime = datetime.plus({ hours: this.utcOffset });
+    this.localTime = datetime;
   }
 
   get today(): undefined | Time {

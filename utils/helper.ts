@@ -31,3 +31,15 @@ export function formattedTime(
     .toFormat(timeFormat === "12" ? HOUR_FORMAT_12 : HOUR_FORMAT, { locale })
     .toLowerCase();
 }
+
+export function numberToTimezoneOffset(offset: number): string {
+  const offsetHours = Math.floor(offset);
+  const offsetMinutes = Math.round((offset - offsetHours) * 60);
+
+  const sign = offset >= 0 ? "+" : "-";
+
+  const hoursString = Math.abs(offsetHours).toString().padStart(2, "0");
+  const minutesString = Math.abs(offsetMinutes).toString().padStart(2, "0");
+
+  return `UTC${sign}${hoursString}:${minutesString}`;
+}
