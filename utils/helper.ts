@@ -33,15 +33,13 @@ export function formattedTime(
 }
 
 export function numberToUTCOffset(offset: number): string {
-  const offsetHours = Math.floor(offset);
-  const offsetMinutes = Math.round((offset - offsetHours) * 60);
+  const absoluteOffset = Math.abs(offset);
+  const offsetHours = Math.floor(absoluteOffset);
+  const offsetMinutes = Math.round((absoluteOffset - offsetHours) * 60);
 
   const sign = offset >= 0 ? "+" : "-";
+  const format = (value: number) => value.toString().padStart(2, "0");
 
-  const format = (value: number) => Math.abs(value).toString().padStart(2, "0");
-
-  const hoursString = format(offsetHours);
-  const minutesString = format(offsetMinutes);
-
-  return `UTC${sign}${hoursString}:${minutesString}`;
+  return `UTC${sign}${format(offsetHours)}:${format(offsetMinutes)}`;
 }
+
