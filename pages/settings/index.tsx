@@ -164,7 +164,7 @@ export default function Settings() {
           >
             <Box className="text-sm">
               <Box.BoxLink
-                href="https://ezanvakti.herokuapp.com"
+                href="https://ezanvakti.emushaf.net/"
                 target="_blank"
               >
                 <p className="text-pretty mr-10">
