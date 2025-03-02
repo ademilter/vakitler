@@ -34,3 +34,6 @@ We welcome contributions to Vakitler! To contribute, please fork the repository 
 ## License
 Vakitler is licensed under the Apache License. See the LICENSE file for more information.
 
+
+
+Edited by gitfix
