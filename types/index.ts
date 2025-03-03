@@ -36,6 +36,7 @@ export interface ITime {
   HicriTarihUzun: string; // "8 Şaban 1444";
   MiladiTarihKisa: string; // "28.02.2023";
   AyinSekliURL: string; // ""http://namazvakti.diyanet.gov.tr/images/i7.gif"";
+  GreenwichOrtalamaZamani: number;
 }
 
 export enum TimeNames {
