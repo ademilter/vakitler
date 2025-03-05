@@ -79,6 +79,7 @@ export default function Settings() {
                 data={[
                   ["tr", "settings:langOptionTr"],
                   ["en", "settings:langOptionEn"],
+                  ["nl", "settings:langOptionNl"]
                 ]}
               />
             </Box>
