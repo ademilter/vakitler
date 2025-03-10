@@ -1,5 +1,4 @@
 import { NextRequest } from "next/server";
-import { DateTime } from "luxon";
 
 export const config = {
   runtime: "edge",

@@ -26,9 +26,8 @@ export class Time {
   }
 
   get moonPhease(): Phease {
-    const [_, file] = this.AyinSekliURL.split(
-      "http://namazvakti.diyanet.gov.tr/images/"
-    );
+    const arr = this.AyinSekliURL.split("/");
+    const file = arr[arr.length - 1];
     const [name, __] = file.split(".");
     return Phease[name as keyof typeof Phease];
   }
