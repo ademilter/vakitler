@@ -20,12 +20,12 @@ git clone https://github.com/yourusername/vakitler.git
 Install dependencies:
 ```bash
 cd vakitler
-yarn
+npm install
 ```
 
 Start the server on localhost
 ```bash
-yarn dev
+npm run dev
 ```
 
 ## Contributing
