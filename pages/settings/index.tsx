@@ -174,7 +174,7 @@ export default function Settings() {
                   />
                 </p>
                 <p className="underline decoration-orange-500/50">
-                  ezanvakti.herokuapp.com
+                  ezanvakti.emushaf.net
                 </p>
               </Box.BoxLink>
             </Box>
