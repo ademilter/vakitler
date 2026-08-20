@@ -10,6 +10,9 @@ const withPWA = require("next-pwa")({
 /** @type {import("next").NextConfig} */
 const nextConfig = withPWA({
   reactStrictMode: false,
+  // Self-host: emit a standalone server bundle with only the traced
+  // dependencies, so the runtime image needs no node_modules install.
+  output: "standalone",
 });
 
 module.exports = nextTranslate(nextConfig);
