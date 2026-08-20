@@ -1,17 +1,15 @@
-import { NextRequest } from "next/server";
+import type { NextApiRequest, NextApiResponse } from "next";
 import { DateTime } from "luxon";
 
-export const config = {
-  runtime: "edge",
-};
-
-export default async function handler(req: NextRequest) {
-  const params = req.nextUrl.searchParams;
-  const cityID = params.get("cityID");
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  const cityID = req.query.cityID;
 
   try {
-    if (!cityID) {
-      return new Response("Missing parameters", { status: 400 });
+    if (typeof cityID !== "string") {
+      return res.status(400).send("Missing parameters");
     }
 
     const url = new URL(`/vakitler/${cityID}`, process.env.API_URL);
@@ -37,16 +35,12 @@ export default async function handler(req: NextRequest) {
 
     ///////////////////////////////////////////////////////////
 
-    return new Response(JSON.stringify([yesterday, ...data]), {
-      status: 200,
-      headers: {
-        "Cache-Control": "s-maxage=172800", // 2 days
-      },
-    });
+    res.setHeader("Cache-Control", "s-maxage=172800"); // 2 days
+    return res.status(200).json([yesterday, ...data]);
   } catch (error) {
     if (error instanceof Error) {
-      return new Response(error.message, { status: 500 });
+      return res.status(500).send(error.message);
     }
-    return new Response("Something went wrong", { status: 500 });
+    return res.status(500).send("Something went wrong");
   }
 }

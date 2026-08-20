@@ -1,10 +1,9 @@
-import { NextRequest } from "next/server";
+import type { NextApiRequest, NextApiResponse } from "next";
 
-export const config = {
-  runtime: "edge",
-};
-
-export default async function handler(req: NextRequest) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   try {
     const url = new URL("/ulkeler", process.env.API_URL);
 
@@ -13,16 +12,12 @@ export default async function handler(req: NextRequest) {
     });
     const data = await response.json();
 
-    return new Response(JSON.stringify(data), {
-      status: 200,
-      headers: {
-        "Cache-Control": "s-maxage=172800", // 2 days
-      },
-    });
+    res.setHeader("Cache-Control", "s-maxage=172800"); // 2 days
+    return res.status(200).json(data);
   } catch (error) {
     if (error instanceof Error) {
-      return new Response(error.message, { status: 500 });
+      return res.status(500).send(error.message);
     }
-    return new Response("Something went wrong", { status: 500 });
+    return res.status(500).send("Something went wrong");
   }
 }

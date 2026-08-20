@@ -1,16 +1,14 @@
-import { NextRequest } from "next/server";
+import type { NextApiRequest, NextApiResponse } from "next";
 
-export const config = {
-  runtime: "edge",
-};
-
-export default async function handler(req: NextRequest) {
-  const params = req.nextUrl.searchParams;
-  const countryID = params.get("countryID");
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  const countryID = req.query.countryID;
 
   try {
-    if (!countryID) {
-      return new Response("Missing parameters", { status: 400 });
+    if (typeof countryID !== "string") {
+      return res.status(400).send("Missing parameters");
     }
 
     const url = new URL(`/sehirler/${countryID}`, process.env.API_URL);
@@ -20,16 +18,12 @@ export default async function handler(req: NextRequest) {
     });
     const data = await response.json();
 
-    return new Response(JSON.stringify(data), {
-      status: 200,
-      headers: {
-        "Cache-Control": "s-maxage=172800", // 2 days
-      },
-    });
+    res.setHeader("Cache-Control", "s-maxage=172800"); // 2 days
+    return res.status(200).json(data);
   } catch (error) {
     if (error instanceof Error) {
-      return new Response(error.message, { status: 500 });
+      return res.status(500).send(error.message);
     }
-    return new Response("Something went wrong", { status: 500 });
+    return res.status(500).send("Something went wrong");
   }
 }
