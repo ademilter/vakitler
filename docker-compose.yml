@@ -1,0 +1,12 @@
+services:
+  vakitler:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      # Overrides the committed .env; API_PASS and GITHUB_ACCESS_TOKENS are
+      # optional and only needed if the upstream API or GitHub asks for them.
+      API_URL: ${API_URL:-https://ezanvakti.emushaf.net}
+      API_PASS: ${API_PASS:-}
+      GITHUB_ACCESS_TOKENS: ${GITHUB_ACCESS_TOKENS:-}
+    restart: unless-stopped

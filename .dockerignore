@@ -1,0 +1,23 @@
+.git
+.github
+node_modules
+.next
+out
+build
+coverage
+.idea
+.DS_Store
+*.tsbuildinfo
+next-env.d.ts
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+# Secrets stay out of the image; inject them at runtime instead.
+# .env is tracked and holds only the public API base URL, so it ships.
+.env*.local
+Dockerfile
+.dockerignore
+docker-compose.yml
+README.md
+LICENSE
