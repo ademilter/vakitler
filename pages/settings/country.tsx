@@ -45,7 +45,7 @@ export default function Country() {
             placeholder: t("settings:searchCountry"),
             name: "country",
           }}
-          // Populer Country (vercel analytics)
+          // Populer Country
           // 2 = Türkiye,
           // 13 = Almanya,
           // 33 = ABD,
